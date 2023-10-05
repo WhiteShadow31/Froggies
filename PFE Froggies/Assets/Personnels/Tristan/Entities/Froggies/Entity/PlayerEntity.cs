@@ -12,10 +12,23 @@ public class PlayerEntity : LivingEntity
     float _verticalInput = 0;
 
 
+    protected StateMachinePlayer _smPlayer;
+
+    protected override void Start()
+    {
+        base.Start();
+        _smPlayer = new StateMachinePlayer(this);
+        _smPlayer.Start();
+    }
+
+
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+
+        _smPlayer.Update(Time.deltaTime);
+
 
         _jumpInput = Input.GetKey(KeyCode.Space);
         _horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -26,6 +39,8 @@ public class PlayerEntity : LivingEntity
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
         if (_jumpInput)
             Jump();

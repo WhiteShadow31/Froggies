@@ -372,6 +372,7 @@
 "Assets/Imported Packages/Ultimate Attributes Pack/Scripts/Core/Attributes/TextColorAttribute.cs"
 "Assets/Imported Packages/Ultimate Attributes Pack/Scripts/Core/Attributes/TitleAttribute.cs"
 "Assets/Imported Packages/Ultimate Attributes Pack/Scripts/Core/Utility/AttributesFunctions.cs"
+"Assets/Personnels/Romain/Entities/Player/Scripts/TongueScript.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/Controller/Prefab/FrogEntityController.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/Controller/Prefab/SimpleController.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/Controller/Prefab/ThirdPersonMovement.cs"
@@ -381,6 +382,11 @@
 "Assets/Personnels/Tristan/Entities/Froggies/Entity/PlayerEntity.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/Entity/SimpleRigidbody.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/PushObject.cs"
+"Assets/Personnels/Tristan/Input/InputTest.cs"
+"Assets/Personnels/Tristan/StateMachine/Player States/StateMachinePlayer.cs"
+"Assets/Personnels/Tristan/StateMachine/Player States/StatePlayerIdle.cs"
+"Assets/Personnels/Tristan/StateMachine/State.cs"
+"Assets/Personnels/Tristan/StateMachine/StateMachine.cs"
 -langversion:9.0
 
 /deterministic
