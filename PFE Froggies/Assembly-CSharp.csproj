@@ -58,17 +58,26 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\FrogEntityController.cs" />
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\PushObject.cs" />
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\TriggerCollider.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\SubTitleAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ProgressBarAttribute.cs" />
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Entity\SimpleRigidbody.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\LineTitleAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\TitleAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ReadOnlyAttribute.cs" />
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\ThirdPersonMovement.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Utility\AttributesFunctions.cs" />
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Entity\PlayerEntity.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\MinMaxSliderAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\TextColorAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\LineAttribute.cs" />
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Entity\GroundedController.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\OpenProjectFileButtonAttribute.cs" />
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Entity\LivingEntity.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\OpenInternetPageButtonAttribute.cs" />
+    <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\SimpleController.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ShowIfAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\FunctionButtonAttribute.cs" />
   </ItemGroup>
