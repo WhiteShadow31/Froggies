@@ -9,7 +9,7 @@ public class StateMachinePlayer : StateMachine
     // STATES
     public StatePlayerIdle idle;
 
-    public StateMachinePlayer(PlayerEntity plr) { controller = plr; }
+    public StateMachinePlayer(PlayerEntity plr) : base(plr.transform) { controller = plr; }
 
     public override void InitStateMachine()
     {

@@ -36,7 +36,8 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     // Initialized
     protected bool _initialized = false;
 
-
+    // ================= UNITY METHODS =================
+    //
     protected virtual void Awake()
     {
         InitComponents();
@@ -58,18 +59,22 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     {
 
     }
+    // =================================================
 
+    // ================= INITITIALISATION METHODS =================
+    //
     protected void InitComponents()
     {
-        if (!_initialized)
+        if (!_initialized) // If it hasnt been initialized
         {
-            InitSimpleRigidbody();
-            InitGroundController();
+            InitSimpleRigidbody(); // Get the rigidbody 
+            InitGroundController(); // Create a grounded controller
             _initialized = true;
         }
     }
     protected void InitSimpleRigidbody()
     {
+        // Get the rigidbody or create it if there is none
         _rigidbodyController = this.transform.TryGetComponent<SimpleRigidbody>(out SimpleRigidbody rb) ? rb : this.transform.AddComponent<SimpleRigidbody>();
     }
     protected void InitGroundController()
@@ -83,7 +88,10 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
         }
         _groundController = new GroundedController(_groundCheck, _groundRadius, _groundMask);
     }
+    // =================================================
 
+    // ================= MOVEMENT METHODS =================
+    //
     public virtual void Rotate(float horizontal, float vertical)
     {
         Vector3 dir = new Vector3(horizontal, 0, vertical).normalized;
@@ -95,7 +103,6 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
             this.transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
     }
-
     public virtual void Move()
     {
         _rigidbodyController.AddForce(this.transform.forward, _moveForce, _moveMode);
@@ -110,7 +117,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
             _rigidbodyController.AddForce(this.transform.forward, _jumpForceFwd, _jumpMode);
         }
     }
-
+    // =================================================
 
     protected virtual void OnDrawGizmos()
     {
@@ -124,9 +131,4 @@ public interface ILivingEntity
     public void Rotate(float horizontal, float vertical);
     public void Move();
     public void Jump();
-}
-
-public interface ITEST
-{
-    public void Test();
 }

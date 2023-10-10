@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour, IStateMachine
+public class StateMachine : IStateMachine
 {
     protected IState _actualState;
+    protected Transform _transform;
+
+    public StateMachine(Transform trform) { _transform = trform; }
 
     public virtual void InitStateMachine()
     {
@@ -18,15 +21,15 @@ public class StateMachine : MonoBehaviour, IStateMachine
         if (_actualState != null)
             _actualState.Start();
     }
-    public virtual void Update()
+    public virtual void Update(float time)
     {
         if (_actualState != null)
-            _actualState.Update(Time.deltaTime);
+            _actualState.Update(time);
     }
-    public virtual void FixedUpdate()
+    public virtual void FixedUpdate(float time)
     {
         if (_actualState != null)
-            _actualState.FixedUpdate(Time.fixedDeltaTime);
+            _actualState.FixedUpdate(time);
     }
     public virtual void Exit(IState newState)
     {
@@ -39,7 +42,7 @@ public class StateMachine : MonoBehaviour, IStateMachine
 
     public Transform GetTransform()
     {
-        return this.transform;
+        return _transform;
     }
 }
 
@@ -47,8 +50,8 @@ public interface IStateMachine
 {
     public void InitStateMachine();
     public void Start();
-    public void Update();
-    public void FixedUpdate();
+    public void Update(float time);
+    public void FixedUpdate(float time);
     public void Exit(IState newState);
     public Transform GetTransform();
 }

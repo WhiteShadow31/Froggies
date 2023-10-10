@@ -12,7 +12,7 @@ public class StatePlayerIdle : State
 
     public override void Start()
     {
-
+        Debug.Log("IDLE");
     }
     public override void Update(float time)
     {
