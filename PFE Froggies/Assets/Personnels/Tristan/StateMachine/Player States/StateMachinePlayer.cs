@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class StateMachinePlayer : StateMachine
 {
-    [SerializeField] public PlayerEntity controller;
+    public PlayerEntity entity;
 
     // STATES
     public StatePlayerIdle idle;
 
-    public StateMachinePlayer(PlayerEntity plr) : base(plr.transform) { controller = plr; }
+    public StateMachinePlayer(PlayerEntity plr) : base(plr.transform) { entity = plr; }
 
     public override void InitStateMachine()
     {

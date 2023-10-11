@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7877812190161844466}
   - component: {fileID: 5835585637291044793}
-  - component: {fileID: 8564460162028282917}
+  - component: {fileID: 1891451569572071492}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -100,10 +100,10 @@ MonoBehaviour:
     m_ActionName: Manette/LESLGBTCETTEBANDEDEPD
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Manette
+  m_DefaultActionMap: Clavier
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8564460162028282917
+--- !u!114 &1891451569572071492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3203673226840653472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae16bc854413254f85cee9b929790b9, type: 3}
+  m_Script: {fileID: 11500000, guid: a9fbfb592a0a0e045954f930d537f1e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabPlayerEntity: {fileID: 6911629313394053865, guid: 197d08ff76e572743b9bd06993c26a2e, type: 3}

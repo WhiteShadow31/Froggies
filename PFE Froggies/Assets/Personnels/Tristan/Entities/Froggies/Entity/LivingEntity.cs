@@ -15,7 +15,8 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     [SerializeField] protected Transform _groundCheck;
     [SerializeField] protected float _groundRadius;
     [SerializeField] protected LayerMask _groundMask;
-    protected GroundedController _groundController;
+    // protected GroundedController _groundController;
+    public bool IsGrounded { get { return Physics.OverlapSphere(_groundCheck.position, _groundRadius, _groundMask).Length > 0; } }
 
     [Header("--- MOVEMENT ---")]
     [SerializeField] protected float _moveForce = 1;
@@ -41,6 +42,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     protected virtual void Awake()
     {
         InitComponents();
+        _camera = Camera.main;
     }
 
     protected virtual void Start()
@@ -52,7 +54,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
 
     protected virtual void Update()
     {
-        _nbrJump = _groundController.IsGrounded ? 0 : _nbrJump;
+        _nbrJump = IsGrounded ? 0 : _nbrJump;
     }
 
     protected virtual void FixedUpdate()
@@ -86,7 +88,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
             go.transform.position = Vector3.zero;
             _groundCheck = go.transform;
         }
-        _groundController = new GroundedController(_groundCheck, _groundRadius, _groundMask);
+        //_groundController = new GroundedController(_groundCheck, _groundRadius, _groundMask);
     }
     // =================================================
 
@@ -109,9 +111,8 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     }
     public virtual void Jump()
     {
-        if (_groundController.IsGrounded && _nbrJump < _nbrJumpMAX && Mathf.Abs(_rigidbodyController.Velocity.y) < 0.1f)
+        if (IsGrounded && Mathf.Abs(_rigidbodyController.Velocity.y) < 0.2f)
         {
-            _nbrJump++;
             
             _rigidbodyController.AddForce(this.transform.up, _jumpForceUp, _jumpMode);
             _rigidbodyController.AddForce(this.transform.forward, _jumpForceFwd, _jumpMode);

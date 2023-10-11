@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputTest : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     [SerializeField] protected GameObject _prefabPlayerEntity;
     protected PlayerEntity _playerEntity;
@@ -15,17 +15,34 @@ public class InputTest : MonoBehaviour
 
     void OnMove(InputValue ctx)
     {
-        Debug.Log(ctx.Get<Vector2>());
+        if(_playerEntity != null)
+        {
+            _playerEntity.RotaInput = ctx.Get<Vector2>();
+        }
     }
 
-    void OnStartAim()
+    void OnJump(InputValue ctx)
     {
-        Debug.Log("Start");
+        if (_playerEntity != null)
+        {
+            _playerEntity.JumpInput = ctx.Get<float>() > 0.1f;
+            //_playerEntity.Jump();
+        }
     }
 
-    void OnEndAim()
+    void OnStartAim(InputValue ctx)
     {
-        Debug.Log("End");
+
+    }
+
+    void OnEndAim(InputValue ctx)
+    {
+
+    }
+
+    void OnTongue(InputValue ctx)
+    {
+
     }
 
     public void SpawnPlayer()
@@ -37,10 +54,9 @@ public class InputTest : MonoBehaviour
             go.transform.position = this.transform.position;
         }
     }
-
     public void SpawnPlayer(Vector3 pos)
     {
-        if(_prefabPlayerEntity != null)
+        if (_prefabPlayerEntity != null)
         {
             GameObject go = Instantiate(_prefabPlayerEntity);
             _playerEntity = go.GetComponent<PlayerEntity>();
