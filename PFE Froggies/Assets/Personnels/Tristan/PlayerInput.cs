@@ -26,7 +26,6 @@ public class PlayerInput : MonoBehaviour
         if (_playerEntity != null)
         {
             _playerEntity.JumpInput = ctx.Get<float>() > 0.1f;
-            //_playerEntity.Jump();
         }
     }
 

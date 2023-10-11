@@ -6,6 +6,11 @@ using UnityEngine;
 [Serializable]
 public class PlayerEntity : LivingEntity
 {
+    [Header("--- TONGUE ---")]
+    [SerializeField] protected Transform _tongueStartTransform;
+    [SerializeField] protected float _lengthTongue;
+
+
     bool _moveInput = false;
     bool _jumpInput = false;
     float _horizontalInput = 0;
@@ -32,12 +37,6 @@ public class PlayerEntity : LivingEntity
         base.Update();
 
         _smPlayer.Update(Time.deltaTime);
-
-
-        // _jumpInput = Input.GetKey(KeyCode.Space);
-        // _rotaInput.x = Input.GetAxisRaw("Horizontal");
-        // _rotaInput.y = Input.GetAxisRaw("Vertical");
-        // _moveInput = Input.GetKey(KeyCode.Q);
     }
     
     protected override void FixedUpdate()
@@ -46,14 +45,9 @@ public class PlayerEntity : LivingEntity
 
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
-        //if (_jumpInput)
-        //    Jump();
 
         if (_moveInput)
-            Move();
-
-        Rotate(_rotaInput.x, _rotaInput.y);
-        
+            Move();        
     }
 
     public override void Jump()
@@ -76,9 +70,17 @@ public class PlayerEntity : LivingEntity
     {
 
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(_tongueStartTransform.position, (this.transform.forward * _lengthTongue) + _tongueStartTransform.position);
+    }
 }
 
 public interface IFrogEntity
 {
     public void TongueHit();
+    public void Jump();
+    public void Rotate();
 }

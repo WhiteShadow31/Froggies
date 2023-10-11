@@ -34,6 +34,8 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     [SerializeField] float _turnSmoothTime = 0.1f;
     float _turnSmoothVelocity;
 
+    
+
     // Initialized
     protected bool _initialized = false;
 
