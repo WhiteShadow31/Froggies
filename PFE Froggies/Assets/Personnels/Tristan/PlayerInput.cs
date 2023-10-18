@@ -21,19 +21,19 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    void OnStartJump(InputValue ctx)
+    void OnJump(InputValue ctx)
     {
         if (_playerEntity != null)
         {
-            _playerEntity.StartJumpInput = ctx.Get<float>() > 0.1f;
+            _playerEntity.UseJump = true;
         }
     }
 
-    void OnEndJump(InputValue ctx)
+    void OnLongJump(InputValue ctx)
     {
         if (_playerEntity != null)
         {
-            _playerEntity.EndJumpInput = true;
+            _playerEntity.UseLongJump = true;
         }
     }
 
@@ -41,7 +41,7 @@ public class PlayerInput : MonoBehaviour
     {
         if( _playerEntity != null)
         {
-            _playerEntity.StartTongueAimInput = ctx.Get<float>() > 0.1f;
+            _playerEntity.StartTongueAimInput = true;
         }
     }
 

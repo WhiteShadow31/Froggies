@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(SimpleRigidbody))]
 public class LivingEntity : MonoBehaviour, ILivingEntity
 {
-    ILivingEntity entity;
-
     [Header("--- SIMPLE RIGIDBODY ---")]
     [SerializeField] protected SimpleRigidbody _rigidbodyController;
 
@@ -15,8 +13,11 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     [SerializeField] protected Transform _groundCheck;
     [SerializeField] protected float _groundRadius;
     [SerializeField] protected LayerMask _groundMask;
-    // protected GroundedController _groundController;
+
     public bool IsGrounded { get { return Physics.OverlapSphere(_groundCheck.position, _groundRadius, _groundMask).Length > 0; } }
+
+
+
 
     [Header("--- MOVEMENT ---")]
     [SerializeField] protected float _moveForce = 1;
@@ -25,9 +26,15 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     [Header("--- JUMP ---")]
     [SerializeField] protected float _jumpForceUp = 1;
     [SerializeField] protected float _jumpForceFwd = 1;
-    [SerializeField] protected ForceMode _jumpMode = ForceMode.Impulse;
-    [SerializeField] protected int _nbrJumpMAX = 1;
+    [Space]
+    [SerializeField] protected float _longJumpForceUp = 1;
+    [SerializeField] protected float _longJumpForceFwd = 2;
+
+    protected ForceMode _jumpMode = ForceMode.Impulse;
+    protected int _nbrJumpMAX = 1;
     protected int _nbrJump = 0;
+
+
 
     [Header("--- ROTATION ---")]
     [SerializeField] protected Camera _camera;

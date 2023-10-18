@@ -64,12 +64,15 @@
     <Compile Include="Assets\Personnels\Tristan\StateMachine\StateMachine.cs" />
     <Compile Include="Assets\Personnels\Tristan\Input\InputTest.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\TriggerCollider.cs" />
+    <Compile Include="Assets\Personnels\Tristan\StateMachine\Player States\StatePlayer.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\SubTitleAttribute.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Entity\InteractableEntity.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ProgressBarAttribute.cs" />
+    <Compile Include="Assets\Personnels\Romain\Entities\Player\Scripts\TongueScript.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Entity\SimpleRigidbody.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\LineTitleAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\TitleAttribute.cs" />
+    <Compile Include="Assets\Personnels\Tristan\StateMachine\Player States\StatePlayerUseTongue.cs" />
     <Compile Include="Assets\Personnels\Tristan\StateMachine\State.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\ThirdPersonMovement.cs" />

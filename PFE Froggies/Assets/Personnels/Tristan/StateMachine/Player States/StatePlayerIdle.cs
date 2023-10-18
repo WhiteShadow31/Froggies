@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class StatePlayerIdle : State
+public class StatePlayerIdle : StatePlayer
 {
-    protected StateMachinePlayer _smPlayer;
 
     bool _isGrounded = false;
 
     // Constructor
-    public StatePlayerIdle(StateMachinePlayer sm) : base(sm) { _smPlayer = sm; }
+    public StatePlayerIdle(StateMachinePlayer sm) : base(sm) { }
 
     public override void Start()
     {

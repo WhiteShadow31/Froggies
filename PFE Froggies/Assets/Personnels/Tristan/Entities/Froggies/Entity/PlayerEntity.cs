@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 [Serializable]
 public class PlayerEntity : LivingEntity
@@ -34,7 +35,7 @@ public class PlayerEntity : LivingEntity
     [SerializeField] protected LayerMask _tongueHitLayerMask;
 
     bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
-
+    /*
     [Header("--- CHARGING JUMP ---")]
     [SerializeField] protected float _fullChargeJumpTime = 1.5f;
     [SerializeField] protected AnimationCurve _chargingJumpCurve;
@@ -46,7 +47,7 @@ public class PlayerEntity : LivingEntity
     bool _chargingJump = false;
     float _chargingJumpTimer = 0;
     float _currentJumpForceUp = 0, _currentJumpForceForward = 0;
-
+    */
     [Header("--- MOUNT OTHER ---")]
     public Transform onFrogTransform;
     [SerializeField] protected float _mountRadius = 3f;
@@ -58,20 +59,27 @@ public class PlayerEntity : LivingEntity
 
     [HideInInspector] public bool isOnFrog = false;
 
+    // ===== MOVE INPUT =====
     bool _moveInput = false;
-    bool _startJumpInput = false;
-    bool _endJumpInput = false;
+    public bool MoveInput { set { _moveInput = value; } }
+
+    // ===== ROTA INPUT =====
+    Vector2 _rotaInput = Vector2.zero;
+    public Vector2 RotaInput { set { _rotaInput = value; } }
+
+    // ===== JUMP INPUT =====
+    protected bool _jump = false;
+    protected bool _longJump = false;
+    public bool UseJump {  set { _jump = value; } }
+    public bool UseLongJump { set { _longJump = value; } }
+
+    // ===== TONGUE INPUT =====
     bool _startTongueAimInput = false;
     bool _endTongueAimInput = false;
     float _horizontalInput = 0;
     float _verticalInput = 0;
-    Vector2 _rotaInput = Vector2.zero;
-    public Vector2 RotaInput { set { _rotaInput = value; } }
-    public bool StartJumpInput {  set { _startJumpInput = value; } }
-    public bool EndJumpInput { set { _endJumpInput = value; } }
-    public bool MoveInput { set { _moveInput = value; } }
     public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
-    public bool EndTongueAimInput { set { _endTongueAimInput = value; } }
+    public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
     public bool MountInput;
 
     protected StateMachinePlayer _smPlayer;
@@ -93,16 +101,6 @@ public class PlayerEntity : LivingEntity
 
         ChoseTongueState();
 
-        ChargingJump();
-
-        /*
-        if (_mountInput)
-        {
-            TryMount();
-            _mountInput = false;
-        }
-        */
-
     }
     
     protected override void FixedUpdate()
@@ -118,18 +116,26 @@ public class PlayerEntity : LivingEntity
 
     public override void Jump()
     {        
-        if(_startJumpInput)
+        if(_jump)
         {
-            _chargingJumpTimer = 0;
-            _currentJumpForceForward = _minJumpForceForward;
-            _currentJumpForceUp = _minJumpForceUp;
+            if (_longJump)
+            {
+                _rigidbodyController.AddForce(this.transform.up, _longJumpForceUp, _jumpMode);
+                _rigidbodyController.AddForce(this.transform.forward, _longJumpForceFwd, _jumpMode);
+            }
+            else
+            {
+                _rigidbodyController.AddForce(this.transform.up, _jumpForceUp, _jumpMode);
+                _rigidbodyController.AddForce(this.transform.forward, _jumpForceFwd, _jumpMode);
+            }
 
-            _chargingJump = true;
-            _startJumpInput = false;
+            _longJump = false;
+            _jump = false;
         }
-        //base.Jump();
+
     }
 
+    /*
     void ChargingJump()
     {
         if (_chargingJump)
@@ -149,22 +155,22 @@ public class PlayerEntity : LivingEntity
             }
 
             // When jump button release, jump
-            if (_endJumpInput)
+            if (_longJump)
             {
                 _rigidbodyController.AddForce(this.transform.up, _currentJumpForceUp, _jumpMode);
                 _rigidbodyController.AddForce(this.transform.forward, _currentJumpForceForward, _jumpMode);
 
-                _endJumpInput = false;
+                _longJump = false;
                 _chargingJump = false;
             }
 
         }
-        else if (_endJumpInput)
+        else if (_longJump)
         {
-            _endJumpInput = false;
+            _longJump = false;
         }
     }
-
+    */
     public void Rotate()
     {
         Rotate(_rotaInput.x, _rotaInput.y);
@@ -198,36 +204,39 @@ public class PlayerEntity : LivingEntity
         }
     }
 
-    protected virtual void TongueAim()
+    public virtual void ShowTongueAim(Vector3 pos)
     {
-        // If TongueDirectionObject is not active, activate it
-        if (!_tongueDirectionObject.activeInHierarchy)
-        {
-            _tongueDirectionObject.SetActive(true);
-        }
+        _tongueDirectionObject.SetActive(true);
+        _tongueDirectionObject.transform.position = Vector3.Lerp(_tongueStartTransform.position, pos, 0.5f);
+    }
 
+    // SHOW VISUAL AIM FOR THE TONGUE
+    public virtual Vector3 TongueAimPosition()
+    {
         // Place tongueDirectionObject on the middle of the tongueStart and the raycast hit point (or tongueMaxLenght if raycast not hit)
         if(Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
-            _tongueDirectionObject.transform.position = Vector3.Lerp(_tongueStartTransform.position, hit.point, 0.5f);           
+            return hit.point;
+            //_tongueDirectionObject.transform.position = Vector3.Lerp(_tongueStartTransform.position, hit.point, 0.5f);           
         }
         else
         {
-            _tongueDirectionObject.transform.position = Vector3.Lerp(_tongueStartTransform.position, _tongueStartTransform.position + (transform.forward * _tongueMaxLenght), 0.5f);
+            return _tongueStartTransform.position + (transform.forward * _tongueMaxLenght);
+            //_tongueDirectionObject.transform.position = Vector3.Lerp(_tongueStartTransform.position, _tongueStartTransform.position + (transform.forward * _tongueMaxLenght), 0.5f);
         }
     }
 
     protected virtual void TongueHit()
     {        
-        if (_tongueDirectionObject.activeInHierarchy) // If TongueDirectionObject is active, deactivate it
-        {
+        //if (_tongueDirectionObject.activeInHierarchy) // If TongueDirectionObject is active, deactivate it
             _tongueDirectionObject.SetActive(false);
-        }
+        
+        
 
-        if (!_tongueLineRenderer.enabled) // If tongueLineRenderer is not disable, enable it
-        {
+        //if (!_tongueLineRenderer.enabled) // If tongueLineRenderer is not disable, enable it
             _tongueLineRenderer.enabled = true;
-        }
+        
+        
 
         // Set tongueLineRenderer point position
         _tongueLineRenderer.SetPosition(0, _tongueStartTransform.position);
@@ -236,13 +245,13 @@ public class PlayerEntity : LivingEntity
         // Get Raycast hit point
         Vector3 hitPoint;
         if(Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
-        {
             hitPoint = hit.point;
-        }
         else
-        {
             hitPoint = _tongueStartTransform.position + (transform.forward * _tongueMaxLenght);
-        }
+        
+        
+        
+        
 
         // Tongue anim in and out
         if (!_tongueAnimEnded)
@@ -288,6 +297,16 @@ public class PlayerEntity : LivingEntity
     {
 
     }
+    
+    protected virtual void UseTongue()
+    {
+        //if (_tongueDirectionObject.activeInHierarchy) // If TongueDirectionObject is active, deactivate it
+        _tongueDirectionObject.SetActive(false);
+
+        //if (!_tongueLineRenderer.enabled) // If tongueLineRenderer is not disable, enable it
+        _tongueLineRenderer.enabled = true;
+    }
+
 
     public virtual bool TryMount()
     {
