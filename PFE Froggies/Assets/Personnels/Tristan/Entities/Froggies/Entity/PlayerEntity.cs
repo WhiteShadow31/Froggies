@@ -301,6 +301,10 @@ public class PlayerEntity : LivingEntity
                 if (col.TryGetComponent<PlayerEntity>(out PlayerEntity otherPlayerEntity) && otherPlayerEntity != this)
                 {
                     _otherPlayerMountTransform = otherPlayerEntity.onFrogTransform;
+
+                    // Set ignore collision between players to true
+                    Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), true);
+
                     isOnFrog = true;
                     return true;
                 }
@@ -315,6 +319,10 @@ public class PlayerEntity : LivingEntity
         if (isOnFrog)
         {
             _otherPlayerMountTransform = null;
+
+            // Set ignore collision between players to false
+            Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), false);
+
             isOnFrog = false;
         }
     }
