@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 
-[Serializable]
+
 public class PlayerEntity : LivingEntity
 {
     [Header("--- TONGUE ---")]
@@ -35,19 +34,12 @@ public class PlayerEntity : LivingEntity
     [SerializeField] protected LayerMask _tongueHitLayerMask;
 
     bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
-    /*
-    [Header("--- CHARGING JUMP ---")]
-    [SerializeField] protected float _fullChargeJumpTime = 1.5f;
-    [SerializeField] protected AnimationCurve _chargingJumpCurve;
-    [SerializeField] protected float _minJumpForceUp = 3f;
-    [SerializeField] protected float _maxJumpForceUp = 5f;
-    [SerializeField] protected float _minJumpForceForward = 5f;
-    [SerializeField] protected float _maxJumpForceForward = 10f;
+   
 
-    bool _chargingJump = false;
-    float _chargingJumpTimer = 0;
-    float _currentJumpForceUp = 0, _currentJumpForceForward = 0;
-    */
+
+
+
+
     [Header("--- MOUNT OTHER ---")]
     public Transform onFrogTransform;
     [SerializeField] protected float _mountRadius = 3f;
@@ -56,21 +48,17 @@ public class PlayerEntity : LivingEntity
     public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
 
 
-
+    // INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS
 
     // ===== MOVE INPUT =====
-    bool _moveInput = false;
-    public bool MoveInput { set { _moveInput = value; } }
+    public bool MoveInput;
 
     // ===== ROTA INPUT =====
-    Vector2 _rotaInput = Vector2.zero;
-    public Vector2 RotaInput { set { _rotaInput = value; } }
+    public Vector2 RotaInput = Vector2.zero;
 
     // ===== JUMP INPUT =====
-    protected bool _jump = false;
-    protected bool _longJump = false;
-    public bool UseJump {  set { _jump = value; } }
-    public bool UseLongJump { set { _longJump = value; } }
+    public bool JumpInput = false;
+    public bool LongJumpInput = false;
 
     // ===== TONGUE INPUT =====
     bool _startTongueAimInput = false;
@@ -79,6 +67,8 @@ public class PlayerEntity : LivingEntity
     float _verticalInput = 0;
     public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
+
+    // ===== MOUNT INPUT =====
     public bool MountInput;
 
     protected StateMachinePlayer _smPlayer;
@@ -88,8 +78,11 @@ public class PlayerEntity : LivingEntity
     protected override void Start()
     {
         base.Start();
+
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
+
+        this.gameObject.name = Random.Range(0,10).ToString();
     }
 
 
@@ -115,67 +108,35 @@ public class PlayerEntity : LivingEntity
          //   Move();     
     }
 
+    // 
+    // =================================== MOVEMENT METHODS ===================================
+    //
+
     public override void Jump()
-    {        
-        if(_jump)
-        {
-            if (_longJump)
-            {
-                _rigidbodyController.AddForce(this.transform.up, _longJumpForceUp, _jumpMode);
-                _rigidbodyController.AddForce(this.transform.forward, _longJumpForceFwd, _jumpMode);
-            }
-            else
-            {
-                _rigidbodyController.AddForce(this.transform.up, _jumpForceUp, _jumpMode);
-                _rigidbodyController.AddForce(this.transform.forward, _jumpForceFwd, _jumpMode);
-            }
-
-            _longJump = false;
-            _jump = false;
-        }
-
-    }
-
-    /*
-    void ChargingJump()
     {
-        if (_chargingJump)
+        if (LongJumpInput)
         {
-            // Charging jump forces up and forward
-            if(_chargingJumpTimer < _fullChargeJumpTime)
-            {
-                _currentJumpForceForward = Mathf.Lerp(_minJumpForceForward, _maxJumpForceForward, _chargingJumpCurve.Evaluate(_chargingJumpTimer / _fullChargeJumpTime));
-                _currentJumpForceUp = Mathf.Lerp(_minJumpForceUp, _maxJumpForceUp, _chargingJumpCurve.Evaluate(_chargingJumpTimer / _fullChargeJumpTime));
-
-                _chargingJumpTimer += Time.deltaTime;
-            }
-            else
-            {
-                _currentJumpForceForward = _maxJumpForceForward;
-                _currentJumpForceUp = _maxJumpForceUp;
-            }
-
-            // When jump button release, jump
-            if (_longJump)
-            {
-                _rigidbodyController.AddForce(this.transform.up, _currentJumpForceUp, _jumpMode);
-                _rigidbodyController.AddForce(this.transform.forward, _currentJumpForceForward, _jumpMode);
-
-                _longJump = false;
-                _chargingJump = false;
-            }
-
+            _rigidbodyController.AddForce(this.transform.up, _longJumpForceUp, _jumpMode);
+            _rigidbodyController.AddForce(this.transform.forward, _longJumpForceFwd, _jumpMode);
         }
-        else if (_longJump)
+        else
         {
-            _longJump = false;
+            _rigidbodyController.AddForce(this.transform.up, _jumpForceUp, _jumpMode);
+            _rigidbodyController.AddForce(this.transform.forward, _jumpForceFwd, _jumpMode);
         }
+
+        LongJumpInput = false;
+        JumpInput = false;
+
     }
-    */
     public void Rotate()
     {
-        Rotate(_rotaInput.x, _rotaInput.y);
+        Rotate(RotaInput.x, RotaInput.y);
     }
+
+    // 
+    // =================================== TONGUE METHODS ===================================
+    //
 
     protected virtual void ChoseTongueState()
     {
@@ -308,6 +269,9 @@ public class PlayerEntity : LivingEntity
         _tongueLineRenderer.enabled = true;
     }
 
+    // 
+    // =================================== MOUNT METHODS ===================================
+    //
 
     public virtual bool TryMount()
     {
@@ -324,7 +288,7 @@ public class PlayerEntity : LivingEntity
                     if (!otherPlayerEntity.isOnFrog)
                     {
                         _otherPlayerMountTransform = otherPlayerEntity.onFrogTransform;
-                        Debug.Log(otherPlayerEntity.name);
+                        Debug.Log(this.name + "mount on "+_otherPlayerMountTransform.parent.name);
 
                         // Set ignore collision between players to true
                         Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), true);

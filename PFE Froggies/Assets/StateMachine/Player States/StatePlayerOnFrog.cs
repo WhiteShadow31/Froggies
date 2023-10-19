@@ -17,11 +17,17 @@ public class StatePlayerOnFrog : State
     {
         _smPlayer.entity.transform.position = _smPlayer.entity.GetMountTransform.position;
 
-        _smPlayer.entity.Jump();
+
+        if (_smPlayer.entity.JumpInput)
+        {
+            //_smPlayer.entity.StopMount();
+            _smPlayer.entity.Jump();
+        }
+        
 
         if (_smPlayer.entity.MountInput)
         {
-            _smPlayer.entity.StopMount();
+            //_smPlayer.entity.StopMount();
         }
     }
     public override void FixedUpdate(float time)

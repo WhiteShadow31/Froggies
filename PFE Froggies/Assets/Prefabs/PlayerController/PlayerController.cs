@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] protected GameObject _prefabPlayerEntity;
     protected PlayerEntity _playerEntity;
@@ -25,7 +25,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (_playerEntity != null)
         {
-            _playerEntity.UseJump = true;
+            _playerEntity.JumpInput = true;
         }
     }
 
@@ -33,7 +33,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (_playerEntity != null)
         {
-            _playerEntity.UseLongJump = true;
+            _playerEntity.LongJumpInput = true;
         }
     }
 
