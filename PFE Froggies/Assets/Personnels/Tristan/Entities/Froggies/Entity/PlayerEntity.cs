@@ -57,7 +57,6 @@ public class PlayerEntity : LivingEntity
 
 
 
-    [HideInInspector] public bool isOnFrog = false;
 
     // ===== MOVE INPUT =====
     bool _moveInput = false;
@@ -83,6 +82,8 @@ public class PlayerEntity : LivingEntity
     public bool MountInput;
 
     protected StateMachinePlayer _smPlayer;
+    [HideInInspector] public bool isOnFrog = false;
+
 
     protected override void Start()
     {
@@ -110,8 +111,8 @@ public class PlayerEntity : LivingEntity
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
 
-        if (_moveInput)
-            Move();     
+        //if (_moveInput)
+         //   Move();     
     }
 
     public override void Jump()
@@ -319,13 +320,18 @@ public class PlayerEntity : LivingEntity
                 // Get a player
                 if (col.TryGetComponent<PlayerEntity>(out PlayerEntity otherPlayerEntity) && otherPlayerEntity != this)
                 {
-                    _otherPlayerMountTransform = otherPlayerEntity.onFrogTransform;
 
-                    // Set ignore collision between players to true
-                    Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), true);
+                    if (!otherPlayerEntity.isOnFrog)
+                    {
+                        _otherPlayerMountTransform = otherPlayerEntity.onFrogTransform;
+                        Debug.Log(otherPlayerEntity.name);
 
-                    isOnFrog = true;
-                    return true;
+                        // Set ignore collision between players to true
+                        Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), true);
+
+                        isOnFrog = true;
+                        return true;
+                    }
                 }
             }
         }
@@ -337,10 +343,10 @@ public class PlayerEntity : LivingEntity
     {
         if (isOnFrog)
         {
-            _otherPlayerMountTransform = null;
-
             // Set ignore collision between players to false
             Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), false);
+
+            _otherPlayerMountTransform = null;
 
             isOnFrog = false;
         }
