@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class StatePlayerIdle : State
+public class StatePlayerIdle : StatePlayer
 {
-    protected StateMachinePlayer _smPlayer;
 
     bool _isGrounded = false;
 
     // Constructor
-    public StatePlayerIdle(StateMachinePlayer sm) : base(sm) { _smPlayer = sm; }
+    public StatePlayerIdle(StateMachinePlayer sm) : base(sm) { }
 
     public override void Start()
     {
@@ -20,14 +19,29 @@ public class StatePlayerIdle : State
     {
         _isGrounded = _smPlayer.entity.IsGrounded;
 
-        if(_isGrounded)
+        if (_isGrounded)
+        {
             _smPlayer.entity.Jump();
+        }
+        /*else
+        {
+            _smPlayer.Exit(_smPlayer.jump);
+        }*/
+
+        if(_smPlayer.entity.MountInput)
+        {
+            if (_smPlayer.entity.TryMount())
+            {
+                _smPlayer.Exit(_smPlayer.onFrog);
+            }
+        }
     }
     public override void FixedUpdate(float time)
     {
         if (_isGrounded)
         {
             _smPlayer.entity.Rotate();
+            //_smPlayer.Exit(_smPlayer.onFrog);
         }
     }
     public override void Exit()

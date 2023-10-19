@@ -327,7 +327,7 @@
 -r:"C:/Program Files/Unity/Hub/Editor/2022.3.9f1/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2022.3.9f1/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll"
 -r:"Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator/ReportGeneratorMerged.dll"
--r:"Library/PackageCache/com.unity.visualscripting@1.9.0/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ForUI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ref.dll"
@@ -377,6 +377,7 @@
 "Assets/Personnels/Tristan/Entities/Froggies/Controller/Prefab/SimpleController.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/Controller/Prefab/ThirdPersonMovement.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/Controller/TriggerCollider.cs"
+<<<<<<< HEAD
 "Assets/Personnels/Tristan/Entities/Froggies/Entity/GroundedController.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/Entity/LivingEntity.cs"
 "Assets/Personnels/Tristan/Entities/Froggies/Entity/PlayerEntity.cs"
@@ -387,6 +388,27 @@
 "Assets/Personnels/Tristan/StateMachine/Player States/StatePlayerIdle.cs"
 "Assets/Personnels/Tristan/StateMachine/State.cs"
 "Assets/Personnels/Tristan/StateMachine/StateMachine.cs"
+=======
+"Assets/Personnels/Tristan/Entities/Froggies/Entity/BigFrogEntity.cs"
+"Assets/Personnels/Tristan/Entities/Froggies/Entity/GroundedController.cs"
+"Assets/Personnels/Tristan/Entities/Froggies/Entity/InteractableEntity.cs"
+"Assets/Personnels/Tristan/Entities/Froggies/Entity/LivingEntity.cs"
+"Assets/Personnels/Tristan/Entities/Froggies/Entity/PlayerEntity.cs"
+"Assets/Personnels/Tristan/Entities/Froggies/Entity/SimpleRigidbody.cs"
+"Assets/Personnels/Tristan/Entities/Froggies/Entity/SmallFrogEntity.cs"
+"Assets/Personnels/Tristan/Entities/Froggies/PushObject.cs"
+"Assets/Personnels/Tristan/Input/InputTest.cs"
+"Assets/Personnels/Tristan/PlayerInput.cs"
+"Assets/Personnels/Tristan/StateMachine/Player States/StateMachinePlayer.cs"
+"Assets/Personnels/Tristan/StateMachine/Player States/StatePlayer.cs"
+"Assets/Personnels/Tristan/StateMachine/Player States/StatePlayerIdle.cs"
+"Assets/Personnels/Tristan/StateMachine/Player States/StatePlayerJump.cs"
+"Assets/Personnels/Tristan/StateMachine/Player States/StatePlayerOnFrog.cs"
+"Assets/Personnels/Tristan/StateMachine/Player States/StatePlayerUseTongue.cs"
+"Assets/Personnels/Tristan/StateMachine/State.cs"
+"Assets/Personnels/Tristan/StateMachine/StateMachine.cs"
+"Assets/PlayerManager.cs"
+>>>>>>> main
 -langversion:9.0
 
 /deterministic

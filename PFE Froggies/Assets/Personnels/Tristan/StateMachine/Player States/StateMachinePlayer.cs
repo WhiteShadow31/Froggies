@@ -8,13 +8,17 @@ public class StateMachinePlayer : StateMachine
 
     // STATES
     public StatePlayerIdle idle;
+    public StatePlayerOnFrog onFrog;
+    public StatePlayerJump jump;
 
     public StateMachinePlayer(PlayerEntity plr) : base(plr.transform) { entity = plr; }
 
     public override void InitStateMachine()
     {
         idle = new StatePlayerIdle(this);
+        onFrog = new StatePlayerOnFrog(this);
+        jump = new StatePlayerJump(this);
 
-        _actualState = idle;
+        _actualState = idle;        
     }
 }

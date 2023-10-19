@@ -25,23 +25,40 @@ public class PlayerInput : MonoBehaviour
     {
         if (_playerEntity != null)
         {
-            _playerEntity.JumpInput = ctx.Get<float>() > 0.1f;
+            _playerEntity.UseJump = true;
         }
     }
 
-    void OnStartAim(InputValue ctx)
+    void OnLongJump(InputValue ctx)
     {
-
+        if (_playerEntity != null)
+        {
+            _playerEntity.UseLongJump = true;
+        }
     }
 
-    void OnEndAim(InputValue ctx)
+    void OnStartTongueAim(InputValue ctx)
     {
-
+        if( _playerEntity != null)
+        {
+            _playerEntity.StartTongueAimInput = true;
+        }
     }
 
-    void OnTongue(InputValue ctx)
+    void OnEndTongueAim(InputValue ctx)
     {
+        if(_playerEntity != null)
+        {
+            _playerEntity.EndTongueAimInput = true;          
+        }
+    }
 
+    void OnMount(InputValue ctx)
+    {
+        if(_playerEntity != null)
+        {
+            _playerEntity.MountInput = true;
+        }
     }
 
     public void SpawnPlayer()
