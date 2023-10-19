@@ -275,14 +275,14 @@ public class PlayerEntity : LivingEntity
 
     public virtual bool TryMount()
     {
-        if (!isOnFrog)
+        if (!isOnFrog) // Is it not on a frog ?
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _mountRadius, _playerLayer);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _mountRadius, _playerLayer); // Look for frogs
 
             foreach (Collider col in colliders)
             {
                 // Get a player
-                if (col.TryGetComponent<PlayerEntity>(out PlayerEntity otherPlayerEntity) && otherPlayerEntity != this)
+                if (col.TryGetComponent<PlayerEntity>(out PlayerEntity otherPlayerEntity) && otherPlayerEntity != this) // Is it a frog 
                 {
 
                     if (!otherPlayerEntity.isOnFrog)
@@ -294,6 +294,7 @@ public class PlayerEntity : LivingEntity
                         Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), true);
 
                         isOnFrog = true;
+                        MountInput = false;
                         return true;
                     }
                 }

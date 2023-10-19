@@ -1979,13 +1979,13 @@ MonoBehaviour:
   _groundRadius: 0.1
   _groundMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   _moveForce: 1
   _moveMode: 1
   _jumpForceUp: 5
   _jumpForceFwd: 10
-  _jumpMode: 1
-  _nbrJumpMAX: 1
+  _longJumpForceUp: 5
+  _longJumpForceFwd: 15
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
   _tongueStartTransform: {fileID: 1159593551632478005}
@@ -2052,40 +2052,16 @@ MonoBehaviour:
   _tongueHitLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  _fullChargeJumpTime: 1.5
-  _chargingJumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _minJumpForceUp: 2
-  _maxJumpForceUp: 5
-  _minJumpForceForward: 5
-  _maxJumpForceForward: 10
   onFrogTransform: {fileID: 7513869125547718495}
   _mountRadius: 3
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  MoveInput: 0
+  RotaInput: {x: 0, y: 0}
+  JumpInput: 0
+  LongJumpInput: 0
+  MountInput: 0
   isOnFrog: 0
 --- !u!114 &8602904163012181652
 MonoBehaviour:

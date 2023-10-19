@@ -20,14 +20,16 @@ public class StatePlayerOnFrog : State
 
         if (_smPlayer.entity.JumpInput)
         {
-            //_smPlayer.entity.StopMount();
+            _smPlayer.entity.StopMount();
             _smPlayer.entity.Jump();
+            _smPlayer.Exit(_smPlayer.idle);
         }
         
 
         if (_smPlayer.entity.MountInput)
         {
-            //_smPlayer.entity.StopMount();
+            _smPlayer.entity.StopMount();
+            _smPlayer.Exit(_smPlayer.idle);
         }
     }
     public override void FixedUpdate(float time)
