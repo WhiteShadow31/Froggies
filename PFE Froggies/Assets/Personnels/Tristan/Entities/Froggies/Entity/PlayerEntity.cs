@@ -180,7 +180,7 @@ public class PlayerEntity : LivingEntity
     {
         if (_startTongueAimInput && _tongueAnimEnded) // Aiming with tongue
         {
-            TongueAim();
+            ShowTongueAim(TongueAimPosition());
         }
         else
         {
