@@ -14,7 +14,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     [SerializeField] protected float _groundRadius;
     [SerializeField] protected LayerMask _groundMask;
 
-    public bool IsGrounded { get { return Physics.OverlapSphere(_groundCheck.position, _groundRadius, _groundMask).Length > 0; } }
+    public bool IsGrounded { get { return LookGrounded(); } }
 
 
 
@@ -127,6 +127,21 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
         }
     }
     // =================================================
+    protected virtual bool LookGrounded()
+    {
+        Collider[] cols = Physics.OverlapSphere(_groundCheck.position, _groundRadius, _groundMask);
+        bool grounded = false;
+
+        foreach (Collider col in cols)
+        {
+            if ((col.transform != this.transform))
+            {
+                grounded = true;
+            }
+        }
+
+        return grounded;
+    }
 
     protected virtual void OnDrawGizmos()
     {
