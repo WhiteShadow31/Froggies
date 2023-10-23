@@ -5,8 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    protected CameraEntity _cameraEntity;
+    [Space]
     [SerializeField] protected GameObject _prefabPlayerEntity;
     protected PlayerEntity _playerEntity;
+
+    private void Awake()
+    {
+        _cameraEntity = Camera.main.GetComponent<CameraEntity>();
+    }
 
     private void Start()
     {
@@ -68,6 +75,8 @@ public class PlayerController : MonoBehaviour
             GameObject go = Instantiate(_prefabPlayerEntity);
             _playerEntity = go.GetComponent<PlayerEntity>();
             go.transform.position = this.transform.position;
+
+            _cameraEntity.AddPlayer(go);
         }
     }
     public void SpawnPlayer(Vector3 pos)

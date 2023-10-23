@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInputManager))]
 public class PlayerManager : MonoBehaviour
 {
-    // ADD CAMERA SCRIPT REFERENCE HERE
-
     protected PlayerInputManager _inputManager;
     protected List<PlayerInput> _players = new List<PlayerInput>();
 
@@ -16,11 +14,8 @@ public class PlayerManager : MonoBehaviour
         _inputManager = GetComponent<PlayerInputManager>();
     }
 
-    public void nPlayerJoined(PlayerInput player)
+    public void OnPlayerJoined(PlayerInput player)
     {
-        _players.Add(player);
-
-        Transform playerTransform = player.transform;
-        // ADD PLAYER TRANSFORM TO CAMERA
+        _players.Add(player);  
     }
 }
