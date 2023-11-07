@@ -64,6 +64,7 @@
     <Compile Include="Assets\StateMachine\StateMachine.cs" />
     <Compile Include="Assets\Personnels\Tristan\Input\InputTest.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\TriggerCollider.cs" />
+    <Compile Include="Assets\Personnels\Romain\Entities\Camera\Scripts\StaticCamPointEntity.cs" />
     <Compile Include="Assets\StateMachine\Player States\StatePlayerIdle.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\Frogs\SmallFrogEntity.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\SubTitleAttribute.cs" />
