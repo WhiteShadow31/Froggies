@@ -10,6 +10,10 @@ public class StaticCamPointEntity : MonoBehaviour
     [SerializeField] List<GameObject> playersInZone = new List<GameObject>(2);
     [SerializeField] LayerMask playersLayerMask;
 
+    [Header("Debug")]
+    [SerializeField] bool showDebug = true;
+    [SerializeField] Color debugColor = Color.red;
+
     private void Awake()
     {
         camEntity = Camera.main.GetComponent<CameraEntity>();
@@ -43,7 +47,10 @@ public class StaticCamPointEntity : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position, GetComponent<BoxCollider>().size);
+        if (showDebug)
+        {
+            Gizmos.color = debugColor;
+            Gizmos.DrawWireCube(transform.position, GetComponent<BoxCollider>().size);
+        }
     }
 }

@@ -2077,13 +2077,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useGravity: 1
   _normalGravity: 9.81
-  _fallingGravity: 30
+  _fallingGravity: 50
   _useVelocityClampX: 1
-  _clampVelocityX: {x: -100, y: 100}
+  _clampVelocityX: {x: -10, y: 10}
   _useVelocityClampY: 1
-  _clampVelocityY: {x: -100, y: 100}
+  _clampVelocityY: {x: -10, y: 10}
   _useVelocityClampZ: 1
-  _clampVelocityZ: {x: -100, y: 100}
+  _clampVelocityZ: {x: -10, y: 10}
 --- !u!120 &4064099953945684390
 LineRenderer:
   serializedVersion: 2

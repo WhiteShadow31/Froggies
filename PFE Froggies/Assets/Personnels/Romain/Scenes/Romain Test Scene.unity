@@ -943,18 +943,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4588733095707161382, guid: d6a16a5580265e7469718df7d505b1aa, type: 3}
-      propertyPath: _camExplorationRotation.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588733095707161382, guid: d6a16a5580265e7469718df7d505b1aa, type: 3}
-      propertyPath: _camExplorationPosInterpTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588733095707161382, guid: d6a16a5580265e7469718df7d505b1aa, type: 3}
-      propertyPath: _camExplorationRotInterpTime
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 5799419464074052381, guid: d6a16a5580265e7469718df7d505b1aa, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -1018,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 769579485}
     - target: {fileID: 7253683230834716871, guid: fcae46119480f3349a07c5f7912eda0d, type: 3}
       propertyPath: m_Name
-      value: Static Cam Point
+      value: Puzzle Cam Point
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

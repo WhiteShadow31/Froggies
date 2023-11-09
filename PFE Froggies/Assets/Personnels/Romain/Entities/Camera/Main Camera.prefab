@@ -108,15 +108,15 @@ MonoBehaviour:
   _player1: {fileID: 0}
   _player2: {fileID: 0}
   _startCameraMode: 0
-  _camExplorationRotation: {x: 0, y: 0, z: 0}
+  _camExplorationRotation: {x: 60, y: 0, z: 0}
   _camMinForwardOffset: -10
   _camMaxForwardOffset: -15
   _maxZoomYDist: 10
   _maxDezoomYDist: 20
   _startDezoomDistance: 5
   _maxDezoomDistance: 15
-  _camExplorationPosInterpTime: 1
-  _camExplorationRotInterpTime: 1
-  _camPuzzleRotInterpTime: 20
+  _camExplorationPosInterpTime: 0.5
+  _camExplorationRotInterpSpeed: 20
   _camPuzzlePosInterpTime: 0.5
+  _camPuzzleRotInterpSpeed: 20
   _drawDebugGizmos: 1

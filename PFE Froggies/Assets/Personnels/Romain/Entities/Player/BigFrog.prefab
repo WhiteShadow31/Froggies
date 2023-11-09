@@ -2015,8 +2015,8 @@ MonoBehaviour:
   _moveMode: 1
   _jumpForceUp: 5
   _jumpForceFwd: 10
-  _jumpMode: 1
-  _nbrJumpMAX: 1
+  _longJumpForceUp: 1
+  _longJumpForceFwd: 2
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
   _tongueStartTransform: {fileID: 1159593551632478005}
@@ -2083,40 +2083,16 @@ MonoBehaviour:
   _tongueHitLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  _fullChargeJumpTime: 1.5
-  _chargingJumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _minJumpForceUp: 2
-  _maxJumpForceUp: 5
-  _minJumpForceForward: 5
-  _maxJumpForceForward: 10
   onFrogTransform: {fileID: 4858431274688913065}
   _mountRadius: 3
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  MoveInput: 0
+  RotaInput: {x: 0, y: 0}
+  JumpInput: 0
+  LongJumpInput: 0
+  MountInput: 0
   isOnFrog: 0
   _push: 1
 --- !u!114 &8602904163012181652
@@ -2133,13 +2109,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useGravity: 1
   _normalGravity: 9.81
-  _fallingGravity: 30
+  _fallingGravity: 50
   _useVelocityClampX: 1
-  _clampVelocityX: {x: -100, y: 100}
+  _clampVelocityX: {x: -10, y: 10}
   _useVelocityClampY: 1
-  _clampVelocityY: {x: -100, y: 100}
+  _clampVelocityY: {x: -10, y: 10}
   _useVelocityClampZ: 1
-  _clampVelocityZ: {x: -100, y: 100}
+  _clampVelocityZ: {x: -10, y: 10}
 --- !u!120 &4064099953945684390
 LineRenderer:
   serializedVersion: 2

@@ -16,9 +16,6 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
 
     public bool IsGrounded { get { return LookGrounded(); } }
 
-
-
-
     [Header("--- MOVEMENT ---")]
     [SerializeField] protected float _moveForce = 1;
     [SerializeField] protected ForceMode _moveMode = ForceMode.Impulse;
@@ -33,7 +30,6 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     protected ForceMode _jumpMode = ForceMode.Impulse;
     protected int _nbrJumpMAX = 1;
     protected int _nbrJump = 0;
-
 
 
     [Header("--- ROTATION ---")]
@@ -121,7 +117,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     public virtual void Jump()
     {
         if (IsGrounded && Mathf.Abs(_rigidbodyController.Velocity.y) < 0.2f)
-        {           
+        {
             _rigidbodyController.AddForce(this.transform.up, _jumpForceUp, _jumpMode);
             _rigidbodyController.AddForce(this.transform.forward, _jumpForceFwd, _jumpMode);
         }
@@ -137,7 +133,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
             if ((col.transform != this.transform))
             {
                 grounded = true;
-            }
+            }           
         }
 
         return grounded;
