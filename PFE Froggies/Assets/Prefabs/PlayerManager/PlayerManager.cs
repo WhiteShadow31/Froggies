@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerManager : MonoBehaviour
 {
     protected PlayerInputManager _inputManager;
-    protected List<PlayerInput> _players = new List<PlayerInput>();
+    protected List<PlayerInput> players = new List<PlayerInput>();
 
     private void Awake()
     {
@@ -16,6 +16,6 @@ public class PlayerManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput player)
     {
-        _players.Add(player);  
+        players.Add(player);
     }
 }

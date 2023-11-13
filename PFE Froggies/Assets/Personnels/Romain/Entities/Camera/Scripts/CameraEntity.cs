@@ -9,6 +9,9 @@ public class CameraEntity : MonoBehaviour
     public GameObject _player1;
     public GameObject _player2;
 
+    //[HideInInspector]
+    public GameObject[] players = new GameObject[2];
+
     [Title("Camera Modes", "light blue", "white")]
     [SerializeField] CameraModes _startCameraMode = CameraModes.Exploration;
 
@@ -111,11 +114,13 @@ public class CameraEntity : MonoBehaviour
         if (_player1 == null && _player2 == null)
         {
             _player1 = player;
+            players[0] = player;
             return;
         }
         else if(_player1 != null && _player2 == null && player != _player1)
         {
             _player2 = player;
+            players[1] = player;
             return;
         }
     }
