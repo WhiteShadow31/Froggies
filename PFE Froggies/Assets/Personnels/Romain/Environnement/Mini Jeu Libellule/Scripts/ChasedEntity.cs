@@ -30,6 +30,7 @@ public class ChasedEntity : MonoBehaviour
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
+        _cameraEntity = Camera.main.GetComponent<CameraEntity>();
     }
 
     private void Start()
