@@ -346,9 +346,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82321408d64afe439fe8b21ab005458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraEntity: {fileID: 0}
+  _cameraEntity: {fileID: 1734163906}
   _startPoint: {fileID: 1592227694}
-  _timeBetweenMovement: 0.2
+  _detectionDistance: 9
+  _timeBetweenMovement: 0
   _movementCurve:
     serializedVersion: 2
     m_Curve:
@@ -374,15 +375,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _movementTime: 1
-  _moveIfPlayersDistance: 10
-  _cornersPoints:
-  - {fileID: 2086161673}
-  - {fileID: 175916235}
-  - {fileID: 1536354476}
-  - {fileID: 1986459624}
   _stuckDistance: 5
+  _stuckDistanceSafestPointFromPlayer: 5
   _normalMat: {fileID: 2100000, guid: d65812cc440177540925b38abcda4c29, type: 2}
   _stuckMat: {fileID: 2100000, guid: 51a7da0b7bf2e474ab958e30c512557d, type: 2}
+  _drawDebug: 1
 --- !u!1 &83279510
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,10 +424,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 538866112}
-  pointGauche: {fileID: 972428270}
-  pointBas: {fileID: 681161484}
-  pointDroite: {fileID: 1654923665}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 972428270}
+  - {fileID: 538866112}
+  - {fileID: 681161484}
+  - {fileID: 1654923665}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &85832896
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,10 +481,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 175916235}
-  pointGauche: {fileID: 1654923665}
-  pointBas: {fileID: 1203930381}
-  pointDroite: {fileID: 0}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 1654923665}
+  - {fileID: 175916235}
+  - {fileID: 1203930381}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &175916235
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,67 +537,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 0}
-  pointGauche: {fileID: 1863999499}
-  pointBas: {fileID: 85832896}
-  pointDroite: {fileID: 0}
---- !u!1001 &196141417
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 29.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8660254
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5799419464074052381, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-      propertyPath: m_Name
-      value: Camera
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 1863999499}
+  - {fileID: 85832896}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &216380675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,10 +1092,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 1592227692}
-  pointGauche: {fileID: 854353155}
-  pointBas: {fileID: 0}
-  pointDroite: {fileID: 1986459624}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 854353155}
+  - {fileID: 1986459624}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &517588584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,10 +1252,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 0}
-  pointGauche: {fileID: 2086161673}
-  pointBas: {fileID: 83279510}
-  pointDroite: {fileID: 1863999499}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 2086161673}
+  - {fileID: 83279510}
+  - {fileID: 1863999499}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &557499973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,10 +1507,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 83279510}
-  pointGauche: {fileID: 776533535}
-  pointBas: {fileID: 854353155}
-  pointDroite: {fileID: 1592227692}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 776533535}
+  - {fileID: 83279510}
+  - {fileID: 854353155}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &776533535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,10 +1563,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 972428270}
-  pointGauche: {fileID: 0}
-  pointBas: {fileID: 1536354476}
-  pointDroite: {fileID: 681161484}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 972428270}
+  - {fileID: 1536354476}
+  - {fileID: 681161484}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &813819982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1729,10 +1724,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 681161484}
-  pointGauche: {fileID: 1536354476}
-  pointBas: {fileID: 0}
-  pointDroite: {fileID: 507350035}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 1536354476}
+  - {fileID: 681161484}
+  - {fileID: 507350035}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &972428270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,10 +1780,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 2086161673}
-  pointGauche: {fileID: 0}
-  pointBas: {fileID: 776533535}
-  pointDroite: {fileID: 83279510}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 2086161673}
+  - {fileID: 776533535}
+  - {fileID: 83279510}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1007159987
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,10 +2151,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 85832896}
-  pointGauche: {fileID: 1592227692}
-  pointBas: {fileID: 1986459624}
-  pointDroite: {fileID: 0}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 85832896}
+  - {fileID: 1986459624}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1286224979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2363,6 +2381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1351095284}
+  - component: {fileID: 1351095285}
   m_Layer: 0
   m_Name: Points
   m_TagString: Untagged
@@ -2401,6 +2420,35 @@ Transform:
   - {fileID: 1986459625}
   m_Father: {fileID: 273318060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1351095285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351095283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0e48e4b8a43d14eafbee7a85c85fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {fileID: 2086161673}
+  - {fileID: 972428270}
+  - {fileID: 776533535}
+  - {fileID: 1536354476}
+  - {fileID: 538866112}
+  - {fileID: 83279510}
+  - {fileID: 681161484}
+  - {fileID: 854353155}
+  - {fileID: 1863999499}
+  - {fileID: 1654923665}
+  - {fileID: 1592227692}
+  - {fileID: 507350035}
+  - {fileID: 175916235}
+  - {fileID: 85832896}
+  - {fileID: 1203930381}
+  - {fileID: 1986459624}
 --- !u!1 &1426614243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,10 +2808,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 776533535}
-  pointGauche: {fileID: 0}
-  pointBas: {fileID: 0}
-  pointDroite: {fileID: 854353155}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 776533535}
+  - {fileID: 854353155}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &1566643356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2865,10 +2920,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 1654923665}
-  pointGauche: {fileID: 776533535}
-  pointBas: {fileID: 507350035}
-  pointDroite: {fileID: 1203930381}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 681161484}
+  - {fileID: 1654923665}
+  - {fileID: 507350035}
+  - {fileID: 1203930381}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1654923665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2913,10 +2977,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 1863999499}
-  pointGauche: {fileID: 83279510}
-  pointBas: {fileID: 1592227692}
-  pointDroite: {fileID: 85832896}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 83279510}
+  - {fileID: 1863999499}
+  - {fileID: 85832896}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!1001 &1734163905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8660254
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799419464074052381, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_Name
+      value: Camera
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+--- !u!114 &1734163906 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4588733095707161382, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+  m_PrefabInstance: {fileID: 1734163905}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9145e68ed2583934fbffd951b4ae1d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1863999499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2961,10 +3101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 0}
-  pointGauche: {fileID: 538866112}
-  pointBas: {fileID: 1654923665}
-  pointDroite: {fileID: 175916235}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 538866112}
+  - {fileID: 1654923665}
+  - {fileID: 175916235}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1986459624
 GameObject:
   m_ObjectHideFlags: 0
@@ -3009,10 +3157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 1203930381}
-  pointGauche: {fileID: 507350035}
-  pointBas: {fileID: 0}
-  pointDroite: {fileID: 0}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 507350035}
+  - {fileID: 1203930381}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &2086161673
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,16 +3212,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointHaut: {fileID: 0}
-  pointGauche: {fileID: 0}
-  pointBas: {fileID: 972428270}
-  pointDroite: {fileID: 538866112}
+  nearPointsParent: {fileID: 1351095283}
+  getNearPointsLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  getNearPointRadius: 11
+  nearPoints:
+  - {fileID: 972428270}
+  - {fileID: 538866112}
+  drawDebugSpheres: 0
+  drawDebugLines: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1566643356}
-  - {fileID: 196141417}
+  - {fileID: 1734163905}
   - {fileID: 1007159991}
   - {fileID: 557499975}
   - {fileID: 273318060}

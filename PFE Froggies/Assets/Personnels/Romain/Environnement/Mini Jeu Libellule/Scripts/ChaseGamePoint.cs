@@ -1,26 +1,62 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UltimateAttributesPack;
 
 public class ChaseGamePoint : MonoBehaviour
 {
-    public GameObject pointHaut, pointGauche, pointBas, pointDroite;
+    [FunctionButton("Get Near Points", "GetNearPoints", typeof(ChaseGamePoint))]
+    public GameObject nearPointsParent;
+    [SerializeField] LayerMask getNearPointsLayerMask;
+    [SerializeField] float getNearPointRadius = 10f;
 
-    private void Start()
+    public List<GameObject> nearPoints = new List<GameObject>();
+
+    [SerializeField] bool drawDebugSpheres;
+    [SerializeField] bool drawDebugLines;
+    [SerializeField] Color debugColor = Color.red;
+
+    public void GetNearPoints()
     {
-        if(pointHaut == null)
+        List<GameObject> nearpoints = new List<GameObject>();
+        foreach(Transform point in nearPointsParent.GetComponentsInChildren<Transform>())
         {
-            pointHaut = gameObject;
+            if(point.gameObject == gameObject || point.gameObject == nearPointsParent)
+            {
+                continue;
+            }
+
+            if(Vector3.Distance(transform.position, point.position) <= getNearPointRadius)
+            {
+                if (Physics.Raycast(transform.position, point.position - transform.position, out RaycastHit hit, getNearPointRadius, getNearPointsLayerMask))
+                {
+                }
+                else
+                {
+                    nearpoints.Add(point.gameObject);
+                }
+            }
         }
-        if(pointGauche == null)
+
+        nearPoints.Clear();
+        nearPoints = nearpoints;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (drawDebugLines)
         {
-            pointGauche = gameObject;
+            Gizmos.color = debugColor;
+            foreach(GameObject point in nearPoints)
+            {
+                if(Vector3.Distance(transform.position, point.transform.position) <= getNearPointRadius)
+                {
+                    Gizmos.DrawLine(transform.position, point.transform.position);
+                }
+            }
         }
-        if(pointBas == null)
+        if (drawDebugSpheres)
         {
-            pointBas = gameObject;
-        }
-        if(pointDroite == null)
-        {
-            pointDroite = gameObject;
+            Gizmos.DrawWireSphere(transform.position, getNearPointRadius);
         }
     }
 }

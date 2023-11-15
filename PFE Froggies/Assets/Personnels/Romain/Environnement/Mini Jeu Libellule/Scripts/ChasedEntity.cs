@@ -5,27 +5,34 @@ using UnityEngine;
 public class ChasedEntity : MonoBehaviour
 {
     [SerializeField] CameraEntity _cameraEntity;
-    [Space]
+
+    MeshRenderer _meshRenderer;
+    ChaseGamePoint _currentTargetPoint;
+
+    [Header("Other params")]
     [SerializeField] ChaseGamePoint _startPoint;
+    [SerializeField] float _detectionDistance;
     [Space]
+
+    [Header("Movement")]
     [SerializeField] float _timeBetweenMovement;
     [SerializeField] AnimationCurve _movementCurve;
     [SerializeField] float _movementTime;
-    [Space]
-    [SerializeField] float _moveIfPlayersDistance;
-    [SerializeField] List<GameObject> _cornersPoints = new List<GameObject>(4);
-    [SerializeField] float _stuckDistance;
-    [SerializeField] Material _normalMat;
-    [SerializeField] Material _stuckMat;
-
-    MeshRenderer _meshRenderer;
 
     float _movementTimer;
-
     bool _isMoving = false;
     bool _isStopped = true;
 
-    ChaseGamePoint _currentTargetPoint;
+    [Header("Stuck")]
+    [SerializeField] float _stuckDistance;
+    [SerializeField] float _stuckDistanceSafestPointFromPlayer = 3f;
+    [SerializeField] Material _normalMat;
+    [SerializeField] Material _stuckMat;
+
+    bool _isStuck;
+
+    [Header("Debug gizmos")]
+    [SerializeField] bool _drawDebug = true;
 
     private void Awake()
     {
@@ -53,8 +60,8 @@ public class ChasedEntity : MonoBehaviour
 
     IEnumerator ChangePoint()
     {
-        GameObject[] nearPoints = {_currentTargetPoint.pointHaut, _currentTargetPoint.pointGauche, _currentTargetPoint.pointBas, _currentTargetPoint.pointDroite };
-        List<float> nearPointDistancesFromPlayers = new List<float>(4);
+        GameObject[] nearPoints = _currentTargetPoint.nearPoints.ToArray();
+        List<float> nearPointDistancesFromPlayers = new List<float>();
 
         foreach(GameObject point in nearPoints)
         {
@@ -65,16 +72,38 @@ public class ChasedEntity : MonoBehaviour
             }
                 
             // Get distances between players and point
-            float[] distanceFromPlayers = new float[_cameraEntity.players.Length];
+            float[] distancePointsFromPlayers = new float[_cameraEntity.players.Length];
             for(int i = 0; i < _cameraEntity.players.Length; i++)
             {
                 if (_cameraEntity.players[i] == null) continue;
-                distanceFromPlayers[i] = Vector3.Distance(point.transform.position, _cameraEntity.players[i].transform.position);                              
+                distancePointsFromPlayers[i] = Vector3.Distance(point.transform.position, _cameraEntity.players[i].transform.position);                              
             }
-            nearPointDistancesFromPlayers.Add(Mathf.Min(distanceFromPlayers));
+            nearPointDistancesFromPlayers.Add(Mathf.Min(distancePointsFromPlayers));
         }
-        
+
+        // Get distances from players
+        float[] distanceFromPlayers = new float[_cameraEntity.players.Length];
+        for (int i = 0; i < _cameraEntity.players.Length; i++)
+        {
+            if (_cameraEntity.players[i] == null) continue;
+            distanceFromPlayers[i] = Vector3.Distance(transform.position, _cameraEntity.players[i].transform.position);
+        }
+
         // Set next target point to safest point arround
+        float safestPointDistanceFromPlayer = Mathf.Max(nearPointDistancesFromPlayers.ToArray());
+
+        // Set stuck
+        if(safestPointDistanceFromPlayer < _stuckDistanceSafestPointFromPlayer)
+        {
+            SetStuck(true);
+            _isStopped = true;
+            yield break;
+        }
+        else if(_isStuck && Mathf.Max(distanceFromPlayers) > _stuckDistance)
+        {
+            SetStuck(false);
+        }
+
         int nextTargetPointIndex = nearPointDistancesFromPlayers.IndexOf(Mathf.Max(nearPointDistancesFromPlayers.ToArray()));
         _currentTargetPoint = nearPoints[nextTargetPointIndex].GetComponent<ChaseGamePoint>();
 
@@ -83,6 +112,20 @@ public class ChasedEntity : MonoBehaviour
         // Start movement to next target point
         _movementTimer = 0;
         _isMoving = true;
+    }
+
+    void SetStuck(bool state)
+    {
+        if (state)
+        {
+            _isStuck = true;
+            _meshRenderer.sharedMaterial = _stuckMat;
+        }
+        else
+        {
+            _isStuck = false;
+            _meshRenderer.sharedMaterial = _normalMat;
+        }
     }
 
     void MoveToNextTarget()
@@ -102,18 +145,12 @@ public class ChasedEntity : MonoBehaviour
 
     void Stopped()
     {
-        if (_cornersPoints.Contains(_currentTargetPoint.gameObject))
+        if (_currentTargetPoint.nearPoints.Count <= 2)
         {
             List<float> distancesFromPlayer = new List<float>();
             foreach(GameObject player in _cameraEntity.players)
             {
                 distancesFromPlayer.Add(Vector3.Distance(transform.position, player.transform.position));
-            }
-
-            if(Mathf.Min(distancesFromPlayer.ToArray()) <= _stuckDistance)
-            {
-                _meshRenderer.sharedMaterial = _stuckMat;
-                return;
             }
         }
 
@@ -124,12 +161,24 @@ public class ChasedEntity : MonoBehaviour
             if(player == null) continue;
 
             float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
-            if(distanceFromPlayer <= _moveIfPlayersDistance)
+            if(distanceFromPlayer <= _detectionDistance)
             {
                 _isStopped = false;
                 StartCoroutine(ChangePoint());
                 return;
             }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_drawDebug)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _stuckDistance);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, _detectionDistance);
         }
     }
 }
