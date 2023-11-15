@@ -114,6 +114,7 @@ public class PlayerEntity : LivingEntity
 
     public override void Jump()
     {
+        _rigidbodyController.StopYVelocity();
         if (LongJumpInput)
         {
             _rigidbodyController.AddForce(this.transform.up, _longJumpForceUp, _jumpMode);
