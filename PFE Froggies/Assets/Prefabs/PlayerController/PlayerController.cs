@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [Space]
     [SerializeField] protected GameObject _prefabPlayerEntity;
     protected PlayerEntity _playerEntity;
+    [Space]
+    public int playerNbr = 0;
 
     private void Awake()
     {
@@ -75,6 +77,8 @@ public class PlayerController : MonoBehaviour
             GameObject go = Instantiate(_prefabPlayerEntity);
             _playerEntity = go.GetComponent<PlayerEntity>();
             go.transform.position = this.transform.position;
+
+            _playerEntity.gameObject.name = _prefabPlayerEntity.name + " " + playerNbr.ToString();
 
             _cameraEntity.AddPlayer(go);
         }

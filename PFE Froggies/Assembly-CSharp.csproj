@@ -84,6 +84,7 @@
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Personnels\Romain\Environnement\Mini Jeu Libellule\Scripts\ChaseGamePoint.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\ThirdPersonMovement.cs" />
+    <Compile Include="Assets\Prefabs\InteractiveEnvironment\InteractiveObject.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Utility\AttributesFunctions.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\Components\SimpleRigidbody.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\MinMaxSliderAttribute.cs" />

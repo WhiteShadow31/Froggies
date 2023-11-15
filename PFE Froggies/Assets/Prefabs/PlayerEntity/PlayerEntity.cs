@@ -81,8 +81,6 @@ public class PlayerEntity : LivingEntity
 
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
-
-        this.gameObject.name = Random.Range(0,10).ToString();
     }
 
 
@@ -315,6 +313,8 @@ public class PlayerEntity : LivingEntity
             _otherPlayerMountTransform = null;
 
             isOnFrog = false;
+
+            MountInput = false;
         }
     }
 

@@ -26,7 +26,6 @@ public class StatePlayerOnFrog : State
 
         if (_smPlayer.entity.MountInput)
         {
-            
             _smPlayer.Exit(_smPlayer.idle);
         }
     }
