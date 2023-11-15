@@ -21,4 +21,6 @@ public class StateMachinePlayer : StateMachine
 
         _actualState = idle;        
     }
+
+
 }

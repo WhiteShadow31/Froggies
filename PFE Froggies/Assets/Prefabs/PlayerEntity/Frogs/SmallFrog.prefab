@@ -1885,6 +1885,7 @@ GameObject:
   - component: {fileID: 5752381936096708436}
   - component: {fileID: 8602904163012181652}
   - component: {fileID: 4064099953945684390}
+  - component: {fileID: 1102277012409290595}
   m_Layer: 6
   m_Name: SmallFrog
   m_TagString: Untagged
@@ -2188,6 +2189,19 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1102277012409290595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341117699019405325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491adff3d5f635b4a9431f465714f7bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 8876496789576747956}
 --- !u!1 &7514569515705479125
 GameObject:
   m_ObjectHideFlags: 0
