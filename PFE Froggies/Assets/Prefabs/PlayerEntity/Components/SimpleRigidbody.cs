@@ -86,6 +86,13 @@ public class SimpleRigidbody : MonoBehaviour
         _rb.AddRelativeForce(direction * force, mode);
     }
 
+    public void StopYVelocity()
+    {
+        Vector3 vel = _rb.velocity;
+        vel.y = 0f;
+        _rb.velocity = vel;
+    }
+
     public void ClampVelocity()
     {
         Vector3 velocity = _rb.velocity;

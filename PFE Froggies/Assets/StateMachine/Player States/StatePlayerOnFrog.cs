@@ -11,7 +11,7 @@ public class StatePlayerOnFrog : State
 
     public override void Start()
     {
-
+        Debug.Log(_smPlayer.entity.gameObject.name + " : " + "ONFROG");
     }
     public override void Update(float time)
     {
@@ -20,15 +20,12 @@ public class StatePlayerOnFrog : State
 
         if (_smPlayer.entity.JumpInput)
         {
-            _smPlayer.entity.StopMount();
-            _smPlayer.entity.Jump();
-            _smPlayer.Exit(_smPlayer.idle);
+            _smPlayer.Exit(_smPlayer.jump);
         }
         
 
         if (_smPlayer.entity.MountInput)
         {
-            _smPlayer.entity.StopMount();
             _smPlayer.Exit(_smPlayer.idle);
         }
     }
@@ -38,6 +35,6 @@ public class StatePlayerOnFrog : State
     }
     public override void Exit()
     {
-
+        _smPlayer.entity.StopMount();
     }
 }
