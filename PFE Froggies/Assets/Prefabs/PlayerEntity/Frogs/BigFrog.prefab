@@ -1914,8 +1914,8 @@ GameObject:
   - component: {fileID: 8876496789576747956}
   - component: {fileID: 1770160604863771836}
   - component: {fileID: 894021438627288280}
-  - component: {fileID: 8602904163012181652}
   - component: {fileID: 4064099953945684390}
+  - component: {fileID: 508620674244156951}
   m_Layer: 6
   m_Name: BigFrog
   m_TagString: Untagged
@@ -2005,7 +2005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac1d618eb50add4f9be4a68e59e2446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbodyController: {fileID: 8602904163012181652}
+  _rigidbodyController: {fileID: 0}
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: 0.5
   _groundMask:
@@ -2015,8 +2015,8 @@ MonoBehaviour:
   _moveMode: 1
   _jumpForceUp: 5
   _jumpForceFwd: 10
-  _jumpMode: 1
-  _nbrJumpMAX: 1
+  _longJumpForceUp: 1
+  _longJumpForceFwd: 2
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
   _tongueStartTransform: {fileID: 1159593551632478005}
@@ -2083,63 +2083,18 @@ MonoBehaviour:
   _tongueHitLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  _fullChargeJumpTime: 1.5
-  _chargingJumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _minJumpForceUp: 2
-  _maxJumpForceUp: 5
-  _minJumpForceForward: 5
-  _maxJumpForceForward: 10
   onFrogTransform: {fileID: 4858431274688913065}
   _mountRadius: 3
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  MoveInput: 0
+  RotaInput: {x: 0, y: 0}
+  JumpInput: 0
+  LongJumpInput: 0
+  MountInput: 0
   isOnFrog: 0
   _push: 1
---- !u!114 &8602904163012181652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7341117699019405325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881b9344159b5ec43a90a14bef5dce05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _useGravity: 1
-  _normalGravity: 9.81
-  _fallingGravity: 30
-  _useVelocityClampX: 1
-  _clampVelocityX: {x: -100, y: 100}
-  _useVelocityClampY: 1
-  _clampVelocityY: {x: -100, y: 100}
-  _useVelocityClampZ: 1
-  _clampVelocityZ: {x: -100, y: 100}
 --- !u!120 &4064099953945684390
 LineRenderer:
   serializedVersion: 2
@@ -2244,6 +2199,27 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &508620674244156951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341117699019405325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb460e58d74c394eb082363328b9376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useGravity: 1
+  _normalGravity: 9.81
+  _fallingGravity: 30
+  _useVelocityClampX: 1
+  _clampVelocityX: {x: -100, y: 100}
+  _useVelocityClampY: 1
+  _clampVelocityY: {x: -100, y: 100}
+  _useVelocityClampZ: 1
+  _clampVelocityZ: {x: -100, y: 100}
 --- !u!1 &7514569515705479125
 GameObject:
   m_ObjectHideFlags: 0

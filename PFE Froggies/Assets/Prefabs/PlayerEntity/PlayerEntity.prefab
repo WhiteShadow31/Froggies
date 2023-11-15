@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 903054990852870148}
   - component: {fileID: 4706420038008099343}
   - component: {fileID: 1106623297558059033}
-  - component: {fileID: 7064877658846005800}
+  - component: {fileID: 504534333456085397}
   - component: {fileID: 641673812500302022}
   m_Layer: 0
   m_Name: PlayerEntity
@@ -419,7 +419,72 @@ MonoBehaviour:
   m_GameObject: {fileID: 6911629313394053865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881b9344159b5ec43a90a14bef5dce05, type: 3}
+  m_Script: {fileID: 11500000, guid: b3aaa53032401fe4d92bb81d57a578cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbodyController: {fileID: 0}
+  _groundCheck: {fileID: 0}
+  _groundRadius: 0
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _moveForce: 1
+  _moveMode: 1
+  _jumpForceUp: 1
+  _jumpForceFwd: 1
+  _longJumpForceUp: 1
+  _longJumpForceFwd: 2
+  _camera: {fileID: 0}
+  _turnSmoothTime: 0.1
+  _tongueStartTransform: {fileID: 0}
+  _tongueEndTransform: {fileID: 0}
+  _tongueMaxLenght: 5
+  _tongueLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _tongueGrabType: 0
+  _tongueOutTime: 0.15
+  _tongueOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _tongueInTime: 0.15
+  _tongueInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _tongueLineRenderer: {fileID: 0}
+  _tongueDirectionObject: {fileID: 0}
+  _tongueHitRadius: 0.3
+  _tongueHitForce: 10
+  _tongueHitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  onFrogTransform: {fileID: 0}
+  _mountRadius: 3
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  MoveInput: 0
+  RotaInput: {x: 0, y: 0}
+  JumpInput: 0
+  LongJumpInput: 0
+  MountInput: 0
+  isOnFrog: 0
+--- !u!114 &504534333456085397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911629313394053865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa9a8235486a61b4582072a0a3d11f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _useGravity: 1
@@ -431,34 +496,6 @@ MonoBehaviour:
   _clampVelocityY: {x: -100, y: 100}
   _useVelocityClampZ: 1
   _clampVelocityZ: {x: -100, y: 100}
---- !u!114 &7064877658846005800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6911629313394053865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00d111c01bdb5f64ab4b593aa6790117, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbodyController: {fileID: 1106623297558059033}
-  _groundCheck: {fileID: 2862007465723301608}
-  _groundRadius: 0.3
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _moveForce: 1
-  _moveMode: 1
-  _jumpForceUp: 1
-  _jumpForceFwd: 1
-  _jumpMode: 1
-  _nbrJumpMAX: 1
-  _camera: {fileID: 0}
-  _turnSmoothTime: 0.1
-  _tongueStartTransform: {fileID: 5667254168685626648}
-  _lengthTongue: 4.54
 --- !u!135 &641673812500302022
 SphereCollider:
   m_ObjectHideFlags: 0

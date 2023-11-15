@@ -64,6 +64,7 @@
     <Compile Include="Assets\StateMachine\StateMachine.cs" />
     <Compile Include="Assets\Personnels\Tristan\Input\InputTest.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\TriggerCollider.cs" />
+    <Compile Include="Assets\Personnels\Romain\Entities\Camera\Scripts\StaticCamPointEntity.cs" />
     <Compile Include="Assets\StateMachine\Player States\StatePlayerIdle.cs" />
     <Compile Include="Assets\RigidbodyDebugger.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\Frogs\SmallFrogEntity.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Assets\Personnels\Romain\Entities\Camera\Scripts\CameraEntity.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ProgressBarAttribute.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\LivingEntity.cs" />
-    <Compile Include="Assets\Personnels\Romain\Entities\Player\Scripts\TongueScript.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\PlayerEntity.cs" />
     <Compile Include="Assets\StateMachine\Player States\StatePlayerUseTongue.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\LineTitleAttribute.cs" />
@@ -82,6 +82,7 @@
     <Compile Include="Assets\StateMachine\Player States\StatePlayerJump.cs" />
     <Compile Include="Assets\StateMachine\Player States\StateMachinePlayer.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ReadOnlyAttribute.cs" />
+    <Compile Include="Assets\Personnels\Romain\Environnement\Mini Jeu Libellule\Scripts\ChaseGamePoint.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\ThirdPersonMovement.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Utility\AttributesFunctions.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\Components\SimpleRigidbody.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\StateMachine\Player States\StatePlayer.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\Frogs\BigFrogEntity.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\OpenProjectFileButtonAttribute.cs" />
+    <Compile Include="Assets\Personnels\Romain\Environnement\Mini Jeu Libellule\Scripts\ChasedEntity.cs" />
     <Compile Include="Assets\Prefabs\PlayerManager\PlayerManager.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\OpenInternetPageButtonAttribute.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\SimpleController.cs" />

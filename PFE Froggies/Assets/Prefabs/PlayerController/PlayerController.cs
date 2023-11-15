@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void OnJump(InputValue ctx)
     {
-        if (_playerEntity != null)
+        if (_playerEntity != null && _playerEntity.IsGrounded)
         {
             _playerEntity.JumpInput = true;
         }
