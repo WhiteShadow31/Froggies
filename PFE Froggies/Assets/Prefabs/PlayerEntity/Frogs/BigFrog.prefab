@@ -2013,10 +2013,10 @@ MonoBehaviour:
     m_Bits: 8
   _moveForce: 1
   _moveMode: 1
-  _jumpForceUp: 5
-  _jumpForceFwd: 10
-  _longJumpForceUp: 1
-  _longJumpForceFwd: 2
+  _jumpForceUp: 3
+  _jumpForceFwd: 12
+  _longJumpForceUp: 9
+  _longJumpForceFwd: 8
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
   _tongueStartTransform: {fileID: 1159593551632478005}
@@ -2212,14 +2212,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useGravity: 1
-  _normalGravity: 9.81
-  _fallingGravity: 30
+  _normalGravity: 15
+  _fallingGravity: 45
   _useVelocityClampX: 1
-  _clampVelocityX: {x: -100, y: 100}
+  _clampVelocityX: {x: -10, y: 10}
   _useVelocityClampY: 1
-  _clampVelocityY: {x: -100, y: 100}
+  _clampVelocityY: {x: -10, y: 10}
   _useVelocityClampZ: 1
-  _clampVelocityZ: {x: -100, y: 100}
+  _clampVelocityZ: {x: -10, y: 10}
 --- !u!1 &7514569515705479125
 GameObject:
   m_ObjectHideFlags: 0

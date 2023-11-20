@@ -11,15 +11,11 @@ public class PlayerController : MonoBehaviour
     protected PlayerEntity _playerEntity;
     [Space]
     public int playerNbr = 0;
+    public Vector3 spawnPoint;
 
     private void Awake()
     {
         _cameraEntity = Camera.main.GetComponent<CameraEntity>();
-    }
-
-    private void Start()
-    {
-        SpawnPlayer();
     }
 
     void OnMove(InputValue ctx)
@@ -90,6 +86,17 @@ public class PlayerController : MonoBehaviour
             GameObject go = Instantiate(_prefabPlayerEntity);
             _playerEntity = go.GetComponent<PlayerEntity>();
             go.transform.position = pos;
+
+            _playerEntity.gameObject.name = _prefabPlayerEntity.name + " " + playerNbr.ToString();
+
+            _cameraEntity.AddPlayer(go);
+        }
+    }
+    public void RespawnPlayer()
+    {
+        if(_prefabPlayerEntity != null)
+        {
+            _playerEntity.transform.position = spawnPoint;
         }
     }
 }

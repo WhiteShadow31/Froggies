@@ -56,56 +56,33 @@ public class ChasedEntity : MonoBehaviour
         {
             MoveToNextTarget();
         }
+        else if (_isStuck)
+        {
+            Stucked();
+        }
     }
 
     IEnumerator ChangePoint()
     {
-        GameObject[] nearPoints = _currentTargetPoint.nearPoints.ToArray();
-        List<float> nearPointDistancesFromPlayers = new List<float>();
-
-        foreach(GameObject point in nearPoints)
-        {
-            if (point == null)
-            {
-                nearPointDistancesFromPlayers.Add(0);
-                continue;
-            }
-                
-            // Get distances between players and point
-            float[] distancePointsFromPlayers = new float[_cameraEntity.players.Length];
-            for(int i = 0; i < _cameraEntity.players.Length; i++)
-            {
-                if (_cameraEntity.players[i] == null) continue;
-                distancePointsFromPlayers[i] = Vector3.Distance(point.transform.position, _cameraEntity.players[i].transform.position);                              
-            }
-            nearPointDistancesFromPlayers.Add(Mathf.Min(distancePointsFromPlayers));
-        }
+        GameObject safestPoint = GetSafestPointArround();
 
         // Get distances from players
-        float[] distanceFromPlayers = new float[_cameraEntity.players.Length];
+        List<float> safestPointDistanceFromPlayers = new List<float>();
         for (int i = 0; i < _cameraEntity.players.Length; i++)
         {
             if (_cameraEntity.players[i] == null) continue;
-            distanceFromPlayers[i] = Vector3.Distance(transform.position, _cameraEntity.players[i].transform.position);
+            safestPointDistanceFromPlayers.Add(Vector3.Distance(safestPoint.transform.position, _cameraEntity.players[i].transform.position));
         }
-
-        // Set next target point to safest point arround
-        float safestPointDistanceFromPlayer = Mathf.Max(nearPointDistancesFromPlayers.ToArray());
 
         // Set stuck
-        if(safestPointDistanceFromPlayer < _stuckDistanceSafestPointFromPlayer)
+        if(Mathf.Min(safestPointDistanceFromPlayers.ToArray()) < _stuckDistanceSafestPointFromPlayer)
         {
             SetStuck(true);
-            _isStopped = true;
             yield break;
         }
-        else if(_isStuck && Mathf.Max(distanceFromPlayers) > _stuckDistance)
-        {
-            SetStuck(false);
-        }
 
-        int nextTargetPointIndex = nearPointDistancesFromPlayers.IndexOf(Mathf.Max(nearPointDistancesFromPlayers.ToArray()));
-        _currentTargetPoint = nearPoints[nextTargetPointIndex].GetComponent<ChaseGamePoint>();
+        // Set new target point
+        _currentTargetPoint = safestPoint.GetComponent<ChaseGamePoint>();
 
         yield return new WaitForSeconds(_timeBetweenMovement);
 
@@ -114,17 +91,78 @@ public class ChasedEntity : MonoBehaviour
         _isMoving = true;
     }
 
+    GameObject GetSafestPointArround()
+    {
+        GameObject[] nearPoints = _currentTargetPoint.nearPoints.ToArray();
+        List<float> nearPointDistancesFromPlayers = new List<float>();
+
+        foreach (GameObject point in nearPoints)
+        {
+            if (point == null)
+            {
+                nearPointDistancesFromPlayers.Add(0);
+                continue;
+            }
+
+            // Get distances between players and point
+            float[] distancePointsFromPlayers = new float[_cameraEntity.players.Length];
+            for (int i = 0; i < _cameraEntity.players.Length; i++)
+            {
+                if (_cameraEntity.players[i] == null) continue;
+                distancePointsFromPlayers[i] = Vector3.Distance(point.transform.position, _cameraEntity.players[i].transform.position);
+            }
+            nearPointDistancesFromPlayers.Add(Mathf.Min(distancePointsFromPlayers));
+        }
+
+        int nextTargetPointIndex = nearPointDistancesFromPlayers.IndexOf(Mathf.Max(nearPointDistancesFromPlayers.ToArray()));
+        return nearPoints[nextTargetPointIndex];
+    }
+
     void SetStuck(bool state)
     {
         if (state)
         {
             _isStuck = true;
+            _isStopped = false;
+            _isMoving = false;
             _meshRenderer.sharedMaterial = _stuckMat;
         }
         else
         {
             _isStuck = false;
+            _isStopped = true;
+            _isMoving = false;
             _meshRenderer.sharedMaterial = _normalMat;
+        }
+    }
+
+    void Stucked()
+    {
+        // Get distances from players
+        List<float> distanceFromPlayers = new List<float>();
+        for (int i = 0; i < _cameraEntity.players.Length; i++)
+        {
+            if (_cameraEntity.players[i] == null) continue;
+            distanceFromPlayers.Add(Vector3.Distance(transform.position, _cameraEntity.players[i].transform.position));
+        }
+
+        // If there is no player in stuck zone
+        if (Mathf.Min(distanceFromPlayers.ToArray()) > _stuckDistance)
+        {
+            GameObject safestPoint = GetSafestPointArround();
+
+            // Get distances between players and safest point
+            List<float> safestPointDistanceFromPlayers = new List<float>();
+            for (int i = 0; i < _cameraEntity.players.Length; i++)
+            {
+                if (_cameraEntity.players[i] == null) continue;
+                safestPointDistanceFromPlayers.Add(Vector3.Distance(safestPoint.transform.position, _cameraEntity.players[i].transform.position));
+            }
+
+            if (Mathf.Min(safestPointDistanceFromPlayers.ToArray()) > _stuckDistanceSafestPointFromPlayer)
+            {
+                SetStuck(false);
+            }
         }
     }
 
@@ -145,17 +183,6 @@ public class ChasedEntity : MonoBehaviour
 
     void Stopped()
     {
-        if (_currentTargetPoint.nearPoints.Count <= 2)
-        {
-            List<float> distancesFromPlayer = new List<float>();
-            foreach(GameObject player in _cameraEntity.players)
-            {
-                distancesFromPlayer.Add(Vector3.Distance(transform.position, player.transform.position));
-            }
-        }
-
-        _meshRenderer.sharedMaterial = _normalMat;
-
         foreach (GameObject player in _cameraEntity.players)
         {
             if(player == null) continue;
