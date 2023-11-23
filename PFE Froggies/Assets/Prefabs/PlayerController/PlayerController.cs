@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
     protected CameraEntity _cameraEntity;
     [Space]
     [SerializeField] protected GameObject _prefabPlayerEntity;
@@ -15,7 +16,10 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _cameraEntity = Camera.main.GetComponent<CameraEntity>();
+        if (_cameraEntity == null)
+        {
+            _cameraEntity = Camera.main.GetComponent<CameraEntity>();
+        }
     }
 
     void OnMove(InputValue ctx)
@@ -75,7 +79,10 @@ public class PlayerController : MonoBehaviour
             go.transform.position = this.transform.position;
 
             _playerEntity.gameObject.name = _prefabPlayerEntity.name + " " + playerNbr.ToString();
-
+            if (_cameraEntity == null)
+            {
+                _cameraEntity = Camera.main.GetComponent<CameraEntity>();
+            }
             _cameraEntity.AddPlayer(go);
         }
     }
@@ -88,7 +95,10 @@ public class PlayerController : MonoBehaviour
             go.transform.position = pos;
 
             _playerEntity.gameObject.name = _prefabPlayerEntity.name + " " + playerNbr.ToString();
-
+            if(_cameraEntity == null)
+            {
+                _cameraEntity = Camera.main.GetComponent<CameraEntity>();
+            }
             _cameraEntity.AddPlayer(go);
         }
     }

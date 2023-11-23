@@ -6,8 +6,8 @@ using UltimateAttributesPack;
 public class CameraEntity : MonoBehaviour
 {
     [Header("Players")]
-    public GameObject _player1;
-    public GameObject _player2;
+    public GameObject _player1 = null;
+    public GameObject _player2 = null;
 
     //[HideInInspector]
     public GameObject[] players = new GameObject[2];
@@ -110,7 +110,7 @@ public class CameraEntity : MonoBehaviour
     }
 
     public void AddPlayer(GameObject player)
-    {        
+    {
         if (_player1 == null && _player2 == null)
         {
             _player1 = player;
@@ -118,7 +118,7 @@ public class CameraEntity : MonoBehaviour
             return;
         }
         else if(_player1 != null && _player2 == null && player != _player1)
-        {
+        {            
             _player2 = player;
             players[1] = player;
             return;
