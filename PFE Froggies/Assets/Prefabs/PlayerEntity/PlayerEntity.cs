@@ -6,10 +6,16 @@ using UnityEngine.InputSystem.HID;
 
 public class PlayerEntity : LivingEntity
 {
+    [HideInInspector] public PlayerController controller;
+
+    [Header("--- MODEL ---")]
+    public Transform model;
+
     [Header("--- TONGUE ---")]
     [SerializeField] protected Transform _tongueStartTransform;
     [SerializeField] protected Transform _tongueEndTransform;
     [SerializeField] protected float _tongueMaxLenght = 5f;
+    [Tooltip("Raycast and detect layer mask")]
     [SerializeField] protected LayerMask _tongueLayerMask;
     [SerializeField] protected TongueGrabType _tongueGrabType;
     protected enum TongueGrabType
@@ -31,6 +37,7 @@ public class PlayerEntity : LivingEntity
     [Space]
     [SerializeField] protected float _tongueHitRadius = 0.3f;
     [SerializeField] protected float _tongueHitForce = 10f;
+    [Tooltip("Cast sphere around the hit point and detect layer mask")]
     [SerializeField] protected LayerMask _tongueHitLayerMask;
 
     bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
@@ -102,8 +109,8 @@ public class PlayerEntity : LivingEntity
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
 
-        //if (_moveInput)
-         //   Move();     
+        if (MoveInput && RotaInput != Vector2.zero)
+           Move();     
     }
 
     // 
@@ -128,6 +135,7 @@ public class PlayerEntity : LivingEntity
         JumpInput = false;
 
     }
+
     public void Rotate()
     {
         Rotate(RotaInput.x, RotaInput.y);
@@ -318,6 +326,11 @@ public class PlayerEntity : LivingEntity
         }
     }
 
+    public virtual void PushPlayer(Vector3 dir, float force)
+    {
+        _rigidbodyController.AddForce(dir, force, ForceMode.Impulse);
+    }
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
@@ -329,3 +342,4 @@ public class PlayerEntity : LivingEntity
         Gizmos.DrawWireSphere(transform.position, _mountRadius);
     }
 }
+

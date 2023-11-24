@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviour
     protected List<PlayerInput> players = new List<PlayerInput>();
     int playerIndex = 0;
 
+    public List<Color> playerColors = new List<Color>();
+
     public Transform[] spawnPoints;
 
     private void Awake()
@@ -26,6 +28,8 @@ public class PlayerManager : MonoBehaviour
             ctrl.playerNbr = playerIndex;
             ctrl.SpawnPlayer(spawnPoints[playerIndex - 1].position);
             ctrl.spawnPoint = spawnPoints[playerIndex - 1].position;
+
+            ctrl.SetPlayerColor(playerColors[playerIndex - 1]);
         }
         if(playerIndex >= spawnPoints.Length)
         {

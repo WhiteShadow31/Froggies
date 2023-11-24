@@ -20,7 +20,18 @@ public class SmallFrogEntity : PlayerEntity
         }
         if(index >= 0)
         {
-            _rigidbodyController.AddForce(this.transform.forward, _tongueHitForce, ForceMode.Impulse);
+            if (cols[index].transform.TryGetComponent<IIntaractableEntity>(out IIntaractableEntity entity))
+            {
+                // PUSH ENTITY
+                entity.Push((cols[index].transform.position - this.transform.position).normalized, _tongueHitForce);
+            }
+            else if(cols[index].transform.TryGetComponent<SmallFrogEntity>(out SmallFrogEntity frog))
+            {
+                // PUSH PLAYER
+                frog.PushPlayer((cols[index].transform.position - this.transform.position).normalized, _tongueHitForce);
+            }
+            else
+                _rigidbodyController.AddForce(this.transform.forward, _tongueHitForce, ForceMode.Impulse);
         }
     }
 }

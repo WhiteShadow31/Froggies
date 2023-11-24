@@ -11,7 +11,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
 
     [Header("--- GROUND CHECK ---")]
     [SerializeField] protected Transform _groundCheck;
-    [SerializeField] protected float _groundRadius;
+    [SerializeField] protected Vector3 _groundRadius;
     [SerializeField] protected LayerMask _groundMask;
 
     public bool IsGrounded { get { return LookGrounded(); } }
@@ -112,7 +112,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     }
     public virtual void Move()
     {
-        _rigidbodyController.AddForce(this.transform.forward, _moveForce, _moveMode);
+        _rigidbodyController.AddPreciseForce(this.transform.forward, _moveForce, _moveMode);
     }
     public virtual void Jump()
     {
@@ -125,7 +125,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     // =================================================
     protected virtual bool LookGrounded()
     {
-        Collider[] cols = Physics.OverlapSphere(_groundCheck.position, _groundRadius, _groundMask);
+        Collider[] cols = Physics.OverlapBox(_groundCheck.position, _groundRadius, Quaternion.identity, _groundMask); //Physics.OverlapSphere(_groundCheck.position, _groundRadius, _groundMask);
         bool grounded = false;
 
         foreach (Collider col in cols)
@@ -141,8 +141,11 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
 
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(_groundCheck.position, _groundRadius);
+        Color col = Color.yellow;
+        col.a = 0.5f;
+        Gizmos.color = col;
+        //Gizmos.DrawSphere(_groundCheck.position, _groundRadius);
+        Gizmos.DrawCube(_groundCheck.position, _groundRadius);
     }
 }
 

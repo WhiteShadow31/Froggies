@@ -13,12 +13,12 @@ public class SimpleRigidbody : MonoBehaviour
     float _actualGravity = 0f;
 
     [Header("--- VELOCITY CLAMP ---")]
-    [SerializeField] bool _useVelocityClampX = true;
-    [SerializeField] Vector2 _clampVelocityX = new Vector2(-100, 100);
+    [SerializeField] bool _useClampPreciseMove = true;
+    [SerializeField] float _clampPreciseMove = 10;
     [SerializeField] bool _useVelocityClampY = true;
-    [SerializeField] Vector2 _clampVelocityY = new Vector2(-100, 100);
+    [SerializeField] float _clampVelocityY = 10;
     [SerializeField] bool _useVelocityClampZ = true;
-    [SerializeField] Vector2 _clampVelocityZ = new Vector2(-100, 100);
+    [SerializeField] float _clampVelocityZ = 10;
 
     bool _rbInitialized = false;
     Rigidbody _rb;
@@ -51,7 +51,6 @@ public class SimpleRigidbody : MonoBehaviour
         if (_useGravity)
             ApplyGravity();
 
-        ClampVelocity();
     }
 
     protected void InitRigidbody()
@@ -71,10 +70,25 @@ public class SimpleRigidbody : MonoBehaviour
     // Apply the gravity on the Rigidbody based on mass
     public void ApplyGravity()
     {
-        _rb.AddForce(-Vector3.up * _rb.mass * _actualGravity);
+        if (_useVelocityClampY)
+            _rb.AddForce(-Vector3.up * _rb.mass * _actualGravity * (_clampVelocityY - _rb.velocity.magnitude) * Time.deltaTime);
+        else
+            _rb.AddForce(-Vector3.up * _rb.mass * _actualGravity);
+
+        //ClampVelocity();
+
     }
 
     // AddForce on Rigidbody
+    public void AddPreciseForce(Vector3 direction, float force, ForceMode mode)
+    {
+        if (_useClampPreciseMove)
+            _rb.AddForce(direction * force * (_clampPreciseMove - _rb.velocity.magnitude) * Time.deltaTime, mode);
+        else if(_rb.velocity.magnitude + force <= _clampPreciseMove)
+            _rb.AddForce(direction * force, mode);
+        //Debug.Log("used precise move");
+    }
+
     public void AddForce(Vector3 direction, float force, ForceMode mode)
     {
         _rb.AddForce(direction * force, mode);
@@ -83,7 +97,10 @@ public class SimpleRigidbody : MonoBehaviour
     // AddForce on Rigidbody based on mass
     public void AddRelativeForce(Vector3 direction, float force, ForceMode mode)
     {
-        _rb.AddRelativeForce(direction * force, mode);
+        if (_useVelocityClampY)
+            _rb.AddRelativeForce(direction * force * (_clampPreciseMove - _rb.velocity.magnitude) * Time.deltaTime, mode);
+        else
+            _rb.AddRelativeForce(direction * force, mode);
     }
 
     public void StopYVelocity()
@@ -91,16 +108,5 @@ public class SimpleRigidbody : MonoBehaviour
         Vector3 vel = _rb.velocity;
         vel.y = 0f;
         _rb.velocity = vel;
-    }
-
-    public void ClampVelocity()
-    {
-        Vector3 velocity = _rb.velocity;
-
-        velocity.x = _useVelocityClampX ? Mathf.Clamp(velocity.x, _clampVelocityX.x, _clampVelocityX.y) : velocity.x;
-        velocity.y = _useVelocityClampY ? Mathf.Clamp(velocity.y, _clampVelocityY.x, _clampVelocityY.y) : velocity.y;
-        velocity.z = _useVelocityClampZ ? Mathf.Clamp(velocity.z, _clampVelocityZ.x, _clampVelocityZ.y) : velocity.z;
-
-        _rb.velocity = velocity;
     }
 }

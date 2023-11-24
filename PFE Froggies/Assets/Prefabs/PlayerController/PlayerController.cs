@@ -22,6 +22,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnStartPreciseMove(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            _playerEntity.MoveInput = true;
+        }
+    }
+
+    void OnEndPreciseMove(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            _playerEntity.MoveInput = false;
+        }
+    }
+
     void OnMove(InputValue ctx)
     {
         if(_playerEntity != null)
@@ -100,6 +116,31 @@ public class PlayerController : MonoBehaviour
                 _cameraEntity = Camera.main.GetComponent<CameraEntity>();
             }
             _cameraEntity.AddPlayer(go);
+
+            _playerEntity.controller = this;
+        }
+    }
+
+    public void SetPlayerColor(Color col)
+    {
+        if(_playerEntity != null && _playerEntity.model != null)
+        {
+            SetPlayerColorRecursive(col, _playerEntity.model);
+        }
+    }
+
+    protected void SetPlayerColorRecursive(Color col, Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.TryGetComponent<MeshRenderer>(out MeshRenderer mrChild))
+            {
+                Material mat = mrChild.material;
+                mat.color = col;
+                mrChild.material = mat;
+            }
+
+            SetPlayerColorRecursive(col, child);
         }
     }
     public void RespawnPlayer()
