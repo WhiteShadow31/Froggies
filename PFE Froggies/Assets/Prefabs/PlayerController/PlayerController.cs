@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
         {
             _cameraEntity = Camera.main.GetComponent<CameraEntity>();
         }
-        SpawnPlayer();
     }
 
     void OnMove(InputValue ctx)
