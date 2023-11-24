@@ -1879,7 +1879,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4811288948140708742}
   - component: {fileID: 8876496789576747956}
-  - component: {fileID: 1770160604863771836}
   - component: {fileID: 5752381936096708436}
   - component: {fileID: 4064099953945684390}
   - component: {fileID: 508620674244156951}
@@ -1942,27 +1941,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!65 &1770160604863771836
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7341117699019405325}
-  m_Material: {fileID: 13400000, guid: ef2f2e264fe064b4ca612ba0ab924672, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1.6, y: 1, z: 1.69}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &5752381936096708436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1998,7 +1976,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   _tongueGrabType: 0
-  _tongueOutTime: 0.15
+  _tongueOutTime: 0.05
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:

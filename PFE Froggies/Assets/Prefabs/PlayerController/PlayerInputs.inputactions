@@ -78,9 +78,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "New action",
+                    "name": "SpawnRdmPlayer",
                     "type": "Button",
                     "id": "eeddfac8-e221-4c29-8404-8d8d6902ed1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ReloadScene_TGS",
+                    "type": "Button",
+                    "id": "a56b92b8-9277-447c-97d1-e2609715a01e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -315,7 +324,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "SpawnRdmPlayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "068c8b3b-2ad3-4a89-8b3d-cf024f1c8251",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReloadScene_TGS",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

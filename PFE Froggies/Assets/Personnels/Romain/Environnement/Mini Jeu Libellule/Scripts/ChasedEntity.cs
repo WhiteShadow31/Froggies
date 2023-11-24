@@ -28,8 +28,11 @@ public class ChasedEntity : MonoBehaviour
     [SerializeField] float _stuckDistanceSafestPointFromPlayer = 3f;
     [SerializeField] Material _normalMat;
     [SerializeField] Material _stuckMat;
+    [Space]
+    [SerializeField] GameObject _obstacle;
 
     bool _isStuck;
+    public bool IsStuck { get { return _isStuck; } }
 
     [Header("Debug gizmos")]
     [SerializeField] bool _drawDebug = true;
@@ -126,6 +129,10 @@ public class ChasedEntity : MonoBehaviour
             _isStopped = false;
             _isMoving = false;
             _meshRenderer.sharedMaterial = _stuckMat;
+
+            this.gameObject.SetActive(false);
+            if (_obstacle != null)
+                _obstacle.SetActive(false);
         }
         else
         {

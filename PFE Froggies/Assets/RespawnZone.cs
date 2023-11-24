@@ -27,4 +27,13 @@ public class RespawnZone : MonoBehaviour
 
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Color col = Color.red;
+        col.a = 0.3f;
+        Gizmos.color = col;
+
+        Gizmos.DrawCube(this.transform.position, GetComponent<BoxCollider>().size);
+    }
 }

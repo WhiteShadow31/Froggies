@@ -31,7 +31,7 @@ public class SmallFrogEntity : PlayerEntity
                 frog.PushPlayer((cols[index].transform.position - this.transform.position).normalized, _tongueHitForce);
             }
             else
-                _rigidbodyController.AddForce(this.transform.forward, _tongueHitForce, ForceMode.Impulse);
+                _rigidbodyController.AddForce(this.transform.forward, _tongueHitForce * 1.5f, ForceMode.Impulse);
         }
     }
 }

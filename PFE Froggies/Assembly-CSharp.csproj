@@ -74,13 +74,13 @@
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ProgressBarAttribute.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\LivingEntity.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\PlayerEntity.cs" />
+    <Compile Include="Assets\Imported Packages\Environment\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
     <Compile Include="Assets\StateMachine\Player States\StatePlayerUseTongue.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\LineTitleAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\TitleAttribute.cs" />
     <Compile Include="Assets\StateMachine\State.cs" />
     <Compile Include="Assets\StateMachine\Player States\StatePlayerOnFrog.cs" />
     <Compile Include="Assets\StateMachine\Player States\StatePlayerJump.cs" />
-    <Compile Include="Assets\Imported Packages\LowPolyWater_Pack\Scripts\LowPolyWater.cs" />
     <Compile Include="Assets\StateMachine\Player States\StateMachinePlayer.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Personnels\Romain\Environnement\Mini Jeu Libellule\Scripts\ChaseGamePoint.cs" />
@@ -113,9 +113,9 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\Imported Packages\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
+    <None Include="Assets\Imported Packages\Environment\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
-    <None Include="Assets\Imported Packages\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
+    <None Include="Assets\Imported Packages\Environment\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
