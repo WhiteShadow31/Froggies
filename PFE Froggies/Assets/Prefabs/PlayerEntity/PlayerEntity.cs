@@ -46,13 +46,15 @@ public class PlayerEntity : LivingEntity
 
 
 
-
     [Header("--- MOUNT OTHER ---")]
     public Transform onFrogTransform;
     [SerializeField] protected float _mountRadius = 3f;
     [SerializeField] protected LayerMask _playerLayer;
     protected Transform _otherPlayerMountTransform = null;
     public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
+
+    [Header("--- UI ---")]
+    public GameObject WherePlayerBubble;
 
 
     // INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS
@@ -308,6 +310,9 @@ public class PlayerEntity : LivingEntity
             }
         }
         MountInput = false;
+
+        //if()
+
         return false;
     }
 

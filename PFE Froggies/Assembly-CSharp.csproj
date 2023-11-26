@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\FrogEntityController.cs" />
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\PushObject.cs" />
+    <Compile Include="Assets\Prefabs\RespawnZone\RespawnZone.cs" />
     <Compile Include="Assets\Prefabs\PlayerController\PlayerController.cs" />
     <Compile Include="Assets\StateMachine\StateMachine.cs" />
     <Compile Include="Assets\Personnels\Tristan\Input\InputTest.cs" />
@@ -87,9 +88,9 @@
     <Compile Include="Assets\Personnels\Tristan\Entities\Froggies\Controller\Prefab\ThirdPersonMovement.cs" />
     <Compile Include="Assets\Prefabs\InteractiveEnvironment\InteractiveObject.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Utility\AttributesFunctions.cs" />
-    <Compile Include="Assets\RespawnZone.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\BubbleUI.cs" />
     <Compile Include="Assets\Prefabs\PlayerEntity\Components\SimpleRigidbody.cs" />
+    <Compile Include="Assets\PlayerCanva.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\MinMaxSliderAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\TextColorAttribute.cs" />
     <Compile Include="Assets\Imported Packages\Ultimate Attributes Pack\Scripts\Core\Attributes\LineAttribute.cs" />
