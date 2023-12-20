@@ -40,7 +40,7 @@ public class PlayerEntity : LivingEntity
     [Tooltip("Cast sphere around the hit point and detect layer mask")]
     [SerializeField] protected LayerMask _tongueHitLayerMask;
 
-    bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
+    //bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
    
 
 
@@ -72,8 +72,8 @@ public class PlayerEntity : LivingEntity
     // ===== TONGUE INPUT =====
     bool _startTongueAimInput = false;
     bool _endTongueAimInput = false;
-    float _horizontalInput = 0;
-    float _verticalInput = 0;
+    //float _horizontalInput = 0;
+    //float _verticalInput = 0;
     public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
 

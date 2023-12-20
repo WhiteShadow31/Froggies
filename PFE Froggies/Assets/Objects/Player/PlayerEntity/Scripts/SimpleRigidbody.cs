@@ -17,8 +17,8 @@ public class SimpleRigidbody : MonoBehaviour
     [SerializeField] float _clampPreciseMove = 10;
     [SerializeField] bool _useVelocityClampY = true;
     [SerializeField] float _clampVelocityY = 10;
-    [SerializeField] bool _useVelocityClampZ = true;
-    [SerializeField] float _clampVelocityZ = 10;
+    //[SerializeField] bool _useVelocityClampZ = true;
+    //[SerializeField] float _clampVelocityZ = 10;
 
     bool _rbInitialized = false;
     Rigidbody _rb;
