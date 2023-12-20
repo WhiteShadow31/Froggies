@@ -147,12 +147,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7253683230834716871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7866773ec0be747a919ec36cf3ea30, type: 3}
+  m_Script: {fileID: 11500000, guid: 953e693998d36e44381a43e5dcb7fe95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playersInZone: []
   _playersLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   _showDebug: 1
   _debugColor: {r: 1, g: 0, b: 0, a: 1}
