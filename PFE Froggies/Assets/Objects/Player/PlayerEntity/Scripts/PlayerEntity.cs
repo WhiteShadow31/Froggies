@@ -143,11 +143,31 @@ public class PlayerEntity : LivingEntity
     {
         Vector3 jumpDirection = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
 
+        float maxDuration = 5f;
+        float timeStepInterval = 0.1f;
+        int maxSteps = (int)(maxDuration / timeStepInterval);
+        Vector3 launchPosition = transform.position + transform.up;
+        Vector3 lastPosition = launchPosition;
+
+        float velocity = jumpDirection.magnitude / _rigidbodyController.Mass * Time.fixedDeltaTime;
+
+        for(int i = 0; i < maxSteps; i++)
+        {
+            Vector3 calculatedPosition = launchPosition + jumpDirection * velocity * i * timeStepInterval;
+            if(_rigidbodyController.Velocity.y < 0)
+            {
+                calculatedPosition.y += _rigidbodyController.NormalGravity / 2 * Mathf.Pow(i * timeStepInterval, 2);
+
+            }
+            else
+            {
+
+
+            }
 
 
 
-
-
+        }
     }
 
     // =====================================================================================
