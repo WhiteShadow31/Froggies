@@ -1152,50 +1152,50 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 73
   _tongueGrabType: 0
-  _tongueOutTime: 0.05
+  _tongueOutTime: 1
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _tongueInTime: 0.15
+  _tongueInTime: 1
   _tongueInCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -1344,8 +1344,6 @@ MonoBehaviour:
   _clampPreciseMove: 3
   _useVelocityClampY: 0
   _clampVelocityY: 30
-  _useVelocityClampZ: 1
-  _clampVelocityZ: 10
 --- !u!136 &7756430894366324494
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -31,14 +31,11 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     protected int _nbrJumpMAX = 1;
     protected int _nbrJump = 0;
 
-
     [Header("--- ROTATION ---")]
     [SerializeField] protected Camera _camera;
     [SerializeField] float _turnSmoothTime = 0.1f;
     float _turnSmoothVelocity;
-
-    
-
+   
     // Initialized
     protected bool _initialized = false;
 
@@ -47,7 +44,7 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     protected virtual void Awake()
     {
         InitComponents();
-        _camera = Camera.main;
+        _camera = Camera.main;        
     }
 
     protected virtual void Start()
@@ -118,8 +115,8 @@ public class LivingEntity : MonoBehaviour, ILivingEntity
     {
         if (IsGrounded && Mathf.Abs(_rigidbodyController.Velocity.y) < 0.2f)
         {
-            _rigidbodyController.AddForce(this.transform.up, _jumpForceUp, _jumpMode);
-            _rigidbodyController.AddForce(this.transform.forward, _jumpForceFwd, _jumpMode);
+            Vector3 forceVector = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
+            _rigidbodyController.AddForce(forceVector.normalized, forceVector.magnitude, _jumpMode);
         }
     }
     // =================================================

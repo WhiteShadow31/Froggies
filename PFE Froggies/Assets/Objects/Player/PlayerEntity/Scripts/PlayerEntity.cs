@@ -41,10 +41,6 @@ public class PlayerEntity : LivingEntity
     [SerializeField] protected LayerMask _tongueHitLayerMask;
 
     //bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
-   
-
-
-
 
     [Header("--- MOUNT OTHER ---")]
     public Transform onFrogTransform;
@@ -52,10 +48,6 @@ public class PlayerEntity : LivingEntity
     [SerializeField] protected LayerMask _playerLayer;
     protected Transform _otherPlayerMountTransform = null;
     public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
-
-    [Header("--- UI ---")]
-    public GameObject WherePlayerBubble;
-
 
     // INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS
 
@@ -101,8 +93,7 @@ public class PlayerEntity : LivingEntity
         _smPlayer.Update(Time.deltaTime);
 
         if (EndTongueAimInput)
-        {
-
+        {            
             EndTongueAimInput = false;
             UseTongue();
         }
@@ -146,6 +137,17 @@ public class PlayerEntity : LivingEntity
     public void Rotate()
     {
         Rotate(RotaInput.x, RotaInput.y);
+    }
+
+    void ShowJumpPrediction()
+    {
+        Vector3 jumpDirection = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
+
+
+
+
+
+
     }
 
     // =====================================================================================
