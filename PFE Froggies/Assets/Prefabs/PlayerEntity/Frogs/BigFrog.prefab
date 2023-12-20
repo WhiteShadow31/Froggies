@@ -1015,7 +1015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7707663042051885650}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2007,7 +2007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbodyController: {fileID: 0}
   _groundCheck: {fileID: 7707663042051885650}
-  _groundRadius: 0.5
+  _groundRadius: {x: 0, y: 0, z: 0}
   _groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -2019,6 +2019,8 @@ MonoBehaviour:
   _longJumpForceFwd: 8
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
+  controller: {fileID: 0}
+  model: {fileID: 0}
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
   _tongueMaxLenght: 5
@@ -2088,6 +2090,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  WherePlayerBubble: {fileID: 0}
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
   JumpInput: 0
@@ -2214,12 +2217,12 @@ MonoBehaviour:
   _useGravity: 1
   _normalGravity: 15
   _fallingGravity: 45
-  _useVelocityClampX: 1
-  _clampVelocityX: {x: -10, y: 10}
+  _useClampPreciseMove: 1
+  _clampPreciseMove: 10
   _useVelocityClampY: 1
-  _clampVelocityY: {x: -10, y: 10}
+  _clampVelocityY: 10
   _useVelocityClampZ: 1
-  _clampVelocityZ: {x: -10, y: 10}
+  _clampVelocityZ: 10
 --- !u!1 &7514569515705479125
 GameObject:
   m_ObjectHideFlags: 0

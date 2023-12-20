@@ -11,7 +11,7 @@ public class StatePlayerUseTongue : StatePlayer
 
     public override void Start()
     {
-        //_smPlayer.entity.ShowTongueAim(_targetPosition = _smPlayer.entity.TongueAimPosition());
+        Debug.Log("TONGUE");
     }
     public override void Update(float time)
     {
@@ -20,7 +20,7 @@ public class StatePlayerUseTongue : StatePlayer
 
         if (_smPlayer.entity.EndTongueAimInput)
         {
-
+            _smPlayer.entity.UseTongue();
             // START TONGUE USE
         }
     }

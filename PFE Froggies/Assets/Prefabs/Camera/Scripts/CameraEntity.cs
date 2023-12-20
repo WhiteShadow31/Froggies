@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UltimateAttributesPack;
@@ -317,6 +316,7 @@ public class CameraEntity : MonoBehaviour
             }
             else
             {
+                // Draw temp corners lines
                 Vector3 newTempCornerPoint = transform.position + (transform.rotation * cornerRay.normalized * 25f);
                 camCornersPoints.Add(newTempCornerPoint);
             }

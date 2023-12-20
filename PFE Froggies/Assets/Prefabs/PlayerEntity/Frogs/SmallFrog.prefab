@@ -982,7 +982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7707663042051885650}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1958,7 +1958,7 @@ MonoBehaviour:
   _groundRadius: {x: 1.6, y: 0.23, z: 1.69}
   _groundMask:
     serializedVersion: 2
-    m_Bits: 200
+    m_Bits: 8
   _moveForce: 1
   _moveMode: 1
   _jumpForceUp: 3
@@ -1974,7 +1974,7 @@ MonoBehaviour:
   _tongueMaxLenght: 5
   _tongueLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 73
   _tongueGrabType: 0
   _tongueOutTime: 0.05
   _tongueOutCurve:
@@ -2032,7 +2032,7 @@ MonoBehaviour:
   _tongueHitForce: 10
   _tongueHitLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 73
   onFrogTransform: {fileID: 7513869125547718495}
   _mountRadius: 3
   _playerLayer:
