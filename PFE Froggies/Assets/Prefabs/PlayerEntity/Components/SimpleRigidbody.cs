@@ -109,4 +109,9 @@ public class SimpleRigidbody : MonoBehaviour
         vel.y = 0f;
         _rb.velocity = vel;
     }
+
+    public void StopVelocity()
+    {
+        _rb.velocity = Vector3.zero;
+    }
 }

@@ -7,7 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<<< HEAD:PFE Froggies/Assets/Prefabs/Mini Jeux/Chase Game/Materials/M-Libellule_Corps.mat
   m_Name: M-Libellule_Corps
+========
+  m_Name: Gris_Mat
+>>>>>>>> origin/Dev-Tristan:PFE Froggies/Assets/Materials/Gris_Mat.mat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -66,7 +70,11 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
+<<<<<<<< HEAD:PFE Froggies/Assets/Prefabs/Mini Jeux/Chase Game/Materials/M-Libellule_Corps.mat
     - _Glossiness: 0.3
+========
+    - _Glossiness: 0
+>>>>>>>> origin/Dev-Tristan:PFE Froggies/Assets/Materials/Gris_Mat.mat
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
@@ -78,6 +86,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+<<<<<<<< HEAD:PFE Froggies/Assets/Prefabs/Mini Jeux/Chase Game/Materials/M-Libellule_Corps.mat
     - _Color: {r: 0.8490566, g: 0, b: 0.570104, a: 1}
+========
+    - _Color: {r: 0.50980395, g: 0.5529412, b: 0.59607846, a: 1}
+>>>>>>>> origin/Dev-Tristan:PFE Froggies/Assets/Materials/Gris_Mat.mat
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

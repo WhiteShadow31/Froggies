@@ -83,7 +83,9 @@ public class PlayerEntity : LivingEntity
     protected StateMachinePlayer _smPlayer;
     [HideInInspector] public bool isOnFrog = false;
 
-
+    // =====================================================================================
+    //                                   UNITY METHODS 
+    // =====================================================================================
     protected override void Start()
     {
         base.Start();
@@ -92,15 +94,18 @@ public class PlayerEntity : LivingEntity
         _smPlayer.Start();
     }
 
-
-    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
 
         _smPlayer.Update(Time.deltaTime);
 
-        ChoseTongueState();
+        if (EndTongueAimInput)
+        {
+
+            EndTongueAimInput = false;
+            UseTongue();
+        }
 
     }
     
@@ -115,13 +120,13 @@ public class PlayerEntity : LivingEntity
            Move();     
     }
 
-    // 
-    // =================================== MOVEMENT METHODS ===================================
-    //
+    // =====================================================================================
+    //                                   MOVEMENT METHODS 
+    // =====================================================================================
 
     public override void Jump()
     {
-        _rigidbodyController.StopYVelocity();
+        _rigidbodyController.StopVelocity();
         if (LongJumpInput)
         {
             _rigidbodyController.AddForce(this.transform.up, _longJumpForceUp, _jumpMode);
@@ -143,145 +148,73 @@ public class PlayerEntity : LivingEntity
         Rotate(RotaInput.x, RotaInput.y);
     }
 
-    // 
-    // =================================== TONGUE METHODS ===================================
-    //
+    // =====================================================================================
+    //                                   TONGUE METHODS 
+    // =====================================================================================
 
-    protected virtual void ChoseTongueState()
-    {
-        if (_startTongueAimInput && _tongueAnimEnded) // Aiming with tongue
-        {
-            ShowTongueAim(TongueAimPosition());
-        }
-        else
-        {
-            _tongueDirectionObject.SetActive(false);
-        }
-
-        if (_endTongueAimInput) // Tongue hit when release button
-        {
-            if (_startTongueAimInput && _tongueAnimEnded)
-            {
-                _tongueOut = true;
-                _tongueOutDelay = 0;
-                _tongueInDelay = 0;
-
-                _tongueAnimEnded = false;
-            }
-
-            _startTongueAimInput = false;
-
-            TongueHit();
-        }
-    }
-
-    public virtual void ShowTongueAim(Vector3 pos)
-    {
-        _tongueDirectionObject.SetActive(true);
-        _tongueDirectionObject.transform.position = Vector3.Lerp(_tongueStartTransform.position, pos, 0.5f);
-    }
-
-    // SHOW VISUAL AIM FOR THE TONGUE
+    /// <summary>
+    /// Draw a raycast to try to hit an object, if not then return a position in front
+    /// </summary>
+    /// <returns> Vector3 position </returns>
     public virtual Vector3 TongueAimPosition()
     {
-        // Place tongueDirectionObject on the middle of the tongueStart and the raycast hit point (or tongueMaxLenght if raycast not hit)
-        if(Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
+        if (Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
             return hit.point;
-            //_tongueDirectionObject.transform.position = Vector3.Lerp(_tongueStartTransform.position, hit.point, 0.5f);           
         }
         else
         {
             return _tongueStartTransform.position + (transform.forward * _tongueMaxLenght);
-            //_tongueDirectionObject.transform.position = Vector3.Lerp(_tongueStartTransform.position, _tongueStartTransform.position + (transform.forward * _tongueMaxLenght), 0.5f);
         }
     }
+    IEnumerator UseTongue(Vector3 pos)
+    {
+        _tongueLineRenderer.enabled = true;
+        while (_tongueOutDelay < _tongueOutTime)
+        {
+            _tongueEndTransform.position = Vector3.Lerp(_tongueStartTransform.position, pos, _tongueOutCurve.Evaluate(_tongueOutDelay / _tongueOutTime));
 
-    protected virtual void TongueHit()
-    {        
-        //if (_tongueDirectionObject.activeInHierarchy) // If TongueDirectionObject is active, deactivate it
-            _tongueDirectionObject.SetActive(false);
-        
-        
+            TongueLine();
 
-        //if (!_tongueLineRenderer.enabled) // If tongueLineRenderer is not disable, enable it
-            _tongueLineRenderer.enabled = true;
-        
-        
+            _tongueOutDelay += Time.fixedDeltaTime;
+            yield return null;
+        }
 
+        TongueHitObject(pos);
+
+        while (_tongueInDelay < _tongueInTime)
+        {
+            _tongueEndTransform.position = Vector3.Lerp(pos, _tongueStartTransform.position, _tongueOutCurve.Evaluate(_tongueInDelay / _tongueInTime));
+
+            TongueLine();
+
+            _tongueInDelay += Time.fixedDeltaTime;
+            yield return null;
+        }
+        _tongueLineRenderer.enabled = false;
+        _tongueOutDelay = 0;
+        _tongueInDelay = 0;
+    }
+    protected void TongueLine()
+    {
         // Set tongueLineRenderer point position
         _tongueLineRenderer.SetPosition(0, _tongueStartTransform.position);
         _tongueLineRenderer.SetPosition(1, _tongueEndTransform.position);
-
-        // Get Raycast hit point
-        Vector3 hitPoint;
-        if(Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
-            hitPoint = hit.point;
-        else
-            hitPoint = _tongueStartTransform.position + (transform.forward * _tongueMaxLenght);
-        
-        
-        
-        
-
-        // Tongue anim in and out
-        if (!_tongueAnimEnded)
-        {
-            if (_tongueOut)
-            {
-                if(_tongueOutDelay < _tongueOutTime)
-                {
-                    _tongueEndTransform.position = Vector3.Lerp(_tongueStartTransform.position, hitPoint, _tongueOutCurve.Evaluate(_tongueOutDelay / _tongueOutTime));
-
-                    _tongueOutDelay += Time.deltaTime;
-                }
-                else
-                {
-                    _tongueEndTransform.position = hitPoint;
-                    _tongueIn = true;
-                    _tongueOut = false;
-
-                    TongueHitObject(hitPoint);
-                }
-            }
-            else if (_tongueIn)
-            {
-                if (_tongueInDelay < _tongueInTime)
-                {
-                    _tongueEndTransform.position = Vector3.Lerp(hitPoint, _tongueStartTransform.position, _tongueOutCurve.Evaluate(_tongueInDelay / _tongueInTime));
-
-                    _tongueInDelay += Time.deltaTime;
-                }
-                else
-                {
-                    _tongueEndTransform.position = _tongueStartTransform.position;
-                    _tongueLineRenderer.enabled = false;
-                    _tongueIn = false;
-                    _tongueAnimEnded = true;
-                    _endTongueAimInput = false;
-                }
-            }
-        }
     }
-
     protected virtual void TongueHitObject(Vector3 target)
     {
 
     }
-    
-    protected virtual void UseTongue()
+    public void UseTongue()
     {
-        //if (_tongueDirectionObject.activeInHierarchy) // If TongueDirectionObject is active, deactivate it
-        _tongueDirectionObject.SetActive(false);
-
-        //if (!_tongueLineRenderer.enabled) // If tongueLineRenderer is not disable, enable it
-        _tongueLineRenderer.enabled = true;
+        Vector3 pos = TongueAimPosition();
+        Debug.Log("Try tongue - pos : " + pos);
+        StartCoroutine(UseTongue(pos));
     }
 
-    // 
-    // =================================== MOUNT METHODS ===================================
-    //
-
+    // =====================================================================================
+    //                                   MOUNT METHODS 
+    // =====================================================================================
     public virtual bool TryMount()
     {
         if (!isOnFrog) // Is it not on a frog ?
