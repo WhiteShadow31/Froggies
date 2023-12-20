@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -251,19 +251,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 484530183174503892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 3870407032434512793}
   - {fileID: 9148286436248780003}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1813462055602212863
 GameObject:
@@ -332,14 +332,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7866773ec0be747a919ec36cf3ea30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camEntity: {fileID: 0}
-  camPositionTransform: {fileID: 9032434023822917448}
-  playersInZone: []
-  playersLayerMask:
+  _playersInZone: []
+  _playersLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  showDebug: 1
-  debugColor: {r: 1, g: 0, b: 0, a: 1}
+  _showDebug: 1
+  _debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &2166981189275451363
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,21 +379,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2166981189275451363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 3870407032434512793}
   - {fileID: 9148286436248780003}
   - {fileID: 8922671925315550394}
   - {fileID: 4974042413153950355}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &2226443621834536864
 GameObject:
@@ -459,7 +457,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -543,19 +541,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2263250184715904262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
+  - {fileID: 6611000686466635952}
   - {fileID: 6019824096130932666}
   - {fileID: 4373256538531148459}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &2316619056130555474
 GameObject:
@@ -619,7 +618,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -703,20 +702,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2744812263346815584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 9148286436248780003}
   - {fileID: 4974042413153950355}
   - {fileID: 9021948789561625487}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &2745020797119471365
 GameObject:
@@ -780,7 +779,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -909,20 +908,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3870407032434512793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 484530183174503892}
   - {fileID: 4667067598704030832}
   - {fileID: 2166981189275451363}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4373256538531148459
 GameObject:
@@ -965,19 +964,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4373256538531148459}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 7614571328807934738}
   - {fileID: 2263250184715904262}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4506459426111542915
 GameObject:
@@ -1041,7 +1040,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1125,20 +1124,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4667067598704030832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 3870407032434512793}
   - {fileID: 8388630155872823367}
   - {fileID: 8922671925315550394}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4676274274306978209
 GameObject:
@@ -1264,20 +1263,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4974042413153950355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 2166981189275451363}
   - {fileID: 2744812263346815584}
+  - {fileID: 6611000686466635952}
   - {fileID: 6019824096130932666}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &5979030969254158267
 GameObject:
@@ -1341,7 +1341,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a18b6f81e12f8140aa00205b6fba61c, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1425,20 +1425,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6019824096130932666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 4974042413153950355}
   - {fileID: 9021948789561625487}
   - {fileID: 2263250184715904262}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6055873020302831332
 GameObject:
@@ -1502,7 +1502,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a18b6f81e12f8140aa00205b6fba61c, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1607,7 +1607,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a18b6f81e12f8140aa00205b6fba61c, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1712,7 +1712,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1817,7 +1817,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a18b6f81e12f8140aa00205b6fba61c, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1901,21 +1901,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6611000686466635952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 8922671925315550394}
   - {fileID: 4974042413153950355}
   - {fileID: 7614571328807934738}
   - {fileID: 2263250184715904262}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &7473504084604453876
 GameObject:
@@ -1974,7 +1974,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7473504084604453876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a0e48e4b8a43d14eafbee7a85c85fa6, type: 3}
+  m_Script: {fileID: 11500000, guid: bc2bdced23ce075409cc3aaf5ad85a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   points:
@@ -2035,19 +2035,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7614571328807934738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 8678329872014821377}
+  - {fileID: 6611000686466635952}
   - {fileID: 4373256538531148459}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8101824013258430825
 GameObject:
@@ -2111,7 +2112,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2216,7 +2217,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a18b6f81e12f8140aa00205b6fba61c, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2300,19 +2301,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8388630155872823367}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 4667067598704030832}
   - {fileID: 8678329872014821377}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8416722846233796232
 GameObject:
@@ -2411,7 +2412,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a45192511867b4648bb535e3660ff4b0, type: 2}
+  - {fileID: 2100000, guid: c4d1242a8118aca48bb2cf9e111ef895, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2495,20 +2496,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8678329872014821377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 8388630155872823367}
   - {fileID: 8922671925315550394}
   - {fileID: 7614571328807934738}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8922671925315550394
 GameObject:
@@ -2551,20 +2552,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8922671925315550394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 4667067598704030832}
   - {fileID: 2166981189275451363}
   - {fileID: 8678329872014821377}
+  - {fileID: 6611000686466635952}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &9021948789561625487
 GameObject:
@@ -2607,19 +2609,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 9021948789561625487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 2744812263346815584}
   - {fileID: 6019824096130932666}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &9148286436248780003
 GameObject:
@@ -2662,20 +2664,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 9148286436248780003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24dd70615f60e7429fd8580cd16eeda, type: 3}
+  m_Script: {fileID: 11500000, guid: debfcdc108833b44b87c97026af87bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nearPointsParent: {fileID: 7473504084604453876}
   getNearPointsLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  getNearPointRadius: 11
+    m_Bits: 0
+  getNearPointRadius: 10
   nearPoints:
   - {fileID: 484530183174503892}
   - {fileID: 2166981189275451363}
   - {fileID: 2744812263346815584}
   drawDebugSpheres: 0
-  drawDebugLines: 1
+  drawDebugLines: 0
   debugColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &573017068723276789
 PrefabInstance:
@@ -2725,6 +2727,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5896051309133795090, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
+      propertyPath: _startPoint
+      value: 
+      objectReference: {fileID: 6617463323460571270}
     - target: {fileID: 6717788459731974314, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
       propertyPath: m_Name
       value: Libellule
@@ -2732,65 +2738,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6717788459731974314, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7326319369534200876}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
 --- !u!4 &4127659109826730885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4520391281915727984, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
   m_PrefabInstance: {fileID: 573017068723276789}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6541939153825067871 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6717788459731974314, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
-  m_PrefabInstance: {fileID: 573017068723276789}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7326319369534200876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6541939153825067871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e82321408d64afe439fe8b21ab005458, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraEntity: {fileID: 0}
-  _startPoint: {fileID: 6617463323460571270}
-  _detectionDistance: 9
-  _timeBetweenMovement: 0
-  _movementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _movementTime: 1
-  _stuckDistance: 8
-  _stuckDistanceSafestPointFromPlayer: 5
-  _normalMat: {fileID: 2100000, guid: d65812cc440177540925b38abcda4c29, type: 2}
-  _stuckMat: {fileID: 2100000, guid: 51a7da0b7bf2e474ab958e30c512557d, type: 2}
-  _turnSpeed: 5
-  _drawDebug: 1

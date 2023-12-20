@@ -538,6 +538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4520391281915727984}
+  - component: {fileID: 5896051309133795090}
   m_Layer: 7
   m_Name: LibullulePrefab
   m_TagString: Untagged
@@ -561,6 +562,53 @@ Transform:
   - {fileID: 1450634982457885078}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5896051309133795090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6717788459731974314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b328c5bf17f7ec7489876725a3fe59db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraEntity: {fileID: 0}
+  _startPoint: {fileID: 0}
+  _detectionDistance: 15
+  _timeBetweenMovement: 0
+  _movementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _movementTime: 0.7
+  _stuckDistance: 7
+  _stuckDistanceSafestPointFromPlayer: 3
+  _bodyMeshRenderer: {fileID: 779314621320952505}
+  _normalMat: {fileID: 2100000, guid: b83c381e3e552704caa1f5add1ed7ac6, type: 2}
+  _stuckMat: {fileID: 2100000, guid: b9e7e3e338f6d754ba6238aff89789a4, type: 2}
+  _drawDebug: 1
 --- !u!1 &8149637302375563468
 GameObject:
   m_ObjectHideFlags: 0
