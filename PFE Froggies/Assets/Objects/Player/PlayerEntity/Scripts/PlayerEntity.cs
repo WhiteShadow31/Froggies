@@ -49,6 +49,13 @@ public class PlayerEntity : LivingEntity
     protected Transform _otherPlayerMountTransform = null;
     public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
 
+    [Header("--- Jump prediction ---")]
+    [SerializeField] protected GameObject _jumpPredictionObject;
+    [SerializeField] protected LineRenderer _jumpPredictionLine;
+    [SerializeField] protected float _jumpPredictionLinePointCount;
+    [SerializeField] protected float _jumpPredictiontTimeBetweenPoints;
+    [SerializeField] protected LayerMask _jumpPredictionLayerMask;
+
     // INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS
 
     // ===== MOVE INPUT =====
@@ -98,6 +105,14 @@ public class PlayerEntity : LivingEntity
             UseTongue();
         }
 
+        if(RotaInput != Vector2.zero)
+        {
+            ShowJumpPrediction();
+        }
+        else
+        {
+            _jumpPredictionLine.enabled = false;
+        }
     }
     
     protected override void FixedUpdate()
@@ -120,18 +135,23 @@ public class PlayerEntity : LivingEntity
         _rigidbodyController.StopVelocity();
         if (LongJumpInput)
         {
-            _rigidbodyController.AddForce(this.transform.up, _longJumpForceUp, _jumpMode);
-            _rigidbodyController.AddForce(this.transform.forward, _longJumpForceFwd, _jumpMode);
+            Vector3 jumpForward = transform.forward * _longJumpForceFwd;
+            Vector3 jumpUp = transform.up * _longJumpForceUp;
+            Vector3 jumpVector = jumpForward + jumpUp;
+
+            _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
         }
         else
         {
-            _rigidbodyController.AddForce(this.transform.up, _jumpForceUp, _jumpMode);
-            _rigidbodyController.AddForce(this.transform.forward, _jumpForceFwd, _jumpMode);
+            Vector3 jumpForward = transform.forward * _jumpForceFwd;
+            Vector3 jumpUp = transform.up * _jumpForceUp;
+            Vector3 jumpVector = jumpForward + jumpUp;
+
+            _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
         }
 
         LongJumpInput = false;
         JumpInput = false;
-
     }
 
     public void Rotate()
@@ -141,32 +161,40 @@ public class PlayerEntity : LivingEntity
 
     void ShowJumpPrediction()
     {
-        Vector3 jumpDirection = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
+        _jumpPredictionLine.enabled = true;
+        _jumpPredictionLine.positionCount = Mathf.CeilToInt(_jumpPredictionLinePointCount / _jumpPredictiontTimeBetweenPoints) + 1;
+        Vector3 startPosition = transform.position;
+        Vector3 jumpVector = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
+        Vector3 startVelocity = jumpVector / _rigidbodyController.Mass;
+        int i = 0;
+        _jumpPredictionLine.SetPosition(i, startPosition);
 
-        float maxDuration = 5f;
-        float timeStepInterval = 0.1f;
-        int maxSteps = (int)(maxDuration / timeStepInterval);
-        Vector3 launchPosition = transform.position + transform.up;
-        Vector3 lastPosition = launchPosition;
-
-        float velocity = jumpDirection.magnitude / _rigidbodyController.Mass * Time.fixedDeltaTime;
-
-        for(int i = 0; i < maxSteps; i++)
+        Vector3 lastPosition = startPosition;
+        for(float time = 0; time < _jumpPredictionLinePointCount; time += _jumpPredictiontTimeBetweenPoints)
         {
-            Vector3 calculatedPosition = launchPosition + jumpDirection * velocity * i * timeStepInterval;
-            if(_rigidbodyController.Velocity.y < 0)
-            {
-                calculatedPosition.y += _rigidbodyController.NormalGravity / 2 * Mathf.Pow(i * timeStepInterval, 2);
+            i++;
+            Vector3 point = startPosition + time * startVelocity;
 
+            if(lastPosition.y > point.y)
+            {
+                point.y = startPosition.y + startVelocity.y * time - (_rigidbodyController.FallingGravity / 2 * time * time);
             }
             else
             {
-
-
+                point.y = startPosition.y + startVelocity.y * time - (_rigidbodyController.NormalGravity / 2 * time * time);
             }
 
+            lastPosition = point;
+            _jumpPredictionLine.SetPosition(i, point);
 
-
+            Vector3 lastPoint = _jumpPredictionLine.GetPosition(i - 1);
+            
+            if(Physics.Raycast(lastPoint, (point - lastPoint).normalized, out RaycastHit hitInfo, (point - lastPoint).magnitude, _jumpPredictionLayerMask))
+            {
+                _jumpPredictionLine.SetPosition(i, hitInfo.point);
+                _jumpPredictionLine.positionCount = i + 1;
+                return;
+            }
         }
     }
 

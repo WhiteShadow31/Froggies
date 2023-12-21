@@ -23,11 +23,12 @@ public class SimpleRigidbody : MonoBehaviour
     bool _rbInitialized = false;
     Rigidbody _rb;
     public bool UseGRavity { set { _useGravity = value; } }
-    public bool  NormalGravity {set { _actualGravity = value == true ? _normalGravity : _fallingGravity; } }
-    public bool FallingGravity { set { _actualGravity = value == true ? _fallingGravity : _normalGravity; } }
+    public bool  IsNormalGravity {set { _actualGravity = value == true ? _normalGravity : _fallingGravity; } }
+    public float NormalGravity { get { return _normalGravity; } }
+    public bool IsFallingGravity { set { _actualGravity = value == true ? _fallingGravity : _normalGravity; } }
+    public float FallingGravity { get { return _fallingGravity; } }
     public bool IsFalling { get { return _rb.velocity.y < 0; } }
     public Vector3 Velocity { get { return _rb.velocity; } }
-
     public float Mass { get { return _rb.mass; } }
 
     private void Awake()
@@ -43,9 +44,9 @@ public class SimpleRigidbody : MonoBehaviour
     private void Update()
     {
         if (this.IsFalling)
-            this.FallingGravity = true;
+            this.IsFallingGravity = true;
         else
-            this.NormalGravity = true;
+            this.IsNormalGravity = true;
     }
 
     private void FixedUpdate()
