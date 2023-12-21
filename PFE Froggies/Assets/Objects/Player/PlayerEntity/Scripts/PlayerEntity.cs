@@ -56,6 +56,17 @@ public class PlayerEntity : LivingEntity
     [SerializeField] protected float _jumpPredictiontTimeBetweenPoints;
     [SerializeField] protected LayerMask _jumpPredictionLayerMask;
 
+    MeshRenderer _jumpPredictionObjectRenderer;
+
+    [Header("Jump experimental")]
+    [SerializeField] protected bool _useExperimentalJump = false;
+    [SerializeField] protected float _timeToReachMaxJumpLenght;
+
+    protected bool _atMaxJumpLenght;
+    protected float _currentJumpForward;
+    protected float _currentJumpUp;
+
+
     // INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS
 
     // ===== MOVE INPUT =====
@@ -89,8 +100,11 @@ public class PlayerEntity : LivingEntity
     {
         base.Start();
 
+        _jumpPredictionObjectRenderer = _jumpPredictionObject.GetComponent<MeshRenderer>();
+
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
+
     }
 
     protected override void Update()
@@ -107,10 +121,12 @@ public class PlayerEntity : LivingEntity
 
         if(RotaInput != Vector2.zero)
         {
+            _jumpPredictionObjectRenderer.enabled = true;
             ShowJumpPrediction();
         }
         else
         {
+            _jumpPredictionObjectRenderer.enabled = false;
             _jumpPredictionLine.enabled = false;
         }
     }
@@ -133,21 +149,28 @@ public class PlayerEntity : LivingEntity
     public override void Jump()
     {
         _rigidbodyController.StopVelocity();
-        if (LongJumpInput)
-        {
-            Vector3 jumpForward = transform.forward * _longJumpForceFwd;
-            Vector3 jumpUp = transform.up * _longJumpForceUp;
-            Vector3 jumpVector = jumpForward + jumpUp;
 
-            _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+        if (_useExperimentalJump)
+        {
+            
+
+
+
+
+
         }
         else
         {
-            Vector3 jumpForward = transform.forward * _jumpForceFwd;
-            Vector3 jumpUp = transform.up * _jumpForceUp;
-            Vector3 jumpVector = jumpForward + jumpUp;
-
-            _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+            if (LongJumpInput)
+            {
+                Vector3 jumpVector = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
+                _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+            }
+            else
+            {
+                Vector3 jumpVector = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
+                _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+            }
         }
 
         LongJumpInput = false;
@@ -193,6 +216,7 @@ public class PlayerEntity : LivingEntity
             {
                 _jumpPredictionLine.SetPosition(i, hitInfo.point);
                 _jumpPredictionLine.positionCount = i + 1;
+                _jumpPredictionObject.transform.position = hitInfo.point;
                 return;
             }
         }
