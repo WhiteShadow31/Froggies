@@ -59,6 +59,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnJumpRelease(InputValue ctx)
+    {
+        if (_playerEntity != null && _playerEntity.IsGrounded)
+        {
+            _playerEntity.JumpReleaseInput = true;
+        }
+    }
+
     void OnLongJump(InputValue ctx)
     {
         if (_playerEntity != null)

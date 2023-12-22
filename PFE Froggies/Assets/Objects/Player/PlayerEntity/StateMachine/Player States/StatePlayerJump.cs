@@ -11,7 +11,7 @@ public class StatePlayerJump : State
 
     public override void Start()
     {
-        Debug.Log(_smPlayer.entity.gameObject.name + " : " + "JUMP");
+        //Debug.Log(_smPlayer.entity.gameObject.name + " : " + "JUMP");
         
         _smPlayer.entity.Jump();
     }

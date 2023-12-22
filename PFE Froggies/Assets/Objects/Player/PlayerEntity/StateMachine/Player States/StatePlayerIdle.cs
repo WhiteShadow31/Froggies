@@ -13,7 +13,7 @@ public class StatePlayerIdle : StatePlayer
 
     public override void Start()
     {
-        Debug.Log(_smPlayer.entity.gameObject.name + " : " + "IDLE");
+        //Debug.Log(_smPlayer.entity.gameObject.name + " : " + "IDLE");
     }
     public override void Update(float time)
     {
