@@ -1215,16 +1215,43 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  _useExperimentalJump: 0
+  _timeToReachMaxJumpLenght: 1.5
+  _jumpLenghtCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _jumpPredictionObject: {fileID: 8099151475436712201}
   _jumpPredictionLine: {fileID: 3735360176625625681}
-  _jumpPredictionLinePointCount: 25
-  _jumpPredictiontTimeBetweenPoints: 0.1
+  _jumpPredictionLinePointCount: 200
+  _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 8
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
   JumpInput: 0
+  JumpReleaseInput: 0
   LongJumpInput: 0
   MountInput: 0
   isOnFrog: 0
@@ -1594,7 +1621,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 6205c990107f24d48a9a46be9cb8ab54, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1620,7 +1647,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:

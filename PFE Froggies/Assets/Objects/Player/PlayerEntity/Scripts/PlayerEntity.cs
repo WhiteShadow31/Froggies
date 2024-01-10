@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
+using UltimateAttributesPack;
 
 
 public class PlayerEntity : LivingEntity
@@ -49,12 +51,25 @@ public class PlayerEntity : LivingEntity
     protected Transform _otherPlayerMountTransform = null;
     public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
 
-    [Header("--- Jump prediction ---")]
-    [SerializeField] protected GameObject _jumpPredictionObject;
-    [SerializeField] protected LineRenderer _jumpPredictionLine;
-    [SerializeField] protected float _jumpPredictionLinePointCount;
-    [SerializeField] protected float _jumpPredictiontTimeBetweenPoints;
-    [SerializeField] protected LayerMask _jumpPredictionLayerMask;
+    [Header("Jump experimental")]
+    [SerializeField] protected bool _useExperimentalJump = false;
+    [Space]
+    [SerializeField, ShowIf("_useExperimentalJump", true)] protected float _timeToReachMaxJumpLenght = 1.5f;
+    [SerializeField, ShowIf("_useExperimentalJump", true)] AnimationCurve _jumpLenghtCurve;
+    [Space]
+    [SerializeField, ShowIf("_useExperimentalJump", true)] protected GameObject _jumpPredictionObject;
+    [SerializeField, ShowIf("_useExperimentalJump", true)] protected LineRenderer _jumpPredictionLine;
+    [SerializeField, ShowIf("_useExperimentalJump", true)] protected int _jumpPredictionLinePointCount;
+    [SerializeField, ShowIf("_useExperimentalJump", true)] protected float _jumpPredictiontDuration;
+    [SerializeField, ShowIf("_useExperimentalJump", true)] protected LayerMask _jumpPredictionLayerMask;
+
+    MeshRenderer _jumpPredictionObjectRenderer;
+    protected bool _prepareJump;
+    protected bool _atMaxJumpLenght;
+    protected float _jumpMaxLenghtTimer;
+    protected float _currentJumpForceForward;
+    protected float _currentJumpForceUp;
+    protected Vector3 _predictionLandingPoint;
 
     // INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS
 
@@ -66,6 +81,7 @@ public class PlayerEntity : LivingEntity
 
     // ===== JUMP INPUT =====
     public bool JumpInput = false;
+    public bool JumpReleaseInput = false;
     public bool LongJumpInput = false;
 
     // ===== TONGUE INPUT =====
@@ -89,8 +105,11 @@ public class PlayerEntity : LivingEntity
     {
         base.Start();
 
+        _jumpPredictionObjectRenderer = _jumpPredictionObject.GetComponent<MeshRenderer>();
+
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
+
     }
 
     protected override void Update()
@@ -105,13 +124,23 @@ public class PlayerEntity : LivingEntity
             UseTongue();
         }
 
-        if(RotaInput != Vector2.zero)
+        if (_useExperimentalJump)
         {
-            ShowJumpPrediction();
-        }
-        else
-        {
-            _jumpPredictionLine.enabled = false;
+            if(IsGrounded && JumpInput)
+            {
+                _jumpPredictionObjectRenderer.enabled = true;
+                _jumpPredictionLine.enabled = true;
+                PrepareJump();              
+                ShowJumpPrediction();
+            }
+            else
+            {
+                _currentJumpForceForward = _jumpForceFwd;
+                _currentJumpForceUp = _jumpForceUp;
+
+                _jumpPredictionObjectRenderer.enabled = false;
+                _jumpPredictionLine.enabled = false;
+            }
         }
     }
     
@@ -133,25 +162,43 @@ public class PlayerEntity : LivingEntity
     public override void Jump()
     {
         _rigidbodyController.StopVelocity();
-        if (LongJumpInput)
-        {
-            Vector3 jumpForward = transform.forward * _longJumpForceFwd;
-            Vector3 jumpUp = transform.up * _longJumpForceUp;
-            Vector3 jumpVector = jumpForward + jumpUp;
 
-            _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+        if (_useExperimentalJump)
+        {
+            if(JumpReleaseInput)
+            {
+                Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
+                _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+
+                _currentJumpForceForward = _jumpForceFwd;
+                _currentJumpForceUp = _jumpForceUp;
+
+                _prepareJump = false;
+                _atMaxJumpLenght = false;
+                _jumpMaxLenghtTimer = 0;
+
+                LongJumpInput = false;
+                JumpInput = false;
+                JumpReleaseInput = false;
+            }
         }
         else
         {
-            Vector3 jumpForward = transform.forward * _jumpForceFwd;
-            Vector3 jumpUp = transform.up * _jumpForceUp;
-            Vector3 jumpVector = jumpForward + jumpUp;
+            if (LongJumpInput)
+            {
+                Vector3 jumpVector = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
+                _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+            }
+            else
+            {
+                Vector3 jumpVector = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
+                _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+            }
 
-            _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
-        }
-
-        LongJumpInput = false;
-        JumpInput = false;
+            LongJumpInput = false;
+            JumpInput = false;
+            JumpReleaseInput = false;
+        }   
     }
 
     public void Rotate()
@@ -159,43 +206,108 @@ public class PlayerEntity : LivingEntity
         Rotate(RotaInput.x, RotaInput.y);
     }
 
-    void ShowJumpPrediction()
+    void PrepareJump()
     {
-        _jumpPredictionLine.enabled = true;
-        _jumpPredictionLine.positionCount = Mathf.CeilToInt(_jumpPredictionLinePointCount / _jumpPredictiontTimeBetweenPoints) + 1;
-        Vector3 startPosition = transform.position;
-        Vector3 jumpVector = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
-        Vector3 startVelocity = jumpVector / _rigidbodyController.Mass;
-        int i = 0;
-        _jumpPredictionLine.SetPosition(i, startPosition);
-
-        Vector3 lastPosition = startPosition;
-        for(float time = 0; time < _jumpPredictionLinePointCount; time += _jumpPredictiontTimeBetweenPoints)
+        if (!_atMaxJumpLenght)
         {
-            i++;
-            Vector3 point = startPosition + time * startVelocity;
-
-            if(lastPosition.y > point.y)
+            if(_jumpMaxLenghtTimer < _timeToReachMaxJumpLenght)
             {
-                point.y = startPosition.y + startVelocity.y * time - (_rigidbodyController.FallingGravity / 2 * time * time);
+                float maxForwardForce = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, _jumpLenghtCurve.Evaluate(_jumpMaxLenghtTimer / _timeToReachMaxJumpLenght));
+                _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, maxForwardForce, RotaInput.magnitude);
+                float maxUpForce = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, _jumpLenghtCurve.Evaluate(_jumpMaxLenghtTimer / _timeToReachMaxJumpLenght));
+                _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, maxUpForce, RotaInput.magnitude);
+
+                _jumpMaxLenghtTimer += Time.deltaTime;
             }
             else
             {
-                point.y = startPosition.y + startVelocity.y * time - (_rigidbodyController.NormalGravity / 2 * time * time);
+                _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, RotaInput.magnitude);
+                _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, RotaInput.magnitude);
+            }
+        }
+        else
+        {
+            _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, RotaInput.magnitude);
+            _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, RotaInput.magnitude);
+        }
+        
+    }
+
+    void ShowJumpPrediction()
+    {
+        _jumpPredictionLine.enabled = true;
+        _jumpPredictionLine.positionCount = _jumpPredictionLinePointCount;
+        Vector3 startPosition = transform.position;
+        Vector3 lastPoint = startPosition;
+        Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
+        Vector3 startVelocity = jumpVector / _rigidbodyController.Mass;
+        float timeStep = _jumpPredictiontDuration / _jumpPredictionLinePointCount;
+        _jumpPredictionLine.SetPosition(0, startPosition);
+
+        // Calculate falling gravity prediction points
+        Vector3[] fallingTrajectoryPoints = new Vector3[_jumpPredictionLinePointCount];
+        fallingTrajectoryPoints[0] = startPosition;
+        for (int g = 1; g < _jumpPredictionLinePointCount; g++)
+        {
+            float fallingTimeOffset = timeStep * g;
+            Vector3 fallingPredictionPoint = startPosition + startVelocity * fallingTimeOffset - (Vector3.up * -0.5f * -_rigidbodyController.FallingGravity * fallingTimeOffset * fallingTimeOffset);
+            fallingTrajectoryPoints[g] = fallingPredictionPoint;
+        }
+
+        // Get highest point of falling gravity trajectory points
+        float[] fallingPointsY = new float[_jumpPredictionLinePointCount];
+        fallingPointsY[0] = startPosition.y;
+        for(int j = 1; j < _jumpPredictionLinePointCount; j++)
+        {
+            fallingPointsY[j] = fallingTrajectoryPoints[j].y;
+        }
+        float fallingTrajectoryHighPoint = Mathf.Max(fallingPointsY);
+        int indexOfFallingTrajectoryHighPoint = Array.IndexOf(fallingPointsY, fallingTrajectoryHighPoint);
+
+        // Calculate trajectory line
+        bool falling = false;
+        int fallIndex = indexOfFallingTrajectoryHighPoint;
+        for (int i = 1; i < _jumpPredictionLinePointCount; i++)
+        {
+            float timeOffset = timeStep * i;
+
+            Vector3 currentPoint;
+
+            if (!falling)
+            {
+                currentPoint = startPosition + startVelocity * timeOffset - (Vector3.up * -0.5f * -_rigidbodyController.NormalGravity * timeOffset * timeOffset);
+            }
+            else
+            {
+                currentPoint = startPosition + startVelocity * timeOffset - (Vector3.up * -0.5f * -_rigidbodyController.FallingGravity * timeOffset * timeOffset);
             }
 
-            lastPosition = point;
-            _jumpPredictionLine.SetPosition(i, point);
+            // If trajectory is falling
+            if (lastPoint.y > currentPoint.y)
+            {
+                falling = true;
+                if (fallingTrajectoryPoints[fallIndex + 1] != null)
+                {
+                    Vector3 DirToNext = fallingTrajectoryPoints[fallIndex + 1] - fallingTrajectoryPoints[fallIndex];
+                    currentPoint = lastPoint + DirToNext;
+                    fallIndex++;
+                }
+                else
+                    return;
+            }
 
-            Vector3 lastPoint = _jumpPredictionLine.GetPosition(i - 1);
-            
-            if(Physics.Raycast(lastPoint, (point - lastPoint).normalized, out RaycastHit hitInfo, (point - lastPoint).magnitude, _jumpPredictionLayerMask))
+            _jumpPredictionLine.SetPosition(i, currentPoint);
+
+            if (Physics.Linecast(lastPoint, currentPoint, out RaycastHit hitInfo, _jumpPredictionLayerMask))
             {
                 _jumpPredictionLine.SetPosition(i, hitInfo.point);
                 _jumpPredictionLine.positionCount = i + 1;
+                _jumpPredictionObject.transform.position = hitInfo.point;
                 return;
             }
-        }
+
+            lastPoint = currentPoint;
+        }       
     }
 
     // =====================================================================================

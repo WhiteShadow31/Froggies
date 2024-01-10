@@ -47,6 +47,15 @@
                     "id": "0061cec2-31c7-4fad-8813-07953654b842",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JumpRelease",
+                    "type": "Button",
+                    "id": "f8107ab5-08c2-48de-9540-f89a9893d117",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
                 },
@@ -336,6 +345,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ReloadScene_TGS",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f423870-aaea-4c66-815b-fe7af867e0e7",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "144d7083-9af7-4f0f-b89d-1590e17b59b1",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

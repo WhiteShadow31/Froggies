@@ -25,7 +25,9 @@ public class PlayerController : MonoBehaviour
 
     void OnReloadScene_TGS(InputValue ctx)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        RespawnZoneSelector.Instance.TeleportPlayerNextRespawn();
     }
     void OnStartPreciseMove(InputValue ctx)
     {
@@ -56,6 +58,14 @@ public class PlayerController : MonoBehaviour
         if (_playerEntity != null && _playerEntity.IsGrounded)
         {
             _playerEntity.JumpInput = true;
+        }
+    }
+
+    void OnJumpRelease(InputValue ctx)
+    {
+        if (_playerEntity != null && _playerEntity.IsGrounded)
+        {
+            _playerEntity.JumpReleaseInput = true;
         }
     }
 
