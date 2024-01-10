@@ -15,6 +15,11 @@ public class RespawnZone : MonoBehaviour
     private void Start()
     {
         this.transform.GetComponent<BoxCollider>().isTrigger = true;
+
+        if(RespawnZoneSelector.Instance != null)
+        {
+            RespawnZoneSelector.Instance.AddRespawn(this);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +37,7 @@ public class RespawnZone : MonoBehaviour
                     m_successIndex = m_successIndex >= successRespawnPoints.Count ? 0 : m_successIndex;
 
                     frog.transform.position = successRespawnPoints[m_successIndex].position;
+                    m_successIndex++;
                 }
             }
             // hasnt been registered
@@ -44,6 +50,7 @@ public class RespawnZone : MonoBehaviour
                     m_unsuccessIndex = m_unsuccessIndex >= unsuccessRespawnPoints.Count ? 0 : m_unsuccessIndex;
 
                     frog.transform.position = unsuccessRespawnPoints[m_unsuccessIndex].position;
+                    m_unsuccessIndex++;
                 }
             }
         }
@@ -62,5 +69,32 @@ public class RespawnZone : MonoBehaviour
     {
         if(!m_playersSuccess.Contains(frog))
             m_playersSuccess.Add(frog);
+    }
+
+    public void RespawnSuccessPlayer(GameObject frog)
+    {
+        // Respawn to success pos
+        if (successRespawnPoints.Count > 0)
+        {
+            // Look if index is outside list
+            m_successIndex = m_successIndex >= successRespawnPoints.Count ? 0 : m_successIndex;
+
+            frog.transform.position = successRespawnPoints[m_successIndex].position;
+            m_successIndex++;
+        }
+    }
+
+    public void RespawnUnsuccessPlayer(GameObject frog)
+    {
+        Debug.Log("Try to respawn");
+        // Respawn to unsuccess pos
+        if (unsuccessRespawnPoints.Count > 0)
+        {
+            // Look if index is outside list
+            m_unsuccessIndex = m_unsuccessIndex >= unsuccessRespawnPoints.Count ? 0 : m_unsuccessIndex;
+
+            frog.transform.position = unsuccessRespawnPoints[m_unsuccessIndex].position;
+            m_unsuccessIndex++;
+        }
     }
 }

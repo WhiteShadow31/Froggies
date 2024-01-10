@@ -25,7 +25,9 @@ public class PlayerController : MonoBehaviour
 
     void OnReloadScene_TGS(InputValue ctx)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        RespawnZoneSelector.Instance.TeleportPlayerNextRespawn();
     }
     void OnStartPreciseMove(InputValue ctx)
     {

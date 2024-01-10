@@ -92,6 +92,11 @@ public class PlayerEntity : LivingEntity
 
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
+
+        if (RespawnZoneSelector.Instance != null)
+        {
+            RespawnZoneSelector.Instance.AddPlayer(this.gameObject);
+        }
     }
 
     protected override void Update()
