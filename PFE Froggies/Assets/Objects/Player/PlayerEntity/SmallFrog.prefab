@@ -1138,10 +1138,10 @@ MonoBehaviour:
     m_Bits: 8
   _moveForce: 1
   _moveMode: 1
-  _jumpForceUp: 3
-  _jumpForceFwd: 12
-  _longJumpForceUp: 9
-  _longJumpForceFwd: 8
+  _jumpForceUp: 9
+  _jumpForceFwd: 25
+  _longJumpForceUp: 27
+  _longJumpForceFwd: 24
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
   controller: {fileID: 0}
@@ -1151,7 +1151,7 @@ MonoBehaviour:
   _tongueMaxLenght: 5
   _tongueLayerMask:
     serializedVersion: 2
-    m_Bits: 73
+    m_Bits: 72
   _tongueGrabType: 0
   _tongueOutTime: 1
   _tongueOutCurve:
@@ -1209,13 +1209,13 @@ MonoBehaviour:
   _tongueHitForce: 10
   _tongueHitLayerMask:
     serializedVersion: 2
-    m_Bits: 73
+    m_Bits: 72
   onFrogTransform: {fileID: 7513869125547718495}
   _mountRadius: 3
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  _useExperimentalJump: 0
+  _useExperimentalJump: 1
   _timeToReachMaxJumpLenght: 1.5
   _jumpLenghtCurve:
     serializedVersion: 2
@@ -1372,8 +1372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useGravity: 1
-  _normalGravity: 15
-  _fallingGravity: 45
+  _normalGravity: 70
+  _fallingGravity: 150
   _useClampPreciseMove: 0
   _clampPreciseMove: 3
   _useVelocityClampY: 0

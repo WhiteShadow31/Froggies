@@ -53,6 +53,7 @@ public class PlayerEntity : LivingEntity
 
     [Header("Jump experimental")]
     [SerializeField] protected bool _useExperimentalJump = false;
+    [SerializeField, ShowIf("_useExperimentalJump", true)] protected bool _showPredictionLine = false;
     [Space]
     [SerializeField, ShowIf("_useExperimentalJump", true)] protected float _timeToReachMaxJumpLenght = 1.5f;
     [SerializeField, ShowIf("_useExperimentalJump", true)] AnimationCurve _jumpLenghtCurve;
@@ -235,7 +236,15 @@ public class PlayerEntity : LivingEntity
 
     void ShowJumpPrediction()
     {
-        _jumpPredictionLine.enabled = true;
+        if (_showPredictionLine)
+        {
+            _jumpPredictionLine.enabled = true;
+        }
+        else
+        {
+            _jumpPredictionLine.enabled = false;
+        }
+
         _jumpPredictionLine.positionCount = _jumpPredictionLinePointCount;
         Vector3 startPosition = transform.position;
         Vector3 lastPoint = startPosition;
