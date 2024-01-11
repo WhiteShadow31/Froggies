@@ -1218,12 +1218,12 @@ MonoBehaviour:
     m_Bits: 64
   _jumpPredictionLine: {fileID: 3735360176625625681}
   _showTrajectoryLine: 0
-  _jumpLandingPoint: {fileID: 8099151475436712201}
+  _landingPointObject: {fileID: 8099151475436712201}
   _showLandingPoint: 1
   _jumpInteructedIfSitckLessThan: 0.05
   _timeToChargeJump: 0.5
-  _landingPointSmoothSpeed: 0.15
-  _interruptLandingPointTime: 0.3
+  _landingPointSmoothSpeed: 0.25
+  _interruptLandingPointTime: 0.2
   _interruptLandingPointMovementCurve:
     serializedVersion: 2
     m_Curve:
@@ -1248,9 +1248,55 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _interruptLandingPointMaxTransparency: 1
+  _interruptLandingPointMinTransparency: 0.5
   _interruptLandingPointTransparencyCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _interruptLandingPointMaxWidth: 1
+  _interruptLandingPointMinWidth: 0.5
+  _interruptLandingPointWidthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -1259,14 +1305,12 @@ MonoBehaviour:
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  _isJumping: 0
   _showInputDebug: 0
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
   JumpPressInput: 0
   JumpReleaseInput: 0
   MountInput: 0
-  isOnFrog: 0
 --- !u!120 &4064099953945684390
 LineRenderer:
   serializedVersion: 2

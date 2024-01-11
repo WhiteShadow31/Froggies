@@ -58,7 +58,7 @@ public class SimpleRigidbody : MonoBehaviour
     {
         if (_useGravity)
         {
-            if (_playerEntity._isJumping)
+            if (_playerEntity.IsJumping)
             {
                 ApplyGravity(_actualGravity);
 

@@ -19,23 +19,20 @@ public class StatePlayerIdle : StatePlayer
     {
         _isGrounded = _smPlayer.entity.IsGrounded;
 
-        if (_smPlayer.entity.JumpPressInput)
+        if (_smPlayer.entity.JumpReleaseInput)
         {            
             if (_isGrounded)
                 _smPlayer.Exit(_smPlayer.jump);
             else
             {
-                _smPlayer.entity.JumpPressInput = false;
+                _smPlayer.entity.JumpReleaseInput = false;
             }
         }
-
 
         if(_smPlayer.entity.MountInput)
         {
             if (_smPlayer.entity.TryMount())
-                _smPlayer.Exit(_smPlayer.onFrog);
-            
-            
+                _smPlayer.Exit(_smPlayer.onFrog);          
         }
     }
     public override void FixedUpdate(float time)

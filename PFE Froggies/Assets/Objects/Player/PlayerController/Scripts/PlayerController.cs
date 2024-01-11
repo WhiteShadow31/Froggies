@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void OnJumpPress(InputValue ctx)
     {
-        if (_playerEntity != null && _playerEntity.IsGrounded)
+        if (_playerEntity != null)
         {
             _playerEntity.JumpPressInput = true;
         }

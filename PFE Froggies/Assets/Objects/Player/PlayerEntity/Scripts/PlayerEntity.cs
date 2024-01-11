@@ -55,23 +55,21 @@ public class PlayerEntity : LivingEntity
     [Header("--- PREDICTED JUMP ---")]
     [SerializeField] protected LineRenderer _jumpPredictionLine;
     [SerializeField] protected bool _showTrajectoryLine = true;
-    [SerializeField] protected GameObject _jumpLandingPoint;
+    [SerializeField] protected GameObject _landingPointObject;
     [SerializeField] protected bool _showLandingPoint = true;
     [Space]
     [SerializeField] protected float _jumpInteructedIfSitckLessThan = 0.05f;
     [SerializeField] protected float _timeToChargeJump = 0.5f;
     [SerializeField] protected float _landingPointSmoothSpeed = 0.15f;
     [Space]
-    [SerializeField] protected float _interruptLandingPointTime;
+    [SerializeField] protected float _interruptLandingPointTime = 0.2f;
     [SerializeField] protected AnimationCurve _interruptLandingPointMovementCurve;
-    [SerializeField] protected AnimationCurve _interruptLandingPointTransparencyCurve;
     [Space]
     [SerializeField] protected int _jumpPredictionLinePointCount = 200;
     [SerializeField] protected float _jumpPredictiontDuration = 5;
     [SerializeField] protected LayerMask _jumpPredictionLayerMask;
 
     MeshRenderer _jumpPredictionObjectRenderer;
-    protected bool _jumpInterupted;
     protected bool _jumpCharged;
     protected float _interruptLandingPointTimer;
     protected float _jumpMaxLenghtTimer;
@@ -81,7 +79,8 @@ public class PlayerEntity : LivingEntity
     protected Vector3 _landingPointLastPosition;
     protected Vector3 _velocityRef = Vector3.zero;
     protected bool _wasGroundedLastFrame = false;
-    [HideInInspector] public bool _isJumping = false;
+    public bool IsJumping { get { return _isJumping; } }
+    protected bool _isJumping;
 
     [Header("--- INPUTS ---")]
     [SerializeField] bool _showInputDebug = false;
@@ -96,7 +95,7 @@ public class PlayerEntity : LivingEntity
     [ShowIf("_showInputDebug", true)] public bool MountInput;
 
     protected StateMachinePlayer _smPlayer;
-    [HideInInspector] public bool isOnFrog = false;
+    protected bool isOnFrog = false;
 
     // =====================================================================================
     //                                   UNITY METHODS 
@@ -105,7 +104,7 @@ public class PlayerEntity : LivingEntity
     {
         base.Start();
 
-        _jumpPredictionObjectRenderer = _jumpLandingPoint.GetComponent<MeshRenderer>();
+        _jumpPredictionObjectRenderer = _landingPointObject.GetComponent<MeshRenderer>();
 
         // Set jump prediction color
         SetJumpPredictionColor(playerColor);
@@ -126,62 +125,7 @@ public class PlayerEntity : LivingEntity
             UseTongue();
         }
 
-        // Check if player is in jump
-        if(_isJumping && !_wasGroundedLastFrame && IsGrounded)
-        {
-            _rigidbodyController.StopVelocity();
-            _isJumping = false;
-        }
-        _wasGroundedLastFrame = IsGrounded;
-
-        // Predicted jump
-        if(IsGrounded && JumpPressInput && RotaInput.magnitude > _jumpInteructedIfSitckLessThan)
-        {
-            // Display or not the landing point and line
-            if (_showTrajectoryLine)
-                _jumpPredictionLine.enabled = true;
-            if(_showLandingPoint)
-                _jumpPredictionObjectRenderer.enabled = true;
-
-            // Detect if jump is interupted or not
-            if(RotaInput.magnitude < _jumpInteructedIfSitckLessThan)
-                _jumpInterupted = true;
-            else
-                _jumpInterupted = false;
-
-            // Charge jump to max if it's not
-            if(!_jumpCharged)
-                ChargeJump();
-
-            SetJumpForce(_jumpCharged);
-
-            // Show prediction if jump isn't interrupted
-            if(!_jumpInterupted && _jumpCharged)
-                ShowJumpPrediction();
-            else
-                SetPredictionRenderer(false);
-
-            _interruptLandingPointTimer = 0;
-        }
-        else
-        {
-            // Set landing point target point for lerp
-            Vector3 landingPointTargetPosition = new Vector3(transform.position.x, _jumpLandingPoint.transform.position.y, transform.position.z);
-
-            if(_interruptLandingPointTimer < _interruptLandingPointTime)
-            {
-                _jumpLandingPoint.transform.position = Vector3.Lerp(_landingPointLastPosition, landingPointTargetPosition, _interruptLandingPointMovementCurve.Evaluate(_interruptLandingPointTimer / _interruptLandingPointTime));
-
-                _interruptLandingPointTimer += Time.deltaTime;
-            }
-            else
-            {
-                _jumpLandingPoint.transform.position = landingPointTargetPosition;
-
-                SetPredictionRenderer(false);
-                ResetJump();
-            }         
-        }
+        ManageJump();
     }
     
     protected override void FixedUpdate()
@@ -199,33 +143,82 @@ public class PlayerEntity : LivingEntity
     //                                   MOVEMENT METHODS 
     // =====================================================================================
 
-    public override void Jump()
-    {
-        if(JumpReleaseInput)
-        {
-            // Interrupt jump
-            if (_jumpInterupted && _jumpCharged)
-            {
-                ResetJump();
-                return;
-            }
-
-            _rigidbodyController.StopVelocity();
-
-            // Jump
-            Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
-            _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
-
-            SetPredictionRenderer(false);
-            ResetJump();
-            _isJumping = true;
-            _wasGroundedLastFrame = true;
-        }
-    }
-
     public void Rotate()
     {
         Rotate(RotaInput.x, RotaInput.y);
+    }
+
+    public override void Jump()
+    {
+        // Interrupt jump
+        if (RotaInput.magnitude < _jumpInteructedIfSitckLessThan && _jumpCharged)
+        {
+            ResetJump();
+            return;
+        }
+
+        _rigidbodyController.StopVelocity();
+
+        // Jump
+        Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
+        _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+
+        SetPredictionRenderer(false);
+        ResetJump();
+        _isJumping = true;
+        _wasGroundedLastFrame = true;
+    }
+
+    void ManageJump()
+    {
+        // Check if player is in jump
+        if (_isJumping && !_wasGroundedLastFrame && IsGrounded)
+        {
+            _rigidbodyController.StopVelocity();
+            _isJumping = false;
+        }
+        _wasGroundedLastFrame = IsGrounded;
+
+        // Predicted jump
+        if (IsGrounded && JumpPressInput && RotaInput.magnitude > _jumpInteructedIfSitckLessThan)
+        {
+            // Display or not the landing point and line
+            if (_showTrajectoryLine)
+                _jumpPredictionLine.enabled = true;
+            if (_showLandingPoint)
+                _jumpPredictionObjectRenderer.enabled = true;
+
+            // Charge jump to max if it's not
+            if (!_jumpCharged)
+                ChargeJump();
+
+            SetJumpForce(_jumpCharged); // Set jump force to current force if jump is charged
+
+            // Show prediction if jump isn't interrupted
+            if (RotaInput.magnitude > _jumpInteructedIfSitckLessThan && _jumpCharged)
+                ShowJumpPrediction();
+            else
+                SetPredictionRenderer(false);
+
+            _interruptLandingPointTimer = 0; // Reset timer of landing point lerp to player position
+        }
+        // Lerp landing point to player position with time and disable it
+        else
+        {
+            // Set landing point target point for lerp
+            Vector3 landingPointTargetPosition = new Vector3(transform.position.x, _landingPointLastPosition.y, transform.position.z);
+
+            if (_interruptLandingPointTimer < _interruptLandingPointTime) // Timer and lerp of landing point to player position
+            {
+                _landingPointObject.transform.position = Vector3.Lerp(_landingPointLastPosition, landingPointTargetPosition, _interruptLandingPointMovementCurve.Evaluate(_interruptLandingPointTimer / _interruptLandingPointTime));
+                _interruptLandingPointTimer += Time.deltaTime;
+            }
+            else // Set landing point to player position and disable it
+            {
+                _landingPointObject.transform.position = landingPointTargetPosition;
+                SetPredictionRenderer(false);
+            }
+        }
     }
 
     void ChargeJump()
@@ -289,8 +282,8 @@ public class PlayerEntity : LivingEntity
     {
         SetJumpForceToMinOrMax(false); // Set jump force to min
        
-        _jumpCharged = false;
-        _jumpMaxLenghtTimer = 0;
+        _jumpCharged = false; // Disable charged jump
+        _jumpMaxLenghtTimer = 0; // Reset timer to charge jump
 
         JumpPressInput = false;
         JumpReleaseInput = false;
@@ -298,22 +291,17 @@ public class PlayerEntity : LivingEntity
 
     void SetPredictionRenderer(bool state)
     {
-        _jumpPredictionLine.enabled = state;
-        _jumpPredictionObjectRenderer.enabled = state;
+        if(_showTrajectoryLine)
+            _jumpPredictionLine.enabled = state;
+        if(_showLandingPoint)
+            _jumpPredictionObjectRenderer.enabled = state;
     }
 
     void ShowJumpPrediction()
     {
-        if (_showTrajectoryLine)
-            _jumpPredictionLine.enabled = true;
-        else
-            _jumpPredictionLine.enabled = false;
+        SetPredictionRenderer(true);
 
-        if (_showLandingPoint)
-            _jumpPredictionObjectRenderer.enabled = true;
-        else
-            _jumpPredictionObjectRenderer.enabled = false;
-
+        // Initialize prediction line
         _jumpPredictionLine.positionCount = _jumpPredictionLinePointCount;
         Vector3 startPosition = transform.position;
         Vector3 lastPoint = startPosition;
@@ -351,6 +339,7 @@ public class PlayerEntity : LivingEntity
 
             Vector3 currentPoint;
 
+            // Calculate current point if the trajectory is falling or not
             if (!falling)
             {
                 currentPoint = startPosition + startVelocity * timeOffset - (Vector3.up * -0.5f * -_rigidbodyController.NormalGravity * timeOffset * timeOffset);
@@ -360,7 +349,7 @@ public class PlayerEntity : LivingEntity
                 currentPoint = startPosition + startVelocity * timeOffset - (Vector3.up * -0.5f * -_rigidbodyController.FallingGravity * timeOffset * timeOffset);
             }
 
-            // If trajectory is falling
+            // If trajectory is falling, get point of falling trajectory
             if (lastPoint.y > currentPoint.y)
             {
                 falling = true;
@@ -374,14 +363,16 @@ public class PlayerEntity : LivingEntity
                     return;
             }
 
-            _jumpPredictionLine.SetPosition(i, currentPoint);
+            _jumpPredictionLine.SetPosition(i, currentPoint); // Set new point in line renderer
 
+            // If the trajectory hit something
             if (Physics.Linecast(lastPoint, currentPoint, out RaycastHit hitInfo, _jumpPredictionLayerMask))
             {
-                _jumpPredictionLine.SetPosition(i, hitInfo.point);
+                _jumpPredictionLine.SetPosition(i, hitInfo.point); // Set last line renderer point to hit point
                 _jumpPredictionLine.positionCount = i + 1;
-                _jumpLandingPoint.transform.position = Vector3.SmoothDamp(_jumpLandingPoint.transform.position, hitInfo.point, ref _velocityRef, _landingPointSmoothSpeed);
-                _landingPointLastPosition = _jumpLandingPoint.transform.position;
+                _landingPointObject.transform.position = new Vector3(_landingPointObject.transform.position.x, hitInfo.point.y, _landingPointObject.transform.position.z); // Set landing point y to hitinfo y
+                _landingPointObject.transform.position = Vector3.SmoothDamp(_landingPointObject.transform.position, hitInfo.point, ref _velocityRef, _landingPointSmoothSpeed); // Smooth landing point position to target position
+                _landingPointLastPosition = _landingPointObject.transform.position;
 
                 return;
             }
