@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "JumpPress",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "0061cec2-31c7-4fad-8813-07953654b842",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "JumpRelease",

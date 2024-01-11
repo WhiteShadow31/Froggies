@@ -62,6 +62,10 @@ public class PlayerEntity : LivingEntity
     [SerializeField] protected float _timeToChargeJump = 0.5f;
     [SerializeField] protected float _landingPointSmoothSpeed = 0.15f;
     [Space]
+    [SerializeField] protected float _interruptLandingPointTime;
+    [SerializeField] protected AnimationCurve _interruptLandingPointMovementCurve;
+    [SerializeField] protected AnimationCurve _interruptLandingPointTransparencyCurve;
+    [Space]
     [SerializeField] protected int _jumpPredictionLinePointCount = 200;
     [SerializeField] protected float _jumpPredictiontDuration = 5;
     [SerializeField] protected LayerMask _jumpPredictionLayerMask;
@@ -69,35 +73,26 @@ public class PlayerEntity : LivingEntity
     MeshRenderer _jumpPredictionObjectRenderer;
     protected bool _jumpInterupted;
     protected bool _jumpCharged;
+    protected float _interruptLandingPointTimer;
     protected float _jumpMaxLenghtTimer;
     protected float _currentJumpForceForward;
     protected float _currentJumpForceUp;
     protected Vector3 _predictionLandingPoint;
+    protected Vector3 _landingPointLastPosition;
     protected Vector3 _velocityRef = Vector3.zero;
-
-    // INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS
+    protected bool _wasGroundedLastFrame = false;
+    [HideInInspector] public bool _isJumping = false;
 
     [Header("--- INPUTS ---")]
     [SerializeField] bool _showInputDebug = false;
-
-    // ===== MOVE INPUT =====
     [ShowIf("_showInputDebug", true)] public bool MoveInput;
-
-    // ===== ROTA INPUT =====
     [ShowIf("_showInputDebug", true)] public Vector2 RotaInput = Vector2.zero;
-
-    // ===== JUMP INPUT =====
     [ShowIf("_showInputDebug", true)] public bool JumpPressInput = false;
     [ShowIf("_showInputDebug", true)] public bool JumpReleaseInput = false;
-
-    // ===== TONGUE INPUT =====
     [ShowIf("_showInputDebug", true)] bool _startTongueAimInput = false;
-    [ShowIf("_showInputDebug", true)] bool _endTongueAimInput = false;
-
     public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
+    [ShowIf("_showInputDebug", true)] bool _endTongueAimInput = false;
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
-
-    // ===== MOUNT INPUT =====
     [ShowIf("_showInputDebug", true)] public bool MountInput;
 
     protected StateMachinePlayer _smPlayer;
@@ -131,8 +126,16 @@ public class PlayerEntity : LivingEntity
             UseTongue();
         }
 
+        // Check if player is in jump
+        if(_isJumping && !_wasGroundedLastFrame && IsGrounded)
+        {
+            _rigidbodyController.StopVelocity();
+            _isJumping = false;
+        }
+        _wasGroundedLastFrame = IsGrounded;
+
         // Predicted jump
-        if(IsGrounded && JumpPressInput)
+        if(IsGrounded && JumpPressInput && RotaInput.magnitude > _jumpInteructedIfSitckLessThan)
         {
             // Display or not the landing point and line
             if (_showTrajectoryLine)
@@ -156,16 +159,28 @@ public class PlayerEntity : LivingEntity
             if(!_jumpInterupted && _jumpCharged)
                 ShowJumpPrediction();
             else
-            {
-                _jumpPredictionLine.enabled = false;
-                _jumpPredictionObjectRenderer.enabled = false;
-            }
+                SetPredictionRenderer(false);
+
+            _interruptLandingPointTimer = 0;
         }
         else
         {
-            _jumpPredictionLine.enabled = false;
-            _jumpPredictionObjectRenderer.enabled = false;
-            ResetJump();
+            // Set landing point target point for lerp
+            Vector3 landingPointTargetPosition = new Vector3(transform.position.x, _jumpLandingPoint.transform.position.y, transform.position.z);
+
+            if(_interruptLandingPointTimer < _interruptLandingPointTime)
+            {
+                _jumpLandingPoint.transform.position = Vector3.Lerp(_landingPointLastPosition, landingPointTargetPosition, _interruptLandingPointMovementCurve.Evaluate(_interruptLandingPointTimer / _interruptLandingPointTime));
+
+                _interruptLandingPointTimer += Time.deltaTime;
+            }
+            else
+            {
+                _jumpLandingPoint.transform.position = landingPointTargetPosition;
+
+                SetPredictionRenderer(false);
+                ResetJump();
+            }         
         }
     }
     
@@ -201,7 +216,10 @@ public class PlayerEntity : LivingEntity
             Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
             _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
 
+            SetPredictionRenderer(false);
             ResetJump();
+            _isJumping = true;
+            _wasGroundedLastFrame = true;
         }
     }
 
@@ -276,6 +294,12 @@ public class PlayerEntity : LivingEntity
 
         JumpPressInput = false;
         JumpReleaseInput = false;
+    }
+
+    void SetPredictionRenderer(bool state)
+    {
+        _jumpPredictionLine.enabled = state;
+        _jumpPredictionObjectRenderer.enabled = state;
     }
 
     void ShowJumpPrediction()
@@ -357,7 +381,8 @@ public class PlayerEntity : LivingEntity
                 _jumpPredictionLine.SetPosition(i, hitInfo.point);
                 _jumpPredictionLine.positionCount = i + 1;
                 _jumpLandingPoint.transform.position = Vector3.SmoothDamp(_jumpLandingPoint.transform.position, hitInfo.point, ref _velocityRef, _landingPointSmoothSpeed);
-                
+                _landingPointLastPosition = _jumpLandingPoint.transform.position;
+
                 return;
             }
 
