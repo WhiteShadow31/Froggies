@@ -19,15 +19,13 @@ public class StatePlayerIdle : StatePlayer
     {
         _isGrounded = _smPlayer.entity.IsGrounded;
 
-        if (_smPlayer.entity.JumpInput)
-        {
-            
+        if (_smPlayer.entity.JumpPressInput)
+        {            
             if (_isGrounded)
                 _smPlayer.Exit(_smPlayer.jump);
             else
             {
-                _smPlayer.entity.JumpInput = false;
-                _smPlayer.entity.LongJumpInput = false;
+                _smPlayer.entity.JumpPressInput = false;
             }
         }
 
