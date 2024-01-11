@@ -58,11 +58,45 @@ public class RespawnZone : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.matrix = transform.localToWorldMatrix;
         Color col = Color.red;
         col.a = 0.3f;
         Gizmos.color = col;
 
-        Gizmos.DrawCube(this.transform.position, GetComponent<BoxCollider>().size);
+        Gizmos.DrawCube(Vector3.zero, GetComponent<BoxCollider>().size);
+    }
+
+    public void AddFrogToSuccess(SmallFrogEntity frog)
+    {
+        if(!m_playersSuccess.Contains(frog))
+            m_playersSuccess.Add(frog);
+    }
+
+    public void RespawnSuccessPlayer(GameObject frog)
+    {
+        // Respawn to success pos
+        if (successRespawnPoints.Count > 0)
+        {
+            // Look if index is outside list
+            m_successIndex = m_successIndex >= successRespawnPoints.Count ? 0 : m_successIndex;
+
+            frog.transform.position = successRespawnPoints[m_successIndex].position;
+            m_successIndex++;
+        }
+    }
+
+    public void RespawnUnsuccessPlayer(GameObject frog)
+    {
+        Debug.Log("Try to respawn");
+        // Respawn to unsuccess pos
+        if (unsuccessRespawnPoints.Count > 0)
+        {
+            // Look if index is outside list
+            m_unsuccessIndex = m_unsuccessIndex >= unsuccessRespawnPoints.Count ? 0 : m_unsuccessIndex;
+
+            frog.transform.position = unsuccessRespawnPoints[m_unsuccessIndex].position;
+            m_unsuccessIndex++;
+        }
     }
 
     public void AddFrogToSuccess(SmallFrogEntity frog)

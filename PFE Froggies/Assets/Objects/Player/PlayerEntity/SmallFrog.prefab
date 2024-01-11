@@ -1138,20 +1138,21 @@ MonoBehaviour:
     m_Bits: 8
   _moveForce: 1
   _moveMode: 1
-  _jumpForceUp: 3
-  _jumpForceFwd: 12
-  _longJumpForceUp: 9
-  _longJumpForceFwd: 8
+  _jumpForceUp: 9
+  _jumpForceFwd: 25
+  _longJumpForceUp: 27
+  _longJumpForceFwd: 24
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
   controller: {fileID: 0}
   model: {fileID: 4404454837975397373}
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
   _tongueMaxLenght: 5
   _tongueLayerMask:
     serializedVersion: 2
-    m_Bits: 73
+    m_Bits: 72
   _tongueGrabType: 0
   _tongueOutTime: 1
   _tongueOutCurve:
@@ -1209,50 +1210,29 @@ MonoBehaviour:
   _tongueHitForce: 10
   _tongueHitLayerMask:
     serializedVersion: 2
-    m_Bits: 73
+    m_Bits: 72
   onFrogTransform: {fileID: 7513869125547718495}
   _mountRadius: 3
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  _useExperimentalJump: 0
-  _timeToReachMaxJumpLenght: 1.5
-  _jumpLenghtCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _jumpPredictionObject: {fileID: 8099151475436712201}
   _jumpPredictionLine: {fileID: 3735360176625625681}
+  _showTrajectoryLine: 1
+  _jumpLandingPoint: {fileID: 8099151475436712201}
+  _showLandingPoint: 1
+  _jumpInteructedIfSitckLessThan: 0.05
+  _timeToChargeJump: 0.5
+  _landingPointSmoothSpeed: 0.15
   _jumpPredictionLinePointCount: 200
   _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  _showInputDebug: 0
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
-  JumpInput: 0
+  JumpPressInput: 0
   JumpReleaseInput: 0
-  LongJumpInput: 0
   MountInput: 0
   isOnFrog: 0
 --- !u!120 &4064099953945684390
@@ -1372,8 +1352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useGravity: 1
-  _normalGravity: 15
-  _fallingGravity: 45
+  _normalGravity: 70
+  _fallingGravity: 150
   _useClampPreciseMove: 0
   _clampPreciseMove: 3
   _useVelocityClampY: 0
@@ -1696,7 +1676,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0

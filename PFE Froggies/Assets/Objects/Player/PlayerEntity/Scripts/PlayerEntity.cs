@@ -12,6 +12,7 @@ public class PlayerEntity : LivingEntity
 
     [Header("--- MODEL ---")]
     public Transform model;
+    [HideInInspector] public Color playerColor;
 
     [Header("--- TONGUE ---")]
     [SerializeField] protected Transform _tongueStartTransform;
@@ -51,49 +52,53 @@ public class PlayerEntity : LivingEntity
     protected Transform _otherPlayerMountTransform = null;
     public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
 
-    [Header("Jump experimental")]
-    [SerializeField] protected bool _useExperimentalJump = false;
+    [Header("--- PREDICTED JUMP ---")]
+    [SerializeField] protected LineRenderer _jumpPredictionLine;
+    [SerializeField] protected bool _showTrajectoryLine = true;
+    [SerializeField] protected GameObject _jumpLandingPoint;
+    [SerializeField] protected bool _showLandingPoint = true;
     [Space]
-    [SerializeField, ShowIf("_useExperimentalJump", true)] protected float _timeToReachMaxJumpLenght = 1.5f;
-    [SerializeField, ShowIf("_useExperimentalJump", true)] AnimationCurve _jumpLenghtCurve;
+    [SerializeField] protected float _jumpInteructedIfSitckLessThan = 0.05f;
+    [SerializeField] protected float _timeToChargeJump = 0.5f;
+    [SerializeField] protected float _landingPointSmoothSpeed = 0.15f;
     [Space]
-    [SerializeField, ShowIf("_useExperimentalJump", true)] protected GameObject _jumpPredictionObject;
-    [SerializeField, ShowIf("_useExperimentalJump", true)] protected LineRenderer _jumpPredictionLine;
-    [SerializeField, ShowIf("_useExperimentalJump", true)] protected int _jumpPredictionLinePointCount;
-    [SerializeField, ShowIf("_useExperimentalJump", true)] protected float _jumpPredictiontDuration;
-    [SerializeField, ShowIf("_useExperimentalJump", true)] protected LayerMask _jumpPredictionLayerMask;
+    [SerializeField] protected int _jumpPredictionLinePointCount = 200;
+    [SerializeField] protected float _jumpPredictiontDuration = 5;
+    [SerializeField] protected LayerMask _jumpPredictionLayerMask;
 
     MeshRenderer _jumpPredictionObjectRenderer;
-    protected bool _prepareJump;
-    protected bool _atMaxJumpLenght;
+    protected bool _jumpInterupted;
+    protected bool _jumpCharged;
     protected float _jumpMaxLenghtTimer;
     protected float _currentJumpForceForward;
     protected float _currentJumpForceUp;
     protected Vector3 _predictionLandingPoint;
+    protected Vector3 _velocityRef = Vector3.zero;
 
     // INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS
 
+    [Header("--- INPUTS ---")]
+    [SerializeField] bool _showInputDebug = false;
+
     // ===== MOVE INPUT =====
-    public bool MoveInput;
+    [ShowIf("_showInputDebug", true)] public bool MoveInput;
 
     // ===== ROTA INPUT =====
-    public Vector2 RotaInput = Vector2.zero;
+    [ShowIf("_showInputDebug", true)] public Vector2 RotaInput = Vector2.zero;
 
     // ===== JUMP INPUT =====
-    public bool JumpInput = false;
-    public bool JumpReleaseInput = false;
-    public bool LongJumpInput = false;
+    [ShowIf("_showInputDebug", true)] public bool JumpPressInput = false;
+    [ShowIf("_showInputDebug", true)] public bool JumpReleaseInput = false;
 
     // ===== TONGUE INPUT =====
-    bool _startTongueAimInput = false;
-    bool _endTongueAimInput = false;
-    //float _horizontalInput = 0;
-    //float _verticalInput = 0;
+    [ShowIf("_showInputDebug", true)] bool _startTongueAimInput = false;
+    [ShowIf("_showInputDebug", true)] bool _endTongueAimInput = false;
+
     public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
 
     // ===== MOUNT INPUT =====
-    public bool MountInput;
+    [ShowIf("_showInputDebug", true)] public bool MountInput;
 
     protected StateMachinePlayer _smPlayer;
     [HideInInspector] public bool isOnFrog = false;
@@ -105,11 +110,13 @@ public class PlayerEntity : LivingEntity
     {
         base.Start();
 
-        _jumpPredictionObjectRenderer = _jumpPredictionObject.GetComponent<MeshRenderer>();
+        _jumpPredictionObjectRenderer = _jumpLandingPoint.GetComponent<MeshRenderer>();
+
+        // Set jump prediction color
+        SetJumpPredictionColor(playerColor);
 
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
-
     }
 
     protected override void Update()
@@ -124,23 +131,41 @@ public class PlayerEntity : LivingEntity
             UseTongue();
         }
 
-        if (_useExperimentalJump)
+        // Predicted jump
+        if(IsGrounded && JumpPressInput)
         {
-            if(IsGrounded && JumpInput)
-            {
-                _jumpPredictionObjectRenderer.enabled = true;
+            // Display or not the landing point and line
+            if (_showTrajectoryLine)
                 _jumpPredictionLine.enabled = true;
-                PrepareJump();              
+            if(_showLandingPoint)
+                _jumpPredictionObjectRenderer.enabled = true;
+
+            // Detect if jump is interupted or not
+            if(RotaInput.magnitude < _jumpInteructedIfSitckLessThan)
+                _jumpInterupted = true;
+            else
+                _jumpInterupted = false;
+
+            // Charge jump to max if it's not
+            if(!_jumpCharged)
+                ChargeJump();
+
+            SetJumpForce(_jumpCharged);
+
+            // Show prediction if jump isn't interrupted
+            if(!_jumpInterupted && _jumpCharged)
                 ShowJumpPrediction();
-            }
             else
             {
-                _currentJumpForceForward = _jumpForceFwd;
-                _currentJumpForceUp = _jumpForceUp;
-
-                _jumpPredictionObjectRenderer.enabled = false;
                 _jumpPredictionLine.enabled = false;
+                _jumpPredictionObjectRenderer.enabled = false;
             }
+        }
+        else
+        {
+            _jumpPredictionLine.enabled = false;
+            _jumpPredictionObjectRenderer.enabled = false;
+            ResetJump();
         }
     }
     
@@ -161,44 +186,23 @@ public class PlayerEntity : LivingEntity
 
     public override void Jump()
     {
-        _rigidbodyController.StopVelocity();
-
-        if (_useExperimentalJump)
+        if(JumpReleaseInput)
         {
-            if(JumpReleaseInput)
+            // Interrupt jump
+            if (_jumpInterupted && _jumpCharged)
             {
-                Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
-                _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
-
-                _currentJumpForceForward = _jumpForceFwd;
-                _currentJumpForceUp = _jumpForceUp;
-
-                _prepareJump = false;
-                _atMaxJumpLenght = false;
-                _jumpMaxLenghtTimer = 0;
-
-                LongJumpInput = false;
-                JumpInput = false;
-                JumpReleaseInput = false;
+                ResetJump();
+                return;
             }
+
+            _rigidbodyController.StopVelocity();
+
+            // Jump
+            Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
+            _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+
+            ResetJump();
         }
-        else
-        {
-            if (LongJumpInput)
-            {
-                Vector3 jumpVector = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
-                _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
-            }
-            else
-            {
-                Vector3 jumpVector = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
-                _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
-            }
-
-            LongJumpInput = false;
-            JumpInput = false;
-            JumpReleaseInput = false;
-        }   
     }
 
     public void Rotate()
@@ -206,36 +210,86 @@ public class PlayerEntity : LivingEntity
         Rotate(RotaInput.x, RotaInput.y);
     }
 
-    void PrepareJump()
+    void ChargeJump()
     {
-        if (!_atMaxJumpLenght)
+        if(_jumpMaxLenghtTimer < _timeToChargeJump)
         {
-            if(_jumpMaxLenghtTimer < _timeToReachMaxJumpLenght)
-            {
-                float maxForwardForce = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, _jumpLenghtCurve.Evaluate(_jumpMaxLenghtTimer / _timeToReachMaxJumpLenght));
-                _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, maxForwardForce, RotaInput.magnitude);
-                float maxUpForce = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, _jumpLenghtCurve.Evaluate(_jumpMaxLenghtTimer / _timeToReachMaxJumpLenght));
-                _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, maxUpForce, RotaInput.magnitude);
+            SetJumpForceToMinOrMax(false); // Set jump force to min
 
-                _jumpMaxLenghtTimer += Time.deltaTime;
-            }
-            else
-            {
-                _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, RotaInput.magnitude);
-                _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, RotaInput.magnitude);
-            }
+            _jumpMaxLenghtTimer += Time.deltaTime;
         }
         else
+        {
+            SetJumpForceToMinOrMax(true); // Set jump force to max
+
+            _jumpCharged = true;
+            _jumpMaxLenghtTimer = 0; // Reset timer
+        } 
+    }
+
+    void SetJumpPredictionColor(Color color)
+    {
+        // Set landing point color
+        Material jumpLandingPointMat = _jumpPredictionObjectRenderer.material;
+        jumpLandingPointMat.color = playerColor;
+        _jumpPredictionObjectRenderer.sharedMaterial = jumpLandingPointMat;
+
+        // Set line color
+        Material jumpPredictionLineMat = _jumpPredictionLine.sharedMaterial;
+        jumpPredictionLineMat.color = color;
+        _jumpPredictionLine.sharedMaterial = jumpPredictionLineMat;    
+    }
+
+    void SetJumpForce(bool jumpCharged)
+    {
+        if (jumpCharged)
         {
             _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, RotaInput.magnitude);
             _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, RotaInput.magnitude);
         }
-        
+        else
+        {
+            SetJumpForceToMinOrMax(false);
+        }
+    }
+
+    void SetJumpForceToMinOrMax(bool toMax)
+    {
+        if (toMax)
+        {
+            _currentJumpForceForward = _longJumpForceFwd;
+            _currentJumpForceUp = _longJumpForceUp;
+        }
+        else
+        {
+            _currentJumpForceForward = _jumpForceFwd;
+            _currentJumpForceUp = _jumpForceUp;
+        }
+    }
+
+    void ResetJump()
+    {
+        SetJumpForceToMinOrMax(false); // Set jump force to min
+       
+        _jumpCharged = false;
+        _jumpMaxLenghtTimer = 0;
+
+        JumpPressInput = false;
+        JumpReleaseInput = false;
     }
 
     void ShowJumpPrediction()
     {
-        _jumpPredictionLine.enabled = true;
+        if (_showTrajectoryLine)
+            _jumpPredictionLine.enabled = true;
+        else
+            _jumpPredictionLine.enabled = false;
+
+        if (_showLandingPoint)
+            _jumpPredictionObjectRenderer.enabled = true;
+        else
+            _jumpPredictionObjectRenderer.enabled = false;
+
         _jumpPredictionLine.positionCount = _jumpPredictionLinePointCount;
         Vector3 startPosition = transform.position;
         Vector3 lastPoint = startPosition;
@@ -302,7 +356,8 @@ public class PlayerEntity : LivingEntity
             {
                 _jumpPredictionLine.SetPosition(i, hitInfo.point);
                 _jumpPredictionLine.positionCount = i + 1;
-                _jumpPredictionObject.transform.position = hitInfo.point;
+                _jumpLandingPoint.transform.position = Vector3.SmoothDamp(_jumpLandingPoint.transform.position, hitInfo.point, ref _velocityRef, _landingPointSmoothSpeed);
+                
                 return;
             }
 
@@ -405,9 +460,6 @@ public class PlayerEntity : LivingEntity
             }
         }
         MountInput = false;
-
-        //if()
-
         return false;
     }
 

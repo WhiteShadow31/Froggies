@@ -53,11 +53,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnJump(InputValue ctx)
+    void OnJumpPress(InputValue ctx)
     {
         if (_playerEntity != null && _playerEntity.IsGrounded)
         {
-            _playerEntity.JumpInput = true;
+            _playerEntity.JumpPressInput = true;
         }
     }
 
@@ -66,14 +66,6 @@ public class PlayerController : MonoBehaviour
         if (_playerEntity != null && _playerEntity.IsGrounded)
         {
             _playerEntity.JumpReleaseInput = true;
-        }
-    }
-
-    void OnLongJump(InputValue ctx)
-    {
-        if (_playerEntity != null)
-        {
-            _playerEntity.LongJumpInput = true;
         }
     }
 
@@ -140,6 +132,7 @@ public class PlayerController : MonoBehaviour
     {
         if(_playerEntity != null && _playerEntity.model != null)
         {
+            _playerEntity.playerColor = col;
             SetPlayerColorRecursive(col, _playerEntity.model);
         }
     }

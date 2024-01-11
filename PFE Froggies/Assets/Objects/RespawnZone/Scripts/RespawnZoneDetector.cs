@@ -22,10 +22,11 @@ public class RespawnZoneDetector : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.matrix = transform.localToWorldMatrix;
         Color col = Color.yellow;
         col.a = 0.3f;
         Gizmos.color = col;
 
-        Gizmos.DrawCube(this.transform.position, GetComponent<BoxCollider>().size);
+        Gizmos.DrawCube(Vector3.zero, GetComponent<BoxCollider>().size);
     }
 }
