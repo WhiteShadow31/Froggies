@@ -70,7 +70,10 @@ public class PlayerEntity : LivingEntity
     [SerializeField] protected LayerMask _jumpPredictionLayerMask;
 
     MeshRenderer _jumpPredictionObjectRenderer;
-    protected bool _jumpCharged;
+    public bool IsJumping { get { return _isJumping; } }
+    protected bool _isJumping = false;
+    protected bool _jumpCharged = false;
+    protected bool _wasGroundedLastFrame = false;
     protected float _interruptLandingPointTimer;
     protected float _jumpMaxLenghtTimer;
     protected float _currentJumpForceForward;
@@ -78,9 +81,6 @@ public class PlayerEntity : LivingEntity
     protected Vector3 _predictionLandingPoint;
     protected Vector3 _landingPointLastPosition;
     protected Vector3 _velocityRef = Vector3.zero;
-    protected bool _wasGroundedLastFrame = false;
-    public bool IsJumping { get { return _isJumping; } }
-    protected bool _isJumping;
 
     [Header("--- INPUTS ---")]
     [SerializeField] bool _showInputDebug = false;
@@ -95,7 +95,8 @@ public class PlayerEntity : LivingEntity
     [ShowIf("_showInputDebug", true)] public bool MountInput;
 
     protected StateMachinePlayer _smPlayer;
-    protected bool isOnFrog = false;
+    protected bool _isOnFrog = false;
+    protected bool _hasPushedOther = false;
 
     // =====================================================================================
     //                                   UNITY METHODS 
@@ -103,6 +104,9 @@ public class PlayerEntity : LivingEntity
     protected override void Start()
     {
         base.Start();
+
+        JumpPressInput = false;
+        JumpReleaseInput = false;
 
         _jumpPredictionObjectRenderer = _landingPointObject.GetComponent<MeshRenderer>();
 
@@ -133,7 +137,6 @@ public class PlayerEntity : LivingEntity
         base.FixedUpdate();
 
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
-
 
         if (MoveInput && RotaInput != Vector2.zero)
            Move();     
@@ -169,7 +172,11 @@ public class PlayerEntity : LivingEntity
         _wasGroundedLastFrame = true;
     }
 
-    void ManageJump()
+    // =====================================================================================
+    //                                   JUMP METHODS 
+    // =====================================================================================
+
+    public void ManageJump()
     {
         // Check if player is in jump
         if (_isJumping && !_wasGroundedLastFrame && IsGrounded)
@@ -259,9 +266,7 @@ public class PlayerEntity : LivingEntity
             _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, RotaInput.magnitude);
         }
         else
-        {
             SetJumpForceToMinOrMax(false);
-        }
     }
 
     void SetJumpForceToMinOrMax(bool toMax)
@@ -341,13 +346,9 @@ public class PlayerEntity : LivingEntity
 
             // Calculate current point if the trajectory is falling or not
             if (!falling)
-            {
                 currentPoint = startPosition + startVelocity * timeOffset - (Vector3.up * -0.5f * -_rigidbodyController.NormalGravity * timeOffset * timeOffset);
-            }
             else
-            {
                 currentPoint = startPosition + startVelocity * timeOffset - (Vector3.up * -0.5f * -_rigidbodyController.FallingGravity * timeOffset * timeOffset);
-            }
 
             // If trajectory is falling, get point of falling trajectory
             if (lastPoint.y > currentPoint.y)
@@ -362,7 +363,7 @@ public class PlayerEntity : LivingEntity
                 else
                     return;
             }
-
+            
             _jumpPredictionLine.SetPosition(i, currentPoint); // Set new point in line renderer
 
             // If the trajectory hit something
@@ -393,19 +394,27 @@ public class PlayerEntity : LivingEntity
     {
         if (Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
+            if(hit.transform.TryGetComponent<PlayerEntity>(out  PlayerEntity otherPlayer) && !_hasPushedOther)
+            {
+                otherPlayer.PushPlayer(transform.forward, _tongueHitForce);
+                _hasPushedOther = true;
+            }
             return hit.point;
         }
-        else
-        {
+        else         
             return _tongueStartTransform.position + (transform.forward * _tongueMaxLenght);
-        }
     }
-    IEnumerator UseTongue(Vector3 pos)
-    {
+
+    IEnumerator UseTongueCoroutine()
+    {      
         _tongueLineRenderer.enabled = true;
+        Vector3 hitPosition;
+
         while (_tongueOutDelay < _tongueOutTime)
         {
-            _tongueEndTransform.position = Vector3.Lerp(_tongueStartTransform.position, pos, _tongueOutCurve.Evaluate(_tongueOutDelay / _tongueOutTime));
+            hitPosition = TongueAimPosition();
+
+            _tongueEndTransform.position = Vector3.Lerp(_tongueStartTransform.position, hitPosition, _tongueOutCurve.Evaluate(_tongueOutDelay / _tongueOutTime));
 
             TongueLine();
 
@@ -413,11 +422,11 @@ public class PlayerEntity : LivingEntity
             yield return null;
         }
 
-        TongueHitObject(pos);
-
         while (_tongueInDelay < _tongueInTime)
         {
-            _tongueEndTransform.position = Vector3.Lerp(pos, _tongueStartTransform.position, _tongueOutCurve.Evaluate(_tongueInDelay / _tongueInTime));
+            hitPosition = TongueAimPosition();
+
+            _tongueEndTransform.position = Vector3.Lerp(hitPosition, _tongueStartTransform.position, _tongueOutCurve.Evaluate(_tongueInDelay / _tongueInTime));
 
             TongueLine();
 
@@ -427,6 +436,7 @@ public class PlayerEntity : LivingEntity
         _tongueLineRenderer.enabled = false;
         _tongueOutDelay = 0;
         _tongueInDelay = 0;
+        _hasPushedOther = false;
     }
     protected void TongueLine()
     {
@@ -440,9 +450,7 @@ public class PlayerEntity : LivingEntity
     }
     public void UseTongue()
     {
-        Vector3 pos = TongueAimPosition();
-        Debug.Log("Try tongue - pos : " + pos);
-        StartCoroutine(UseTongue(pos));
+        StartCoroutine(UseTongueCoroutine());
     }
 
     // =====================================================================================
@@ -450,7 +458,7 @@ public class PlayerEntity : LivingEntity
     // =====================================================================================
     public virtual bool TryMount()
     {
-        if (!isOnFrog) // Is it not on a frog ?
+        if (!_isOnFrog) // Is it not on a frog ?
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _mountRadius, _playerLayer); // Look for frogs
 
@@ -459,8 +467,7 @@ public class PlayerEntity : LivingEntity
                 // Get a player
                 if (col.TryGetComponent<PlayerEntity>(out PlayerEntity otherPlayerEntity) && otherPlayerEntity != this) // Is it a frog 
                 {
-
-                    if (!otherPlayerEntity.isOnFrog)
+                    if (!otherPlayerEntity._isOnFrog)
                     {
                         _otherPlayerMountTransform = otherPlayerEntity.onFrogTransform;
                         Debug.Log(this.name + "mount on "+_otherPlayerMountTransform.parent.name);
@@ -468,7 +475,7 @@ public class PlayerEntity : LivingEntity
                         // Set ignore collision between players to true
                         Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), true);
 
-                        isOnFrog = true;
+                        _isOnFrog = true;
                         MountInput = false;
                         return true;
                     }
@@ -481,14 +488,14 @@ public class PlayerEntity : LivingEntity
 
     public virtual void StopMount()
     {
-        if (isOnFrog)
+        if (_isOnFrog)
         {
             // Set ignore collision between players to false
             Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), false);
 
             _otherPlayerMountTransform = null;
 
-            isOnFrog = false;
+            _isOnFrog = false;
 
             MountInput = false;
         }
