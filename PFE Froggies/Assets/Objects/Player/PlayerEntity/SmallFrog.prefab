@@ -1060,8 +1060,8 @@ GameObject:
   - component: {fileID: 4811288948140708742}
   - component: {fileID: 8876496789576747956}
   - component: {fileID: 5752381936096708436}
-  - component: {fileID: 4064099953945684390}
   - component: {fileID: 508620674244156951}
+  - component: {fileID: 4064099953945684390}
   - component: {fileID: 7756430894366324494}
   m_Layer: 6
   m_Name: SmallFrog
@@ -1127,77 +1127,75 @@ MonoBehaviour:
   m_GameObject: {fileID: 7341117699019405325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4529b70cb1736ff46bee911847651dc2, type: 3}
+  m_Script: {fileID: 11500000, guid: d84a7923fcc524347b13a4abb5715546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbodyController: {fileID: 0}
+  controller: {fileID: 0}
+  _camera: {fileID: 0}
+  _turnSmoothTime: 0.1
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: {x: 1.6, y: 0.23, z: 1.69}
   _groundMask:
     serializedVersion: 2
-    m_Bits: 8
-  _moveForce: 1
-  _moveMode: 1
-  _jumpForceUp: 9
-  _jumpForceFwd: 25
-  _longJumpForceUp: 27
-  _longJumpForceFwd: 24
-  _camera: {fileID: 0}
-  _turnSmoothTime: 0.1
-  controller: {fileID: 0}
+    m_Bits: 200
   model: {fileID: 4404454837975397373}
   playerColor: {r: 0, g: 0, b: 0, a: 0}
+  _moveForce: 1
+  _moveMode: 1
+  _jumpForceUp: 20
+  _jumpForceFwd: 30
+  _longJumpForceUp: 40
+  _longJumpForceFwd: 35
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
-  _tongueMaxLenght: 5
+  _tongueMaxLenght: 4
   _tongueLayerMask:
     serializedVersion: 2
-    m_Bits: 72
-  _tongueGrabType: 0
-  _tongueOutTime: 1
+    m_Bits: 201
+  _tongueOutTime: 0.15
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _tongueInTime: 1
+  _tongueInTime: 0.15
   _tongueInCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -1205,36 +1203,80 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _tongueLineRenderer: {fileID: 4064099953945684390}
-  _tongueDirectionObject: {fileID: 0}
   _tongueHitRadius: 0.3
   _tongueHitForce: 10
   _tongueHitLayerMask:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 192
   onFrogTransform: {fileID: 7513869125547718495}
   _mountRadius: 3
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
   _jumpPredictionLine: {fileID: 3735360176625625681}
-  _showTrajectoryLine: 1
-  _jumpLandingPoint: {fileID: 8099151475436712201}
+  _showTrajectoryLine: 0
+  _landingPointObject: {fileID: 8099151475436712201}
   _showLandingPoint: 1
   _jumpInteructedIfSitckLessThan: 0.05
   _timeToChargeJump: 0.5
-  _landingPointSmoothSpeed: 0.15
+  _landingPointSmoothSpeed: 0.25
+  _interruptLandingPointTime: 0.2
+  _interruptLandingPointMovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _jumpPredictionLinePointCount: 200
   _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 216
+  _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
   _showInputDebug: 0
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
   JumpPressInput: 0
   JumpReleaseInput: 0
   MountInput: 0
-  isOnFrog: 0
+--- !u!114 &508620674244156951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341117699019405325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb460e58d74c394eb082363328b9376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useGravity: 1
+  _baseGravity: 15
+  _jumpNormalGravity: 200
+  _jumpFallingGravity: 240
+  _useClampPreciseMove: 0
+  _clampPreciseMove: 3
+  _useVelocityClampY: 0
+  _clampVelocityY: 30
 --- !u!120 &4064099953945684390
 LineRenderer:
   serializedVersion: 2
@@ -1244,7 +1286,7 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7341117699019405325}
   m_Enabled: 0
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -1256,7 +1298,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a13557e11af85cd48a6163c8b4339ef7, type: 2}
+  - {fileID: 2100000, guid: dc69dd1211d08894ba2f0e218b80e696, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1300,8 +1342,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0.48584908, b: 0.67570317, a: 1}
+      key1: {r: 1, g: 0.4862745, b: 0.6745098, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1325,7 +1367,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -1339,25 +1381,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &508620674244156951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7341117699019405325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb460e58d74c394eb082363328b9376, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _useGravity: 1
-  _normalGravity: 70
-  _fallingGravity: 150
-  _useClampPreciseMove: 0
-  _clampPreciseMove: 3
-  _useVelocityClampY: 0
-  _clampVelocityY: 30
 --- !u!136 &7756430894366324494
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1589,7 +1612,7 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8099151475436712201}
   m_Enabled: 0
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

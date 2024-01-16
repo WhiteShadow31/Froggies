@@ -38,22 +38,13 @@
                     "id": "0061cec2-31c7-4fad-8813-07953654b842",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
                     "name": "JumpRelease",
                     "type": "Button",
-                    "id": "f8107ab5-08c2-48de-9540-f89a9893d117",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "JumpRelease",
-                    "type": "Button",
-                    "id": "f8107ab5-08c2-48de-9540-f89a9893d117",
+                    "id": "fb95c89c-be7b-4857-ac86-a497c27dd037",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=1)",
@@ -84,15 +75,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=1)",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SpawnRdmPlayer",
-                    "type": "Button",
-                    "id": "eeddfac8-e221-4c29-8404-8d8d6902ed1b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -306,17 +288,6 @@
                 },
                 {
                     "name": "",
-                    "id": "40eef66a-a32c-4ea2-a923-c917e58e596a",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SpawnRdmPlayer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "068c8b3b-2ad3-4a89-8b3d-cf024f1c8251",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -328,7 +299,7 @@
                 },
                 {
                     "name": "",
-                    "id": "6f423870-aaea-4c66-815b-fe7af867e0e7",
+                    "id": "fcc69e60-6735-4618-be95-50a590f86a01",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -339,7 +310,7 @@
                 },
                 {
                     "name": "",
-                    "id": "144d7083-9af7-4f0f-b89d-1590e17b59b1",
+                    "id": "b0e9f82f-33d2-4e69-abab-92e4fb8fce68",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
