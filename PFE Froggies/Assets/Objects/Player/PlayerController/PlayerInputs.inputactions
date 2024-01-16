@@ -78,15 +78,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpawnRdmPlayer",
-                    "type": "Button",
-                    "id": "eeddfac8-e221-4c29-8404-8d8d6902ed1b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ReloadScene_TGS",
                     "type": "Button",
                     "id": "a56b92b8-9277-447c-97d1-e2609715a01e",
@@ -292,17 +283,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "EndPreciseMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "40eef66a-a32c-4ea2-a923-c917e58e596a",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SpawnRdmPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

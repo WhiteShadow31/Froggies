@@ -16,7 +16,7 @@ public class RespawnZoneDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.TryGetComponent<SmallFrogEntity>(out SmallFrogEntity frog))
+        if (other.transform.TryGetComponent<PlayerEntity>(out PlayerEntity frog))
             m_respawnZone.AddFrogToSuccess(frog);
     }
 

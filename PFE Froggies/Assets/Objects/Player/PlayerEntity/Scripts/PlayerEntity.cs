@@ -4,15 +4,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UltimateAttributesPack;
+using Unity.VisualScripting;
 
-
-public class PlayerEntity : LivingEntity
+public class PlayerEntity : MonoBehaviour
 {
     [HideInInspector] public PlayerController controller;
+    SimpleRigidbody _rigidbodyController;
+    StateMachinePlayer _smPlayer;
+
+    [Header("--- ROTATION ---")]
+    [SerializeField] Camera _camera;
+    [SerializeField] float _turnSmoothTime = 0.1f;
+    float _turnSmoothVelocity;
+
+    [Header("--- GROUND CHECK ---")]
+    [SerializeField] Transform _groundCheck;
+    [SerializeField] Vector3 _groundRadius;
+    [SerializeField] LayerMask _groundMask;
+    public bool IsGrounded { get { return LookGrounded(); } }
 
     [Header("--- MODEL ---")]
     public Transform model;
     [HideInInspector] public Color playerColor;
+
+    [Header("--- MOVEMENT ---")]
+    [SerializeField] float _moveForce = 1;
+    [SerializeField] ForceMode _moveMode = ForceMode.Impulse;
+
+    [Header("--- JUMP ---")]
+    [SerializeField] float _jumpForceUp = 1;
+    [SerializeField] float _jumpForceFwd = 1;
+    [Space]
+    [SerializeField] float _longJumpForceUp = 1;
+    [SerializeField] float _longJumpForceFwd = 2;
+    protected ForceMode _jumpMode = ForceMode.Impulse;
 
     [Header("--- TONGUE ---")]
     [SerializeField] protected Transform _tongueStartTransform;
@@ -20,28 +45,18 @@ public class PlayerEntity : LivingEntity
     [SerializeField] protected float _tongueMaxLenght = 5f;
     [Tooltip("Raycast and detect layer mask")]
     [SerializeField] protected LayerMask _tongueLayerMask;
-    [SerializeField] protected TongueGrabType _tongueGrabType;
-    protected enum TongueGrabType
-    {
-        Tirer,
-        Attirer
-    }
-
     [Space]
     [SerializeField] protected float _tongueOutTime = 0.15f;
     [SerializeField] protected AnimationCurve _tongueOutCurve;
     [SerializeField] protected float _tongueInTime = 0.15f;
     [SerializeField] protected AnimationCurve _tongueInCurve;
-    float _tongueOutDelay = 0, _tongueInDelay = 0;
-
     [Space]
     [SerializeField] protected LineRenderer _tongueLineRenderer;
-    [SerializeField] protected GameObject _tongueDirectionObject;
-    [Space]
     [SerializeField] protected float _tongueHitRadius = 0.3f;
     [SerializeField] protected float _tongueHitForce = 10f;
     [Tooltip("Cast sphere around the hit point and detect layer mask")]
     [SerializeField] protected LayerMask _tongueHitLayerMask;
+    float _tongueOutDelay = 0, _tongueInDelay = 0;
 
     //bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
 
@@ -82,6 +97,9 @@ public class PlayerEntity : LivingEntity
     protected Vector3 _landingPointLastPosition;
     protected Vector3 _velocityRef = Vector3.zero;
 
+    [Header("--- DEBUG ---")]
+    [SerializeField] Color _groundCheckDebugColor = Color.red;
+
     [Header("--- INPUTS ---")]
     [SerializeField] bool _showInputDebug = false;
     [ShowIf("_showInputDebug", true)] public bool MoveInput;
@@ -94,16 +112,25 @@ public class PlayerEntity : LivingEntity
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
     [ShowIf("_showInputDebug", true)] public bool MountInput;
 
-    protected StateMachinePlayer _smPlayer;
+    protected bool _initialized = false;    
     protected bool _isOnFrog = false;
-    protected bool _hasPushedOther = false;
+    protected bool _hasPushedOtherPlayer = false;
+    protected bool _hasPushedInterractable = false;
 
     // =====================================================================================
     //                                   UNITY METHODS 
     // =====================================================================================
-    protected override void Start()
+
+    protected virtual void Awake()
     {
-        base.Start();
+        InitComponents();
+    }
+
+    protected void Start()
+    {
+        InitComponents();
+        if (_camera == null)
+            _camera = Camera.main;
 
         JumpPressInput = false;
         JumpReleaseInput = false;
@@ -117,10 +144,8 @@ public class PlayerEntity : LivingEntity
         _smPlayer.Start();
     }
 
-    protected override void Update()
+    protected void Update()
     {
-        base.Update();
-
         _smPlayer.Update(Time.deltaTime);
 
         if (EndTongueAimInput)
@@ -132,10 +157,8 @@ public class PlayerEntity : LivingEntity
         ManageJump();
     }
     
-    protected override void FixedUpdate()
+    protected void FixedUpdate()
     {
-        base.FixedUpdate();
-
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
         if (MoveInput && RotaInput != Vector2.zero)
@@ -143,15 +166,72 @@ public class PlayerEntity : LivingEntity
     }
 
     // =====================================================================================
+    //                                   INITIALISATION METHODS 
+    // =====================================================================================
+
+    protected void InitComponents()
+    {
+        if (!_initialized) // If it hasnt been initialized
+        {
+            InitSimpleRigidbody(); // Get the rigidbody 
+            InitGroundController(); // Create a grounded controller
+            _initialized = true;
+        }
+    }
+    protected void InitSimpleRigidbody()
+    {
+        // Get the rigidbody or create it if there is none
+        _rigidbodyController = this.transform.TryGetComponent<SimpleRigidbody>(out SimpleRigidbody rb) ? rb : this.transform.AddComponent<SimpleRigidbody>();
+    }
+    protected void InitGroundController()
+    {
+        if (_groundCheck == null)
+        {
+            GameObject go = new GameObject("GroundCheck");
+            go.transform.parent = this.transform;
+            go.transform.position = Vector3.zero;
+            _groundCheck = go.transform;
+        }
+        //_groundController = new GroundedController(_groundCheck, _groundRadius, _groundMask);
+    }
+
+    // =====================================================================================
     //                                   MOVEMENT METHODS 
     // =====================================================================================
 
-    public void Rotate()
+    bool LookGrounded()
     {
-        Rotate(RotaInput.x, RotaInput.y);
+        Collider[] cols = Physics.OverlapBox(_groundCheck.position, _groundRadius, Quaternion.identity, _groundMask); //Physics.OverlapSphere(_groundCheck.position, _groundRadius, _groundMask);
+        bool grounded = false;
+
+        foreach (Collider col in cols)
+        {
+            if ((col.transform != this.transform))
+            {
+                grounded = true;
+            }
+        }
+        return grounded;
     }
 
-    public override void Jump()
+    public void Move()
+    {
+        _rigidbodyController.AddPreciseForce(this.transform.forward, _moveForce, _moveMode);
+    }
+
+    public void Rotate()
+    {
+        Vector3 dir = new Vector3(RotaInput.x, 0, RotaInput.y).normalized;
+
+        if (dir.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
+            this.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+    }
+
+    public void Jump()
     {
         // Interrupt jump
         if (RotaInput.magnitude < _jumpInteructedIfSitckLessThan && _jumpCharged)
@@ -394,10 +474,15 @@ public class PlayerEntity : LivingEntity
     {
         if (Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
-            if(hit.transform.TryGetComponent<PlayerEntity>(out  PlayerEntity otherPlayer) && !_hasPushedOther)
+            if(hit.transform.TryGetComponent<PlayerEntity>(out  PlayerEntity otherPlayer) && !_hasPushedOtherPlayer)
             {
                 otherPlayer.PushPlayer(transform.forward, _tongueHitForce);
-                _hasPushedOther = true;
+                _hasPushedOtherPlayer = true;
+            }
+            if(hit.transform.TryGetComponent<InteractableEntity>(out  InteractableEntity otherInteractable) && !_hasPushedInterractable)
+            {
+                otherInteractable.Push(transform.forward, _tongueHitForce);
+                _hasPushedInterractable = true;
             }
             return hit.point;
         }
@@ -429,14 +514,15 @@ public class PlayerEntity : LivingEntity
             _tongueEndTransform.position = Vector3.Lerp(hitPosition, _tongueStartTransform.position, _tongueOutCurve.Evaluate(_tongueInDelay / _tongueInTime));
 
             TongueLine();
-
+            
             _tongueInDelay += Time.fixedDeltaTime;
             yield return null;
         }
         _tongueLineRenderer.enabled = false;
         _tongueOutDelay = 0;
         _tongueInDelay = 0;
-        _hasPushedOther = false;
+        _hasPushedOtherPlayer = false;
+        _hasPushedInterractable = false;
     }
     protected void TongueLine()
     {
@@ -506,9 +592,22 @@ public class PlayerEntity : LivingEntity
         _rigidbodyController.AddForce(dir, force, ForceMode.Impulse);
     }
 
-    protected override void OnDrawGizmos()
+    // =====================================================================================
+    //                                   RESPAWN METHODS 
+    // =====================================================================================
+    public void Respawn(Vector3 pos)
     {
-        base.OnDrawGizmos();
+        this.transform.position = pos;
+        _rigidbodyController.StopVelocity();
+    }
+
+    // =====================================================================================
+    //                                   GIZMOS METHODS 
+    // =====================================================================================
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = _groundCheckDebugColor;
+        Gizmos.DrawCube(_groundCheck.position, _groundRadius);
 
         Gizmos.color = Color.red;
         Gizmos.DrawLine(_tongueStartTransform.position, (this.transform.forward * _tongueMaxLenght) + _tongueStartTransform.position);
