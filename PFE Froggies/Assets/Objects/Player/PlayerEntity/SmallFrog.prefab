@@ -1133,6 +1133,10 @@ MonoBehaviour:
   controller: {fileID: 0}
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
+  _refreshRotationRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _refreshRotationRaycastLenght: 2
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: {x: 1.6, y: 0.23, z: 1.69}
   _groundMask:
@@ -1152,6 +1156,7 @@ MonoBehaviour:
   _tongueLayerMask:
     serializedVersion: 2
     m_Bits: 201
+  _tongueInTime: 0.15
   _tongueOutTime: 0.15
   _tongueOutCurve:
     serializedVersion: 2
@@ -1177,7 +1182,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _tongueInTime: 0.15
   _tongueInCurve:
     serializedVersion: 2
     m_Curve:
@@ -1251,6 +1255,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 216
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
+  _tongueDebugColor: {r: 0, g: 0, b: 1, a: 1}
+  _mountRadiusDebugColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _refreshRotationLineDebugColor: {r: 0, g: 1, b: 0, a: 1}
   _showInputDebug: 0
   MoveInput: 0
   RotaInput: {x: 0, y: 0}

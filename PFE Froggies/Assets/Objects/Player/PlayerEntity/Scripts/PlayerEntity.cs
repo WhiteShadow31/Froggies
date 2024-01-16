@@ -15,6 +15,10 @@ public class PlayerEntity : MonoBehaviour
     [Header("--- ROTATION ---")]
     [SerializeField] Camera _camera;
     [SerializeField] float _turnSmoothTime = 0.1f;
+    [Space]
+    [SerializeField] LayerMask _refreshRotationRaycastLayer;
+    [SerializeField] float _refreshRotationRaycastLenght = 2;
+    [SerializeField] float _refreshRotationSmoothTime = 0.2f;
     float _turnSmoothVelocity;
 
     [Header("--- GROUND CHECK ---")]
@@ -46,9 +50,9 @@ public class PlayerEntity : MonoBehaviour
     [Tooltip("Raycast and detect layer mask")]
     [SerializeField] protected LayerMask _tongueLayerMask;
     [Space]
+    [SerializeField] protected float _tongueInTime = 0.15f;
     [SerializeField] protected float _tongueOutTime = 0.15f;
     [SerializeField] protected AnimationCurve _tongueOutCurve;
-    [SerializeField] protected float _tongueInTime = 0.15f;
     [SerializeField] protected AnimationCurve _tongueInCurve;
     [Space]
     [SerializeField] protected LineRenderer _tongueLineRenderer;
@@ -99,6 +103,9 @@ public class PlayerEntity : MonoBehaviour
 
     [Header("--- DEBUG ---")]
     [SerializeField] Color _groundCheckDebugColor = Color.red;
+    [SerializeField] Color _tongueDebugColor = Color.blue;
+    [SerializeField] Color _mountRadiusDebugColor = Color.yellow;
+    [SerializeField] Color _refreshRotationLineDebugColor = Color.green;
 
     [Header("--- INPUTS ---")]
     [SerializeField] bool _showInputDebug = false;
@@ -121,7 +128,7 @@ public class PlayerEntity : MonoBehaviour
     //                                   UNITY METHODS 
     // =====================================================================================
 
-    protected virtual void Awake()
+    protected void Awake()
     {
         InitComponents();
     }
@@ -153,7 +160,6 @@ public class PlayerEntity : MonoBehaviour
             EndTongueAimInput = false;
             UseTongue();
         }
-
         ManageJump();
     }
     
@@ -169,7 +175,7 @@ public class PlayerEntity : MonoBehaviour
     //                                   INITIALISATION METHODS 
     // =====================================================================================
 
-    protected void InitComponents()
+    void InitComponents()
     {
         if (!_initialized) // If it hasnt been initialized
         {
@@ -178,12 +184,12 @@ public class PlayerEntity : MonoBehaviour
             _initialized = true;
         }
     }
-    protected void InitSimpleRigidbody()
+    void InitSimpleRigidbody()
     {
         // Get the rigidbody or create it if there is none
         _rigidbodyController = this.transform.TryGetComponent<SimpleRigidbody>(out SimpleRigidbody rb) ? rb : this.transform.AddComponent<SimpleRigidbody>();
     }
-    protected void InitGroundController()
+    void InitGroundController()
     {
         if (_groundCheck == null)
         {
@@ -192,7 +198,6 @@ public class PlayerEntity : MonoBehaviour
             go.transform.position = Vector3.zero;
             _groundCheck = go.transform;
         }
-        //_groundController = new GroundedController(_groundCheck, _groundRadius, _groundMask);
     }
 
     // =====================================================================================
@@ -222,13 +227,26 @@ public class PlayerEntity : MonoBehaviour
     public void Rotate()
     {
         Vector3 dir = new Vector3(RotaInput.x, 0, RotaInput.y).normalized;
+        Vector3 newRotationVector = transform.eulerAngles;
 
+        // Get rotation Y (stick)
         if (dir.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
-            this.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            newRotationVector.y = angle;
         }
+
+        // Get rotation X and Z (slopes...)
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo, _refreshRotationRaycastLenght, _refreshRotationRaycastLayer))
+        {
+            Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hitInfo.normal) * transform.rotation;
+            transform.rotation = targetRotation;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, newRotationVector.y, transform.eulerAngles.z);
+            return;                
+        }
+
+        transform.eulerAngles = newRotationVector;
     }
 
     public void Jump()
@@ -470,7 +488,7 @@ public class PlayerEntity : MonoBehaviour
     /// Draw a raycast to try to hit an object, if not then return a position in front
     /// </summary>
     /// <returns> Vector3 position </returns>
-    public virtual Vector3 TongueAimPosition()
+    public Vector3 TongueAimPosition()
     {
         if (Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
@@ -524,16 +542,13 @@ public class PlayerEntity : MonoBehaviour
         _hasPushedOtherPlayer = false;
         _hasPushedInterractable = false;
     }
-    protected void TongueLine()
+    void TongueLine()
     {
         // Set tongueLineRenderer point position
         _tongueLineRenderer.SetPosition(0, _tongueStartTransform.position);
         _tongueLineRenderer.SetPosition(1, _tongueEndTransform.position);
     }
-    protected virtual void TongueHitObject(Vector3 target)
-    {
 
-    }
     public void UseTongue()
     {
         StartCoroutine(UseTongueCoroutine());
@@ -542,7 +557,7 @@ public class PlayerEntity : MonoBehaviour
     // =====================================================================================
     //                                   MOUNT METHODS 
     // =====================================================================================
-    public virtual bool TryMount()
+    public bool TryMount()
     {
         if (!_isOnFrog) // Is it not on a frog ?
         {
@@ -572,7 +587,7 @@ public class PlayerEntity : MonoBehaviour
         return false;
     }
 
-    public virtual void StopMount()
+    public void StopMount()
     {
         if (_isOnFrog)
         {
@@ -587,7 +602,7 @@ public class PlayerEntity : MonoBehaviour
         }
     }
 
-    public virtual void PushPlayer(Vector3 dir, float force)
+    public void PushPlayer(Vector3 dir, float force)
     {
         _rigidbodyController.AddForce(dir, force, ForceMode.Impulse);
     }
@@ -604,16 +619,24 @@ public class PlayerEntity : MonoBehaviour
     // =====================================================================================
     //                                   GIZMOS METHODS 
     // =====================================================================================
-    protected void OnDrawGizmos()
+
+    void OnDrawGizmos()
     {
+        // Draw ground check debug
         Gizmos.color = _groundCheckDebugColor;
         Gizmos.DrawCube(_groundCheck.position, _groundRadius);
 
-        Gizmos.color = Color.red;
+        // Draw tongue debug line
+        Gizmos.color = _tongueDebugColor;
         Gizmos.DrawLine(_tongueStartTransform.position, (this.transform.forward * _tongueMaxLenght) + _tongueStartTransform.position);
 
-        Gizmos.color = Color.gray;
+        // Draw mount radius debug
+        Gizmos.color = _mountRadiusDebugColor;
         Gizmos.DrawWireSphere(transform.position, _mountRadius);
+
+        // Draw refresh rotation debug line
+        Gizmos.color = _refreshRotationLineDebugColor;
+        Gizmos.DrawLine(transform.position, transform.position + (-transform.up * _refreshRotationRaycastLenght));
     }
 }
 
