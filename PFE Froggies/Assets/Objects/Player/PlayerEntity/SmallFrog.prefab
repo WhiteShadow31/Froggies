@@ -1133,10 +1133,11 @@ MonoBehaviour:
   controller: {fileID: 0}
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
-  _refreshRotationRaycastLayer:
+  _setGroundRotationRaycastLayer:
     serializedVersion: 2
     m_Bits: 8
-  _refreshRotationRaycastLenght: 2
+  _setGroundRotationRaycastLenght: 1
+  _rotationSmoothTime: 0.05
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: {x: 1.6, y: 0.23, z: 1.69}
   _groundMask:
@@ -1223,7 +1224,7 @@ MonoBehaviour:
   _showLandingPoint: 1
   _jumpInteructedIfSitckLessThan: 0.05
   _timeToChargeJump: 0.5
-  _landingPointSmoothSpeed: 0.25
+  _landingPointSmoothSpeed: 0.02
   _interruptLandingPointTime: 0.2
   _interruptLandingPointMovementCurve:
     serializedVersion: 2
@@ -1254,11 +1255,11 @@ MonoBehaviour:
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 216
+  _showDebug: 0
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
   _tongueDebugColor: {r: 0, g: 0, b: 1, a: 1}
   _mountRadiusDebugColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _refreshRotationLineDebugColor: {r: 0, g: 1, b: 0, a: 1}
-  _showInputDebug: 0
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
   JumpPressInput: 0

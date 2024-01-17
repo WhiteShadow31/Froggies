@@ -16,10 +16,12 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] Camera _camera;
     [SerializeField] float _turnSmoothTime = 0.1f;
     [Space]
-    [SerializeField] LayerMask _refreshRotationRaycastLayer;
-    [SerializeField] float _refreshRotationRaycastLenght = 2;
-    [SerializeField] float _refreshRotationSmoothTime = 0.2f;
+    [SerializeField] LayerMask _setGroundRotationRaycastLayer;
+    [SerializeField] float _setGroundRotationRaycastLenght = 2;
+    [SerializeField] float _rotationSmoothTime = 0.001f;
+    bool returnToFlatGround = false;
     float _turnSmoothVelocity;
+    Vector3 _smoothRotationVelocityRef = Vector3.zero;
 
     [Header("--- GROUND CHECK ---")]
     [SerializeField] Transform _groundCheck;
@@ -79,7 +81,7 @@ public class PlayerEntity : MonoBehaviour
     [Space]
     [SerializeField] protected float _jumpInteructedIfSitckLessThan = 0.05f;
     [SerializeField] protected float _timeToChargeJump = 0.5f;
-    [SerializeField] protected float _landingPointSmoothSpeed = 0.15f;
+    [SerializeField] protected float _landingPointSmoothSpeed = 0.02f;
     [Space]
     [SerializeField] protected float _interruptLandingPointTime = 0.2f;
     [SerializeField] protected AnimationCurve _interruptLandingPointMovementCurve;
@@ -102,22 +104,22 @@ public class PlayerEntity : MonoBehaviour
     protected Vector3 _velocityRef = Vector3.zero;
 
     [Header("--- DEBUG ---")]
-    [SerializeField] Color _groundCheckDebugColor = Color.red;
-    [SerializeField] Color _tongueDebugColor = Color.blue;
-    [SerializeField] Color _mountRadiusDebugColor = Color.yellow;
-    [SerializeField] Color _refreshRotationLineDebugColor = Color.green;
+    [SerializeField] bool _showDebug = false;
+    [ShowIf("_showDebug", true), SerializeField] Color _groundCheckDebugColor = Color.red;
+    [ShowIf("_showDebug", true), SerializeField] Color _tongueDebugColor = Color.blue;
+    [ShowIf("_showDebug", true), SerializeField] Color _mountRadiusDebugColor = Color.yellow;
+    [ShowIf("_showDebug", true), SerializeField] Color _refreshRotationLineDebugColor = Color.green;
 
     [Header("--- INPUTS ---")]
-    [SerializeField] bool _showInputDebug = false;
-    [ShowIf("_showInputDebug", true)] public bool MoveInput;
-    [ShowIf("_showInputDebug", true)] public Vector2 RotaInput = Vector2.zero;
-    [ShowIf("_showInputDebug", true)] public bool JumpPressInput = false;
-    [ShowIf("_showInputDebug", true)] public bool JumpReleaseInput = false;
-    [ShowIf("_showInputDebug", true)] bool _startTongueAimInput = false;
+    [ShowIf("_showDebug", true)] public bool MoveInput;
+    [ShowIf("_showDebug", true)] public Vector2 RotaInput = Vector2.zero;
+    [ShowIf("_showDebug", true)] public bool JumpPressInput = false;
+    [ShowIf("_showDebug", true)] public bool JumpReleaseInput = false;
+    [ShowIf("_showDebug", true)] bool _startTongueAimInput = false;
     public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
-    [ShowIf("_showInputDebug", true)] bool _endTongueAimInput = false;
+    [ShowIf("_showDebug", true)] bool _endTongueAimInput = false;
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
-    [ShowIf("_showInputDebug", true)] public bool MountInput;
+    [ShowIf("_showDebug", true)] public bool MountInput;
 
     protected bool _initialized = false;    
     protected bool _isOnFrog = false;
@@ -160,6 +162,8 @@ public class PlayerEntity : MonoBehaviour
             EndTongueAimInput = false;
             UseTongue();
         }
+
+        Rotate();
         ManageJump();
     }
     
@@ -225,7 +229,7 @@ public class PlayerEntity : MonoBehaviour
     }
 
     public void Rotate()
-    {
+    {        
         Vector3 dir = new Vector3(RotaInput.x, 0, RotaInput.y).normalized;
         Vector3 newRotationVector = transform.eulerAngles;
 
@@ -233,20 +237,21 @@ public class PlayerEntity : MonoBehaviour
         if (dir.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
-            newRotationVector.y = angle;
+            newRotationVector.y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, 0);
         }
-
-        // Get rotation X and Z (slopes...)
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo, _refreshRotationRaycastLenght, _refreshRotationRaycastLayer))
+        
+        // Set rotation
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
         {
             Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hitInfo.normal) * transform.rotation;
-            transform.rotation = targetRotation;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, newRotationVector.y, transform.eulerAngles.z);
-            return;                
+            Vector3 targetRotationVector = new Vector3(targetRotation.x, newRotationVector.y, targetRotation.z);
+            transform.eulerAngles = Vector3.SmoothDamp(transform.eulerAngles, targetRotationVector, ref _smoothRotationVelocityRef, _rotationSmoothTime);      
         }
-
-        transform.eulerAngles = newRotationVector;
+        else
+        {        
+            Vector3 targetRotationVector = new Vector3(0, newRotationVector.y, 0);
+            transform.eulerAngles = Vector3.SmoothDamp(transform.eulerAngles, targetRotationVector, ref _smoothRotationVelocityRef, _rotationSmoothTime);
+        }
     }
 
     public void Jump()
@@ -636,7 +641,7 @@ public class PlayerEntity : MonoBehaviour
 
         // Draw refresh rotation debug line
         Gizmos.color = _refreshRotationLineDebugColor;
-        Gizmos.DrawLine(transform.position, transform.position + (-transform.up * _refreshRotationRaycastLenght));
+        Gizmos.DrawLine(transform.position, transform.position + (-transform.up * _setGroundRotationRaycastLenght));
     }
 }
 

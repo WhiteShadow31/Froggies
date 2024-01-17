@@ -24,7 +24,7 @@ public class StatePlayerJump : State
     }
     public override void FixedUpdate(float time)
     {
-        _smPlayer.entity.Rotate();
+
     }
     public override void Exit()
     {
