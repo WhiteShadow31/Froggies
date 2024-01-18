@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(PlayerEntity))]
 public class SimpleRigidbody : MonoBehaviour
 {
     [Header("--- GRAVITY ---")]
     [SerializeField] bool _useGravity = true;
-    [SerializeField] float _normalGravity = 9.81f;
-    [SerializeField] float _fallingGravity = 30f;
+    [SerializeField] float _baseGravity = 9.81f;
+    [SerializeField] float _jumpNormalGravity = 9.81f;
+    [SerializeField] float _jumpFallingGravity = 30f;
     float _actualGravity = 0f;
 
     [Header("--- VELOCITY CLAMP ---")]
@@ -23,13 +24,20 @@ public class SimpleRigidbody : MonoBehaviour
     bool _rbInitialized = false;
     Rigidbody _rb;
     public bool UseGRavity { set { _useGravity = value; } }
-    public bool  NormalGravity { set { _actualGravity = value == true ? _normalGravity : _fallingGravity; } }
-    public bool FallingGravity { set { _actualGravity = value == true ? _fallingGravity : _normalGravity; } }
+    public bool  IsNormalGravity {set { _actualGravity = value == true ? _jumpNormalGravity : _jumpFallingGravity; } }
+    public float NormalGravity { get { return _jumpNormalGravity; } }
+    public bool IsFallingGravity { set { _actualGravity = value == true ? _jumpFallingGravity : _jumpNormalGravity; } }
+    public float FallingGravity { get { return _jumpFallingGravity; } }
     public bool IsFalling { get { return _rb.velocity.y < 0; } }
     public Vector3 Velocity { get { return _rb.velocity; } }
+    public float Mass { get { return _rb.mass; } }
+
+    PlayerEntity _playerEntity;
 
     private void Awake()
     {
+        _playerEntity = GetComponent<PlayerEntity>();   
+
         InitRigidbody();
     }
 
@@ -41,16 +49,25 @@ public class SimpleRigidbody : MonoBehaviour
     private void Update()
     {
         if (this.IsFalling)
-            this.FallingGravity = true;
+            this.IsFallingGravity = true;
         else
-            this.NormalGravity = true;
+            this.IsNormalGravity = true;
     }
 
     private void FixedUpdate()
     {
         if (_useGravity)
-            ApplyGravity();
+        {
+            if (_playerEntity.IsJumping)
+            {
+                ApplyGravity(_actualGravity);
 
+            }
+            else
+            {
+                ApplyGravity(_baseGravity);
+            }
+        }
     }
 
     protected void InitRigidbody()
@@ -61,19 +78,19 @@ public class SimpleRigidbody : MonoBehaviour
             _rb.useGravity = false;
             _rbInitialized = true;
 
-            _actualGravity = _normalGravity;
+            _actualGravity = _jumpNormalGravity;
 
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 
     // Apply the gravity on the Rigidbody based on mass
-    public void ApplyGravity()
+    public void ApplyGravity(float gravity)
     {
         if (_useVelocityClampY)
-            _rb.AddForce(-Vector3.up * _rb.mass * _actualGravity * (_clampVelocityY - _rb.velocity.magnitude) * Time.deltaTime);
+            _rb.AddForce(-Vector3.up * _rb.mass * gravity * (_clampVelocityY - _rb.velocity.magnitude) * Time.deltaTime);
         else
-            _rb.AddForce(-Vector3.up * _rb.mass * _actualGravity);
+            _rb.AddForce(-Vector3.up * _rb.mass * gravity);
 
         //ClampVelocity();
 
@@ -86,7 +103,6 @@ public class SimpleRigidbody : MonoBehaviour
             _rb.AddForce(direction * force * (_clampPreciseMove - _rb.velocity.magnitude) * Time.deltaTime, mode);
         else if(_rb.velocity.magnitude + force <= _clampPreciseMove)
             _rb.AddForce(direction * force, mode);
-        //Debug.Log("used precise move");
     }
 
     public void AddForce(Vector3 direction, float force, ForceMode mode)
@@ -113,5 +129,6 @@ public class SimpleRigidbody : MonoBehaviour
     public void StopVelocity()
     {
         _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
     }
 }

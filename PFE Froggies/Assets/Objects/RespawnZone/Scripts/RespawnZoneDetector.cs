@@ -16,16 +16,17 @@ public class RespawnZoneDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.TryGetComponent<SmallFrogEntity>(out SmallFrogEntity frog))
+        if (other.transform.TryGetComponent<PlayerEntity>(out PlayerEntity frog))
             m_respawnZone.AddFrogToSuccess(frog);
     }
 
     private void OnDrawGizmos()
     {
+        Gizmos.matrix = transform.localToWorldMatrix;
         Color col = Color.yellow;
         col.a = 0.3f;
         Gizmos.color = col;
 
-        Gizmos.DrawCube(this.transform.position, GetComponent<BoxCollider>().size);
+        Gizmos.DrawCube(Vector3.zero, GetComponent<BoxCollider>().size);
     }
 }

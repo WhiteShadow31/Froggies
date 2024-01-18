@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -14,7 +12,7 @@ public class InteractableEntity : MonoBehaviour, IIntaractableEntity
 
     public virtual void Push(Vector3 dir, float force)
     {
-        _rb.AddForce(dir * force, ForceMode.Impulse);
+        _rb.AddForce(dir * force, ForceMode.VelocityChange);
     }
 }
 

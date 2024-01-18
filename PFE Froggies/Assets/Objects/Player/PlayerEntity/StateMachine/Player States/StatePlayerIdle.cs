@@ -13,31 +13,26 @@ public class StatePlayerIdle : StatePlayer
 
     public override void Start()
     {
-        Debug.Log(_smPlayer.entity.gameObject.name + " : " + "IDLE");
+        //Debug.Log(_smPlayer.entity.gameObject.name + " : " + "IDLE");
     }
     public override void Update(float time)
     {
         _isGrounded = _smPlayer.entity.IsGrounded;
 
-        if (_smPlayer.entity.JumpInput)
-        {
-            
+        if (_smPlayer.entity.JumpReleaseInput)
+        {            
             if (_isGrounded)
                 _smPlayer.Exit(_smPlayer.jump);
             else
             {
-                _smPlayer.entity.JumpInput = false;
-                _smPlayer.entity.LongJumpInput = false;
+                _smPlayer.entity.JumpReleaseInput = false;
             }
         }
-
 
         if(_smPlayer.entity.MountInput)
         {
             if (_smPlayer.entity.TryMount())
-                _smPlayer.Exit(_smPlayer.onFrog);
-            
-            
+                _smPlayer.Exit(_smPlayer.onFrog);          
         }
     }
     public override void FixedUpdate(float time)

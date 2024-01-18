@@ -10,7 +10,7 @@ public class RespawnZone : MonoBehaviour
     protected int m_successIndex = 0;
     public List<Transform> successRespawnPoints = new List<Transform>();
 
-    protected List<SmallFrogEntity> m_playersSuccess = new List<SmallFrogEntity>();
+    protected List<PlayerEntity> m_playersSuccess = new List<PlayerEntity>();
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class RespawnZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // It is a frog
-        if (other.transform.TryGetComponent<SmallFrogEntity>(out SmallFrogEntity frog))
+        if (other.transform.TryGetComponent<PlayerEntity>(out PlayerEntity frog))
         {
             // Player frog has been registered as succeeded the zone
             if (m_playersSuccess.Contains(frog))
@@ -58,14 +58,15 @@ public class RespawnZone : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.matrix = transform.localToWorldMatrix;
         Color col = Color.red;
         col.a = 0.3f;
         Gizmos.color = col;
 
-        Gizmos.DrawCube(this.transform.position, GetComponent<BoxCollider>().size);
+        Gizmos.DrawCube(Vector3.zero, GetComponent<BoxCollider>().size);
     }
 
-    public void AddFrogToSuccess(SmallFrogEntity frog)
+    public void AddFrogToSuccess(PlayerEntity frog)
     {
         if(!m_playersSuccess.Contains(frog))
             m_playersSuccess.Add(frog);
