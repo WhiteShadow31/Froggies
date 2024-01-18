@@ -17,11 +17,9 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _turnSmoothTime = 0.1f;
     [Space]
     [SerializeField] LayerMask _setGroundRotationRaycastLayer;
-    [SerializeField] float _setGroundRotationRaycastLenght = 2;
-    [SerializeField] float _rotationSmoothTime = 0.001f;
-    bool returnToFlatGround = false;
+    [SerializeField] float _setGroundRotationRaycastLenght = 1;
+    [SerializeField] float _rotationSmoothSpeed = 2;
     float _turnSmoothVelocity;
-    Vector3 _smoothRotationVelocityRef = Vector3.zero;
 
     [Header("--- GROUND CHECK ---")]
     [SerializeField] Transform _groundCheck;
@@ -229,29 +227,28 @@ public class PlayerEntity : MonoBehaviour
     }
 
     public void Rotate()
-    {        
-        Vector3 dir = new Vector3(RotaInput.x, 0, RotaInput.y).normalized;
-        Vector3 newRotationVector = transform.eulerAngles;
-
+    {
         // Get rotation Y (stick)
+        Vector3 dir = new Vector3(RotaInput.x, 0, RotaInput.y).normalized;
         if (dir.magnitude >= 0.1f)
         {
+            Vector3 newRotation = transform.eulerAngles;
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
-            newRotationVector.y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, 0);
+            newRotation.y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
+            transform.eulerAngles = newRotation;
         }
-        
-        // Set rotation
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
+
+        // Get new up
+        Vector3 up = transform.up;
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
         {
-            Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hitInfo.normal) * transform.rotation;
-            Vector3 targetRotationVector = new Vector3(targetRotation.x, newRotationVector.y, targetRotation.z);
-            transform.eulerAngles = Vector3.SmoothDamp(transform.eulerAngles, targetRotationVector, ref _smoothRotationVelocityRef, _rotationSmoothTime);      
+            up = hitInfo.normal;      
         }
-        else
-        {        
-            Vector3 targetRotationVector = new Vector3(0, newRotationVector.y, 0);
-            transform.eulerAngles = Vector3.SmoothDamp(transform.eulerAngles, targetRotationVector, ref _smoothRotationVelocityRef, _rotationSmoothTime);
-        }
+
+        // Get new forward and set rotation
+        Vector3 forward = transform.forward.normalized - up * Vector3.Dot(transform.forward.normalized, up);
+        Quaternion targetRotation = Quaternion.LookRotation(forward.normalized, up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSmoothSpeed);
     }
 
     public void Jump()
