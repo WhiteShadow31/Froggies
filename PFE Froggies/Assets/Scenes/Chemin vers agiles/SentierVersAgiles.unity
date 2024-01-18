@@ -42604,6 +42604,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4588733095707161382, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: _camMinForwardOffset
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588733095707161382, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: _camExplorationRotation.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588733095707161382, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
       propertyPath: _horizontalPlaneLayerMask.m_Bits
       value: 256
       objectReference: {fileID: 0}
