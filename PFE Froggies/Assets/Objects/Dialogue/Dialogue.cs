@@ -10,7 +10,9 @@ public class Dialogue : UIRotateToCamera
     public float radiusDetection = 3f;
     [Header("Canvas Parameters")]
     public Vector3 offsetCanva = Vector3.zero;
+    public Vector2 sizeCanva = new Vector2(1, 1);
     [Header("Image Parameters")]
+    public Vector3 offsetImage = Vector3.zero;
     public Vector2 sizeImage = new Vector2(1,1);
 
 
@@ -50,7 +52,7 @@ public class Dialogue : UIRotateToCamera
 
         RectTransform rectCanva = canvasGO.GetComponent<RectTransform>();
         rectCanva.localPosition = offsetCanva;
-        rectCanva.sizeDelta = new Vector2(1,1);
+        rectCanva.sizeDelta = sizeCanva;
 
         // IMAGE
         GameObject goChild = new GameObject("DialogueImage");
@@ -59,7 +61,7 @@ public class Dialogue : UIRotateToCamera
         Image img = goChild.AddComponent<Image>();
 
         RectTransform rectImg = goChild.GetComponent<RectTransform>();
-        rectImg.localPosition = Vector3.zero;
+        rectImg.localPosition = offsetImage;
         rectImg.sizeDelta = sizeImage;
 
         if (spriteToShow == null)
@@ -86,6 +88,6 @@ public class Dialogue : UIRotateToCamera
         Color color = Color.white;
         color.a = 0.3f;
         Gizmos.color = color;
-        Gizmos.DrawCube(this.transform.position + offsetCanva, new Vector3(sizeImage.x, sizeImage.y, 0.1f));
+        Gizmos.DrawCube(this.transform.position + offsetImage, new Vector3(sizeImage.x, sizeImage.y, 0.1f));
     }
 }
