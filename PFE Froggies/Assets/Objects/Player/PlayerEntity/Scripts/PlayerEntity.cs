@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 using UltimateAttributesPack;
 using Unity.VisualScripting;
 
@@ -35,71 +33,64 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _moveForce = 1;
     [SerializeField] ForceMode _moveMode = ForceMode.Impulse;
 
+    [Header("--- TONGUE ---")]
+    [SerializeField] Transform _tongueStartTransform;
+    [SerializeField] Transform _tongueEndTransform;
+    [SerializeField] float _tongueMaxLenght = 5f;
+    [Tooltip("Raycast and detect layer mask")]
+    [SerializeField] LayerMask _tongueLayerMask;
+    [Space]
+    [SerializeField] float _tongueInTime = 0.15f;
+    [SerializeField] float _tongueOutTime = 0.15f;
+    [SerializeField] AnimationCurve _tongueOutCurve;
+    [SerializeField] AnimationCurve _tongueInCurve;
+    [Space]
+    [SerializeField] LineRenderer _tongueLineRenderer;
+    [SerializeField] float _tongueHitRadius = 0.3f;
+    [SerializeField] float _tongueHitForce = 10f;
+    [Tooltip("Cast sphere around the hit point and detect layer mask")]
+    [SerializeField] LayerMask _tongueHitLayerMask;
+    float _tongueOutDelay = 0, _tongueInDelay = 0;
+
+    [Header("--- MOUNT OTHER ---")]
+    public Transform onFrogTransform;
+    [SerializeField] float _mountRadius = 3f;
+    [SerializeField] LayerMask _playerLayer;
+    Transform _otherPlayerMountTransform = null;
+    public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
+
     [Header("--- JUMP ---")]
     [SerializeField] float _jumpForceUp = 1;
     [SerializeField] float _jumpForceFwd = 1;
     [Space]
     [SerializeField] float _longJumpForceUp = 1;
     [SerializeField] float _longJumpForceFwd = 2;
-    protected ForceMode _jumpMode = ForceMode.Impulse;
-
-    [Header("--- TONGUE ---")]
-    [SerializeField] protected Transform _tongueStartTransform;
-    [SerializeField] protected Transform _tongueEndTransform;
-    [SerializeField] protected float _tongueMaxLenght = 5f;
-    [Tooltip("Raycast and detect layer mask")]
-    [SerializeField] protected LayerMask _tongueLayerMask;
+    ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
-    [SerializeField] protected float _tongueInTime = 0.15f;
-    [SerializeField] protected float _tongueOutTime = 0.15f;
-    [SerializeField] protected AnimationCurve _tongueOutCurve;
-    [SerializeField] protected AnimationCurve _tongueInCurve;
+    [SerializeField] LineRenderer _jumpPredictionLine;
+    [SerializeField] bool _showTrajectoryLine = true;
+    [SerializeField] GameObject _landingPointObject;
+    [SerializeField] bool _showLandingPoint = true;
     [Space]
-    [SerializeField] protected LineRenderer _tongueLineRenderer;
-    [SerializeField] protected float _tongueHitRadius = 0.3f;
-    [SerializeField] protected float _tongueHitForce = 10f;
-    [Tooltip("Cast sphere around the hit point and detect layer mask")]
-    [SerializeField] protected LayerMask _tongueHitLayerMask;
-    float _tongueOutDelay = 0, _tongueInDelay = 0;
-
-    //bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
-
-    [Header("--- MOUNT OTHER ---")]
-    public Transform onFrogTransform;
-    [SerializeField] protected float _mountRadius = 3f;
-    [SerializeField] protected LayerMask _playerLayer;
-    protected Transform _otherPlayerMountTransform = null;
-    public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
-
-    [Header("--- PREDICTED JUMP ---")]
-    [SerializeField] protected LineRenderer _jumpPredictionLine;
-    [SerializeField] protected bool _showTrajectoryLine = true;
-    [SerializeField] protected GameObject _landingPointObject;
-    [SerializeField] protected bool _showLandingPoint = true;
+    [SerializeField] float _jumpInteructedIfSitckLessThan = 0.05f;
+    [SerializeField] float _timeToChargeJump = 0.5f;
+    [SerializeField] AnimationCurve _landingPointSmoothCurve;
+    [SerializeField] float _landingPointSmoothSpeed = 0.02f;
     [Space]
-    [SerializeField] protected float _jumpInteructedIfSitckLessThan = 0.05f;
-    [SerializeField] protected float _timeToChargeJump = 0.5f;
-    [SerializeField] protected float _landingPointSmoothSpeed = 0.02f;
-    [Space]
-    [SerializeField] protected float _interruptLandingPointTime = 0.2f;
-    [SerializeField] protected AnimationCurve _interruptLandingPointMovementCurve;
-    [Space]
-    [SerializeField] protected int _jumpPredictionLinePointCount = 200;
-    [SerializeField] protected float _jumpPredictiontDuration = 5;
-    [SerializeField] protected LayerMask _jumpPredictionLayerMask;
+    [SerializeField] int _jumpPredictionLinePointCount = 200;
+    [SerializeField] float _jumpPredictiontDuration = 5;
+    [SerializeField] LayerMask _jumpPredictionLayerMask;
 
     MeshRenderer _jumpPredictionObjectRenderer;
     public bool IsJumping { get { return _isJumping; } }
-    protected bool _isJumping = false;
-    protected bool _jumpCharged = false;
-    protected bool _wasGroundedLastFrame = false;
-    protected float _interruptLandingPointTimer;
-    protected float _jumpMaxLenghtTimer;
-    protected float _currentJumpForceForward;
-    protected float _currentJumpForceUp;
-    protected Vector3 _predictionLandingPoint;
-    protected Vector3 _landingPointLastPosition;
-    protected Vector3 _velocityRef = Vector3.zero;
+    bool _isJumping = false;
+    bool _jumpCharged = false;
+    bool _wasGroundedLastFrame = false;
+    float _jumpMaxLenghtTimer;
+    float _currentJumpForceForward;
+    float _currentJumpForceUp;
+    Vector3 _landingPointLastPosition;
+    Vector3 _velocityRef = Vector3.zero;
 
     [Header("--- DEBUG ---")]
     [SerializeField] bool _showDebug = false;
@@ -119,10 +110,10 @@ public class PlayerEntity : MonoBehaviour
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
     [ShowIf("_showDebug", true)] public bool MountInput;
 
-    protected bool _initialized = false;    
-    protected bool _isOnFrog = false;
-    protected bool _hasPushedOtherPlayer = false;
-    protected bool _hasPushedInterractable = false;
+    bool _initialized = false;    
+    bool _isOnFrog = false;
+    bool _hasPushedOtherPlayer = false;
+    bool _hasPushedInterractable = false;
 
     // =====================================================================================
     //                                   UNITY METHODS 
@@ -306,25 +297,12 @@ public class PlayerEntity : MonoBehaviour
                 ShowJumpPrediction();
             else
                 SetPredictionRenderer(false);
-
-            _interruptLandingPointTimer = 0; // Reset timer of landing point lerp to player position
         }
-        // Lerp landing point to player position with time and disable it
+        // Set landing point to player position with time and disable it
         else
         {
-            // Set landing point target point for lerp
-            Vector3 landingPointTargetPosition = new Vector3(transform.position.x, _landingPointLastPosition.y, transform.position.z);
-
-            if (_interruptLandingPointTimer < _interruptLandingPointTime) // Timer and lerp of landing point to player position
-            {
-                _landingPointObject.transform.position = Vector3.Lerp(_landingPointLastPosition, landingPointTargetPosition, _interruptLandingPointMovementCurve.Evaluate(_interruptLandingPointTimer / _interruptLandingPointTime));
-                _interruptLandingPointTimer += Time.deltaTime;
-            }
-            else // Set landing point to player position and disable it
-            {
-                _landingPointObject.transform.position = landingPointTargetPosition;
-                SetPredictionRenderer(false);
-            }
+            _landingPointObject.transform.position = new Vector3(transform.position.x, _landingPointObject.transform.position.y, transform.position.z);
+            SetPredictionRenderer(false);
         }
     }
 
@@ -360,10 +338,10 @@ public class PlayerEntity : MonoBehaviour
 
     void SetJumpForce(bool jumpCharged)
     {
-        if (jumpCharged)
+        if (jumpCharged && RotaInput.magnitude >= _jumpInteructedIfSitckLessThan)
         {
-            _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, RotaInput.magnitude);
-            _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, RotaInput.magnitude);
+            _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, _landingPointSmoothCurve.Evaluate(RotaInput.magnitude) - _jumpInteructedIfSitckLessThan);
+            _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, _landingPointSmoothCurve.Evaluate(RotaInput.magnitude) - _jumpInteructedIfSitckLessThan);
         }
         else
             SetJumpForceToMinOrMax(false);
