@@ -318,7 +318,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b83c381e3e552704caa1f5add1ed7ac6, type: 2}
+  - {fileID: 2100000, guid: eb7056ee7338bf8418124806437292ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -606,8 +606,8 @@ MonoBehaviour:
   _stuckDistance: 7
   _stuckDistanceSafestPointFromPlayer: 3
   _bodyMeshRenderer: {fileID: 779314621320952505}
-  _normalMat: {fileID: 2100000, guid: b83c381e3e552704caa1f5add1ed7ac6, type: 2}
-  _stuckMat: {fileID: 2100000, guid: b9e7e3e338f6d754ba6238aff89789a4, type: 2}
+  _normalMat: {fileID: 2100000, guid: eb7056ee7338bf8418124806437292ce, type: 2}
+  _stuckMat: {fileID: 2100000, guid: cf2eadd678508a64d802eb33c9551247, type: 2}
   _drawDebug: 1
 --- !u!1 &8149637302375563468
 GameObject:
@@ -753,7 +753,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b83c381e3e552704caa1f5add1ed7ac6, type: 2}
+  - {fileID: 2100000, guid: eb7056ee7338bf8418124806437292ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
