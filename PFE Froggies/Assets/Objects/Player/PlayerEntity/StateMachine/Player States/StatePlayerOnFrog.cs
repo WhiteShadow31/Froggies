@@ -24,7 +24,6 @@ public class StatePlayerOnFrog : State
     }
     public override void FixedUpdate(float time)
     {
-            _smPlayer.entity.Rotate();
         _smPlayer.entity.ManageJump();
     }
     public override void Exit()

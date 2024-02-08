@@ -1133,6 +1133,11 @@ MonoBehaviour:
   controller: {fileID: 0}
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
+  _setGroundRotationRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _setGroundRotationRaycastLenght: 1
+  _rotationSmoothSpeed: 2
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: {x: 1.6, y: 0.23, z: 1.69}
   _groundMask:
@@ -1142,16 +1147,13 @@ MonoBehaviour:
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   _moveForce: 1
   _moveMode: 1
-  _jumpForceUp: 20
-  _jumpForceFwd: 30
-  _longJumpForceUp: 40
-  _longJumpForceFwd: 35
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
   _tongueMaxLenght: 4
   _tongueLayerMask:
     serializedVersion: 2
     m_Bits: 201
+  _tongueInTime: 0.15
   _tongueOutTime: 0.15
   _tongueOutCurve:
     serializedVersion: 2
@@ -1177,7 +1179,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _tongueInTime: 0.15
   _tongueInCurve:
     serializedVersion: 2
     m_Curve:
@@ -1213,15 +1214,17 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  _jumpForceUp: 20
+  _jumpForceFwd: 30
+  _longJumpForceUp: 40
+  _longJumpForceFwd: 35
   _jumpPredictionLine: {fileID: 3735360176625625681}
   _showTrajectoryLine: 0
   _landingPointObject: {fileID: 8099151475436712201}
   _showLandingPoint: 1
-  _jumpInteructedIfSitckLessThan: 0.05
+  _jumpInteructedIfSitckLessThan: 0.1
   _timeToChargeJump: 0.5
-  _landingPointSmoothSpeed: 0.25
-  _interruptLandingPointTime: 0.2
-  _interruptLandingPointMovementCurve:
+  _landingPointSmoothCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -1245,13 +1248,17 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _landingPointSmoothSpeed: 0.05
   _jumpPredictionLinePointCount: 200
   _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 216
+  _showDebug: 0
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
-  _showInputDebug: 0
+  _tongueDebugColor: {r: 0, g: 0, b: 1, a: 1}
+  _mountRadiusDebugColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _refreshRotationLineDebugColor: {r: 0, g: 1, b: 0, a: 1}
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
   JumpPressInput: 0

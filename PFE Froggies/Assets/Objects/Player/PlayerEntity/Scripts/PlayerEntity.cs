@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 using UltimateAttributesPack;
 using Unity.VisualScripting;
 
@@ -15,6 +13,10 @@ public class PlayerEntity : MonoBehaviour
     [Header("--- ROTATION ---")]
     [SerializeField] Camera _camera;
     [SerializeField] float _turnSmoothTime = 0.1f;
+    [Space]
+    [SerializeField] LayerMask _setGroundRotationRaycastLayer;
+    [SerializeField] float _setGroundRotationRaycastLenght = 1;
+    [SerializeField] float _rotationSmoothSpeed = 2;
     float _turnSmoothVelocity;
 
     [Header("--- GROUND CHECK ---")]
@@ -31,97 +33,93 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _moveForce = 1;
     [SerializeField] ForceMode _moveMode = ForceMode.Impulse;
 
+    [Header("--- TONGUE ---")]
+    [SerializeField] Transform _tongueStartTransform;
+    [SerializeField] Transform _tongueEndTransform;
+    [SerializeField] float _tongueMaxLenght = 5f;
+    [Tooltip("Raycast and detect layer mask")]
+    [SerializeField] LayerMask _tongueLayerMask;
+    [Space]
+    [SerializeField] float _tongueInTime = 0.15f;
+    [SerializeField] float _tongueOutTime = 0.15f;
+    [SerializeField] AnimationCurve _tongueOutCurve;
+    [SerializeField] AnimationCurve _tongueInCurve;
+    [Space]
+    [SerializeField] LineRenderer _tongueLineRenderer;
+    [SerializeField] float _tongueHitRadius = 0.3f;
+    [SerializeField] float _tongueHitForce = 10f;
+    [Tooltip("Cast sphere around the hit point and detect layer mask")]
+    [SerializeField] LayerMask _tongueHitLayerMask;
+    float _tongueOutDelay = 0, _tongueInDelay = 0;
+
+    [Header("--- MOUNT OTHER ---")]
+    public Transform onFrogTransform;
+    [SerializeField] float _mountRadius = 3f;
+    [SerializeField] LayerMask _playerLayer;
+    Transform _otherPlayerMountTransform = null;
+    public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
+
     [Header("--- JUMP ---")]
     [SerializeField] float _jumpForceUp = 1;
     [SerializeField] float _jumpForceFwd = 1;
     [Space]
     [SerializeField] float _longJumpForceUp = 1;
     [SerializeField] float _longJumpForceFwd = 2;
-    protected ForceMode _jumpMode = ForceMode.Impulse;
-
-    [Header("--- TONGUE ---")]
-    [SerializeField] protected Transform _tongueStartTransform;
-    [SerializeField] protected Transform _tongueEndTransform;
-    [SerializeField] protected float _tongueMaxLenght = 5f;
-    [Tooltip("Raycast and detect layer mask")]
-    [SerializeField] protected LayerMask _tongueLayerMask;
+    ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
-    [SerializeField] protected float _tongueOutTime = 0.15f;
-    [SerializeField] protected AnimationCurve _tongueOutCurve;
-    [SerializeField] protected float _tongueInTime = 0.15f;
-    [SerializeField] protected AnimationCurve _tongueInCurve;
+    [SerializeField] LineRenderer _jumpPredictionLine;
+    [SerializeField] bool _showTrajectoryLine = true;
+    [SerializeField] GameObject _landingPointObject;
+    [SerializeField] bool _showLandingPoint = true;
     [Space]
-    [SerializeField] protected LineRenderer _tongueLineRenderer;
-    [SerializeField] protected float _tongueHitRadius = 0.3f;
-    [SerializeField] protected float _tongueHitForce = 10f;
-    [Tooltip("Cast sphere around the hit point and detect layer mask")]
-    [SerializeField] protected LayerMask _tongueHitLayerMask;
-    float _tongueOutDelay = 0, _tongueInDelay = 0;
-
-    //bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
-
-    [Header("--- MOUNT OTHER ---")]
-    public Transform onFrogTransform;
-    [SerializeField] protected float _mountRadius = 3f;
-    [SerializeField] protected LayerMask _playerLayer;
-    protected Transform _otherPlayerMountTransform = null;
-    public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
-
-    [Header("--- PREDICTED JUMP ---")]
-    [SerializeField] protected LineRenderer _jumpPredictionLine;
-    [SerializeField] protected bool _showTrajectoryLine = true;
-    [SerializeField] protected GameObject _landingPointObject;
-    [SerializeField] protected bool _showLandingPoint = true;
+    [SerializeField] float _jumpInteructedIfSitckLessThan = 0.05f;
+    [SerializeField] float _timeToChargeJump = 0.5f;
+    [SerializeField] AnimationCurve _landingPointSmoothCurve;
+    [SerializeField] float _landingPointSmoothSpeed = 0.02f;
     [Space]
-    [SerializeField] protected float _jumpInteructedIfSitckLessThan = 0.05f;
-    [SerializeField] protected float _timeToChargeJump = 0.5f;
-    [SerializeField] protected float _landingPointSmoothSpeed = 0.15f;
-    [Space]
-    [SerializeField] protected float _interruptLandingPointTime = 0.2f;
-    [SerializeField] protected AnimationCurve _interruptLandingPointMovementCurve;
-    [Space]
-    [SerializeField] protected int _jumpPredictionLinePointCount = 200;
-    [SerializeField] protected float _jumpPredictiontDuration = 5;
-    [SerializeField] protected LayerMask _jumpPredictionLayerMask;
+    [SerializeField] int _jumpPredictionLinePointCount = 200;
+    [SerializeField] float _jumpPredictiontDuration = 5;
+    [SerializeField] LayerMask _jumpPredictionLayerMask;
 
     MeshRenderer _jumpPredictionObjectRenderer;
     public bool IsJumping { get { return _isJumping; } }
-    protected bool _isJumping = false;
-    protected bool _jumpCharged = false;
-    protected bool _wasGroundedLastFrame = false;
-    protected float _interruptLandingPointTimer;
-    protected float _jumpMaxLenghtTimer;
-    protected float _currentJumpForceForward;
-    protected float _currentJumpForceUp;
-    protected Vector3 _predictionLandingPoint;
-    protected Vector3 _landingPointLastPosition;
-    protected Vector3 _velocityRef = Vector3.zero;
+    bool _isJumping = false;
+    bool _jumpCharged = false;
+    bool _wasGroundedLastFrame = false;
+    float _jumpMaxLenghtTimer;
+    float _currentJumpForceForward;
+    float _currentJumpForceUp;
+    Vector3 _landingPointLastPosition;
+    Vector3 _velocityRef = Vector3.zero;
 
     [Header("--- DEBUG ---")]
-    [SerializeField] Color _groundCheckDebugColor = Color.red;
+    [SerializeField] bool _showDebug = false;
+    [ShowIf("_showDebug", true), SerializeField] Color _groundCheckDebugColor = Color.red;
+    [ShowIf("_showDebug", true), SerializeField] Color _tongueDebugColor = Color.blue;
+    [ShowIf("_showDebug", true), SerializeField] Color _mountRadiusDebugColor = Color.yellow;
+    [ShowIf("_showDebug", true), SerializeField] Color _refreshRotationLineDebugColor = Color.green;
 
     [Header("--- INPUTS ---")]
-    [SerializeField] bool _showInputDebug = false;
-    [ShowIf("_showInputDebug", true)] public bool MoveInput;
-    [ShowIf("_showInputDebug", true)] public Vector2 RotaInput = Vector2.zero;
-    [ShowIf("_showInputDebug", true)] public bool JumpPressInput = false;
-    [ShowIf("_showInputDebug", true)] public bool JumpReleaseInput = false;
-    [ShowIf("_showInputDebug", true)] bool _startTongueAimInput = false;
+    [ShowIf("_showDebug", true)] public bool MoveInput;
+    [ShowIf("_showDebug", true)] public Vector2 RotaInput = Vector2.zero;
+    [ShowIf("_showDebug", true)] public bool JumpPressInput = false;
+    [ShowIf("_showDebug", true)] public bool JumpReleaseInput = false;
+    [ShowIf("_showDebug", true)] bool _startTongueAimInput = false;
     public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
-    [ShowIf("_showInputDebug", true)] bool _endTongueAimInput = false;
+    [ShowIf("_showDebug", true)] bool _endTongueAimInput = false;
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
-    [ShowIf("_showInputDebug", true)] public bool MountInput;
+    [ShowIf("_showDebug", true)] public bool MountInput;
 
-    protected bool _initialized = false;    
-    protected bool _isOnFrog = false;
-    protected bool _hasPushedOtherPlayer = false;
-    protected bool _hasPushedInterractable = false;
+    bool _initialized = false;    
+    bool _isOnFrog = false;
+    bool _hasPushedOtherPlayer = false;
+    bool _hasPushedInterractable = false;
 
     // =====================================================================================
     //                                   UNITY METHODS 
     // =====================================================================================
 
-    protected virtual void Awake()
+    protected void Awake()
     {
         InitComponents();
     }
@@ -159,6 +157,7 @@ public class PlayerEntity : MonoBehaviour
             UseTongue();
         }
 
+        Rotate();
         ManageJump();
     }
     
@@ -174,7 +173,7 @@ public class PlayerEntity : MonoBehaviour
     //                                   INITIALISATION METHODS 
     // =====================================================================================
 
-    protected void InitComponents()
+    void InitComponents()
     {
         if (!_initialized) // If it hasnt been initialized
         {
@@ -183,12 +182,12 @@ public class PlayerEntity : MonoBehaviour
             _initialized = true;
         }
     }
-    protected void InitSimpleRigidbody()
+    void InitSimpleRigidbody()
     {
         // Get the rigidbody or create it if there is none
         _rigidbodyController = this.transform.TryGetComponent<SimpleRigidbody>(out SimpleRigidbody rb) ? rb : this.transform.AddComponent<SimpleRigidbody>();
     }
-    protected void InitGroundController()
+    void InitGroundController()
     {
         if (_groundCheck == null)
         {
@@ -197,7 +196,6 @@ public class PlayerEntity : MonoBehaviour
             go.transform.position = Vector3.zero;
             _groundCheck = go.transform;
         }
-        //_groundController = new GroundedController(_groundCheck, _groundRadius, _groundMask);
     }
 
     // =====================================================================================
@@ -226,14 +224,27 @@ public class PlayerEntity : MonoBehaviour
 
     public void Rotate()
     {
+        // Get rotation Y (stick)
         Vector3 dir = new Vector3(RotaInput.x, 0, RotaInput.y).normalized;
-
         if (dir.magnitude >= 0.1f)
         {
+            Vector3 newRotation = transform.eulerAngles;
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
-            this.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            newRotation.y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
+            transform.eulerAngles = newRotation;
         }
+
+        // Get new up
+        Vector3 up = transform.up;
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
+        {
+            up = hitInfo.normal;      
+        }
+
+        // Get new forward and set rotation
+        Vector3 forward = transform.forward.normalized - up * Vector3.Dot(transform.forward.normalized, up);
+        Quaternion targetRotation = Quaternion.LookRotation(forward.normalized, up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSmoothSpeed);
     }
 
     public void Jump()
@@ -291,25 +302,12 @@ public class PlayerEntity : MonoBehaviour
                 ShowJumpPrediction();
             else
                 SetPredictionRenderer(false);
-
-            _interruptLandingPointTimer = 0; // Reset timer of landing point lerp to player position
         }
-        // Lerp landing point to player position with time and disable it
+        // Set landing point to player position with time and disable it
         else
         {
-            // Set landing point target point for lerp
-            Vector3 landingPointTargetPosition = new Vector3(transform.position.x, _landingPointLastPosition.y, transform.position.z);
-
-            if (_interruptLandingPointTimer < _interruptLandingPointTime) // Timer and lerp of landing point to player position
-            {
-                _landingPointObject.transform.position = Vector3.Lerp(_landingPointLastPosition, landingPointTargetPosition, _interruptLandingPointMovementCurve.Evaluate(_interruptLandingPointTimer / _interruptLandingPointTime));
-                _interruptLandingPointTimer += Time.deltaTime;
-            }
-            else // Set landing point to player position and disable it
-            {
-                _landingPointObject.transform.position = landingPointTargetPosition;
-                SetPredictionRenderer(false);
-            }
+            _landingPointObject.transform.position = new Vector3(transform.position.x, _landingPointObject.transform.position.y, transform.position.z);
+            SetPredictionRenderer(false);
         }
     }
 
@@ -345,10 +343,10 @@ public class PlayerEntity : MonoBehaviour
 
     void SetJumpForce(bool jumpCharged)
     {
-        if (jumpCharged)
+        if (jumpCharged && RotaInput.magnitude >= _jumpInteructedIfSitckLessThan)
         {
-            _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, RotaInput.magnitude);
-            _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, RotaInput.magnitude);
+            _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, _landingPointSmoothCurve.Evaluate(RotaInput.magnitude) - _jumpInteructedIfSitckLessThan);
+            _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, _landingPointSmoothCurve.Evaluate(RotaInput.magnitude) - _jumpInteructedIfSitckLessThan);
         }
         else
             SetJumpForceToMinOrMax(false);
@@ -475,7 +473,7 @@ public class PlayerEntity : MonoBehaviour
     /// Draw a raycast to try to hit an object, if not then return a position in front
     /// </summary>
     /// <returns> Vector3 position </returns>
-    public virtual Vector3 TongueAimPosition()
+    public Vector3 TongueAimPosition()
     {
         if (Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
@@ -529,16 +527,13 @@ public class PlayerEntity : MonoBehaviour
         _hasPushedOtherPlayer = false;
         _hasPushedInterractable = false;
     }
-    protected void TongueLine()
+    void TongueLine()
     {
         // Set tongueLineRenderer point position
         _tongueLineRenderer.SetPosition(0, _tongueStartTransform.position);
         _tongueLineRenderer.SetPosition(1, _tongueEndTransform.position);
     }
-    protected virtual void TongueHitObject(Vector3 target)
-    {
 
-    }
     public void UseTongue()
     {
         StartCoroutine(UseTongueCoroutine());
@@ -547,7 +542,7 @@ public class PlayerEntity : MonoBehaviour
     // =====================================================================================
     //                                   MOUNT METHODS 
     // =====================================================================================
-    public virtual bool TryMount()
+    public bool TryMount()
     {
         if (!_isOnFrog) // Is it not on a frog ?
         {
@@ -577,7 +572,7 @@ public class PlayerEntity : MonoBehaviour
         return false;
     }
 
-    public virtual void StopMount()
+    public void StopMount()
     {
         if (_isOnFrog)
         {
@@ -592,7 +587,7 @@ public class PlayerEntity : MonoBehaviour
         }
     }
 
-    public virtual void PushPlayer(Vector3 dir, float force)
+    public void PushPlayer(Vector3 dir, float force)
     {
         _rigidbodyController.AddForce(dir, force, ForceMode.Impulse);
     }
@@ -609,16 +604,24 @@ public class PlayerEntity : MonoBehaviour
     // =====================================================================================
     //                                   GIZMOS METHODS 
     // =====================================================================================
-    protected void OnDrawGizmos()
+
+    void OnDrawGizmos()
     {
+        // Draw ground check debug
         Gizmos.color = _groundCheckDebugColor;
         Gizmos.DrawCube(_groundCheck.position, _groundRadius);
 
-        Gizmos.color = Color.red;
+        // Draw tongue debug line
+        Gizmos.color = _tongueDebugColor;
         Gizmos.DrawLine(_tongueStartTransform.position, (this.transform.forward * _tongueMaxLenght) + _tongueStartTransform.position);
 
-        Gizmos.color = Color.gray;
+        // Draw mount radius debug
+        Gizmos.color = _mountRadiusDebugColor;
         Gizmos.DrawWireSphere(transform.position, _mountRadius);
+
+        // Draw refresh rotation debug line
+        Gizmos.color = _refreshRotationLineDebugColor;
+        Gizmos.DrawLine(transform.position, transform.position + (-transform.up * _setGroundRotationRaycastLenght));
     }
 }
 

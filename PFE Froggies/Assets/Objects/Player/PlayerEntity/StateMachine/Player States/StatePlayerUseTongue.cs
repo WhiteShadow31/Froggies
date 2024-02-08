@@ -26,11 +26,7 @@ public class StatePlayerUseTongue : StatePlayer
     }
     public override void FixedUpdate(float time)
     {
-        if (_isGrounded)
-        {
-            _smPlayer.entity.Rotate();
 
-        }
     }
     public override void Exit()
     {
