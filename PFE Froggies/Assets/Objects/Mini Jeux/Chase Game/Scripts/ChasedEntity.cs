@@ -7,6 +7,7 @@ public class ChasedEntity : MonoBehaviour
     [SerializeField] CameraEntity _cameraEntity;
 
     ChaseGamePoint _currentTargetPoint;
+    ChaseGamePoint _lastTargetPoint;
 
     [Header("Other params")]
     [SerializeField] ChaseGamePoint _startPoint;
@@ -17,6 +18,7 @@ public class ChasedEntity : MonoBehaviour
     [SerializeField] float _timeBetweenMovement;
     [SerializeField] AnimationCurve _movementCurve;
     [SerializeField] float _movementTime;
+    [SerializeField] float _rotationSpeed;
 
     float _movementTimer;
     bool _isMoving = false;
@@ -82,6 +84,7 @@ public class ChasedEntity : MonoBehaviour
         }
 
         // Set new target point
+        _lastTargetPoint = _currentTargetPoint;
         _currentTargetPoint = safestPoint.GetComponent<ChaseGamePoint>();
 
         yield return new WaitForSeconds(_timeBetweenMovement);
@@ -174,6 +177,9 @@ public class ChasedEntity : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, _currentTargetPoint.transform.position, _movementCurve.Evaluate(_movementTimer / _movementTime));
             _movementTimer += Time.deltaTime;
+
+            Quaternion targetRotation = Quaternion.LookRotation(_currentTargetPoint.transform.position - _lastTargetPoint.transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed);
         }
         else
         {
