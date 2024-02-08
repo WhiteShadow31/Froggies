@@ -470,6 +470,7 @@ public class PlayerEntity : MonoBehaviour
     /// <returns> Vector3 position </returns>
     public Vector3 TongueAimPosition()
     {
+        //
         if (Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
             if(hit.transform.TryGetComponent<PlayerEntity>(out  PlayerEntity otherPlayer) && !_hasPushedOtherPlayer)
@@ -477,9 +478,9 @@ public class PlayerEntity : MonoBehaviour
                 otherPlayer.PushPlayer(transform.forward, _tongueHitForce);
                 _hasPushedOtherPlayer = true;
             }
-            if(hit.transform.TryGetComponent<InteractableEntity>(out  InteractableEntity otherInteractable) && !_hasPushedInterractable)
+            if(hit.transform.TryGetComponent<IInteractableEntity>(out  IInteractableEntity otherInteractable) && !_hasPushedInterractable)
             {
-                otherInteractable.Push(transform.forward, _tongueHitForce);
+                otherInteractable.Push(transform.forward, _tongueHitForce, this.gameObject);
                 _hasPushedInterractable = true;
             }
             return hit.point;

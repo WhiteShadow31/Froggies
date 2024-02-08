@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class InteractableEntity : MonoBehaviour, IIntaractableEntity
+public class InteractableEntity : MonoBehaviour, IInteractableEntity
 {
     protected Rigidbody _rb;
 
@@ -10,13 +10,13 @@ public class InteractableEntity : MonoBehaviour, IIntaractableEntity
         _rb = GetComponent<Rigidbody>();
     }
 
-    public virtual void Push(Vector3 dir, float force)
+    public virtual void Push(Vector3 dir, float force, GameObject frog)
     {
-        _rb.AddForce(dir * force, ForceMode.Impulse);
+        _rb.AddForce(dir * force, ForceMode.VelocityChange);
     }
 }
 
-public interface IIntaractableEntity
+public interface IInteractableEntity
 {
-    public void Push(Vector3 dir, float force);
+    public void Push(Vector3 dir, float force, GameObject frog);
 }
