@@ -12,6 +12,7 @@ public class InteractableRockEntity : InteractableEntity, IInteractableEntity
 
     [Header("Moving Parameters")]
     [SerializeField] public float distanceToMove = 1;
+    bool canBePushed = true;
 
     private void FixedUpdate()
     {
@@ -51,7 +52,10 @@ public class InteractableRockEntity : InteractableEntity, IInteractableEntity
                 direction.x = 0;
                 direction.z = 1;
             }
-            _rb.AddForce(direction * force, ForceMode.VelocityChange);
+
+            if (canBePushed)
+                StartCoroutine(MoveBoulder(1, this.transform.position + direction));
+            //_rb.AddForce(direction * force, ForceMode.VelocityChange);
 
         }
         // 1st time hit
@@ -61,5 +65,20 @@ public class InteractableRockEntity : InteractableEntity, IInteractableEntity
             _timeTried = 0;
             _frogFirstHit = frog;
         }
+    }
+
+    IEnumerator MoveBoulder(float time, Vector3 posToGo)
+    {
+        float timer = 0;
+        canBePushed = false;
+
+        while (timer < time)
+        {
+            timer += Time.fixedDeltaTime;
+            this.transform.position = Vector3.Lerp(this.transform.position, posToGo, timer / time);
+            yield return null;
+        }
+        this.transform.position = posToGo;
+        canBePushed = true;
     }
 }
