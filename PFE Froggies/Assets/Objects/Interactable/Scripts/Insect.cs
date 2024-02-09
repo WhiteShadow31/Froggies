@@ -15,7 +15,8 @@ public class Insect : MonoBehaviour, IInteractableEntity
 
     private void Start()
     {
-        StartCoroutine(MoveInsect(durationToReach));
+        if(plantTarget != null)
+            StartCoroutine(MoveInsect(durationToReach));
     }
 
     IEnumerator MoveInsect(float duration)
@@ -39,6 +40,7 @@ public class Insect : MonoBehaviour, IInteractableEntity
 
     public virtual void Push(Vector3 dir, float force, GameObject frog)
     {
-        this.gameObject.SetActive(true);
+        //this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 }
