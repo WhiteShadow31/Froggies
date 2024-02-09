@@ -237,7 +237,7 @@ Transform:
   m_GameObject: {fileID: 4869463750527140665}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 121.87168, y: 26.113272, z: 144.70679}
+  m_LocalPosition: {x: 80.42719, y: 26.113272, z: 116.74422}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantTarget: {fileID: 0}
-  durationToReach: 3
+  durationToReach: 6
 --- !u!54 &1522587712693222464
 Rigidbody:
   m_ObjectHideFlags: 0
