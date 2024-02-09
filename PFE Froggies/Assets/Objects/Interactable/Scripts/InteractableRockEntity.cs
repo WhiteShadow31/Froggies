@@ -9,6 +9,7 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
     Vector3 _frogFirstHitDirection = Vector3.zero;
 
     [Header("Moving Parameters")]
+    public LayerMask excludeMask;
     [SerializeField] public float distanceToMove = 1;
     bool canBePushed = true;
 
@@ -43,7 +44,15 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
             Vector3 size = GetComponent<BoxCollider>().size;
             Vector3 center = this.transform.position + size.x * direction;
             center.y += size.y / 2;
-            bool collide = Physics.OverlapBox(center, (size / 2f)*0.9f).Length > 0;
+            bool collide = false;
+            Collider[] cels = Physics.OverlapSphere(center, (size.x / 2.1f), ~excludeMask);
+            for (int i = 0; i < cels.Length; i++) {
+
+                if (cels[i].transform != this.transform) {
+
+                    collide = true;
+                }
+            }
             // Isnt pushed
             if (canBePushed && _frogFirstHitDirection == direction && !collide)
                 StartCoroutine(MoveBoulder(timeToMove, this.transform.position + distanceToMove * direction));

@@ -60,7 +60,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.5, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalScale: {x: 6.95, y: 7, z: 6.95}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8499261386469830305}
@@ -190,7 +190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeTriedToBePushed: 0.55
-  timeToMove: 0.55
+  timeToMove: 1.5
+  excludeMask:
+    serializedVersion: 2
+    m_Bits: 776
   distanceToMove: 7
 --- !u!65 &5252768411132140592
 BoxCollider:
