@@ -40,8 +40,12 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
         // Has already been hit
         if (_isTriedToBePushed && _frogFirstHit != frog)
         {
+            Vector3 size = GetComponent<BoxCollider>().size;
+            Vector3 center = this.transform.position + distanceToMove * direction;
+            center.y += size.y / 2;
+            bool collide = Physics.OverlapBox(center, size / 2.1f).Length > 0;
             // Isnt pushed
-            if (canBePushed && _frogFirstHitDirection == direction)
+            if (canBePushed && _frogFirstHitDirection == direction && !collide)
                 StartCoroutine(MoveBoulder(timeToMove, this.transform.position + distanceToMove * direction));
 
 
@@ -57,19 +61,21 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
         }
     }
 
-    IEnumerator MoveBoulder(float time, Vector3 posToGo)
+    IEnumerator MoveBoulder(float duration, Vector3 posToGo)
     {
         // Move timer
         float timer = 0;
+
+        Vector3 startPosition = this.transform.position;
 
         // If it can be pushed
         canBePushed = false;
 
         // Calculate move with time
-        while (timer < time)
+        while (timer < duration)
         {
             timer += Time.fixedDeltaTime;
-            this.transform.position = Vector3.Lerp(this.transform.position, posToGo, timer / time);
+            this.transform.position = Vector3.Lerp(startPosition, posToGo, timer / duration);
             yield return null;
         }
         this.transform.position = posToGo;
