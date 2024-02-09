@@ -15,58 +15,63 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
 
     private void Awake()
     {
-        GetComponent<Rigidbody>().isKinematic = true;
+        _rb = GetComponent<Rigidbody>();
+        _rb.isKinematic = true;
     }
 
     public override void Push(Vector3 dir, float force, GameObject frog)
     {
-        Vector3 direction = (this.transform.position - frog.transform.position).normalized;
-        // Take only 1 axis
-        direction.y = 0;
-        float signe = 0;
-
-        // Move to direction right 
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+        if (_rb.isKinematic)
         {
-            signe = Mathf.Abs(direction.x) / direction.x;
-            direction = Vector3.right * signe;
-        }
-        // Move to direction forward 
-        else
-        {
-            signe = Mathf.Abs(direction.z) / direction.z;
-            direction = Vector3.forward * signe;
-        }
+            Vector3 direction = (this.transform.position - frog.transform.position).normalized;
+            // Take only 1 axis
+            direction.y = 0;
+            float signe = 0;
 
-        // Has already been hit
-        if (_isTriedToBePushed && _frogFirstHit != frog)
-        {
-            Vector3 size = GetComponent<BoxCollider>().size;
-            Vector3 center = this.transform.position + size.x * direction;
-            center.y += size.y / 2;
-            bool collide = false;
-            Collider[] cels = Physics.OverlapSphere(center, (size.x / 2.1f), ~excludeMask);
-            for (int i = 0; i < cels.Length; i++) {
-
-                if (cels[i].transform != this.transform) {
-
-                    collide = true;
-                }
+            // Move to direction right 
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+            {
+                signe = Mathf.Abs(direction.x) / direction.x;
+                direction = Vector3.right * signe;
             }
-            // Isnt pushed
-            if (canBePushed && _frogFirstHitDirection == direction && !collide)
-                StartCoroutine(MoveBoulder(timeToMove, this.transform.position + distanceToMove * direction));
+            // Move to direction forward 
+            else
+            {
+                signe = Mathf.Abs(direction.z) / direction.z;
+                direction = Vector3.forward * signe;
+            }
+
+            // Has already been hit
+            if (_isTriedToBePushed && _frogFirstHit != frog)
+            {
+                Vector3 size = GetComponent<BoxCollider>().size;
+                Vector3 center = this.transform.position + size.x * direction;
+                center.y += size.y / 2;
+                bool collide = false;
+                Collider[] cels = Physics.OverlapSphere(center, (size.x / 2.1f), ~excludeMask);
+                for (int i = 0; i < cels.Length; i++) {
+
+                    if (cels[i].transform != this.transform) {
+
+                        collide = true;
+                    }
+                }
+                // Isnt pushed
+                if (canBePushed && _frogFirstHitDirection == direction && !collide)
+                    StartCoroutine(MoveBoulder(timeToMove, this.transform.position + distanceToMove * direction));
 
 
-        }
-        // 1st time hit
-        else
-        {
-            _isTriedToBePushed = true;
-            _timeTried = 0;
-            _frogFirstHit = frog;
+            }
+            // 1st time hit
+            else
+            {
+                _isTriedToBePushed = true;
+                _timeTried = 0;
+                _frogFirstHit = frog;
 
-            _frogFirstHitDirection = direction;
+                _frogFirstHitDirection = direction;
+            }
+
         }
     }
 
@@ -93,16 +98,15 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
 
     private void OnDrawGizmos()
     {
-        Vector3 forwardDistance = this.transform.position + distanceToMove * Vector3.forward;
-        Vector3 backDistance = this.transform.position + distanceToMove * Vector3.back;
-        Vector3 rightDistance = this.transform.position + distanceToMove * Vector3.right;
-        Vector3 leftDistance = this.transform.position + distanceToMove * Vector3.left;
-
-        Vector3 center = this.transform.position;
+      
         Vector3 size = GetComponent<BoxCollider>().size;
+        Vector3 center = this.transform.position;
         center.y += size.y / 2;
-        
+
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(center + (size.z) * Vector3.forward, size*0.9f);
+        Gizmos.DrawWireSphere(center + size.x * Vector3.forward, (size.x / 2.1f));
+        Gizmos.DrawWireSphere(center + size.x * Vector3.back, (size.x / 2.1f));
+        Gizmos.DrawWireSphere(center + size.x * Vector3.right, (size.x / 2.1f));
+        Gizmos.DrawWireSphere(center + size.x * Vector3.left, (size.x / 2.1f));
     }
 }

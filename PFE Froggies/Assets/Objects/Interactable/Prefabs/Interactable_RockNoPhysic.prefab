@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 9153088630232406343}
   - component: {fileID: 1920669650715302538}
   - component: {fileID: 5252768411132140592}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interactable_RockNoPhysic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 8621567089393464257}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.74, y: 0, z: -3.84}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
