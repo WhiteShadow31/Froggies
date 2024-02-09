@@ -41,9 +41,9 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
         if (_isTriedToBePushed && _frogFirstHit != frog)
         {
             Vector3 size = GetComponent<BoxCollider>().size;
-            Vector3 center = this.transform.position + distanceToMove * direction;
+            Vector3 center = this.transform.position + size.x * direction;
             center.y += size.y / 2;
-            bool collide = Physics.OverlapBox(center, size / 2.1f).Length > 0;
+            bool collide = Physics.OverlapBox(center, (size / 2f)*0.9f).Length > 0;
             // Isnt pushed
             if (canBePushed && _frogFirstHitDirection == direction && !collide)
                 StartCoroutine(MoveBoulder(timeToMove, this.transform.position + distanceToMove * direction));
@@ -74,7 +74,7 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
         // Calculate move with time
         while (timer < duration)
         {
-            timer += Time.fixedDeltaTime;
+            timer += Time.deltaTime;
             this.transform.position = Vector3.Lerp(startPosition, posToGo, timer / duration);
             yield return null;
         }
@@ -89,10 +89,11 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
         Vector3 rightDistance = this.transform.position + distanceToMove * Vector3.right;
         Vector3 leftDistance = this.transform.position + distanceToMove * Vector3.left;
 
+        Vector3 center = this.transform.position;
+        Vector3 size = GetComponent<BoxCollider>().size;
+        center.y += size.y / 2;
+        
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(forwardDistance, 0.3f);
-        Gizmos.DrawSphere(backDistance, 0.3f);
-        Gizmos.DrawSphere(rightDistance, 0.3f);
-        Gizmos.DrawSphere(leftDistance, 0.3f);
+        Gizmos.DrawWireCube(center + (size.z) * Vector3.forward, size*0.9f);
     }
 }
