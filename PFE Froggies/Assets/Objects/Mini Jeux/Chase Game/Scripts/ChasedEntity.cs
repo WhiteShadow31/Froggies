@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChasedEntity : MonoBehaviour
+public class ChasedEntity : MonoBehaviour, IInteractableEntity
 {
     [SerializeField] CameraEntity _cameraEntity;
 
@@ -34,6 +34,14 @@ public class ChasedEntity : MonoBehaviour
     bool _isStuck;
     public bool IsStuck { get { return _isStuck; } }
 
+    [Header("Eated")]
+    [SerializeField] float _tryToEatTime;
+    [SerializeField] GameObject[] _destroyedObjectsWhenEated;
+
+    float _tryToEatTimer;
+    bool _isTriedToBeEated;
+    GameObject _frogFirstEat;
+
     [Header("Debug gizmos")]
     [SerializeField] bool _drawDebug = true;
 
@@ -61,6 +69,23 @@ public class ChasedEntity : MonoBehaviour
         else if (_isStuck)
         {
             Stucked();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        // A player tried to push it
+        if (_isTriedToBeEated)
+        {
+            // Timer waiting for other player to hit it
+            if (_tryToEatTimer < _tryToEatTime)
+                _tryToEatTimer += Time.fixedDeltaTime;
+            else
+            {
+                _isTriedToBeEated = false;
+                _tryToEatTimer = 0;
+                _frogFirstEat = null;
+            }
         }
     }
 
@@ -128,9 +153,7 @@ public class ChasedEntity : MonoBehaviour
             _isStuck = true;
             _isStopped = false;
             _isMoving = false;
-            _bodyMeshRenderer.sharedMaterial = _stuckMat;
-
-            this.gameObject.SetActive(false);
+            _bodyMeshRenderer.sharedMaterial = _stuckMat;            
         }
         else
         {
@@ -143,6 +166,8 @@ public class ChasedEntity : MonoBehaviour
 
     void Stucked()
     {
+        // Coder le coup de langue a deux ici
+
         // Get distances from players
         List<float> distanceFromPlayers = new List<float>();
         for (int i = 0; i < _cameraEntity.players.Length; i++)
@@ -202,6 +227,26 @@ public class ChasedEntity : MonoBehaviour
                 StartCoroutine(ChangePoint());
                 return;
             }
+        }
+    }
+
+    // If chased entity is hitted bu tongue
+    public void Push(Vector3 dir, float force, GameObject frog)
+    {
+        // Has already been hit
+        if (_isTriedToBeEated && _frogFirstEat != frog)
+        {
+            foreach(GameObject obj in _destroyedObjectsWhenEated)
+            {
+                obj.SetActive(false);
+            }
+        }
+        // 1st time hit
+        else
+        {
+            _isTriedToBeEated = true;
+            _tryToEatTimer = 0;
+            _frogFirstEat = frog;
         }
     }
 

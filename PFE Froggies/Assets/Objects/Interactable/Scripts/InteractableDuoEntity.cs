@@ -10,8 +10,6 @@ public class InteractableDuoEntity : InteractableEntity, IInteractableEntity
     [SerializeField] bool _isTriedToBePushed = false;
     [SerializeField] GameObject _frogFirstHit;
 
-
-
     private void FixedUpdate()
     {
         // A player tried to push it
