@@ -1328,6 +1328,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 217292656721007578, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
@@ -1379,6 +1383,10 @@ PrefabInstance:
     - target: {fileID: 3179937234017522720, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179937234017522720, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4588733095707161382, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
       propertyPath: _maxZoomYDist
