@@ -6,11 +6,11 @@ public class InteractableDuoEntity : InteractableEntity, IInteractableEntity
 {
     [Header("Time to hit Parameters")]
     [SerializeField] public float timeTriedToBePushed = 1f;
-    [SerializeField] float _timeTried = 0;
-    [SerializeField] bool _isTriedToBePushed = false;
-    [SerializeField] GameObject _frogFirstHit;
+    protected float _timeTried = 0;
+    protected bool _isTriedToBePushed = false;
+    protected GameObject _frogFirstHit;
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         // A player tried to push it
         if(_isTriedToBePushed)

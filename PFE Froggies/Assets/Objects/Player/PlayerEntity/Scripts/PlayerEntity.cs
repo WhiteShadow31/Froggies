@@ -470,7 +470,6 @@ public class PlayerEntity : MonoBehaviour
     /// <returns> Vector3 position </returns>
     public Vector3 TongueAimPosition()
     {
-        //
         if (Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
             if(hit.transform.TryGetComponent<PlayerEntity>(out  PlayerEntity otherPlayer) && !_hasPushedOtherPlayer)
