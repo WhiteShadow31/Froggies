@@ -1254,6 +1254,9 @@ MonoBehaviour:
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 216
+  _maxChargeDuration: 0.5
+  _unchargeJumpDuration: 2.5
+  _maxChargeScale: {x: 1.25, y: 1.25, z: 1.25}
   _showDebug: 0
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
   _tongueDebugColor: {r: 0, g: 0, b: 1, a: 1}
