@@ -88,6 +88,11 @@ public class Dialogue : UIRotateToCamera
         Color color = Color.white;
         color.a = 0.3f;
         Gizmos.color = color;
+        Gizmos.DrawCube(this.transform.position + offsetCanva, new Vector3(sizeCanva.x, sizeCanva.y, 0.1f));
+
+        color = Color.red;
+        color.a = 0.3f;
+        Gizmos.color = color;
         Gizmos.DrawCube(this.transform.position + offsetImage, new Vector3(sizeImage.x, sizeImage.y, 0.1f));
     }
 }
