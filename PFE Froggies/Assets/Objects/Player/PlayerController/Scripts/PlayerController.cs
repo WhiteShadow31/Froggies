@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected GameObject _prefabPlayerEntity;
     protected PlayerEntity _playerEntity;
     [Space]
+    
     public int playerNbr = 0;
     public Vector3 spawnPoint;
 
@@ -97,11 +98,19 @@ public class PlayerController : MonoBehaviour
     {
         if (_prefabPlayerEntity != null)
         {
+            // Instantiate the gameObject frog
             GameObject go = Instantiate(_prefabPlayerEntity);
+
+            // Get the component to control it
             _playerEntity = go.GetComponent<PlayerEntity>();
+
+            // Set it's starting position to this
             go.transform.position = this.transform.position;
 
-            _playerEntity.gameObject.name = _prefabPlayerEntity.name + " " + playerNbr.ToString();
+            // Change it's name
+            _playerEntity.gameObject.name = "PlayerFrog" + playerNbr.ToString();
+
+
             if (_cameraEntity == null)
             {
                 _cameraEntity = Camera.main.GetComponent<CameraEntity>();
@@ -127,7 +136,6 @@ public class PlayerController : MonoBehaviour
             _playerEntity.controller = this;
         }
     }
-
     public void SetPlayerColor(Color col)
     {
         if(_playerEntity != null && _playerEntity.model != null)
