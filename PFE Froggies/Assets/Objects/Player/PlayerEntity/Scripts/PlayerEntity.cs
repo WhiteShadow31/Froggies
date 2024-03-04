@@ -117,7 +117,7 @@ public class PlayerEntity : MonoBehaviour
     [ShowIf("_showDebug", true)] public bool JumpPressInput = false;
     [ShowIf("_showDebug", true)] public bool JumpReleaseInput = false;
     [ShowIf("_showDebug", true)] bool _startTongueAimInput = false;
-    public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
+    public bool StartTongueAimInput { get { return _startTongueAimInput; } set { _startTongueAimInput = value; } }
     [ShowIf("_showDebug", true)] bool _endTongueAimInput = false;
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
     [ShowIf("_showDebug", true)] public bool MountInput;
