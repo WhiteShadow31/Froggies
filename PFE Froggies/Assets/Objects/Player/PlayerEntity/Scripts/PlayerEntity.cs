@@ -32,6 +32,7 @@ public class PlayerEntity : MonoBehaviour
     [Header("--- MOVEMENT ---")]
     [SerializeField] float _moveForce = 1;
     [SerializeField] ForceMode _moveMode = ForceMode.Impulse;
+    bool _isMoving;
 
     [Header("--- TONGUE ---")]
     [SerializeField] Transform _tongueStartTransform;
@@ -51,6 +52,7 @@ public class PlayerEntity : MonoBehaviour
     [Tooltip("Cast sphere around the hit point and detect layer mask")]
     [SerializeField] LayerMask _tongueHitLayerMask;
     float _tongueOutDelay = 0, _tongueInDelay = 0;
+    bool _canUseTongue = true;
 
     [Header("--- MOUNT OTHER ---")]
     public Transform onFrogTransform;
@@ -67,34 +69,25 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _longJumpForceFwd = 2;
     ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
-    [SerializeField] LineRenderer _jumpPredictionLine;
-    [SerializeField] bool _showTrajectoryLine = true;
-    [SerializeField] GameObject _landingPointObject;
-    [SerializeField] bool _showLandingPoint = true;
-    [Space]
-    [SerializeField] float _jumpInteructedIfSitckLessThan = 0.05f;
-    [SerializeField] float _timeToChargeJump = 0.5f;
-    [SerializeField] AnimationCurve _landingPointSmoothCurve;
-    [SerializeField] float _landingPointSmoothSpeed = 0.02f;
-    [Space]
-    [SerializeField] int _jumpPredictionLinePointCount = 200;
-    [SerializeField] float _jumpPredictiontDuration = 5;
-    [SerializeField] LayerMask _jumpPredictionLayerMask;
-
+    //[SerializeField] LineRenderer _jumpPredictionLine;
+    //[SerializeField] bool _showTrajectoryLine = true;
+    //[SerializeField] GameObject _landingPointObject;
+    //[SerializeField] bool _showLandingPoint = true;
+    //[Space]
+    //[SerializeField] float _jumpInteructedIfSitckLessThan = 0.05f;
+    //[SerializeField] float _timeToChargeJump = 0.5f;
+    //[SerializeField] AnimationCurve _landingPointSmoothCurve;
+    //[SerializeField] float _landingPointSmoothSpeed = 0.02f;
+    //[Space]
+    //[SerializeField] int _jumpPredictionLinePointCount = 200;
+    //[SerializeField] float _jumpPredictiontDuration = 5;
+    //[SerializeField] LayerMask _jumpPredictionLayerMask;
     //MeshRenderer _jumpPredictionObjectRenderer;
-    public bool IsJumping { get { return _isJumping; } }
+    [SerializeField] float _jumpIfStickIsMoreThan;
     bool _isJumping = false;
-    [SerializeField] float _maxChargeDuration;
-    [SerializeField] float _unchargeJumpDuration;
-    [SerializeField] Vector3 _maxChargeScale;
-    Vector3 _minChargeScale;
-    float _maxChargeTimer;
-    float _unchargeJumpTimer;
-    float _currentJumpForceUp;
-    float _currentJumpForceFwd;
-    bool _isChargingJump;
-    bool _jumpCharged;
+    public bool IsJumping { get { return _isJumping; } }
     bool _wasGroundedLastFrame;
+    bool _haveToLongJump = false;
 
     //bool _jumpCharged = false;
     //bool _wasGroundedLastFrame = false;
@@ -143,24 +136,22 @@ public class PlayerEntity : MonoBehaviour
             _camera = Camera.main;
 
         //_jumpPredictionObjectRenderer = _landingPointObject.GetComponent<MeshRenderer>();
-
         // Set jump prediction color
         //SetJumpPredictionColor(playerColor);
 
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
-
-        _minChargeScale = transform.localScale;
     }
 
     protected void Update()
     {
         _smPlayer.Update(Time.deltaTime);
 
-        if (EndTongueAimInput)
-        {            
-            EndTongueAimInput = false;
-            UseTongue();
+        // If the tongue button is pressed
+        if (StartTongueAimInput && _canUseTongue)
+        {
+            StartTongueAimInput = false;           
+            UseTongue(); // Use tongue
         }
 
         Rotate();
@@ -171,7 +162,7 @@ public class PlayerEntity : MonoBehaviour
     {
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
-        if (MoveInput && RotaInput != Vector2.zero)
+        if (RotaInput != Vector2.zero && _isMoving)
            Move();     
     }
 
@@ -278,17 +269,33 @@ public class PlayerEntity : MonoBehaviour
     //                                   JUMP METHODS 
     // =====================================================================================
 
-    public void Jump()
+    void SmallJump()
     {
         _rigidbodyController.StopVelocity();
-        transform.localScale = _minChargeScale;
 
-        Vector3 jumpVector = (transform.forward * _currentJumpForceFwd) + (transform.up * _currentJumpForceUp);
+        Vector3 jumpVector = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
         _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
 
-        ResetJump();
         _isJumping = true;
         _wasGroundedLastFrame = true;
+
+        JumpPressInput = false;
+        JumpReleaseInput = false;
+    }
+
+    void LongJump()
+    {
+        _rigidbodyController.StopVelocity();
+
+        Vector3 jumpVector = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
+        _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+
+        _isJumping = true;
+        _wasGroundedLastFrame = true;
+        _haveToLongJump = false;
+
+        JumpPressInput = false;
+        JumpReleaseInput = false;
     }
 
     public void ManageJump()
@@ -301,54 +308,29 @@ public class PlayerEntity : MonoBehaviour
         }
         _wasGroundedLastFrame = IsGrounded;
 
-        // Manage is charging jump state
-        if(!_isChargingJump && IsGrounded && JumpPressInput)
-            _isChargingJump = true;
-
-        // Manage jump charge
-        if (_isChargingJump)
+        // Long jump
+        if(!_isJumping && IsGrounded)
         {
-            // If jump is charging
-            if (_maxChargeTimer < _maxChargeDuration)
+            if (JumpPressInput || _haveToLongJump)
             {
-                transform.localScale = Vector3.Lerp(_minChargeScale, _maxChargeScale, _maxChargeTimer / _maxChargeDuration);
-                _maxChargeTimer += Time.deltaTime;
-            }
-            // If jump is charged but player dont jump
-            else if(_unchargeJumpTimer < _unchargeJumpDuration)
-            {
-                transform.localScale = _maxChargeScale;
-
-                _jumpCharged = true;
-                _currentJumpForceFwd = _longJumpForceFwd;
-                _currentJumpForceUp = _longJumpForceUp;
-
-                _unchargeJumpTimer += Time.deltaTime;
-            }
-            // If uncharge timer is finished
-            else
-            {
-                transform.localScale = _minChargeScale;
-                ResetJump();
+                LongJump();
             }
         }
-    }
+        else if(JumpPressInput)
+        {
+            _haveToLongJump = true;
+        }
 
-    void ResetJump()
-    {
-        // Reset jump force to small jump
-        _currentJumpForceFwd = _jumpForceFwd;
-        _currentJumpForceUp = _jumpForceUp;
-        // Reset jump states
-        _isChargingJump = false;
-        _jumpCharged = false;
-        _isJumping = false;
-        // Reset timers
-        _maxChargeTimer = 0;
-        _unchargeJumpTimer = 0;
-        // Reset jump inputs
-        JumpPressInput = false;
-        JumpReleaseInput = false;
+        // Small jumps
+        if(RotaInput.magnitude > _jumpIfStickIsMoreThan && !_isJumping && IsGrounded)
+        {
+            _isMoving = false;
+            SmallJump();
+        }
+        else
+        {
+            _isMoving = true;
+        }
     }
 
     //public void ManageJump()
@@ -573,7 +555,8 @@ public class PlayerEntity : MonoBehaviour
     }
 
     IEnumerator UseTongueCoroutine()
-    {      
+    {
+        _canUseTongue = false;
         _tongueLineRenderer.enabled = true;
         Vector3 hitPosition;
 
@@ -585,7 +568,7 @@ public class PlayerEntity : MonoBehaviour
 
             TongueLine();
 
-            _tongueOutDelay += Time.fixedDeltaTime;
+            _tongueOutDelay += Time.deltaTime;
             yield return null;
         }
 
@@ -597,7 +580,7 @@ public class PlayerEntity : MonoBehaviour
 
             TongueLine();
             
-            _tongueInDelay += Time.fixedDeltaTime;
+            _tongueInDelay += Time.deltaTime;
             yield return null;
         }
         _tongueLineRenderer.enabled = false;
@@ -605,6 +588,7 @@ public class PlayerEntity : MonoBehaviour
         _tongueInDelay = 0;
         _hasPushedOtherPlayer = false;
         _hasPushedInterractable = false;
+        _canUseTongue = true;
     }
     void TongueLine()
     {

@@ -19,15 +19,15 @@ public class StatePlayerIdle : StatePlayer
     {
         _isGrounded = _smPlayer.entity.IsGrounded;
 
-        if (_smPlayer.entity.JumpReleaseInput)
-        {            
-            if (_isGrounded)
-                _smPlayer.Exit(_smPlayer.jump);
-            else
-            {
-                _smPlayer.entity.JumpReleaseInput = false;
-            }
-        }
+        //if (_smPlayer.entity.JumpReleaseInput)
+        //{            
+        //    if (_isGrounded)
+        //        _smPlayer.Exit(_smPlayer.jump);
+        //    else
+        //    {
+        //        _smPlayer.entity.JumpReleaseInput = false;
+        //    }
+        //}
 
         if(_smPlayer.entity.MountInput)
         {
