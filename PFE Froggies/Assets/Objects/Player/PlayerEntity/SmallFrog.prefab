@@ -1144,8 +1144,8 @@ MonoBehaviour:
   _moveMode: 1
   _jumpForceUp: 20
   _jumpForceFwd: 30
-  _longJumpForceUp: 40
-  _longJumpForceFwd: 35
+  _longJumpForceUp: 60
+  _longJumpForceFwd: 10
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
   _tongueMaxLenght: 4
