@@ -22,10 +22,8 @@ public class GamepadButton : MonoBehaviour
 
     public void HighlightButton()
     {
-        if (true)
-        {
-            _button.Select();
-        }
+        Debug.Log("Highlight");
+        _button.Select();
     }
 
     public void UnHighlightButton()
@@ -38,6 +36,7 @@ public class GamepadButton : MonoBehaviour
 
     public GamepadButton ChangeButton(Vector2 dir)
     {
+        
         if(Mathf.Abs(dir.x) > 0.7f || Mathf.Abs(dir.y) > 0.7f)
         {
             // UP DOWN
