@@ -69,7 +69,12 @@ public class PlayerEntity : MonoBehaviour
     [Space]
     [SerializeField] float _longJumpForceUp = 1;
     [SerializeField] float _longJumpForceFwd = 2;
-    ForceMode _jumpMode = ForceMode.Impulse;
+    [SerializeField] ForceMode _jumpMode = ForceMode.Impulse;
+    [Space]
+    [SerializeField] int _jumpCollisionDetectionEveryTickCount;
+    [SerializeField] float _jumpCollisionDetectionOffset;
+    [SerializeField] LayerMask _jumpCollisionDetectionLayerMask;
+    int _jumpCollisionDetectionTickCount;
     [Space]
     [SerializeField] bool _showTrajectoryLine = true;
     [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LineRenderer _jumpPredictionLine;
@@ -143,7 +148,19 @@ public class PlayerEntity : MonoBehaviour
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
         if (RotaInput != Vector2.zero && RotaInput.magnitude < _moveIfStickLessThat)
-           Move();     
+           Move();
+
+        if (_isJumping)
+        {
+            ManageJumpCollision();
+        }
+        else
+        {
+            foreach (Collider col in transform.GetComponentsInChildren<Collider>())
+            {
+                col.enabled = true;
+            }
+        }
     }
 
     // =====================================================================================
@@ -261,6 +278,31 @@ public class PlayerEntity : MonoBehaviour
         }
         else
             _jumpPredictionLine.enabled = false;
+    }
+
+    void ManageJumpCollision()
+    {
+        if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount)
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpPredictionLayerMask))
+            {
+                Debug.Log("off");
+                foreach(Collider col in transform.GetComponentsInChildren<Collider>())
+                {                    
+                    col.enabled = false;
+                }
+            }
+            else
+            {
+                Debug.Log("on");
+                foreach (Collider col in transform.GetComponentsInChildren<Collider>())
+                {
+                    col.enabled = true;
+                }
+            }
+            _jumpCollisionDetectionTickCount = 0;
+        }
+        _jumpCollisionDetectionTickCount++;
     }
 
     void ResetJump()
