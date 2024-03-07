@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
     public int playerNbr = 0;
     public Vector3 spawnPoint;
 
-    // MENU 
-    protected bool m_isInMenu = false;
+    bool _tryToChangeButton = false;
+
+
 
 
     private void Awake()
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void OnStartPreciseMove(InputValue ctx)
     {
-        if (_playerEntity != null && !m_isInMenu)
+        if (_playerEntity != null && !MenuManager.Instance.IsInMenu)
         {
             _playerEntity.MoveInput = true;
         }
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     void OnEndPreciseMove(InputValue ctx)
     {
-        if (_playerEntity != null && !m_isInMenu)
+        if (_playerEntity != null && !MenuManager.Instance.IsInMenu)
         {
             _playerEntity.MoveInput = false;
         }
@@ -55,13 +56,30 @@ public class PlayerController : MonoBehaviour
     {
         if(_playerEntity != null)
         {
+            // Direction
             Vector2 dir = ctx.Get<Vector2>();
-            if (!m_isInMenu)
+
+            // Is not in the menu
+            if (!MenuManager.Instance.IsInMenu)
                 _playerEntity.RotaInput = dir;
             else
             {
-                // MENU USE DIRECTION FOR SELECTION OF BUTTONS
-                MenuManager.Instance.ChangeSelectedButton(dir);
+                // Wasnt trying to change button and pushed joystick
+                if(!_tryToChangeButton && dir.magnitude > 0.5f)
+                {
+                    _tryToChangeButton = true;
+
+                    //Debug.Log("Try to change selected button");
+                    // MENU USE DIRECTION FOR SELECTION OF BUTTONS
+                    MenuManager.Instance.ChangeSelectedButton(dir);
+
+                }
+                // Has tried to change and almost stopped pushing joystick
+                else if (_tryToChangeButton && dir.magnitude < 0.3f)
+                {
+
+                    _tryToChangeButton = false;
+                }
             }
         }
     }
@@ -70,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_playerEntity != null)
         {
-            if (!m_isInMenu)
+            if (!MenuManager.Instance.IsInMenu)
                 _playerEntity.JumpPressInput = true;
             else
             {
@@ -82,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     void OnJumpRelease(InputValue ctx)
     {
-        if (_playerEntity != null && _playerEntity.IsGrounded && !m_isInMenu)
+        if (_playerEntity != null && _playerEntity.IsGrounded && !MenuManager.Instance.IsInMenu)
         {
             _playerEntity.JumpReleaseInput = true;
         }
@@ -90,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     void OnStartTongueAim(InputValue ctx)
     {
-        if( _playerEntity != null && !m_isInMenu)
+        if( _playerEntity != null && !MenuManager.Instance.IsInMenu)
         {
             _playerEntity.StartTongueAimInput = true;
         }
@@ -98,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
     void OnEndTongueAim(InputValue ctx)
     {
-        if(_playerEntity != null && !m_isInMenu)
+        if(_playerEntity != null && !MenuManager.Instance.IsInMenu)
         {
             _playerEntity.EndTongueAimInput = true;          
         }
@@ -106,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMount(InputValue ctx)
     {
-        if(_playerEntity != null && !m_isInMenu)
+        if(_playerEntity != null && !MenuManager.Instance.IsInMenu)
         {
             _playerEntity.MountInput = true;
         }
@@ -114,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMenuPause(InputValue ctx)
     {
-        m_isInMenu = !m_isInMenu;
+        MenuManager.Instance.TryToOpenMenu();
     }
 
     public void SpawnPlayer()
