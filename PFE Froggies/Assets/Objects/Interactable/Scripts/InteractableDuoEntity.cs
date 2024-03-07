@@ -10,24 +10,18 @@ public class InteractableDuoEntity : InteractableEntity, IInteractableEntity
     protected bool _isTriedToBePushed = false;
     protected GameObject _frogFirstHit;
 
-
-
     protected virtual void FixedUpdate()
     {
         // A player tried to push it
-        if (_isTriedToBePushed)
+        if(_isTriedToBePushed)
         {
             // Timer waiting for other player to hit it
-            if (_timeTried < timeTriedToBePushed)
+            if(_timeTried < timeTriedToBePushed)
                 _timeTried += Time.fixedDeltaTime;
-            // Timer reached
             else
             {
-                // Stop try to push
                 _isTriedToBePushed = false;
-                // Reset timer
                 _timeTried = 0;
-                // Clear 1st hit
                 _frogFirstHit = null;
             }
         }

@@ -1133,6 +1133,11 @@ MonoBehaviour:
   controller: {fileID: 0}
   _camera: {fileID: 0}
   _turnSmoothTime: 0.1
+  _setGroundRotationRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _setGroundRotationRaycastLenght: 1
+  _rotationSmoothSpeed: 2
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: {x: 1.6, y: 0.23, z: 1.69}
   _groundMask:
@@ -1142,62 +1147,76 @@ MonoBehaviour:
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   _moveForce: 1
   _moveMode: 1
-  _jumpForceUp: 20
-  _jumpForceFwd: 30
-  _longJumpForceUp: 40
-  _longJumpForceFwd: 50
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
   _tongueMaxLenght: 4
   _tongueLayerMask:
     serializedVersion: 2
     m_Bits: 201
-  _tongueOutTime: 0.15
+  _tongueInTime: 0.35
+  _tongueOutTime: 0.35
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.16251221
+      value: 0.70990604
+      inSlope: 1.1616927
+      outSlope: 1.1616927
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.48721802
+      outWeight: 0.14122853
+    - serializedVersion: 3
+      time: 1.0000011
+      value: 0.995284
+      inSlope: 0.000005066368
+      outSlope: 0.000005066368
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2388104
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _tongueInTime: 0.15
   _tongueInCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.16251221
+      value: 0.70990604
+      inSlope: 1.1616927
+      outSlope: 1.1616927
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.48721802
+      outWeight: 0.14122853
+    - serializedVersion: 3
+      time: 1.0000011
+      value: 0.995284
+      inSlope: 0.000005066368
+      outSlope: 0.000005066368
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2388104
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1213,49 +1232,26 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  _jumpPredictionLine: {fileID: 3735360176625625681}
+  _jumpForceUp: 20
+  _jumpForceFwd: 30
+  _longJumpForceUp: 30
+  _longJumpForceFwd: 60
   _showTrajectoryLine: 0
-  _landingPointObject: {fileID: 8099151475436712201}
-  _showLandingPoint: 1
-  _jumpInteructedIfSitckLessThan: 0.05
-  _timeToChargeJump: 0.5
-  _landingPointSmoothSpeed: 0.25
-  _interruptLandingPointTime: 0.2
-  _interruptLandingPointMovementCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  _jumpPredictionLine: {fileID: 3735360176625625681}
   _jumpPredictionLinePointCount: 200
   _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
     serializedVersion: 2
-    m_Bits: 152
+    m_Bits: 216
+  _showDebug: 0
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
-  _showInputDebug: 0
+  _tongueDebugColor: {r: 0, g: 0, b: 1, a: 1}
+  _mountRadiusDebugColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _refreshRotationLineDebugColor: {r: 0, g: 1, b: 0, a: 1}
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
-  JumpPressInput: 0
-  JumpReleaseInput: 0
+  SmallJumpInput: 0
+  LongJumpInput: 0
   MountInput: 0
 --- !u!114 &508620674244156951
 MonoBehaviour:
@@ -1528,8 +1524,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3491076819419388840}
-  - component: {fileID: 3897644470385245452}
-  - component: {fileID: 6924832171635293979}
   - component: {fileID: 3735360176625625681}
   m_Layer: 6
   m_Name: JumpPrediction
@@ -1553,56 +1547,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4811288948140708742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3897644470385245452
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8099151475436712201}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6924832171635293979
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8099151475436712201}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b0af24a0a0be49a488719ce4a2ff2039, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!120 &3735360176625625681
 LineRenderer:
   serializedVersion: 2

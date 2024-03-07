@@ -17,14 +17,13 @@ public class StatePlayerOnFrog : State
     {
         _smPlayer.entity.transform.position = _smPlayer.entity.GetMountTransform.position;
 
-        if (_smPlayer.entity.JumpReleaseInput)
+        if (_smPlayer.entity.SmallJumpInput || _smPlayer.entity.LongJumpInput)
         {
             _smPlayer.Exit(_smPlayer.jump);
         }
     }
     public override void FixedUpdate(float time)
     {
-            _smPlayer.entity.Rotate();
         _smPlayer.entity.ManageJump();
     }
     public override void Exit()
