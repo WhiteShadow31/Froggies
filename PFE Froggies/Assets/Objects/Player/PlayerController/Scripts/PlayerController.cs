@@ -70,6 +70,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnLongJump()
+    {
+        if (_playerEntity != null && _playerEntity.IsGrounded)
+        {
+            _playerEntity.LongJumpInput = true;
+        }
+    }
+
     void OnStartTongueAim(InputValue ctx)
     {
         if( _playerEntity != null)

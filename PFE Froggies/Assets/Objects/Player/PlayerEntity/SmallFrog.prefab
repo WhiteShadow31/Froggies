@@ -1236,7 +1236,42 @@ MonoBehaviour:
   _jumpForceFwd: 30
   _longJumpForceUp: 30
   _longJumpForceFwd: 60
-  _jumpIfStickIsMoreThan: 0.7
+  _jumpPredictionLine: {fileID: 3735360176625625681}
+  _showTrajectoryLine: 0
+  _landingPointObject: {fileID: 8099151475436712201}
+  _showLandingPoint: 1
+  _jumpInteructedIfSitckLessThan: 0.05
+  _timeToChargeJump: 0.5
+  _landingPointSmoothCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _landingPointSmoothSpeed: 0.02
+  _jumpPredictionLinePointCount: 200
+  _jumpPredictiontDuration: 5
+  _jumpPredictionLayerMask:
+    serializedVersion: 2
+    m_Bits: 216
   _showDebug: 0
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
   _tongueDebugColor: {r: 0, g: 0, b: 1, a: 1}

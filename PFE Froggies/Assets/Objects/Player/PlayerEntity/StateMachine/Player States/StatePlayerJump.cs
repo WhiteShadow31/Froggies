@@ -13,7 +13,7 @@ public class StatePlayerJump : State
     {
         //Debug.Log(_smPlayer.entity.gameObject.name + " : " + "JUMP");
 
-        //_smPlayer.entity.Jump();
+        _smPlayer.entity.Jump();
     }
     public override void Update(float time)
     {
