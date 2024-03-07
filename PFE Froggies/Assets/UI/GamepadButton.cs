@@ -22,7 +22,8 @@ public class GamepadButton : MonoBehaviour
 
     public void HighlightButton()
     {
-        Debug.Log("Highlight");
+        if(_button == null)
+            _button = GetComponent<Button>();
         _button.Select();
     }
 
@@ -30,51 +31,45 @@ public class GamepadButton : MonoBehaviour
     {
         if (EventSystem.current.currentSelectedGameObject == _button)
         {
-            EventSystem.current.SetSelectedGameObject(null);
         }
+            EventSystem.current.SetSelectedGameObject(null);
     }
 
     public GamepadButton ChangeButton(Vector2 dir)
     {
-        
-        if(Mathf.Abs(dir.x) > 0.7f || Mathf.Abs(dir.y) > 0.7f)
+        // UP DOWN
+        if (Mathf.Abs(dir.x) < Mathf.Abs(dir.y))
         {
-            // UP DOWN
-            if(Mathf.Abs(dir.x) < Mathf.Abs(dir.y))
+            if (dir.y < 0)
             {
-                if(dir.y < 0)
-                {
-                    // Change down
-                    return downButton;
-                }
-                else
-                {
-                    // Change up
-                    return upButton;
-                }
+                // Change down
+                return downButton;
             }
-            // LEFT RIGHT
             else
             {
-                if (dir.x < 0)
-                {
-                    // Change left
-                    return leftButton;
-                }
-                else
-                {
-                    // Change right
-                    return rightButton;
-                }
+                // Change up
+                return upButton;
             }
         }
-        //UnHighlightButton();
-
-        return null;
+        // LEFT RIGHT
+        else
+        {
+            if (dir.x < 0)
+            {
+                // Change left
+                return leftButton;
+            }
+            else
+            {
+                // Change right
+                return rightButton;
+            }
+        }
     }
 
-    public void PressButton()
+    public virtual void PressButton()
     {
+        Debug.Log(this.gameObject.name);
         _button.onClick.Invoke();
     }
 }

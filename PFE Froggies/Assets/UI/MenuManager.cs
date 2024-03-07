@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
-    public GameObject menu;
+
+    public Menu actualMenu;
+    protected Menu m_starterMenu;
 
     // MENU 
     protected bool m_isInMenu = false;
     public bool IsInMenu {  get { return m_isInMenu; } }
 
-    // Button actually selected by the players
-    [SerializeField] protected GamepadButton m_selectedButton;
-    public GamepadButton SelectedButton { set { m_selectedButton = value; } }
 
     private void Awake()
     {
         Instance = this;
 
-        if(menu)
-            menu.SetActive(false);
+        if(actualMenu != null)
+            m_starterMenu = actualMenu;
     }
 
     public void TryToOpenMenu()
@@ -28,14 +28,10 @@ public class MenuManager : MonoBehaviour
         if (m_isInMenu)
         {
             CloseMenu();
-            if (m_selectedButton != null)
-                m_selectedButton.UnHighlightButton();
         }
         else
         {
             OpenMenu();
-            if(m_selectedButton != null)
-                m_selectedButton.HighlightButton();
         }
     }
 
@@ -43,36 +39,43 @@ public class MenuManager : MonoBehaviour
     protected void OpenMenu()
     {
         m_isInMenu = true;
-
-        menu.SetActive(true);
+        actualMenu.OpenMenu();
     }
     protected void CloseMenu()
     {
         m_isInMenu = false;
-
-        menu.SetActive(false);
+        actualMenu.CloseMenu();
     }
 
     public void PressSelectedButton()
     {
-        m_selectedButton.PressButton();
+        if(actualMenu != null)
+            actualMenu.PressSelectedButton();
     }
 
     public void ChangeSelectedButton(Vector2 dir)
     {
-        GamepadButton button = null;
+        if (actualMenu != null)
+            actualMenu.ChangeSelectedButton(dir);
+    }
 
-        if (m_selectedButton != null)
+    public void CloseGame()
+    {
+        if (m_isInMenu)
         {
-            button = m_selectedButton.ChangeButton(dir);
+            Application.Quit();
         }
+    }
+    public void StartNewGame()
+    {
+        if(SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCount)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        else
+            SceneManager.LoadScene(0);
+        
+    }
+    public void LoadGame()
+    {
 
-        if(button != null)
-        {
-            m_selectedButton.UnHighlightButton();
-            m_selectedButton=button;
-            m_selectedButton.HighlightButton();
-
-        }
     }
 }

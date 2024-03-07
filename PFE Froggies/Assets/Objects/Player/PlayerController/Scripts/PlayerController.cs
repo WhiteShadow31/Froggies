@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 // Wasnt trying to change button and pushed joystick
-                if(!_tryToChangeButton && dir.magnitude > 0.5f)
+                if(!_tryToChangeButton && dir.magnitude > 0.7f)
                 {
                     _tryToChangeButton = true;
 
