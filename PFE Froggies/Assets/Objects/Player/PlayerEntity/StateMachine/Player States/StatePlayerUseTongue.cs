@@ -18,7 +18,7 @@ public class StatePlayerUseTongue : StatePlayer
         _isGrounded = _smPlayer.entity.IsGrounded;
         _targetPosition = _smPlayer.entity.TongueAimPosition(); // USE A RAYCAST TO FIND POSITION TO AIM
 
-        if (_smPlayer.entity.EndTongueAimInput)
+        if (_smPlayer.entity.StartTongueAimInput)
         {
             _smPlayer.entity.UseTongue();
             // START TONGUE USE
@@ -26,11 +26,7 @@ public class StatePlayerUseTongue : StatePlayer
     }
     public override void FixedUpdate(float time)
     {
-        if (_isGrounded)
-        {
-            _smPlayer.entity.Rotate();
 
-        }
     }
     public override void Exit()
     {

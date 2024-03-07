@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "JumpPress",
+                    "name": "SmallJump",
                     "type": "Button",
                     "id": "0061cec2-31c7-4fad-8813-07953654b842",
                     "expectedControlType": "Button",
@@ -42,12 +42,12 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "JumpRelease",
+                    "name": "LongJump",
                     "type": "Button",
-                    "id": "fb95c89c-be7b-4857-ac86-a497c27dd037",
+                    "id": "8f5f15a5-9a82-4c91-90ed-691cdfe258ed",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -60,27 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StartPreciseMove",
-                    "type": "Button",
-                    "id": "343240cf-7ad2-47b6-ae09-c10bffe4956f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "EndPreciseMove",
-                    "type": "Button",
-                    "id": "61ba11aa-10e3-468f-a70a-0edb4593749a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ReloadScene_TGS",
                     "type": "Button",
                     "id": "a56b92b8-9277-447c-97d1-e2609715a01e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MenuPause",
+                    "type": "Button",
+                    "id": "77a5533a-0a60-4911-bbd8-31b4a35d9647",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -194,7 +185,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "JumpPress",
+                    "action": "SmallJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -227,7 +218,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "JumpPress",
+                    "action": "SmallJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -244,50 +235,6 @@
                 },
                 {
                     "name": "",
-                    "id": "eec8927f-5065-4b74-83d2-7f7b2d45718b",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "StartPreciseMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2e3df23a-1f33-474c-b654-4cb7f0e4e60c",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "StartPreciseMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "930dec78-711c-4890-a6e0-25d1459839e8",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EndPreciseMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2a9a251f-6d29-4f09-963a-cf631a01b478",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "EndPreciseMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "068c8b3b-2ad3-4a89-8b3d-cf024f1c8251",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -299,23 +246,34 @@
                 },
                 {
                     "name": "",
-                    "id": "fcc69e60-6735-4618-be95-50a590f86a01",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "6f6fb625-834a-4d50-82f5-9ee763b514b4",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "JumpRelease",
+                    "action": "MenuPause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b0e9f82f-33d2-4e69-abab-92e4fb8fce68",
-                    "path": "<Keyboard>/space",
+                    "id": "a09e540e-ceb8-4af3-8e5e-57ae2b2daec5",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "JumpRelease",
+                    "action": "LongJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc2b9bdb-a827-4432-aebc-978f903ce76f",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LongJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

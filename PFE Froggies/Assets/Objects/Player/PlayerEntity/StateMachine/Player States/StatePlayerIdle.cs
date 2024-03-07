@@ -19,17 +19,18 @@ public class StatePlayerIdle : StatePlayer
     {
         _isGrounded = _smPlayer.entity.IsGrounded;
 
-        if (_smPlayer.entity.JumpReleaseInput)
-        {            
+        if (_smPlayer.entity.SmallJumpInput || _smPlayer.entity.LongJumpInput)
+        {
             if (_isGrounded)
                 _smPlayer.Exit(_smPlayer.jump);
             else
             {
-                _smPlayer.entity.JumpReleaseInput = false;
+                _smPlayer.entity.SmallJumpInput = false;
+                _smPlayer.entity.LongJumpInput = false;
             }
         }
 
-        if(_smPlayer.entity.MountInput)
+        if (_smPlayer.entity.MountInput)
         {
             if (_smPlayer.entity.TryMount())
                 _smPlayer.Exit(_smPlayer.onFrog);          
@@ -37,11 +38,7 @@ public class StatePlayerIdle : StatePlayer
     }
     public override void FixedUpdate(float time)
     {
-        if (_isGrounded)
-        {
-            _smPlayer.entity.Rotate();
 
-        }
     }
     public override void Exit()
     {
