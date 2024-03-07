@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "JumpRelease",
+                    "type": "Button",
+                    "id": "fb95c89c-be7b-4857-ac86-a497c27dd037",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Mount",
                     "type": "Button",
                     "id": "2dfd93bb-71db-43df-8dc6-4a931bd0b090",
@@ -78,9 +87,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LongJump",
+                    "name": "MenuPause",
                     "type": "Button",
-                    "id": "2750dfcb-b535-43fc-84d5-295cd1b86d82",
+                    "id": "77a5533a-0a60-4911-bbd8-31b4a35d9647",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -299,12 +308,34 @@
                 },
                 {
                     "name": "",
-                    "id": "46e79ff3-daec-43fe-8fef-96cb0a4e2251",
-                    "path": "<Gamepad>/buttonNorth",
+                    "id": "fcc69e60-6735-4618-be95-50a590f86a01",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LongJump",
+                    "action": "JumpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0e9f82f-33d2-4e69-abab-92e4fb8fce68",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f6fb625-834a-4d50-82f5-9ee763b514b4",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuPause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
