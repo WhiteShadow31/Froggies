@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UltimateAttributesPack;
 using Unity.VisualScripting;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerEntity : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlayerEntity : MonoBehaviour
     [HideInInspector] public Color playerColor;
 
     [Header("--- MOVEMENT ---")]
+    [SerializeField] float _moveIfStickLessThat = 0.8f;
     [SerializeField] float _moveForce = 1;
     [SerializeField] ForceMode _moveMode = ForceMode.Impulse;
     bool _isMoving;
@@ -69,30 +71,15 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _longJumpForceFwd = 2;
     ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
-    [SerializeField] LineRenderer _jumpPredictionLine;
     [SerializeField] bool _showTrajectoryLine = true;
-    [SerializeField] GameObject _landingPointObject;
-    [SerializeField] bool _showLandingPoint = true;
-    [Space]
-    [SerializeField] float _jumpInteructedIfSitckLessThan = 0.05f;
-    [SerializeField] float _timeToChargeJump = 0.5f;
-    [SerializeField] AnimationCurve _landingPointSmoothCurve;
-    [SerializeField] float _landingPointSmoothSpeed = 0.02f;
-    [Space]
-    [SerializeField] int _jumpPredictionLinePointCount = 200;
-    [SerializeField] float _jumpPredictiontDuration = 5;
-    [SerializeField] LayerMask _jumpPredictionLayerMask;
-    MeshRenderer _jumpPredictionObjectRenderer;
-
+    [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LineRenderer _jumpPredictionLine;
+    [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] int _jumpPredictionLinePointCount = 200;
+    [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] float _jumpPredictiontDuration = 5;
+    [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LayerMask _jumpPredictionLayerMask;
+    Vector3 _velocityRef = Vector3.zero;
     bool _isJumping;
     public bool IsJumping { get { return _isJumping; } }
-    bool _jumpCharged = false;
     bool _wasGroundedLastFrame = false;
-    float _jumpMaxLenghtTimer;
-    float _currentJumpForceForward;
-    float _currentJumpForceUp;
-    Vector3 _landingPointLastPosition;
-    Vector3 _velocityRef = Vector3.zero;
 
     [Header("--- DEBUG ---")]
     [SerializeField] bool _showDebug = false;
@@ -104,8 +91,7 @@ public class PlayerEntity : MonoBehaviour
     [Header("--- INPUTS ---")]
     [ShowIf("_showDebug", true)] public bool MoveInput;
     [ShowIf("_showDebug", true)] public Vector2 RotaInput = Vector2.zero;
-    [ShowIf("_showDebug", true)] public bool JumpPressInput = false;
-    [ShowIf("_showDebug", true)] public bool JumpReleaseInput = false;
+    [ShowIf("_showDebug", true)] public bool SmallJumpInput = false;
     [ShowIf("_showDebug", true)] public bool LongJumpInput = false;
     [ShowIf("_showDebug", true)] bool _startTongueAimInput = false;
     public bool StartTongueAimInput { get { return _startTongueAimInput; } set { _startTongueAimInput = value; } }
@@ -133,10 +119,6 @@ public class PlayerEntity : MonoBehaviour
         if (_camera == null)
             _camera = Camera.main;
 
-        _jumpPredictionObjectRenderer = _landingPointObject.GetComponent<MeshRenderer>();
-        //Set jump prediction color
-        SetJumpPredictionColor(playerColor);
-
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
     }
@@ -160,7 +142,7 @@ public class PlayerEntity : MonoBehaviour
     {
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
-        if (RotaInput != Vector2.zero && _isMoving)
+        if (RotaInput != Vector2.zero && RotaInput.magnitude < _moveIfStickLessThat)
            Move();     
     }
 
@@ -244,20 +226,15 @@ public class PlayerEntity : MonoBehaviour
 
     public void Jump()
     {
-        // Interrupt jump
-        if (RotaInput.magnitude < _jumpInteructedIfSitckLessThan && _jumpCharged)
-        {
-            ResetJump();
-            return;
-        }
-
         _rigidbodyController.StopVelocity();
+        
+        Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
+        if (LongJumpInput)
+            jumpForce = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
 
         // Jump
-        Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
-        _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+        _rigidbodyController.AddForce(jumpForce.normalized, jumpForce.magnitude, _jumpMode);
 
-        SetPredictionRenderer(false);
         ResetJump();
         _isJumping = true;
         _wasGroundedLastFrame = true;
@@ -277,118 +254,28 @@ public class PlayerEntity : MonoBehaviour
         }
         _wasGroundedLastFrame = IsGrounded;
 
-        // Predicted jump
-        if (IsGrounded && JumpPressInput && RotaInput.magnitude > _jumpInteructedIfSitckLessThan)
+        if (_showTrajectoryLine)
         {
-            // Display or not the landing point and line
-            if (_showTrajectoryLine)
-                _jumpPredictionLine.enabled = true;
-            if (_showLandingPoint)
-                _jumpPredictionObjectRenderer.enabled = true;
-
-            // Charge jump to max if it's not
-            if (!_jumpCharged)
-                ChargeJump();
-
-            SetJumpForce(_jumpCharged); // Set jump force to current force if jump is charged
-
-            // Show prediction if jump isn't interrupted
-            if (RotaInput.magnitude > _jumpInteructedIfSitckLessThan && _jumpCharged)
-                ShowJumpPrediction();
-            else
-                SetPredictionRenderer(false);
-        }
-        // Set landing point to player position with time and disable it
-        else
-        {
-            _landingPointObject.transform.position = new Vector3(transform.position.x, _landingPointObject.transform.position.y, transform.position.z);
-            SetPredictionRenderer(false);
-        }
-    }
-
-    void ChargeJump()
-    {
-        if (_jumpMaxLenghtTimer < _timeToChargeJump)
-        {
-            SetJumpForceToMinOrMax(false); // Set jump force to min
-
-            _jumpMaxLenghtTimer += Time.deltaTime;
+            _jumpPredictionLine.enabled = true;
+            ShowJumpPrediction();
         }
         else
-        {
-            SetJumpForceToMinOrMax(true); // Set jump force to max
-
-            _jumpCharged = true;
-            _jumpMaxLenghtTimer = 0; // Reset timer
-        }
-    }
-
-    void SetJumpPredictionColor(Color color)
-    {
-        // Set landing point color
-        Material jumpLandingPointMat = _jumpPredictionObjectRenderer.material;
-        jumpLandingPointMat.color = playerColor;
-        _jumpPredictionObjectRenderer.sharedMaterial = jumpLandingPointMat;
-
-        // Set line color
-        Material jumpPredictionLineMat = _jumpPredictionLine.sharedMaterial;
-        jumpPredictionLineMat.color = color;
-        _jumpPredictionLine.sharedMaterial = jumpPredictionLineMat;
-    }
-
-    void SetJumpForce(bool jumpCharged)
-    {
-        if (jumpCharged && RotaInput.magnitude >= _jumpInteructedIfSitckLessThan)
-        {
-            _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, _landingPointSmoothCurve.Evaluate(RotaInput.magnitude) - _jumpInteructedIfSitckLessThan);
-            _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, _landingPointSmoothCurve.Evaluate(RotaInput.magnitude) - _jumpInteructedIfSitckLessThan);
-        }
-        else
-            SetJumpForceToMinOrMax(false);
-    }
-
-    void SetJumpForceToMinOrMax(bool toMax)
-    {
-        if (toMax)
-        {
-            _currentJumpForceForward = _longJumpForceFwd;
-            _currentJumpForceUp = _longJumpForceUp;
-        }
-        else
-        {
-            _currentJumpForceForward = _jumpForceFwd;
-            _currentJumpForceUp = _jumpForceUp;
-        }
+            _jumpPredictionLine.enabled = false;
     }
 
     void ResetJump()
     {
-        SetJumpForceToMinOrMax(false); // Set jump force to min
-
-        _jumpCharged = false; // Disable charged jump
-        _jumpMaxLenghtTimer = 0; // Reset timer to charge jump
-
-        JumpPressInput = false;
-        JumpReleaseInput = false;
-    }
-
-    void SetPredictionRenderer(bool state)
-    {
-        if (_showTrajectoryLine)
-            _jumpPredictionLine.enabled = state;
-        if (_showLandingPoint)
-            _jumpPredictionObjectRenderer.enabled = state;
+        SmallJumpInput = false;
+        LongJumpInput = false;
     }
 
     void ShowJumpPrediction()
     {
-        SetPredictionRenderer(true);
-
         // Initialize prediction line
         _jumpPredictionLine.positionCount = _jumpPredictionLinePointCount;
         Vector3 startPosition = transform.position;
         Vector3 lastPoint = startPosition;
-        Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
+        Vector3 jumpVector = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
         Vector3 startVelocity = jumpVector / _rigidbodyController.Mass;
         float timeStep = _jumpPredictiontDuration / _jumpPredictionLinePointCount;
         _jumpPredictionLine.SetPosition(0, startPosition);
@@ -419,7 +306,6 @@ public class PlayerEntity : MonoBehaviour
         for (int i = 1; i < _jumpPredictionLinePointCount; i++)
         {
             float timeOffset = timeStep * i;
-
             Vector3 currentPoint;
 
             // Calculate current point if the trajectory is falling or not
@@ -449,13 +335,8 @@ public class PlayerEntity : MonoBehaviour
             {
                 _jumpPredictionLine.SetPosition(i, hitInfo.point); // Set last line renderer point to hit point
                 _jumpPredictionLine.positionCount = i + 1;
-                _landingPointObject.transform.position = new Vector3(_landingPointObject.transform.position.x, hitInfo.point.y, _landingPointObject.transform.position.z); // Set landing point y to hitinfo y
-                _landingPointObject.transform.position = Vector3.SmoothDamp(_landingPointObject.transform.position, hitInfo.point, ref _velocityRef, _landingPointSmoothSpeed); // Smooth landing point position to target position
-                _landingPointLastPosition = _landingPointObject.transform.position;
-
                 return;
             }
-
             lastPoint = currentPoint;
         }
     }

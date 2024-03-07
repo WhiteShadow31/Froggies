@@ -36,22 +36,6 @@ public class PlayerController : MonoBehaviour
         //RespawnZoneSelector.Instance.TeleportPlayerNextRespawn();
     }
 
-    void OnStartPreciseMove(InputValue ctx)
-    {
-        if (_playerEntity != null && !MenuManager.Instance.IsInMenu)
-        {
-            _playerEntity.MoveInput = true;
-        }
-    }
-
-    void OnEndPreciseMove(InputValue ctx)
-    {
-        if (_playerEntity != null && !MenuManager.Instance.IsInMenu)
-        {
-            _playerEntity.MoveInput = false;
-        }
-    }
-
     void OnMove(InputValue ctx)
     {
         if(_playerEntity != null)
@@ -84,25 +68,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnJumpPress(InputValue ctx)
+    void OnSmallJump(InputValue ctx)
     {
         if (_playerEntity != null)
         {
-            if (!MenuManager.Instance.IsInMenu)
-                _playerEntity.JumpPressInput = true;
+            if (!MenuManager.Instance.IsInMenu && _playerEntity.IsGrounded)
+                _playerEntity.SmallJumpInput = true;
             else
             {
                 // PRESS A BUTTON FROM MENU
                 MenuManager.Instance.PressSelectedButton();
             }
-        }
-    }
-
-    void OnJumpRelease(InputValue ctx)
-    {
-        if (_playerEntity != null && _playerEntity.IsGrounded && !MenuManager.Instance.IsInMenu)
-        {
-            _playerEntity.JumpReleaseInput = true;
         }
     }
 
