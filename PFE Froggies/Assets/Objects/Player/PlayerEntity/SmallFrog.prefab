@@ -1154,8 +1154,8 @@ MonoBehaviour:
   _tongueLayerMask:
     serializedVersion: 2
     m_Bits: 201
-  _tongueInTime: 0.35
-  _tongueOutTime: 0.35
+  _tongueInTime: 0.2
+  _tongueOutTime: 0.2
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:
@@ -1235,8 +1235,8 @@ MonoBehaviour:
     m_Bits: 64
   _jumpForceUp: 20
   _jumpForceFwd: 30
-  _longJumpForceUp: 30
-  _longJumpForceFwd: 60
+  _longJumpForceUp: 40
+  _longJumpForceFwd: 35
   _jumpMode: 1
   _jumpCollisionDetectionEveryTickCount: 1
   _jumpCollisionDetectionOffset: 0
