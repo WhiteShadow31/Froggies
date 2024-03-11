@@ -69,14 +69,18 @@ public class PlayerEntity : MonoBehaviour
     [Space]
     [SerializeField] float _longJumpForceUp = 1;
     [SerializeField] float _longJumpForceFwd = 2;
-    ForceMode _jumpMode = ForceMode.Impulse;
+    [SerializeField] ForceMode _jumpMode = ForceMode.Impulse;
+    [Space]
+    [SerializeField] int _jumpCollisionDetectionEveryTickCount;
+    [SerializeField] float _jumpCollisionDetectionOffset;
+    [SerializeField] LayerMask _jumpCollisionDetectionLayerMask;
+    int _jumpCollisionDetectionTickCount;
     [Space]
     [SerializeField] bool _showTrajectoryLine = true;
     [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LineRenderer _jumpPredictionLine;
     [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] int _jumpPredictionLinePointCount = 200;
     [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] float _jumpPredictiontDuration = 5;
     [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LayerMask _jumpPredictionLayerMask;
-    Vector3 _velocityRef = Vector3.zero;
     bool _isJumping;
     public bool IsJumping { get { return _isJumping; } }
     bool _wasGroundedLastFrame = false;
@@ -92,7 +96,7 @@ public class PlayerEntity : MonoBehaviour
     [ShowIf("_showDebug", true)] public bool MoveInput;
     [ShowIf("_showDebug", true)] public Vector2 RotaInput = Vector2.zero;
     [ShowIf("_showDebug", true)] public bool SmallJumpInput = false;
-    [ShowIf("_showDebug", true)] public bool LongJumpInput = false;
+    [ShowIf("_showDebug", true)] public float LongJumpInput;
     [ShowIf("_showDebug", true)] bool _startTongueAimInput = false;
     public bool StartTongueAimInput { get { return _startTongueAimInput; } set { _startTongueAimInput = value; } }
     [ShowIf("_showDebug", true)] bool _endTongueAimInput = false;
@@ -143,7 +147,19 @@ public class PlayerEntity : MonoBehaviour
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
         if (RotaInput != Vector2.zero && RotaInput.magnitude < _moveIfStickLessThat)
-           Move();     
+           Move();
+
+        if (_isJumping)
+        {
+            ManageJumpCollision();
+        }
+        else
+        {
+            foreach (Collider col in transform.GetComponentsInChildren<Collider>())
+            {
+                col.enabled = true;
+            }
+        }
     }
 
     // =====================================================================================
@@ -229,7 +245,7 @@ public class PlayerEntity : MonoBehaviour
         _rigidbodyController.StopVelocity();
         
         Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
-        if (LongJumpInput)
+        if (LongJumpInput != 0)
             jumpForce = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
 
         // Jump
@@ -263,10 +279,34 @@ public class PlayerEntity : MonoBehaviour
             _jumpPredictionLine.enabled = false;
     }
 
+    void ManageJumpCollision()
+    {
+        if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount)
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpPredictionLayerMask))
+            {
+                Debug.Log("off");
+                foreach(Collider col in transform.GetComponentsInChildren<Collider>())
+                {                    
+                    col.enabled = false;
+                }
+            }
+            else
+            {
+                Debug.Log("on");
+                foreach (Collider col in transform.GetComponentsInChildren<Collider>())
+                {
+                    col.enabled = true;
+                }
+            }
+            _jumpCollisionDetectionTickCount = 0;
+        }
+        _jumpCollisionDetectionTickCount++;
+    }
+
     void ResetJump()
     {
         SmallJumpInput = false;
-        LongJumpInput = false;
     }
 
     void ShowJumpPrediction()

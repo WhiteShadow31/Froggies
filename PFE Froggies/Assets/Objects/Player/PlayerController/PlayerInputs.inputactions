@@ -43,12 +43,12 @@
                 },
                 {
                     "name": "LongJump",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "8f5f15a5-9a82-4c91-90ed-691cdfe258ed",
                     "expectedControlType": "Button",
-                    "processors": "",
+                    "processors": "AxisDeadzone",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Mount",
@@ -258,7 +258,7 @@
                 {
                     "name": "",
                     "id": "a09e540e-ceb8-4af3-8e5e-57ae2b2daec5",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

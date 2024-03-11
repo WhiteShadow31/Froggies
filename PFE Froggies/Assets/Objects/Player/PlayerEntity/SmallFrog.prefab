@@ -1145,6 +1145,7 @@ MonoBehaviour:
     m_Bits: 200
   model: {fileID: 4404454837975397373}
   playerColor: {r: 0, g: 0, b: 0, a: 0}
+  _moveIfStickLessThat: 0.8
   _moveForce: 1
   _moveMode: 1
   _tongueStartTransform: {fileID: 1159593551632478005}
@@ -1236,6 +1237,14 @@ MonoBehaviour:
   _jumpForceFwd: 30
   _longJumpForceUp: 30
   _longJumpForceFwd: 60
+  _jumpMode: 1
+  _playerColliders:
+  - {fileID: 0}
+  _jumpCollisionDetectionEveryTickCount: 1
+  _jumpCollisionDetectionOffset: 0
+  _jumpCollisionDetectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
   _showTrajectoryLine: 0
   _jumpPredictionLine: {fileID: 3735360176625625681}
   _jumpPredictionLinePointCount: 200

@@ -82,11 +82,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnLongJump()
+    void OnLongJump(InputValue ctx)
     {
-        if (_playerEntity != null && _playerEntity.IsGrounded)
+        if (_playerEntity != null)
         {
-            _playerEntity.LongJumpInput = true;
+            _playerEntity.LongJumpInput = ctx.Get<float>();
         }
     }
 
