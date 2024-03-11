@@ -228,8 +228,8 @@ public class PlayerEntity : MonoBehaviour
         }
 
         // Get new up
-        Vector3 up = transform.up;
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
+        Vector3 up = Vector3.up;
+        if (Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
         {
             up = hitInfo.normal;      
         }
@@ -244,9 +244,9 @@ public class PlayerEntity : MonoBehaviour
     {
         _rigidbodyController.StopVelocity();
         
-        Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (transform.up * _jumpForceUp);
+        Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (Vector3.up * _jumpForceUp);
         if (LongJumpInput != 0)
-            jumpForce = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
+            jumpForce = (transform.forward * _longJumpForceFwd) + (Vector3.up * _longJumpForceUp);
 
         // Jump
         _rigidbodyController.AddForce(jumpForce.normalized, jumpForce.magnitude, _jumpMode);
