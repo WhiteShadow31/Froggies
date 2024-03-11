@@ -1132,12 +1132,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   _camera: {fileID: 0}
-  _turnSmoothTime: 0.1
+  _turnSmoothTime: 0.2
   _setGroundRotationRaycastLayer:
     serializedVersion: 2
     m_Bits: 8
   _setGroundRotationRaycastLenght: 1
-  _rotationSmoothSpeed: 2
+  _rotationSmoothSpeed: 1
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: {x: 1.6, y: 0.23, z: 1.69}
   _groundMask:
@@ -1238,8 +1238,6 @@ MonoBehaviour:
   _longJumpForceUp: 30
   _longJumpForceFwd: 60
   _jumpMode: 1
-  _playerColliders:
-  - {fileID: 0}
   _jumpCollisionDetectionEveryTickCount: 1
   _jumpCollisionDetectionOffset: 0
   _jumpCollisionDetectionLayerMask:
@@ -1405,8 +1403,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
-  m_Height: 2.23
+  m_Radius: 0.7
+  m_Height: 1.8
   m_Direction: 2
   m_Center: {x: 0, y: 0.69, z: 0}
 --- !u!1 &7703099250493989202
