@@ -214,6 +214,7 @@ public class PlayerEntity : MonoBehaviour
 
     public void Move()
     {
+        Debug.Log("Move");
         _rigidbodyController.AddPreciseForce(this.transform.forward, _moveForce, _moveMode);
     }
 
