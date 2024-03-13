@@ -98,7 +98,7 @@ public class PlayerEntity : MonoBehaviour
     [ShowIf("_showDebug", true)] public bool MoveInput;
     [ShowIf("_showDebug", true)] public Vector2 RotaInput = Vector2.zero;
     [ShowIf("_showDebug", true)] public bool SmallJumpInput = false;
-    [ShowIf("_showDebug", true)] public float LongJumpInput;
+    [ShowIf("_showDebug", true)] public bool LongJumpInput;
     [ShowIf("_showDebug", true)] bool _startTongueAimInput = false;
     public bool StartTongueAimInput { get { return _startTongueAimInput; } set { _startTongueAimInput = value; } }
     [ShowIf("_showDebug", true)] bool _endTongueAimInput = false;
@@ -247,7 +247,7 @@ public class PlayerEntity : MonoBehaviour
         _rigidbodyController.StopVelocity();
         
         Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (Vector3.up * _jumpForceUp);
-        if (LongJumpInput != 0)
+        if (LongJumpInput)
             jumpForce = (transform.forward * _longJumpForceFwd) + (Vector3.up * _longJumpForceUp);
 
         // Jump
@@ -309,6 +309,7 @@ public class PlayerEntity : MonoBehaviour
     void ResetJump()
     {
         SmallJumpInput = false;
+        LongJumpInput = false;
     }
 
     void ShowJumpPrediction()

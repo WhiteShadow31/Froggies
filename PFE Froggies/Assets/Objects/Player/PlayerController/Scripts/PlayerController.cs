@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_playerEntity != null)
         {
-            _playerEntity.LongJumpInput = ctx.Get<float>();
+            _playerEntity.LongJumpInput = true;
         }
     }
 
