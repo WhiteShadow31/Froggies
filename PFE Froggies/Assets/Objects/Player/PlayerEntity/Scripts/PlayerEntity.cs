@@ -227,17 +227,17 @@ public class PlayerEntity : MonoBehaviour
             transform.eulerAngles = newRotation;
         }
 
-        //// Get new up
-        //Vector3 up = Vector3.up;
-        //if (Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
-        //{
-        //    up = hitInfo.normal;      
-        //}
+        // Get new up
+        Vector3 up = Vector3.up;
+        if (Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
+        {
+            up = hitInfo.normal;      
+        }
 
-        //// Get new forward and set rotation
-        //Vector3 forward = transform.forward.normalized - up * Vector3.Dot(transform.forward.normalized, up);
-        //Quaternion targetRotation = Quaternion.LookRotation(forward.normalized, up);
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSmoothSpeed);
+        // Get new forward and set rotation
+        Vector3 forward = transform.forward.normalized - up * Vector3.Dot(transform.forward.normalized, up);
+        Quaternion targetRotation = Quaternion.LookRotation(forward.normalized, up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSmoothSpeed);
     }
 
     public void Jump()
