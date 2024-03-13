@@ -17,7 +17,7 @@ public class StatePlayerOnFrog : State
     {
         _smPlayer.entity.transform.position = _smPlayer.entity.GetMountTransform.position;
 
-        if (_smPlayer.entity.SmallJumpInput)
+        if (_smPlayer.entity.SmallJumpInput || _smPlayer.entity.LongJumpInput)
         {
             _smPlayer.Exit(_smPlayer.jump);
         }

@@ -71,6 +71,7 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _longJumpForceFwd = 2;
     [SerializeField] ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
+    [SerializeField] Transform _jumpCollisionDetectionTransform;
     [SerializeField] int _jumpCollisionDetectionEveryTickCount;
     [SerializeField] float _jumpCollisionDetectionOffset;
     [SerializeField] LayerMask _jumpCollisionDetectionLayerMask;
@@ -91,12 +92,13 @@ public class PlayerEntity : MonoBehaviour
     [ShowIf("_showDebug", true), SerializeField] Color _tongueDebugColor = Color.blue;
     [ShowIf("_showDebug", true), SerializeField] Color _mountRadiusDebugColor = Color.yellow;
     [ShowIf("_showDebug", true), SerializeField] Color _refreshRotationLineDebugColor = Color.green;
+    [ShowIf("_showDebug", true), SerializeField] Color _jumpCollisionDetectionDebugColor = Color.cyan;
 
     [Header("--- INPUTS ---")]
     [ShowIf("_showDebug", true)] public bool MoveInput;
     [ShowIf("_showDebug", true)] public Vector2 RotaInput = Vector2.zero;
     [ShowIf("_showDebug", true)] public bool SmallJumpInput = false;
-    [ShowIf("_showDebug", true)] public float LongJumpInput;
+    [ShowIf("_showDebug", true)] public bool LongJumpInput;
     [ShowIf("_showDebug", true)] bool _startTongueAimInput = false;
     public bool StartTongueAimInput { get { return _startTongueAimInput; } set { _startTongueAimInput = value; } }
     [ShowIf("_showDebug", true)] bool _endTongueAimInput = false;
@@ -212,6 +214,7 @@ public class PlayerEntity : MonoBehaviour
 
     public void Move()
     {
+        Debug.Log("Move");
         _rigidbodyController.AddPreciseForce(this.transform.forward, _moveForce, _moveMode);
     }
 
@@ -245,7 +248,7 @@ public class PlayerEntity : MonoBehaviour
         _rigidbodyController.StopVelocity();
         
         Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (Vector3.up * _jumpForceUp);
-        if (LongJumpInput != 0)
+        if (LongJumpInput)
             jumpForce = (transform.forward * _longJumpForceFwd) + (Vector3.up * _longJumpForceUp);
 
         // Jump
@@ -281,9 +284,9 @@ public class PlayerEntity : MonoBehaviour
 
     void ManageJumpCollision()
     {
-        if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount)
+        if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount && !IsGrounded)
         {
-            if (Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpPredictionLayerMask))
+            if (Physics.Raycast(_jumpCollisionDetectionTransform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpCollisionDetectionLayerMask))
             {
                 Debug.Log("off");
                 foreach(Collider col in transform.GetComponentsInChildren<Collider>())
@@ -307,6 +310,7 @@ public class PlayerEntity : MonoBehaviour
     void ResetJump()
     {
         SmallJumpInput = false;
+        LongJumpInput = false;
     }
 
     void ShowJumpPrediction()
@@ -540,6 +544,10 @@ public class PlayerEntity : MonoBehaviour
         // Draw refresh rotation debug line
         Gizmos.color = _refreshRotationLineDebugColor;
         Gizmos.DrawLine(transform.position, transform.position + (-transform.up * _setGroundRotationRaycastLenght));
+
+        // Draw jump collision detection line
+        Gizmos.color = _jumpCollisionDetectionDebugColor;
+        Gizmos.DrawLine(_jumpCollisionDetectionTransform.position, _jumpCollisionDetectionTransform.position + (Vector3.down * (transform.localScale.y / 2 + _jumpCollisionDetectionOffset)));
     }
 }
 
