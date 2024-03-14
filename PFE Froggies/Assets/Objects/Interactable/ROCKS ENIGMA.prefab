@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8531218936751765559}
   - component: {fileID: 2186693708786817142}
   - component: {fileID: 7005317999025263243}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: AreaActivatePhysics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 507093165334526167}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14, y: 3.5, z: -28}
+  m_LocalPosition: {x: 14.000004, y: 1, z: -29.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 6356172917504371928}
   - component: {fileID: 3323861572819789350}
   - component: {fileID: 2302117792459510885}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: AreaActivatePhysics (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 7898403382248911786}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21, y: 3.5, z: -28}
+  m_LocalPosition: {x: 21.000004, y: 1, z: -29.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -245,6 +245,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6902862642098148960}
     m_Modifications:
+    - target: {fileID: 1920669650715302538, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
+      propertyPath: excludeMask.m_Bits
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 5138023474410231220, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7
@@ -351,7 +355,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interactable_RockNoPhysic (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1920669650715302538, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -369,6 +374,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6902862642098148960}
     m_Modifications:
+    - target: {fileID: 1920669650715302538, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
+      propertyPath: excludeMask.m_Bits
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 5138023474410231220, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -431,6 +440,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6902862642098148960}
     m_Modifications:
+    - target: {fileID: 1920669650715302538, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
+      propertyPath: excludeMask.m_Bits
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 5138023474410231220, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -537,7 +550,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interactable_RockNoPhysic (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1920669650715302538, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -599,7 +613,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interactable_RockNoPhysic (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1920669650715302538, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -617,6 +632,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6902862642098148960}
     m_Modifications:
+    - target: {fileID: 1920669650715302538, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
+      propertyPath: excludeMask.m_Bits
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 5138023474410231220, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21
@@ -657,6 +676,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7531294067062624793, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8621567089393464257, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
       propertyPath: m_Name
       value: Interactable_RockNoPhysic (5)
@@ -679,6 +702,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6902862642098148960}
     m_Modifications:
+    - target: {fileID: 1920669650715302538, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
+      propertyPath: excludeMask.m_Bits
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 5138023474410231220, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -718,6 +745,10 @@ PrefabInstance:
     - target: {fileID: 5138023474410231220, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531294067062624793, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8621567089393464257, guid: f8c1ccf27f8b0f94ab163c8fb30024e3, type: 3}
       propertyPath: m_Name
