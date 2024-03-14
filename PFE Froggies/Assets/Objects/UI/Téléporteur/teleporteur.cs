@@ -6,14 +6,12 @@ using UnityEngine.SceneManagement;
 public class teleporteur : MonoBehaviour
 {
 
-    // Enumération des différents niveaux possibles
-    public enum nom_level {
-        ecran_titre, selection_niveau, lvl_1, lvl_2
-    };
-
+    // Variables
     public Collider hit_box;
     int grenouilles_check;
-    public nom_level Nom_Level;
+    stock_enum_ui Stock_Enum_Ui = new stock_enum_ui();
+    
+    public stock_enum_ui.nom_level Nom_Level;
 
 
     // Permet de faire des trucs au lancement du script
@@ -54,19 +52,19 @@ public class teleporteur : MonoBehaviour
 
         switch (Nom_Level) {
 
-            case nom_level.ecran_titre:
+            case stock_enum_ui.nom_level.ecran_titre:
                 SceneManager.LoadScene("ecran_titre");
             break;
 
-            case nom_level.selection_niveau:
+            case stock_enum_ui.nom_level.selection_niveau:
                 SceneManager.LoadScene("selection_niveaux");
             break;
 
-            case nom_level.lvl_1:
+            case stock_enum_ui.nom_level.lvl_1:
                 SceneManager.LoadScene("Village des brunes");
             break;
 
-            case nom_level.lvl_2:
+            case stock_enum_ui.nom_level.lvl_2:
                 SceneManager.LoadScene("Foret cool");
             break;
         }
