@@ -9,7 +9,7 @@ public class teleporteur : MonoBehaviour
     // Variables
     public Collider hit_box;
     int grenouilles_check;
-    stock_enum_ui Stock_Enum_Ui = new stock_enum_ui();
+    //stock_enum_ui Stock_Enum_Ui = new stock_enum_ui();
     
     public stock_enum_ui.nom_level Nom_Level;
 
