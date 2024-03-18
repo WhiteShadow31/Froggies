@@ -1177,9 +1177,9 @@ MonoBehaviour:
     m_Bits: 200
   model: {fileID: 4404454837975397373}
   playerColor: {r: 1, g: 0.5019608, b: 0.763672, a: 1}
-  _moveIfStickLessThat: 2
   _moveForce: 1
   _moveMode: 1
+  _startMoveAfter: 0.2
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
   _tongueMaxLenght: 4
@@ -1286,7 +1286,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _showTrajectoryLine: 0
-  _jumpPredictionLine: {fileID: 0}
+  _jumpPredictionLine: {fileID: 4064099953945684390}
   _jumpPredictionLinePointCount: 200
   _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
