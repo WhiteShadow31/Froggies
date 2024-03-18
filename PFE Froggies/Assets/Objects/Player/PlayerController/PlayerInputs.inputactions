@@ -192,7 +192,7 @@
                 {
                     "name": "",
                     "id": "b4af143c-175a-42d4-ab72-5b374a098dd8",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -258,18 +258,7 @@
                 {
                     "name": "",
                     "id": "a09e540e-ceb8-4af3-8e5e-57ae2b2daec5",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LongJump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dc2b9bdb-a827-4432-aebc-978f903ce76f",
-                    "path": "<Keyboard>/f",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

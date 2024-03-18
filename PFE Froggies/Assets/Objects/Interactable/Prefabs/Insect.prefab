@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8918082616260300722}
   - component: {fileID: 9187816709713824859}
   - component: {fileID: 3125671558621082361}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4671906998056387872}
   - component: {fileID: 232381568509146362}
   - component: {fileID: 4970297796947210041}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eye 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 8744111143169805698}
   - component: {fileID: 7797925282770314703}
   - component: {fileID: 1522587712693222464}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Insect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ Transform:
   m_GameObject: {fileID: 4869463750527140665}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 80.42719, y: 26.113272, z: 116.74422}
+  m_LocalPosition: {x: 85.437805, y: 26.113272, z: 111.40735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 1985560631653342592}
   - component: {fileID: 5168540556146463963}
   - component: {fileID: 1886175732892621453}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eye 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9043905617315425745}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
