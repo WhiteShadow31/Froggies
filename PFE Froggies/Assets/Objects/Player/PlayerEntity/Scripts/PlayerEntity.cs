@@ -31,9 +31,10 @@ public class PlayerEntity : MonoBehaviour
     [HideInInspector] public Color playerColor;
 
     [Header("--- MOVEMENT ---")]
-    [SerializeField] float _moveIfStickLessThat = 0.8f;
     [SerializeField] float _moveForce = 1;
     [SerializeField] ForceMode _moveMode = ForceMode.Impulse;
+    [SerializeField] float _startMoveAfter;
+    float _startMoveTimer;
     bool _isMoving;
 
     [Header("--- TONGUE ---")]
@@ -148,8 +149,7 @@ public class PlayerEntity : MonoBehaviour
     {
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
-        if (RotaInput != Vector2.zero && RotaInput.magnitude < _moveIfStickLessThat)
-           Move();
+        Move();
 
         if (_isJumping)
         {
@@ -214,8 +214,18 @@ public class PlayerEntity : MonoBehaviour
 
     public void Move()
     {
-        Debug.Log("Move");
-        _rigidbodyController.AddPreciseForce(this.transform.forward, _moveForce, _moveMode);
+        // Reset timer if stick is zero
+        if(RotaInput.magnitude == 0)
+            _startMoveTimer = 0;
+
+        if(RotaInput.magnitude != 0 && IsGrounded)
+        {
+            // Increase timer if it's not finished and stick is not null
+            if(_startMoveTimer < _startMoveAfter)
+                _startMoveTimer += Time.fixedDeltaTime;
+            else // If timer is finished, move
+                _rigidbodyController.AddPreciseForce(this.transform.forward, _moveForce, _moveMode);
+        }
     }
 
     public void Rotate()
@@ -288,7 +298,6 @@ public class PlayerEntity : MonoBehaviour
         {
             if (Physics.Raycast(_jumpCollisionDetectionTransform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpCollisionDetectionLayerMask))
             {
-                Debug.Log("off");
                 foreach(Collider col in transform.GetComponentsInChildren<Collider>())
                 {                    
                     col.enabled = false;
@@ -296,7 +305,6 @@ public class PlayerEntity : MonoBehaviour
             }
             else
             {
-                Debug.Log("on");
                 foreach (Collider col in transform.GetComponentsInChildren<Collider>())
                 {
                     col.enabled = true;

@@ -1176,18 +1176,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 200
   model: {fileID: 4404454837975397373}
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
-  _moveIfStickLessThat: 2
+  playerColor: {r: 1, g: 0.5019608, b: 0.763672, a: 1}
   _moveForce: 1
   _moveMode: 1
+  _startMoveAfter: 0.2
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
   _tongueMaxLenght: 4
   _tongueLayerMask:
     serializedVersion: 2
     m_Bits: 201
-  _tongueInTime: 0.2
-  _tongueOutTime: 0.2
+  _tongueInTime: 0.25
+  _tongueOutTime: 0.5
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:
@@ -1201,22 +1201,31 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.16251221
-      value: 0.70990604
-      inSlope: 1.1616927
-      outSlope: 1.1616927
+      time: 0.04858066
+      value: 0.5197377
+      inSlope: 3.2050169
+      outSlope: 3.2050169
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.48721802
-      outWeight: 0.14122853
+      inWeight: 0.35362816
+      outWeight: 0.25527495
     - serializedVersion: 3
-      time: 1.0000011
-      value: 0.995284
-      inSlope: 0.000005066368
-      outSlope: 0.000005066368
+      time: 0.15880378
+      value: 0.83719313
+      inSlope: 0.6786143
+      outSlope: 0.6786143
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.2388104
+      inWeight: 0.676125
+      outWeight: 0.14929445
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1227,29 +1236,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.16251221
-      value: 0.70990604
-      inSlope: 1.1616927
-      outSlope: 1.1616927
+      time: 0.7408114
+      value: 0.49241933
+      inSlope: 1.4808333
+      outSlope: 1.4808333
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.48721802
-      outWeight: 0.14122853
+      inWeight: 0.09760976
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.0000011
-      value: 0.995284
-      inSlope: 0.000005066368
-      outSlope: 0.000005066368
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.2388104
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1277,7 +1286,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _showTrajectoryLine: 0
-  _jumpPredictionLine: {fileID: 3735360176625625681}
+  _jumpPredictionLine: {fileID: 4064099953945684390}
   _jumpPredictionLinePointCount: 200
   _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
