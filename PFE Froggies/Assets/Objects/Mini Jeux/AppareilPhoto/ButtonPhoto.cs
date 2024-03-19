@@ -51,7 +51,6 @@ public class ButtonPhoto : MonoBehaviour, IInteractableEntity
         {
             while (time < timeToShow)
             {
-                Debug.Log(startPos +" && "+endPos);
                 photo.transform.localPosition = Vector3.Lerp(startPos, endPos, time/timeToShow);
 
                 if(opacity != null && transparentMat != null)
