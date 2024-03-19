@@ -132,9 +132,7 @@ public class PlayerEntity : MonoBehaviour
 
     protected void Update()
     {
-        Debug.Log(IsGrounded);
         _smPlayer.Update(Time.deltaTime);
-
         // If the tongue button is pressed
         if (StartTongueAimInput && _canUseTongue)
         {
