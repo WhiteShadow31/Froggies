@@ -5,8 +5,8 @@ using UltimateAttributesPack;
 public class CameraEntity : MonoBehaviour
 {
     [Header("Players")]
-    public GameObject _player1 = null;
-    public GameObject _player2 = null;
+    public PlayerEntity _player1 = null;
+    public PlayerEntity _player2 = null;
 
     [HideInInspector]
     public GameObject[] players = new GameObject[2];
@@ -124,6 +124,14 @@ public class CameraEntity : MonoBehaviour
         {
             float percent = Mathf.InverseLerp(_startDezoomDistance, _maxDezoomDistance, distancePlayers);
             float yAddDezoom = Mathf.Lerp(_maxZoomYDist, _maxDezoomYDist, percent);
+
+            // Get highest player y and set camera y to it
+            if(_player1.IsGrounded && _player2.IsGrounded)
+            {
+                float maxY = Mathf.Max(_player1.transform.position.y, _player2.transform.position.y);
+                playersMidCamPosition.y = maxY;
+            }
+
             float currentForwardDezoom = Mathf.Lerp(_camMinForwardOffset, _camMaxForwardOffset, percent);
 
             _lastCameraTargetPosition = new Vector3(playersMidCamPosition.x, playersMidCamPosition.y + yAddDezoom, playersMidCamPosition.z + currentForwardDezoom);
@@ -175,14 +183,20 @@ public class CameraEntity : MonoBehaviour
     {
         if (_player1 == null && _player2 == null)
         {
-            _player1 = player;
             players[0] = player;
+            if(player.TryGetComponent<PlayerEntity>(out PlayerEntity playerEntity))
+            {
+                _player1 = playerEntity;
+            }
             return;
         }
         else if(_player1 != null && _player2 == null && player != _player1)
-        {            
-            _player2 = player;
+        {
             players[1] = player;
+            if (player.TryGetComponent<PlayerEntity>(out PlayerEntity playerEntity))
+            {
+                _player2 = playerEntity;
+            }
             return;
         }
     }
