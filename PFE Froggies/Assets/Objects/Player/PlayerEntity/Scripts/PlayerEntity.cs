@@ -133,7 +133,6 @@ public class PlayerEntity : MonoBehaviour
     protected void Update()
     {
         _smPlayer.Update(Time.deltaTime);
-
         // If the tongue button is pressed
         if (StartTongueAimInput && _canUseTongue)
         {
@@ -555,7 +554,7 @@ public class PlayerEntity : MonoBehaviour
 
         // Draw jump collision detection line
         Gizmos.color = _jumpCollisionDetectionDebugColor;
-        Gizmos.DrawLine(_jumpCollisionDetectionTransform.position, _jumpCollisionDetectionTransform.position + (Vector3.down * (transform.localScale.y / 2 + _jumpCollisionDetectionOffset)));
+        Gizmos.DrawLine(_jumpCollisionDetectionTransform.position, _jumpCollisionDetectionTransform.position + (Vector3.down * _jumpCollisionDetectionOffset));
     }
 }
 

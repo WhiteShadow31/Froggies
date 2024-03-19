@@ -15,7 +15,7 @@ public class StatePlayerJump : State
     }
     public override void Update(float time)
     {
-        if (_smPlayer.entity.IsGrounded)
+        if (_smPlayer.entity.IsGrounded && !_smPlayer.entity.IsJumping)
         {
             _smPlayer.Exit(_smPlayer.idle);
         }
