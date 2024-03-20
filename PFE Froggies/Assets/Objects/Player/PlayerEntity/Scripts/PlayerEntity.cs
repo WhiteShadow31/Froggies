@@ -70,6 +70,9 @@ public class PlayerEntity : MonoBehaviour
     [Space]
     [SerializeField] float _longJumpForceUp = 1;
     [SerializeField] float _longJumpForceFwd = 2;
+    [SerializeField] float _canJumpTime;
+    bool _canJump = true;
+    public bool CanJump { get { return _canJump; } }
     [SerializeField] ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
     [SerializeField] Transform _jumpCollisionDetectionTransform;
@@ -266,6 +269,15 @@ public class PlayerEntity : MonoBehaviour
         ResetJump();
         _isJumping = true;
         _wasGroundedLastFrame = true;
+
+        // Disable can jump and start timer to reactivate it
+        _canJump = false;
+        Invoke(nameof(CanJumpTimerFinished), _canJumpTime);
+    }
+
+    void CanJumpTimerFinished()
+    {
+        _canJump = true;
     }
 
     // =====================================================================================

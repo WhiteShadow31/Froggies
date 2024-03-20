@@ -1278,6 +1278,7 @@ MonoBehaviour:
   _jumpForceFwd: 30
   _longJumpForceUp: 40
   _longJumpForceFwd: 35
+  _canJumpTime: 0.05
   _jumpMode: 1
   _jumpCollisionDetectionTransform: {fileID: 3222051968224460766}
   _jumpCollisionDetectionEveryTickCount: 1

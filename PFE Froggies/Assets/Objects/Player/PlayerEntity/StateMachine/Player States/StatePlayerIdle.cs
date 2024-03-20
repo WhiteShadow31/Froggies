@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class StatePlayerIdle : StatePlayer
 {
-
-    bool _isGrounded = false;
-
     // Constructor
     public StatePlayerIdle(StateMachinePlayer sm) : base(sm) { }
 
@@ -17,11 +14,9 @@ public class StatePlayerIdle : StatePlayer
     }
     public override void Update(float time)
     {
-        _isGrounded = _smPlayer.entity.IsGrounded;
-
         if (_smPlayer.entity.SmallJumpInput || _smPlayer.entity.LongJumpInput)
         {
-            if (_isGrounded)
+            if (_smPlayer.entity.IsGrounded && _smPlayer.entity.CanJump)
                 _smPlayer.Exit(_smPlayer.jump);
             else
             {
