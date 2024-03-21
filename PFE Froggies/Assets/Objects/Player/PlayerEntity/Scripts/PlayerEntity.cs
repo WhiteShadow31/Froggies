@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UltimateAttributesPack;
 using Unity.VisualScripting;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerEntity : MonoBehaviour
 {
@@ -73,6 +72,7 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _canJumpTime;
     bool _canJump = true;
     public bool CanJump { get { return _canJump; } }
+
     [SerializeField] ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
     [SerializeField] Transform _jumpCollisionDetectionTransform;
@@ -118,11 +118,6 @@ public class PlayerEntity : MonoBehaviour
     //                                   UNITY METHODS 
     // =====================================================================================
 
-    protected void Awake()
-    {
-        InitComponents();
-    }
-
     protected void Start()
     {
         InitComponents();
@@ -140,7 +135,7 @@ public class PlayerEntity : MonoBehaviour
         if (StartTongueAimInput && _canUseTongue)
         {
             StartTongueAimInput = false;           
-            UseTongue(); // Use tongue
+            UseTongue(); // Use tongue           
         }
 
         Rotate();
@@ -263,16 +258,22 @@ public class PlayerEntity : MonoBehaviour
         if (LongJumpInput)
             jumpForce = (transform.forward * _longJumpForceFwd) + (Vector3.up * _longJumpForceUp);
 
+        SmallJumpInput = false;
+        LongJumpInput = false;
+
         // Jump
-        _rigidbodyController.AddForce(jumpForce.normalized, jumpForce.magnitude, _jumpMode);
+        if ((IsGrounded || _isOnFrog) && !IsJumping && _canJump)
+        {
+            _rigidbodyController.AddForce(jumpForce.normalized, jumpForce.magnitude, _jumpMode);
 
-        ResetJump();
-        _isJumping = true;
-        _wasGroundedLastFrame = true;
+            _isOnFrog = false;
+            _isJumping = true;
+            _wasGroundedLastFrame = true;
 
-        // Disable can jump and start timer to reactivate it
-        _canJump = false;
-        Invoke(nameof(CanJumpTimerFinished), _canJumpTime);
+            // Disable can jump and start timer to reactivate it
+            _canJump = false;
+            Invoke(nameof(CanJumpTimerFinished), _canJumpTime);
+        }
     }
 
     void CanJumpTimerFinished()
@@ -305,31 +306,25 @@ public class PlayerEntity : MonoBehaviour
 
     void ManageJumpCollision()
     {
-        if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount && !IsGrounded)
-        {
-            if (Physics.Raycast(_jumpCollisionDetectionTransform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpCollisionDetectionLayerMask))
-            {
-                foreach(Collider col in transform.GetComponentsInChildren<Collider>())
-                {                    
-                    col.enabled = false;
-                }
-            }
-            else
-            {
-                foreach (Collider col in transform.GetComponentsInChildren<Collider>())
-                {
-                    col.enabled = true;
-                }
-            }
-            _jumpCollisionDetectionTickCount = 0;
-        }
-        _jumpCollisionDetectionTickCount++;
-    }
-
-    void ResetJump()
-    {
-        SmallJumpInput = false;
-        LongJumpInput = false;
+        //if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount && !IsGrounded && !_isOnFrog)
+        //{
+        //    if (Physics.Raycast(_jumpCollisionDetectionTransform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpCollisionDetectionLayerMask))
+        //    {
+        //        foreach(Collider col in transform.GetComponentsInChildren<Collider>())
+        //        {                    
+        //            col.enabled = false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        foreach (Collider col in transform.GetComponentsInChildren<Collider>())
+        //        {
+        //            col.enabled = true;
+        //        }
+        //    }
+        //    _jumpCollisionDetectionTickCount = 0;
+        //}
+        //_jumpCollisionDetectionTickCount++;
     }
 
     void ShowJumpPrediction()
@@ -437,7 +432,6 @@ public class PlayerEntity : MonoBehaviour
         _canUseTongue = false;
         _tongueLineRenderer.enabled = true;
         Vector3 hitPosition;
-
         while (_tongueOutDelay < _tongueOutTime)
         {
             hitPosition = TongueAimPosition();
@@ -457,17 +451,18 @@ public class PlayerEntity : MonoBehaviour
             _tongueEndTransform.position = Vector3.Lerp(hitPosition, _tongueStartTransform.position, _tongueOutCurve.Evaluate(_tongueInDelay / _tongueInTime));
 
             TongueLine();
-            
+
             _tongueInDelay += Time.deltaTime;
             yield return null;
-        }
-        _tongueLineRenderer.enabled = false;
+        }        
         _tongueOutDelay = 0;
         _tongueInDelay = 0;
+        _tongueLineRenderer.enabled = false;
         _hasPushedOtherPlayer = false;
         _hasPushedInterractable = false;
         _canUseTongue = true;
     }
+
     void TongueLine()
     {
         // Set tongueLineRenderer point position
@@ -522,7 +517,7 @@ public class PlayerEntity : MonoBehaviour
 
             _otherPlayerMountTransform = null;
 
-            _isOnFrog = false;
+            _canJump = true;
 
             MountInput = false;
         }

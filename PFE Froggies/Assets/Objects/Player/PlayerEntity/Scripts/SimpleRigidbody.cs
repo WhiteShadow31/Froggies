@@ -58,7 +58,7 @@ public class SimpleRigidbody : MonoBehaviour
     {
         if (_useGravity)
         {
-            if (!_playerEntity.IsGrounded)
+            if (_playerEntity.IsJumping)
             {
                 ApplyGravity(_actualGravity);
             }
@@ -126,7 +126,7 @@ public class SimpleRigidbody : MonoBehaviour
     }
 
     public void StopVelocity()
-    {
+    {        
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
     }

@@ -1282,12 +1282,12 @@ MonoBehaviour:
   _jumpMode: 1
   _jumpCollisionDetectionTransform: {fileID: 3222051968224460766}
   _jumpCollisionDetectionEveryTickCount: 1
-  _jumpCollisionDetectionOffset: 0.4
+  _jumpCollisionDetectionOffset: 0.2
   _jumpCollisionDetectionLayerMask:
     serializedVersion: 2
     m_Bits: 8
   _showTrajectoryLine: 0
-  _jumpPredictionLine: {fileID: 4064099953945684390}
+  _jumpPredictionLine: {fileID: 3735360176625625681}
   _jumpPredictionLinePointCount: 200
   _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
