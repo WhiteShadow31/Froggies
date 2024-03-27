@@ -80,6 +80,8 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _jumpCollisionDetectionOffset;
     [SerializeField] LayerMask _jumpCollisionDetectionLayerMask;
     int _jumpCollisionDetectionTickCount;
+    [SerializeField] float _tryToResetIsJumpingAfter;
+    bool _tryResetIsJumping;
     [Space]
     [SerializeField] bool _showTrajectoryLine = true;
     [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LineRenderer _jumpPredictionLine;
@@ -140,25 +142,14 @@ public class PlayerEntity : MonoBehaviour
 
         Rotate();
         ManageJump();
+        ManageIsJumping();
     }
     
     protected void FixedUpdate()
     {
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
-        Move();
-
-        if (_isJumping)
-        {
-            ManageJumpCollision();
-        }
-        else
-        {
-            foreach (Collider col in transform.GetComponentsInChildren<Collider>())
-            {
-                col.enabled = true;
-            }
-        }
+        Move();       
     }
 
     // =====================================================================================
@@ -273,7 +264,13 @@ public class PlayerEntity : MonoBehaviour
             // Disable can jump and start timer to reactivate it
             _canJump = false;
             Invoke(nameof(CanJumpTimerFinished), _canJumpTime);
+            Invoke(nameof(SetTryResetIsJumping), _tryToResetIsJumpingAfter);
         }
+    }
+
+    void SetTryResetIsJumping()
+    {
+        _tryResetIsJumping = true;
     }
 
     void CanJumpTimerFinished()
@@ -288,12 +285,12 @@ public class PlayerEntity : MonoBehaviour
     public void ManageJump()
     {
         //Check if player is in jump
-        if (_isJumping && !_wasGroundedLastFrame && IsGrounded)
-        {
-            _rigidbodyController.StopVelocity();
-            _isJumping = false;
-        }
-        _wasGroundedLastFrame = IsGrounded;
+        //if (_isJumping && !_wasGroundedLastFrame && IsGrounded)
+        //{
+        //    _rigidbodyController.StopVelocity();
+        //    _isJumping = false;
+        //}
+        //_wasGroundedLastFrame = IsGrounded;
 
         if (_showTrajectoryLine)
         {
@@ -304,27 +301,13 @@ public class PlayerEntity : MonoBehaviour
             _jumpPredictionLine.enabled = false;
     }
 
-    void ManageJumpCollision()
-    {
-        //if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount && !IsGrounded && !_isOnFrog)
-        //{
-        //    if (Physics.Raycast(_jumpCollisionDetectionTransform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpCollisionDetectionLayerMask))
-        //    {
-        //        foreach(Collider col in transform.GetComponentsInChildren<Collider>())
-        //        {                    
-        //            col.enabled = false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach (Collider col in transform.GetComponentsInChildren<Collider>())
-        //        {
-        //            col.enabled = true;
-        //        }
-        //    }
-        //    _jumpCollisionDetectionTickCount = 0;
-        //}
-        //_jumpCollisionDetectionTickCount++;
+    void ManageIsJumping()
+    {        
+        if(_tryResetIsJumping && _rigidbodyController.Velocity.magnitude < 0.1f && IsGrounded && IsJumping)
+        {
+            _isJumping = false;
+            _tryResetIsJumping = false;
+        }
     }
 
     void ShowJumpPrediction()

@@ -1286,6 +1286,7 @@ MonoBehaviour:
   _jumpCollisionDetectionLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  _tryToResetIsJumpingAfter: 0.1
   _showTrajectoryLine: 0
   _jumpPredictionLine: {fileID: 3735360176625625681}
   _jumpPredictionLinePointCount: 200
