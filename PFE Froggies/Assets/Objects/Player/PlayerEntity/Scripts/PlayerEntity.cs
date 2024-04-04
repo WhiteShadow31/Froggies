@@ -35,6 +35,11 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _startMoveAfter;
     float _startMoveTimer;
     bool _isMoving;
+    bool _onHighSlope;
+    [SerializeField] float _disableMovementSlopeAngle;
+    [SerializeField] LayerMask _disableMovementSlopeRaycastLayerMask;
+    [SerializeField] Transform _disableMovementSlopeRaycastTransform;
+    [SerializeField] float _disableMovementSlopeRaycastLenght;
 
     [Header("--- TONGUE ---")]
     [SerializeField] Transform _tongueStartTransform;
@@ -95,6 +100,7 @@ public class PlayerEntity : MonoBehaviour
     [Header("--- DEBUG ---")]
     [SerializeField] bool _showDebug = false;
     [ShowIf("_showDebug", true), SerializeField] Color _groundCheckDebugColor = Color.red;
+    [ShowIf("_showDebug", true), SerializeField] Color _disableMovementSlopeRaycastColor = Color.blue;
     [ShowIf("_showDebug", true), SerializeField] Color _tongueDebugColor = Color.blue;
     [ShowIf("_showDebug", true), SerializeField] Color _mountRadiusDebugColor = Color.yellow;
     [ShowIf("_showDebug", true), SerializeField] Color _refreshRotationLineDebugColor = Color.green;
@@ -141,6 +147,7 @@ public class PlayerEntity : MonoBehaviour
         }
 
         Rotate();
+        ManageMovementOnSlope();
         ManageJump();
         ManageIsJumping();
     }
@@ -206,7 +213,7 @@ public class PlayerEntity : MonoBehaviour
         if(RotaInput.magnitude == 0)
             _startMoveTimer = 0;
 
-        if(RotaInput.magnitude != 0 && IsGrounded)
+        if(RotaInput.magnitude != 0 && IsGrounded && !_onHighSlope)
         {
             // Increase timer if it's not finished and stick is not null
             if(_startMoveTimer < _startMoveAfter)
@@ -241,6 +248,18 @@ public class PlayerEntity : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSmoothSpeed);
     }
 
+    void ManageMovementOnSlope()
+    {
+        if (Physics.Raycast(_disableMovementSlopeRaycastTransform.position, -Vector3.up, out RaycastHit hitInfo, _disableMovementSlopeRaycastLenght, _disableMovementSlopeRaycastLayerMask))
+        {
+            //Debug.Log(Mathf.Abs(Vector3.Angle(Vector3.up, hitInfo.normal)));
+            if (Mathf.Abs(Vector3.Angle(Vector3.up, hitInfo.normal)) >= _disableMovementSlopeAngle)
+                _onHighSlope = true;
+            else
+                _onHighSlope = false;
+        }
+    }
+
     public void Jump()
     {
         _rigidbodyController.StopVelocity();
@@ -253,7 +272,7 @@ public class PlayerEntity : MonoBehaviour
         LongJumpInput = false;
 
         // Jump
-        if ((IsGrounded || _isOnFrog) && !IsJumping && _canJump)
+        if ((IsGrounded || _isOnFrog) && !IsJumping && _canJump && !_onHighSlope)
         {
             _rigidbodyController.AddForce(jumpForce.normalized, jumpForce.magnitude, _jumpMode);
 
@@ -529,6 +548,10 @@ public class PlayerEntity : MonoBehaviour
         // Draw ground check debug
         Gizmos.color = _groundCheckDebugColor;
         Gizmos.DrawCube(_groundCheck.position, _groundRadius);
+
+        // Draw disable movement slope raycast debug
+        Gizmos.color = _disableMovementSlopeRaycastColor;
+        Gizmos.DrawLine(_disableMovementSlopeRaycastTransform.position, _disableMovementSlopeRaycastTransform.position - (_disableMovementSlopeRaycastTransform.up * _disableMovementSlopeRaycastLenght));
 
         // Draw tongue debug line
         Gizmos.color = _tongueDebugColor;
