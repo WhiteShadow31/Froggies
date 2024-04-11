@@ -158,7 +158,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8621567089393464257}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -193,7 +193,7 @@ MonoBehaviour:
   timeToMove: 1.5
   excludeMask:
     serializedVersion: 2
-    m_Bits: 776
+    m_Bits: 800
   distanceToMove: 7
 --- !u!65 &5252768411132140592
 BoxCollider:

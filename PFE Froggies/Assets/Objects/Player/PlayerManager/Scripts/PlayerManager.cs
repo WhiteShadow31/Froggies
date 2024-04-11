@@ -48,7 +48,7 @@ public class PlayerManager : MonoBehaviour
             // Spawn the player frog
             ctrl.SpawnPlayer(spawnPoints[playerIndex].position);
             // Set the color of the frog
-            ctrl.SetPlayerColor(playerColors[playerIndex - 1]);
+            ctrl.SetPlayerColor(playerColors[playerIndex]);
 
             // Increase index player 
             playerIndex++;

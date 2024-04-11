@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6980928410764645654}
   - component: {fileID: 2770675164299310041}
   - component: {fileID: 3885945922703369012}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3401537805480342349}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4994925577953113189}
   - component: {fileID: 4753233000032021455}
   - component: {fileID: 2042646752133211348}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

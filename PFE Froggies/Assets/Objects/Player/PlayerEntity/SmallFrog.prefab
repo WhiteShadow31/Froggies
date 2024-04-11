@@ -679,7 +679,7 @@ Transform:
   m_GameObject: {fileID: 4599348896235674240}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.014, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -711,6 +711,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4811288948140708742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6568517334246088545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3222051968224460766}
+  m_Layer: 6
+  m_Name: JumpCollisionDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3222051968224460766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6568517334246088545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.185, z: 0.715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1089,6 +1120,7 @@ Transform:
   - {fileID: 5260575640272389438}
   - {fileID: 7513869125547718495}
   - {fileID: 3491076819419388840}
+  - {fileID: 3222051968224460766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8876496789576747956
@@ -1132,39 +1164,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   _camera: {fileID: 0}
-  _turnSmoothTime: 0.1
+  _turnSmoothTime: 0.2
+  _setGroundRotationRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _setGroundRotationRaycastLenght: 1
+  _rotationSmoothSpeed: 1
   _groundCheck: {fileID: 7707663042051885650}
-  _groundRadius: {x: 1.6, y: 0.23, z: 1.69}
+  _groundRadius: {x: 1.4, y: 0.1, z: 1.5}
   _groundMask:
     serializedVersion: 2
     m_Bits: 200
   model: {fileID: 4404454837975397373}
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  playerColor: {r: 1, g: 0.5019608, b: 0.763672, a: 1}
   _moveForce: 1
   _moveMode: 1
-  _jumpForceUp: 20
-  _jumpForceFwd: 30
-  _longJumpForceUp: 40
-  _longJumpForceFwd: 35
+  _startMoveAfter: 0.2
   _tongueStartTransform: {fileID: 1159593551632478005}
   _tongueEndTransform: {fileID: 5260575640272389438}
   _tongueMaxLenght: 4
   _tongueLayerMask:
     serializedVersion: 2
     m_Bits: 201
-  _tongueOutTime: 0.15
+  _tongueInTime: 0.25
+  _tongueOutTime: 0.5
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 0.04858066
+      value: 0.5197377
+      inSlope: 3.2050169
+      outSlope: 3.2050169
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.35362816
+      outWeight: 0.25527495
+    - serializedVersion: 3
+      time: 0.15880378
+      value: 0.83719313
+      inSlope: 0.6786143
+      outSlope: 0.6786143
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.676125
+      outWeight: 0.14929445
     - serializedVersion: 3
       time: 1
       value: 1
@@ -1177,7 +1230,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _tongueInTime: 0.15
   _tongueInCurve:
     serializedVersion: 2
     m_Curve:
@@ -1191,10 +1243,19 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.7408114
+      value: 0.49241933
+      inSlope: 1.4808333
+      outSlope: 1.4808333
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09760976
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -1213,49 +1274,35 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  _jumpPredictionLine: {fileID: 3735360176625625681}
-  _showTrajectoryLine: 0
-  _landingPointObject: {fileID: 8099151475436712201}
-  _showLandingPoint: 1
-  _jumpInteructedIfSitckLessThan: 0.05
-  _timeToChargeJump: 0.5
-  _landingPointSmoothSpeed: 0.25
-  _interruptLandingPointTime: 0.2
-  _interruptLandingPointMovementCurve:
+  _jumpForceUp: 20
+  _jumpForceFwd: 30
+  _longJumpForceUp: 40
+  _longJumpForceFwd: 35
+  _canJumpTime: 0.05
+  _jumpMode: 1
+  _jumpCollisionDetectionTransform: {fileID: 3222051968224460766}
+  _jumpCollisionDetectionEveryTickCount: 1
+  _jumpCollisionDetectionOffset: 0.4
+  _jumpCollisionDetectionLayerMask:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_Bits: 8
+  _showTrajectoryLine: 0
+  _jumpPredictionLine: {fileID: 4064099953945684390}
   _jumpPredictionLinePointCount: 200
   _jumpPredictiontDuration: 5
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 216
+  _showDebug: 1
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
-  _showInputDebug: 0
+  _tongueDebugColor: {r: 0, g: 0, b: 1, a: 1}
+  _mountRadiusDebugColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _refreshRotationLineDebugColor: {r: 0, g: 1, b: 0, a: 1}
+  _jumpCollisionDetectionDebugColor: {r: 0, g: 1, b: 1, a: 1}
   MoveInput: 0
   RotaInput: {x: 0, y: 0}
-  JumpPressInput: 0
-  JumpReleaseInput: 0
+  SmallJumpInput: 0
+  LongJumpInput: 0
   MountInput: 0
 --- !u!114 &508620674244156951
 MonoBehaviour:
@@ -1270,7 +1317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useGravity: 1
-  _baseGravity: 15
+  _baseGravity: 20
   _jumpNormalGravity: 200
   _jumpFallingGravity: 240
   _useClampPreciseMove: 0
@@ -1400,10 +1447,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
-  m_Height: 2.23
+  m_Radius: 0.55
+  m_Height: 1.8
   m_Direction: 2
-  m_Center: {x: 0, y: 0.69, z: 0}
+  m_Center: {x: 0, y: 0.55, z: 0}
 --- !u!1 &7703099250493989202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,8 +1575,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3491076819419388840}
-  - component: {fileID: 3897644470385245452}
-  - component: {fileID: 6924832171635293979}
   - component: {fileID: 3735360176625625681}
   m_Layer: 6
   m_Name: JumpPrediction
@@ -1553,56 +1598,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4811288948140708742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3897644470385245452
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8099151475436712201}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6924832171635293979
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8099151475436712201}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b0af24a0a0be49a488719ce4a2ff2039, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!120 &3735360176625625681
 LineRenderer:
   serializedVersion: 2

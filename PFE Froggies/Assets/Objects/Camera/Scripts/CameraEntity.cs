@@ -5,8 +5,8 @@ using UltimateAttributesPack;
 public class CameraEntity : MonoBehaviour
 {
     [Header("Players")]
-    public GameObject _player1 = null;
-    public GameObject _player2 = null;
+    public PlayerEntity _player1 = null;
+    public PlayerEntity _player2 = null;
 
     [HideInInspector]
     public GameObject[] players = new GameObject[2];
@@ -50,7 +50,10 @@ public class CameraEntity : MonoBehaviour
 
     [Space]
     [Title("Camera border", "yellow", "white")]
-
+    [SerializeField] bool _useBordersInExploration = true;
+    [SerializeField] bool _useBordersInPuzzle = false;
+    bool _camBordersEnabled = true;
+    [Space]
     [SerializeField, Tooltip("The plane that is used to calculate camera corners point at players y position")] GameObject _horizontalPlaneObject;
     [SerializeField] LayerMask _horizontalPlaneLayerMask;
     float _averrageYPlayers;
@@ -58,10 +61,6 @@ public class CameraEntity : MonoBehaviour
     [SerializeField] GameObject[] _bordersWalls = new GameObject[4];
     [SerializeField] float _bordersWallsWidth;
     [SerializeField] float _bordersWallsHeight;
-    [Space]
-    [SerializeField] GameObject[] _bordersTriggers = new GameObject[4];
-    [SerializeField] float _bordersTriggersWidth;
-    [SerializeField] float _bordersTriggersHeight;
 
     [Space]
     [Title("Debug", "grey", "white")]
@@ -85,15 +84,16 @@ public class CameraEntity : MonoBehaviour
     private void Start()
     {
         _currentCameraMode = CameraModes.Exploration;
+        _camBordersEnabled = _useBordersInExploration;
     }
 
     void Update()
     {
+        // Dont use camera if the players are not in game
         if(_player1 == null || _player2 == null)
-        {
             return;
-        }
 
+        // Use camera by type
         switch(_currentCameraMode)
         {
             case CameraModes.Exploration:
@@ -103,7 +103,7 @@ public class CameraEntity : MonoBehaviour
                 PuzzleCamera();
                 break;
         }
-
+        
         PlaceCamBorder();
     }
 
@@ -111,6 +111,10 @@ public class CameraEntity : MonoBehaviour
 
     void ExplorationCamera()
     {
+        // Set cam borders enabled
+        if (_camBordersEnabled != _useBordersInExploration)
+            SetCameraBorderEnabled(_useBordersInExploration);
+
         // Calculate players mid point
         float distancePlayers = Vector3.Distance(_player1.transform.position, _player2.transform.position);
         Vector3 playersMidCamPosition = Vector3.Lerp(_player1.transform.position, _player2.transform.position, 0.5f);
@@ -120,6 +124,14 @@ public class CameraEntity : MonoBehaviour
         {
             float percent = Mathf.InverseLerp(_startDezoomDistance, _maxDezoomDistance, distancePlayers);
             float yAddDezoom = Mathf.Lerp(_maxZoomYDist, _maxDezoomYDist, percent);
+
+            // Get highest player y and set camera y to it
+            if(_player1.IsGrounded && _player2.IsGrounded)
+            {
+                float maxY = Mathf.Max(_player1.transform.position.y, _player2.transform.position.y);
+                playersMidCamPosition.y = maxY;
+            }
+
             float currentForwardDezoom = Mathf.Lerp(_camMinForwardOffset, _camMaxForwardOffset, percent);
 
             _lastCameraTargetPosition = new Vector3(playersMidCamPosition.x, playersMidCamPosition.y + yAddDezoom, playersMidCamPosition.z + currentForwardDezoom);
@@ -145,6 +157,11 @@ public class CameraEntity : MonoBehaviour
 
     void PuzzleCamera()
     {
+        // Set cam borders enabled
+        if (_camBordersEnabled != _useBordersInPuzzle)
+            SetCameraBorderEnabled(_useBordersInPuzzle);
+
+        // Lerp cam to target position
         if(_puzzleCameraTargetPoint != null)
         {
             transform.position = Vector3.SmoothDamp(transform.position, _puzzleCameraTargetPoint.position, ref _velocityRef, _camPuzzlePosInterpTime);
@@ -152,18 +169,34 @@ public class CameraEntity : MonoBehaviour
         }
     }
 
+    // Enable or disable cam borders
+    void SetCameraBorderEnabled(bool state)
+    {
+        foreach(GameObject go in _bordersWalls)
+        {
+            go.SetActive(state);
+        }
+        _camBordersEnabled = state;
+    }
+
     public void AddPlayer(GameObject player)
     {
         if (_player1 == null && _player2 == null)
         {
-            _player1 = player;
             players[0] = player;
+            if(player.TryGetComponent<PlayerEntity>(out PlayerEntity playerEntity))
+            {
+                _player1 = playerEntity;
+            }
             return;
         }
         else if(_player1 != null && _player2 == null && player != _player1)
-        {            
-            _player2 = player;
+        {
             players[1] = player;
+            if (player.TryGetComponent<PlayerEntity>(out PlayerEntity playerEntity))
+            {
+                _player2 = playerEntity;
+            }
             return;
         }
     }
@@ -220,7 +253,6 @@ public class CameraEntity : MonoBehaviour
             Vector3 midPoint = Vector3.Lerp(camCornersPoints[i], camCornersPoints[nextIndex], 0.5f);
             midPoint.y = _averrageYPlayers;
             _bordersWalls[i].transform.position = midPoint;
-            _bordersTriggers[i].transform.position = midPoint;
 
             // If border wall and trigger must be rotated, rotate it and set collider size
             if (i == 0 || i == 2)
@@ -233,14 +265,12 @@ public class CameraEntity : MonoBehaviour
                 // Set collider size
                 float cornersPointsDist = Vector3.Distance(camCornersPoints[i], camCornersPoints[nextIndex]);
                 _bordersWalls[i].GetComponent<BoxCollider>().size = new Vector3(_bordersWallsWidth, _bordersWallsHeight, cornersPointsDist + 2);
-                _bordersTriggers[i].GetComponent<BoxCollider>().size = new Vector3(_bordersTriggersWidth, _bordersTriggersHeight, cornersPointsDist + 2);
             }
             else
             {
                 // Set collider size
                 float cornersPointsDist = Vector3.Distance(camCornersPoints[i], camCornersPoints[nextIndex]);
                 _bordersWalls[i].GetComponent<BoxCollider>().size = new Vector3(cornersPointsDist + 2, _bordersWallsHeight, _bordersWallsWidth);
-                _bordersTriggers[i].GetComponent<BoxCollider>().size = new Vector3(cornersPointsDist + 2, _bordersTriggersHeight, _bordersTriggersWidth);
             }
         }
     }
@@ -351,7 +381,6 @@ public class CameraEntity : MonoBehaviour
 
             // Draw border trigger
             Gizmos.color = _bordersTriggersDebugColor;
-            Gizmos.DrawCube(Vector3.zero, _bordersTriggers[i].GetComponent<BoxCollider>().size);
         }
     }
 }

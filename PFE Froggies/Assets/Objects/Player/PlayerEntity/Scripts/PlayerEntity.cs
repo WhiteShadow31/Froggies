@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 using UltimateAttributesPack;
 using Unity.VisualScripting;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerEntity : MonoBehaviour
 {
@@ -15,6 +14,10 @@ public class PlayerEntity : MonoBehaviour
     [Header("--- ROTATION ---")]
     [SerializeField] Camera _camera;
     [SerializeField] float _turnSmoothTime = 0.1f;
+    [Space]
+    [SerializeField] LayerMask _setGroundRotationRaycastLayer;
+    [SerializeField] float _setGroundRotationRaycastLenght = 1;
+    [SerializeField] float _rotationSmoothSpeed = 2;
     float _turnSmoothVelocity;
 
     [Header("--- GROUND CHECK ---")]
@@ -30,6 +33,36 @@ public class PlayerEntity : MonoBehaviour
     [Header("--- MOVEMENT ---")]
     [SerializeField] float _moveForce = 1;
     [SerializeField] ForceMode _moveMode = ForceMode.Impulse;
+    [SerializeField] float _startMoveAfter;
+    float _startMoveTimer;
+    bool _isMoving;
+
+    [Header("--- TONGUE ---")]
+    [SerializeField] Transform _tongueStartTransform;
+    [SerializeField] Transform _tongueEndTransform;
+    [SerializeField] float _tongueMaxLenght = 5f;
+    [Tooltip("Raycast and detect layer mask")]
+    [SerializeField] LayerMask _tongueLayerMask;
+    [Space]
+    [SerializeField] float _tongueInTime = 0.15f;
+    [SerializeField] float _tongueOutTime = 0.15f;
+    [SerializeField] AnimationCurve _tongueOutCurve;
+    [SerializeField] AnimationCurve _tongueInCurve;
+    [Space]
+    [SerializeField] LineRenderer _tongueLineRenderer;
+    [SerializeField] float _tongueHitRadius = 0.3f;
+    [SerializeField] float _tongueHitForce = 10f;
+    [Tooltip("Cast sphere around the hit point and detect layer mask")]
+    [SerializeField] LayerMask _tongueHitLayerMask;
+    float _tongueOutDelay = 0, _tongueInDelay = 0;
+    bool _canUseTongue = true;
+
+    [Header("--- MOUNT OTHER ---")]
+    public Transform onFrogTransform;
+    [SerializeField] float _mountRadius = 3f;
+    [SerializeField] LayerMask _playerLayer;
+    Transform _otherPlayerMountTransform = null;
+    public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
 
     [Header("--- JUMP ---")]
     [SerializeField] float _jumpForceUp = 1;
@@ -37,91 +70,55 @@ public class PlayerEntity : MonoBehaviour
     [Space]
     [SerializeField] float _longJumpForceUp = 1;
     [SerializeField] float _longJumpForceFwd = 2;
-    protected ForceMode _jumpMode = ForceMode.Impulse;
-
-    [Header("--- TONGUE ---")]
-    [SerializeField] protected Transform _tongueStartTransform;
-    [SerializeField] protected Transform _tongueEndTransform;
-    [SerializeField] protected float _tongueMaxLenght = 5f;
-    [Tooltip("Raycast and detect layer mask")]
-    [SerializeField] protected LayerMask _tongueLayerMask;
+    [SerializeField] float _canJumpTime;
+    bool _canJump = true;
+    public bool CanJump { get { return _canJump; } }
+    [SerializeField] ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
-    [SerializeField] protected float _tongueOutTime = 0.15f;
-    [SerializeField] protected AnimationCurve _tongueOutCurve;
-    [SerializeField] protected float _tongueInTime = 0.15f;
-    [SerializeField] protected AnimationCurve _tongueInCurve;
+    [SerializeField] Transform _jumpCollisionDetectionTransform;
+    [SerializeField] int _jumpCollisionDetectionEveryTickCount;
+    [SerializeField] float _jumpCollisionDetectionOffset;
+    [SerializeField] LayerMask _jumpCollisionDetectionLayerMask;
+    int _jumpCollisionDetectionTickCount;
     [Space]
-    [SerializeField] protected LineRenderer _tongueLineRenderer;
-    [SerializeField] protected float _tongueHitRadius = 0.3f;
-    [SerializeField] protected float _tongueHitForce = 10f;
-    [Tooltip("Cast sphere around the hit point and detect layer mask")]
-    [SerializeField] protected LayerMask _tongueHitLayerMask;
-    float _tongueOutDelay = 0, _tongueInDelay = 0;
-
-    //bool _tongueAnimEnded = true, _tongueIn = false, _tongueOut = false;
-
-    [Header("--- MOUNT OTHER ---")]
-    public Transform onFrogTransform;
-    [SerializeField] protected float _mountRadius = 3f;
-    [SerializeField] protected LayerMask _playerLayer;
-    protected Transform _otherPlayerMountTransform = null;
-    public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
-
-    [Header("--- PREDICTED JUMP ---")]
-    [SerializeField] protected LineRenderer _jumpPredictionLine;
-    [SerializeField] protected bool _showTrajectoryLine = true;
-    [SerializeField] protected GameObject _landingPointObject;
-    [SerializeField] protected bool _showLandingPoint = true;
-    [Space]
-    [SerializeField] protected float _jumpInteructedIfSitckLessThan = 0.05f;
-    [SerializeField] protected float _timeToChargeJump = 0.5f;
-    [SerializeField] protected float _landingPointSmoothSpeed = 0.15f;
-    [Space]
-    [SerializeField] protected float _interruptLandingPointTime = 0.2f;
-    [SerializeField] protected AnimationCurve _interruptLandingPointMovementCurve;
-    [Space]
-    [SerializeField] protected int _jumpPredictionLinePointCount = 200;
-    [SerializeField] protected float _jumpPredictiontDuration = 5;
-    [SerializeField] protected LayerMask _jumpPredictionLayerMask;
-
-    MeshRenderer _jumpPredictionObjectRenderer;
+    [SerializeField] bool _showTrajectoryLine = true;
+    [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LineRenderer _jumpPredictionLine;
+    [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] int _jumpPredictionLinePointCount = 200;
+    [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] float _jumpPredictiontDuration = 5;
+    [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LayerMask _jumpPredictionLayerMask;
+    bool _isJumping;
     public bool IsJumping { get { return _isJumping; } }
-    protected bool _isJumping = false;
-    protected bool _jumpCharged = false;
-    protected bool _wasGroundedLastFrame = false;
-    protected float _interruptLandingPointTimer;
-    protected float _jumpMaxLenghtTimer;
-    protected float _currentJumpForceForward;
-    protected float _currentJumpForceUp;
-    protected Vector3 _predictionLandingPoint;
-    protected Vector3 _landingPointLastPosition;
-    protected Vector3 _velocityRef = Vector3.zero;
+    bool _wasGroundedLastFrame = false;
 
     [Header("--- DEBUG ---")]
-    [SerializeField] Color _groundCheckDebugColor = Color.red;
+    [SerializeField] bool _showDebug = false;
+    [ShowIf("_showDebug", true), SerializeField] Color _groundCheckDebugColor = Color.red;
+    [ShowIf("_showDebug", true), SerializeField] Color _tongueDebugColor = Color.blue;
+    [ShowIf("_showDebug", true), SerializeField] Color _mountRadiusDebugColor = Color.yellow;
+    [ShowIf("_showDebug", true), SerializeField] Color _refreshRotationLineDebugColor = Color.green;
+    [ShowIf("_showDebug", true), SerializeField] Color _jumpCollisionDetectionDebugColor = Color.cyan;
 
     [Header("--- INPUTS ---")]
-    [SerializeField] bool _showInputDebug = false;
-    [ShowIf("_showInputDebug", true)] public bool MoveInput;
-    [ShowIf("_showInputDebug", true)] public Vector2 RotaInput = Vector2.zero;
-    [ShowIf("_showInputDebug", true)] public bool JumpPressInput = false;
-    [ShowIf("_showInputDebug", true)] public bool JumpReleaseInput = false;
-    [ShowIf("_showInputDebug", true)] bool _startTongueAimInput = false;
-    public bool StartTongueAimInput { set { _startTongueAimInput = value; } }
-    [ShowIf("_showInputDebug", true)] bool _endTongueAimInput = false;
+    [ShowIf("_showDebug", true)] public bool MoveInput;
+    [ShowIf("_showDebug", true)] public Vector2 RotaInput = Vector2.zero;
+    [ShowIf("_showDebug", true)] public bool SmallJumpInput = false;
+    [ShowIf("_showDebug", true)] public bool LongJumpInput;
+    [ShowIf("_showDebug", true)] bool _startTongueAimInput = false;
+    public bool StartTongueAimInput { get { return _startTongueAimInput; } set { _startTongueAimInput = value; } }
+    [ShowIf("_showDebug", true)] bool _endTongueAimInput = false;
     public bool EndTongueAimInput { get { return _endTongueAimInput; } set { _endTongueAimInput = value; } }
-    [ShowIf("_showInputDebug", true)] public bool MountInput;
+    [ShowIf("_showDebug", true)] public bool MountInput;
 
-    protected bool _initialized = false;    
-    protected bool _isOnFrog = false;
-    protected bool _hasPushedOtherPlayer = false;
-    protected bool _hasPushedInterractable = false;
+    bool _initialized = false;    
+    bool _isOnFrog = false;
+    bool _hasPushedOtherPlayer = false;
+    bool _hasPushedInterractable = false;
 
     // =====================================================================================
     //                                   UNITY METHODS 
     // =====================================================================================
 
-    protected virtual void Awake()
+    protected void Awake()
     {
         InitComponents();
     }
@@ -132,14 +129,6 @@ public class PlayerEntity : MonoBehaviour
         if (_camera == null)
             _camera = Camera.main;
 
-        JumpPressInput = false;
-        JumpReleaseInput = false;
-
-        _jumpPredictionObjectRenderer = _landingPointObject.GetComponent<MeshRenderer>();
-
-        // Set jump prediction color
-        SetJumpPredictionColor(playerColor);
-
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
     }
@@ -147,13 +136,14 @@ public class PlayerEntity : MonoBehaviour
     protected void Update()
     {
         _smPlayer.Update(Time.deltaTime);
-
-        if (EndTongueAimInput)
-        {            
-            EndTongueAimInput = false;
-            UseTongue();
+        // If the tongue button is pressed
+        if (StartTongueAimInput && _canUseTongue)
+        {
+            StartTongueAimInput = false;           
+            UseTongue(); // Use tongue
         }
 
+        Rotate();
         ManageJump();
     }
     
@@ -161,15 +151,26 @@ public class PlayerEntity : MonoBehaviour
     {
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
-        if (MoveInput && RotaInput != Vector2.zero)
-           Move();     
+        Move();
+
+        if (_isJumping)
+        {
+            ManageJumpCollision();
+        }
+        else
+        {
+            foreach (Collider col in transform.GetComponentsInChildren<Collider>())
+            {
+                col.enabled = true;
+            }
+        }
     }
 
     // =====================================================================================
     //                                   INITIALISATION METHODS 
     // =====================================================================================
 
-    protected void InitComponents()
+    void InitComponents()
     {
         if (!_initialized) // If it hasnt been initialized
         {
@@ -178,12 +179,12 @@ public class PlayerEntity : MonoBehaviour
             _initialized = true;
         }
     }
-    protected void InitSimpleRigidbody()
+    void InitSimpleRigidbody()
     {
         // Get the rigidbody or create it if there is none
         _rigidbodyController = this.transform.TryGetComponent<SimpleRigidbody>(out SimpleRigidbody rb) ? rb : this.transform.AddComponent<SimpleRigidbody>();
     }
-    protected void InitGroundController()
+    void InitGroundController()
     {
         if (_groundCheck == null)
         {
@@ -192,7 +193,6 @@ public class PlayerEntity : MonoBehaviour
             go.transform.position = Vector3.zero;
             _groundCheck = go.transform;
         }
-        //_groundController = new GroundedController(_groundCheck, _groundRadius, _groundMask);
     }
 
     // =====================================================================================
@@ -216,40 +216,68 @@ public class PlayerEntity : MonoBehaviour
 
     public void Move()
     {
-        _rigidbodyController.AddPreciseForce(this.transform.forward, _moveForce, _moveMode);
+        // Reset timer if stick is zero
+        if(RotaInput.magnitude == 0)
+            _startMoveTimer = 0;
+
+        if(RotaInput.magnitude != 0 && IsGrounded)
+        {
+            // Increase timer if it's not finished and stick is not null
+            if(_startMoveTimer < _startMoveAfter)
+                _startMoveTimer += Time.fixedDeltaTime;
+            else // If timer is finished, move
+                _rigidbodyController.AddPreciseForce(this.transform.forward, _moveForce, _moveMode);
+        }
     }
 
     public void Rotate()
     {
+        // Get rotation Y (stick)
         Vector3 dir = new Vector3(RotaInput.x, 0, RotaInput.y).normalized;
-
         if (dir.magnitude >= 0.1f)
         {
+            Vector3 newRotation = transform.eulerAngles;
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
-            this.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            newRotation.y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, _turnSmoothTime);
+            transform.eulerAngles = newRotation;
         }
+
+        // Get new up
+        Vector3 up = Vector3.up;
+        if (Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hitInfo, _setGroundRotationRaycastLenght, _setGroundRotationRaycastLayer))
+        {
+            up = hitInfo.normal;      
+        }
+
+        // Get new forward and set rotation
+        Vector3 forward = transform.forward.normalized - up * Vector3.Dot(transform.forward.normalized, up);
+        Quaternion targetRotation = Quaternion.LookRotation(forward.normalized, up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSmoothSpeed);
     }
 
     public void Jump()
     {
-        // Interrupt jump
-        if (RotaInput.magnitude < _jumpInteructedIfSitckLessThan && _jumpCharged)
-        {
-            ResetJump();
-            return;
-        }
-
         _rigidbodyController.StopVelocity();
+        
+        Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (Vector3.up * _jumpForceUp);
+        if (LongJumpInput)
+            jumpForce = (transform.forward * _longJumpForceFwd) + (Vector3.up * _longJumpForceUp);
 
         // Jump
-        Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
-        _rigidbodyController.AddForce(jumpVector.normalized, jumpVector.magnitude, _jumpMode);
+        _rigidbodyController.AddForce(jumpForce.normalized, jumpForce.magnitude, _jumpMode);
 
-        SetPredictionRenderer(false);
         ResetJump();
         _isJumping = true;
         _wasGroundedLastFrame = true;
+
+        // Disable can jump and start timer to reactivate it
+        _canJump = false;
+        Invoke(nameof(CanJumpTimerFinished), _canJumpTime);
+    }
+
+    void CanJumpTimerFinished()
+    {
+        _canJump = true;
     }
 
     // =====================================================================================
@@ -258,7 +286,7 @@ public class PlayerEntity : MonoBehaviour
 
     public void ManageJump()
     {
-        // Check if player is in jump
+        //Check if player is in jump
         if (_isJumping && !_wasGroundedLastFrame && IsGrounded)
         {
             _rigidbodyController.StopVelocity();
@@ -266,131 +294,51 @@ public class PlayerEntity : MonoBehaviour
         }
         _wasGroundedLastFrame = IsGrounded;
 
-        // Predicted jump
-        if (IsGrounded && JumpPressInput && RotaInput.magnitude > _jumpInteructedIfSitckLessThan)
+        if (_showTrajectoryLine)
         {
-            // Display or not the landing point and line
-            if (_showTrajectoryLine)
-                _jumpPredictionLine.enabled = true;
-            if (_showLandingPoint)
-                _jumpPredictionObjectRenderer.enabled = true;
+            _jumpPredictionLine.enabled = true;
+            ShowJumpPrediction();
+        }
+        else
+            _jumpPredictionLine.enabled = false;
+    }
 
-            // Charge jump to max if it's not
-            if (!_jumpCharged)
-                ChargeJump();
-
-            SetJumpForce(_jumpCharged); // Set jump force to current force if jump is charged
-
-            // Show prediction if jump isn't interrupted
-            if (RotaInput.magnitude > _jumpInteructedIfSitckLessThan && _jumpCharged)
-                ShowJumpPrediction();
+    void ManageJumpCollision()
+    {
+        if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount && !IsGrounded)
+        {
+            if (Physics.Raycast(_jumpCollisionDetectionTransform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpCollisionDetectionLayerMask))
+            {
+                foreach(Collider col in transform.GetComponentsInChildren<Collider>())
+                {                    
+                    col.enabled = false;
+                }
+            }
             else
-                SetPredictionRenderer(false);
-
-            _interruptLandingPointTimer = 0; // Reset timer of landing point lerp to player position
-        }
-        // Lerp landing point to player position with time and disable it
-        else
-        {
-            // Set landing point target point for lerp
-            Vector3 landingPointTargetPosition = new Vector3(transform.position.x, _landingPointLastPosition.y, transform.position.z);
-
-            if (_interruptLandingPointTimer < _interruptLandingPointTime) // Timer and lerp of landing point to player position
             {
-                _landingPointObject.transform.position = Vector3.Lerp(_landingPointLastPosition, landingPointTargetPosition, _interruptLandingPointMovementCurve.Evaluate(_interruptLandingPointTimer / _interruptLandingPointTime));
-                _interruptLandingPointTimer += Time.deltaTime;
+                foreach (Collider col in transform.GetComponentsInChildren<Collider>())
+                {
+                    col.enabled = true;
+                }
             }
-            else // Set landing point to player position and disable it
-            {
-                _landingPointObject.transform.position = landingPointTargetPosition;
-                SetPredictionRenderer(false);
-            }
+            _jumpCollisionDetectionTickCount = 0;
         }
-    }
-
-    void ChargeJump()
-    {
-        if(_jumpMaxLenghtTimer < _timeToChargeJump)
-        {
-            SetJumpForceToMinOrMax(false); // Set jump force to min
-
-            _jumpMaxLenghtTimer += Time.deltaTime;
-        }
-        else
-        {
-            SetJumpForceToMinOrMax(true); // Set jump force to max
-
-            _jumpCharged = true;
-            _jumpMaxLenghtTimer = 0; // Reset timer
-        } 
-    }
-
-    void SetJumpPredictionColor(Color color)
-    {
-        // Set landing point color
-        Material jumpLandingPointMat = _jumpPredictionObjectRenderer.material;
-        jumpLandingPointMat.color = playerColor;
-        _jumpPredictionObjectRenderer.sharedMaterial = jumpLandingPointMat;
-
-        // Set line color
-        Material jumpPredictionLineMat = _jumpPredictionLine.sharedMaterial;
-        jumpPredictionLineMat.color = color;
-        _jumpPredictionLine.sharedMaterial = jumpPredictionLineMat;    
-    }
-
-    void SetJumpForce(bool jumpCharged)
-    {
-        if (jumpCharged)
-        {
-            _currentJumpForceForward = Mathf.Lerp(_jumpForceFwd, _longJumpForceFwd, RotaInput.magnitude);
-            _currentJumpForceUp = Mathf.Lerp(_jumpForceUp, _longJumpForceUp, RotaInput.magnitude);
-        }
-        else
-            SetJumpForceToMinOrMax(false);
-    }
-
-    void SetJumpForceToMinOrMax(bool toMax)
-    {
-        if (toMax)
-        {
-            _currentJumpForceForward = _longJumpForceFwd;
-            _currentJumpForceUp = _longJumpForceUp;
-        }
-        else
-        {
-            _currentJumpForceForward = _jumpForceFwd;
-            _currentJumpForceUp = _jumpForceUp;
-        }
+        _jumpCollisionDetectionTickCount++;
     }
 
     void ResetJump()
     {
-        SetJumpForceToMinOrMax(false); // Set jump force to min
-       
-        _jumpCharged = false; // Disable charged jump
-        _jumpMaxLenghtTimer = 0; // Reset timer to charge jump
-
-        JumpPressInput = false;
-        JumpReleaseInput = false;
-    }
-
-    void SetPredictionRenderer(bool state)
-    {
-        if(_showTrajectoryLine)
-            _jumpPredictionLine.enabled = state;
-        if(_showLandingPoint)
-            _jumpPredictionObjectRenderer.enabled = state;
+        SmallJumpInput = false;
+        LongJumpInput = false;
     }
 
     void ShowJumpPrediction()
     {
-        SetPredictionRenderer(true);
-
         // Initialize prediction line
         _jumpPredictionLine.positionCount = _jumpPredictionLinePointCount;
         Vector3 startPosition = transform.position;
         Vector3 lastPoint = startPosition;
-        Vector3 jumpVector = (transform.forward * _currentJumpForceForward) + (transform.up * _currentJumpForceUp);
+        Vector3 jumpVector = (transform.forward * _longJumpForceFwd) + (transform.up * _longJumpForceUp);
         Vector3 startVelocity = jumpVector / _rigidbodyController.Mass;
         float timeStep = _jumpPredictiontDuration / _jumpPredictionLinePointCount;
         _jumpPredictionLine.SetPosition(0, startPosition);
@@ -408,7 +356,7 @@ public class PlayerEntity : MonoBehaviour
         // Get highest point of falling gravity trajectory points
         float[] fallingPointsY = new float[_jumpPredictionLinePointCount];
         fallingPointsY[0] = startPosition.y;
-        for(int j = 1; j < _jumpPredictionLinePointCount; j++)
+        for (int j = 1; j < _jumpPredictionLinePointCount; j++)
         {
             fallingPointsY[j] = fallingTrajectoryPoints[j].y;
         }
@@ -421,7 +369,6 @@ public class PlayerEntity : MonoBehaviour
         for (int i = 1; i < _jumpPredictionLinePointCount; i++)
         {
             float timeOffset = timeStep * i;
-
             Vector3 currentPoint;
 
             // Calculate current point if the trajectory is falling or not
@@ -443,7 +390,7 @@ public class PlayerEntity : MonoBehaviour
                 else
                     return;
             }
-            
+
             _jumpPredictionLine.SetPosition(i, currentPoint); // Set new point in line renderer
 
             // If the trajectory hit something
@@ -451,15 +398,10 @@ public class PlayerEntity : MonoBehaviour
             {
                 _jumpPredictionLine.SetPosition(i, hitInfo.point); // Set last line renderer point to hit point
                 _jumpPredictionLine.positionCount = i + 1;
-                _landingPointObject.transform.position = new Vector3(_landingPointObject.transform.position.x, hitInfo.point.y, _landingPointObject.transform.position.z); // Set landing point y to hitinfo y
-                _landingPointObject.transform.position = Vector3.SmoothDamp(_landingPointObject.transform.position, hitInfo.point, ref _velocityRef, _landingPointSmoothSpeed); // Smooth landing point position to target position
-                _landingPointLastPosition = _landingPointObject.transform.position;
-
                 return;
             }
-
             lastPoint = currentPoint;
-        }       
+        }
     }
 
     // =====================================================================================
@@ -470,9 +412,8 @@ public class PlayerEntity : MonoBehaviour
     /// Draw a raycast to try to hit an object, if not then return a position in front
     /// </summary>
     /// <returns> Vector3 position </returns>
-    public virtual Vector3 TongueAimPosition()
+    public Vector3 TongueAimPosition()
     {
-        //
         if (Physics.Raycast(_tongueStartTransform.position, transform.forward, out RaycastHit hit, _tongueMaxLenght, _tongueLayerMask))
         {
             if(hit.transform.TryGetComponent<PlayerEntity>(out  PlayerEntity otherPlayer) && !_hasPushedOtherPlayer)
@@ -492,7 +433,8 @@ public class PlayerEntity : MonoBehaviour
     }
 
     IEnumerator UseTongueCoroutine()
-    {      
+    {
+        _canUseTongue = false;
         _tongueLineRenderer.enabled = true;
         Vector3 hitPosition;
 
@@ -504,7 +446,7 @@ public class PlayerEntity : MonoBehaviour
 
             TongueLine();
 
-            _tongueOutDelay += Time.fixedDeltaTime;
+            _tongueOutDelay += Time.deltaTime;
             yield return null;
         }
 
@@ -516,7 +458,7 @@ public class PlayerEntity : MonoBehaviour
 
             TongueLine();
             
-            _tongueInDelay += Time.fixedDeltaTime;
+            _tongueInDelay += Time.deltaTime;
             yield return null;
         }
         _tongueLineRenderer.enabled = false;
@@ -524,17 +466,15 @@ public class PlayerEntity : MonoBehaviour
         _tongueInDelay = 0;
         _hasPushedOtherPlayer = false;
         _hasPushedInterractable = false;
+        _canUseTongue = true;
     }
-    protected void TongueLine()
+    void TongueLine()
     {
         // Set tongueLineRenderer point position
         _tongueLineRenderer.SetPosition(0, _tongueStartTransform.position);
         _tongueLineRenderer.SetPosition(1, _tongueEndTransform.position);
     }
-    protected virtual void TongueHitObject(Vector3 target)
-    {
 
-    }
     public void UseTongue()
     {
         StartCoroutine(UseTongueCoroutine());
@@ -543,7 +483,7 @@ public class PlayerEntity : MonoBehaviour
     // =====================================================================================
     //                                   MOUNT METHODS 
     // =====================================================================================
-    public virtual bool TryMount()
+    public bool TryMount()
     {
         if (!_isOnFrog) // Is it not on a frog ?
         {
@@ -573,7 +513,7 @@ public class PlayerEntity : MonoBehaviour
         return false;
     }
 
-    public virtual void StopMount()
+    public void StopMount()
     {
         if (_isOnFrog)
         {
@@ -588,7 +528,7 @@ public class PlayerEntity : MonoBehaviour
         }
     }
 
-    public virtual void PushPlayer(Vector3 dir, float force)
+    public void PushPlayer(Vector3 dir, float force)
     {
         _rigidbodyController.AddForce(dir, force, ForceMode.Impulse);
     }
@@ -605,16 +545,28 @@ public class PlayerEntity : MonoBehaviour
     // =====================================================================================
     //                                   GIZMOS METHODS 
     // =====================================================================================
-    protected void OnDrawGizmos()
+
+    void OnDrawGizmos()
     {
+        // Draw ground check debug
         Gizmos.color = _groundCheckDebugColor;
         Gizmos.DrawCube(_groundCheck.position, _groundRadius);
 
-        Gizmos.color = Color.red;
+        // Draw tongue debug line
+        Gizmos.color = _tongueDebugColor;
         Gizmos.DrawLine(_tongueStartTransform.position, (this.transform.forward * _tongueMaxLenght) + _tongueStartTransform.position);
 
-        Gizmos.color = Color.gray;
+        // Draw mount radius debug
+        Gizmos.color = _mountRadiusDebugColor;
         Gizmos.DrawWireSphere(transform.position, _mountRadius);
+
+        // Draw refresh rotation debug line
+        Gizmos.color = _refreshRotationLineDebugColor;
+        Gizmos.DrawLine(transform.position, transform.position + (-transform.up * _setGroundRotationRaycastLenght));
+
+        // Draw jump collision detection line
+        Gizmos.color = _jumpCollisionDetectionDebugColor;
+        Gizmos.DrawLine(_jumpCollisionDetectionTransform.position, _jumpCollisionDetectionTransform.position + (Vector3.down * _jumpCollisionDetectionOffset));
     }
 }
 
