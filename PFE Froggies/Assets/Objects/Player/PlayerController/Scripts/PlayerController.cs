@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_playerEntity != null)
         {
-            if (!MenuManager.Instance.IsInMenu && _playerEntity.IsGrounded)
+            if (!MenuManager.Instance.IsInMenu)
                 _playerEntity.SmallJumpInput = true;
             else
             {
