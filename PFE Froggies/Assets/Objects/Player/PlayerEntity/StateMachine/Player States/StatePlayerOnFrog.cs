@@ -14,9 +14,8 @@ public class StatePlayerOnFrog : State
         Debug.Log(_smPlayer.entity.gameObject.name + " : " + "ONFROG");
     }
     public override void Update(float time)
-    {
+    {       
         _smPlayer.entity.transform.position = _smPlayer.entity.GetMountTransform.position;
-
         if (_smPlayer.entity.SmallJumpInput || _smPlayer.entity.LongJumpInput)
         {
             _smPlayer.Exit(_smPlayer.jump);

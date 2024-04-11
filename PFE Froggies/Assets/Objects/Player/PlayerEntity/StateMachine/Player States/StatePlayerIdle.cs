@@ -16,13 +16,8 @@ public class StatePlayerIdle : StatePlayer
     {
         if (_smPlayer.entity.SmallJumpInput || _smPlayer.entity.LongJumpInput)
         {
-            if (_smPlayer.entity.IsGrounded && _smPlayer.entity.CanJump)
+            if (_smPlayer.entity.IsGrounded)
                 _smPlayer.Exit(_smPlayer.jump);
-            else
-            {
-                _smPlayer.entity.SmallJumpInput = false;
-                _smPlayer.entity.LongJumpInput = false;
-            }
         }
 
         if (_smPlayer.entity.MountInput)

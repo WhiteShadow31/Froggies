@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UltimateAttributesPack;
 using Unity.VisualScripting;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class PlayerEntity : MonoBehaviour
 {
@@ -36,6 +35,11 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _startMoveAfter;
     float _startMoveTimer;
     bool _isMoving;
+    bool _onHighSlope;
+    [SerializeField] float _disableMovementSlopeAngle;
+    [SerializeField] LayerMask _disableMovementSlopeRaycastLayerMask;
+    [SerializeField] Transform _disableMovementSlopeRaycastTransform;
+    [SerializeField] float _disableMovementSlopeRaycastLenght;
 
     [Header("--- TONGUE ---")]
     [SerializeField] Transform _tongueStartTransform;
@@ -73,6 +77,7 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _canJumpTime;
     bool _canJump = true;
     public bool CanJump { get { return _canJump; } }
+
     [SerializeField] ForceMode _jumpMode = ForceMode.Impulse;
     [Space]
     [SerializeField] Transform _jumpCollisionDetectionTransform;
@@ -80,6 +85,8 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] float _jumpCollisionDetectionOffset;
     [SerializeField] LayerMask _jumpCollisionDetectionLayerMask;
     int _jumpCollisionDetectionTickCount;
+    [SerializeField] float _tryToResetIsJumpingAfter;
+    bool _tryResetIsJumping;
     [Space]
     [SerializeField] bool _showTrajectoryLine = true;
     [SerializeField, ShowIf(nameof(_showTrajectoryLine), true)] LineRenderer _jumpPredictionLine;
@@ -93,6 +100,7 @@ public class PlayerEntity : MonoBehaviour
     [Header("--- DEBUG ---")]
     [SerializeField] bool _showDebug = false;
     [ShowIf("_showDebug", true), SerializeField] Color _groundCheckDebugColor = Color.red;
+    [ShowIf("_showDebug", true), SerializeField] Color _disableMovementSlopeRaycastColor = Color.blue;
     [ShowIf("_showDebug", true), SerializeField] Color _tongueDebugColor = Color.blue;
     [ShowIf("_showDebug", true), SerializeField] Color _mountRadiusDebugColor = Color.yellow;
     [ShowIf("_showDebug", true), SerializeField] Color _refreshRotationLineDebugColor = Color.green;
@@ -118,11 +126,6 @@ public class PlayerEntity : MonoBehaviour
     //                                   UNITY METHODS 
     // =====================================================================================
 
-    protected void Awake()
-    {
-        InitComponents();
-    }
-
     protected void Start()
     {
         InitComponents();
@@ -140,30 +143,20 @@ public class PlayerEntity : MonoBehaviour
         if (StartTongueAimInput && _canUseTongue)
         {
             StartTongueAimInput = false;           
-            UseTongue(); // Use tongue
+            UseTongue(); // Use tongue           
         }
 
         Rotate();
+        ManageMovementOnSlope();
         ManageJump();
+        ManageIsJumping();
     }
     
     protected void FixedUpdate()
     {
         _smPlayer.FixedUpdate(Time.fixedDeltaTime);
 
-        Move();
-
-        if (_isJumping)
-        {
-            ManageJumpCollision();
-        }
-        else
-        {
-            foreach (Collider col in transform.GetComponentsInChildren<Collider>())
-            {
-                col.enabled = true;
-            }
-        }
+        Move();       
     }
 
     // =====================================================================================
@@ -220,7 +213,7 @@ public class PlayerEntity : MonoBehaviour
         if(RotaInput.magnitude == 0)
             _startMoveTimer = 0;
 
-        if(RotaInput.magnitude != 0 && IsGrounded)
+        if(RotaInput.magnitude != 0 && IsGrounded && !_onHighSlope)
         {
             // Increase timer if it's not finished and stick is not null
             if(_startMoveTimer < _startMoveAfter)
@@ -255,6 +248,18 @@ public class PlayerEntity : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSmoothSpeed);
     }
 
+    void ManageMovementOnSlope()
+    {
+        if (Physics.Raycast(_disableMovementSlopeRaycastTransform.position, -Vector3.up, out RaycastHit hitInfo, _disableMovementSlopeRaycastLenght, _disableMovementSlopeRaycastLayerMask))
+        {
+            //Debug.Log(Mathf.Abs(Vector3.Angle(Vector3.up, hitInfo.normal)));
+            if (Mathf.Abs(Vector3.Angle(Vector3.up, hitInfo.normal)) >= _disableMovementSlopeAngle)
+                _onHighSlope = true;
+            else
+                _onHighSlope = false;
+        }
+    }
+
     public void Jump()
     {
         _rigidbodyController.StopVelocity();
@@ -263,16 +268,28 @@ public class PlayerEntity : MonoBehaviour
         if (LongJumpInput)
             jumpForce = (transform.forward * _longJumpForceFwd) + (Vector3.up * _longJumpForceUp);
 
+        SmallJumpInput = false;
+        LongJumpInput = false;
+
         // Jump
-        _rigidbodyController.AddForce(jumpForce.normalized, jumpForce.magnitude, _jumpMode);
+        if ((IsGrounded || _isOnFrog) && !IsJumping && _canJump && !_onHighSlope)
+        {
+            _rigidbodyController.AddForce(jumpForce.normalized, jumpForce.magnitude, _jumpMode);
 
-        ResetJump();
-        _isJumping = true;
-        _wasGroundedLastFrame = true;
+            _isOnFrog = false;
+            _isJumping = true;
+            _wasGroundedLastFrame = true;
 
-        // Disable can jump and start timer to reactivate it
-        _canJump = false;
-        Invoke(nameof(CanJumpTimerFinished), _canJumpTime);
+            // Disable can jump and start timer to reactivate it
+            _canJump = false;
+            Invoke(nameof(CanJumpTimerFinished), _canJumpTime);
+            Invoke(nameof(SetTryResetIsJumping), _tryToResetIsJumpingAfter);
+        }
+    }
+
+    void SetTryResetIsJumping()
+    {
+        _tryResetIsJumping = true;
     }
 
     void CanJumpTimerFinished()
@@ -287,12 +304,12 @@ public class PlayerEntity : MonoBehaviour
     public void ManageJump()
     {
         //Check if player is in jump
-        if (_isJumping && !_wasGroundedLastFrame && IsGrounded)
-        {
-            _rigidbodyController.StopVelocity();
-            _isJumping = false;
-        }
-        _wasGroundedLastFrame = IsGrounded;
+        //if (_isJumping && !_wasGroundedLastFrame && IsGrounded)
+        //{
+        //    _rigidbodyController.StopVelocity();
+        //    _isJumping = false;
+        //}
+        //_wasGroundedLastFrame = IsGrounded;
 
         if (_showTrajectoryLine)
         {
@@ -303,33 +320,13 @@ public class PlayerEntity : MonoBehaviour
             _jumpPredictionLine.enabled = false;
     }
 
-    void ManageJumpCollision()
-    {
-        if(_jumpCollisionDetectionTickCount == _jumpCollisionDetectionEveryTickCount && !IsGrounded)
+    void ManageIsJumping()
+    {        
+        if(_tryResetIsJumping && _rigidbodyController.Velocity.magnitude < 0.1f && IsGrounded && IsJumping)
         {
-            if (Physics.Raycast(_jumpCollisionDetectionTransform.position, Vector3.down, transform.localScale.y / 2 + _jumpCollisionDetectionOffset, _jumpCollisionDetectionLayerMask))
-            {
-                foreach(Collider col in transform.GetComponentsInChildren<Collider>())
-                {                    
-                    col.enabled = false;
-                }
-            }
-            else
-            {
-                foreach (Collider col in transform.GetComponentsInChildren<Collider>())
-                {
-                    col.enabled = true;
-                }
-            }
-            _jumpCollisionDetectionTickCount = 0;
+            _isJumping = false;
+            _tryResetIsJumping = false;
         }
-        _jumpCollisionDetectionTickCount++;
-    }
-
-    void ResetJump()
-    {
-        SmallJumpInput = false;
-        LongJumpInput = false;
     }
 
     void ShowJumpPrediction()
@@ -437,7 +434,6 @@ public class PlayerEntity : MonoBehaviour
         _canUseTongue = false;
         _tongueLineRenderer.enabled = true;
         Vector3 hitPosition;
-
         while (_tongueOutDelay < _tongueOutTime)
         {
             hitPosition = TongueAimPosition();
@@ -457,17 +453,18 @@ public class PlayerEntity : MonoBehaviour
             _tongueEndTransform.position = Vector3.Lerp(hitPosition, _tongueStartTransform.position, _tongueOutCurve.Evaluate(_tongueInDelay / _tongueInTime));
 
             TongueLine();
-            
+
             _tongueInDelay += Time.deltaTime;
             yield return null;
-        }
-        _tongueLineRenderer.enabled = false;
+        }        
         _tongueOutDelay = 0;
         _tongueInDelay = 0;
+        _tongueLineRenderer.enabled = false;
         _hasPushedOtherPlayer = false;
         _hasPushedInterractable = false;
         _canUseTongue = true;
     }
+
     void TongueLine()
     {
         // Set tongueLineRenderer point position
@@ -522,7 +519,7 @@ public class PlayerEntity : MonoBehaviour
 
             _otherPlayerMountTransform = null;
 
-            _isOnFrog = false;
+            _canJump = true;
 
             MountInput = false;
         }
@@ -551,6 +548,10 @@ public class PlayerEntity : MonoBehaviour
         // Draw ground check debug
         Gizmos.color = _groundCheckDebugColor;
         Gizmos.DrawCube(_groundCheck.position, _groundRadius);
+
+        // Draw disable movement slope raycast debug
+        Gizmos.color = _disableMovementSlopeRaycastColor;
+        Gizmos.DrawLine(_disableMovementSlopeRaycastTransform.position, _disableMovementSlopeRaycastTransform.position - (_disableMovementSlopeRaycastTransform.up * _disableMovementSlopeRaycastLenght));
 
         // Draw tongue debug line
         Gizmos.color = _tongueDebugColor;
