@@ -2572,12 +2572,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5896051309133795090, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
+      propertyPath: _drawDebug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5896051309133795090, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
       propertyPath: _startPoint
       value: 
       objectReference: {fileID: 6617463323460571270}
     - target: {fileID: 5896051309133795090, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
       propertyPath: _tryToEatTime
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5896051309133795090, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
       propertyPath: _rotationSpeed
@@ -2589,7 +2593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896051309133795090, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
       propertyPath: _timeBetweenMovement
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5896051309133795090, guid: 81c1fcbaacb222a4b93ce39b5236f481, type: 3}
       propertyPath: _stuckDistanceSafestPointFromPlayer

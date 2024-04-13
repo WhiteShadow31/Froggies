@@ -27,7 +27,7 @@ public class ButtonPhoto : MonoBehaviour, IInteractableEntity
 
         //tex2D = toTexture2D(rt);
         renderMat.mainTexture = toTexture2D(rt);
-        Push(Vector3.zero, 0, null);
+        //Push(Vector3.zero, 0, null);
         //rt.Release();
 
     }
@@ -44,8 +44,8 @@ public class ButtonPhoto : MonoBehaviour, IInteractableEntity
     {
         float time = 0;
         Vector3 startPos = photo.transform.localPosition;
-        Vector3 endPos = photo.transform.localPosition;
-        endPos.z += 3;
+        Vector3 endPos = photo.transform.localPosition + photo.transform.right * 3;
+        //endPos.z += 3;
 
         if (photo != null)
         {
