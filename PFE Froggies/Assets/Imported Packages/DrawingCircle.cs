@@ -17,7 +17,7 @@ public class DrawingCircle : MonoBehaviour
             Vector3 pos = Vector3.zero;
             pos.x = Mathf.Sin(i * 360 / nbrPoints * Mathf.Deg2Rad);
             pos.z = Mathf.Cos(i * 360 / nbrPoints * Mathf.Deg2Rad);
-            pos = pos.normalized * radius;
+            pos = this.transform.rotation * pos.normalized * radius;
 
             positions.Add(pos + this.transform.position);
         }
