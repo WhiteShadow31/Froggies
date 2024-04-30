@@ -92,12 +92,17 @@ public static class SavingManager
         }
     }
 
-    public static void SaveScene(string savedGameName, string sceneName)
+    public static void SaveSceneName(string savedGameName, string sceneName)
     {
         string savedDirectory = _saveDirectoryPath + "/" + savedGameName;
 
         string savedData = JsonUtility.ToJson(sceneName);
 
         File.WriteAllText(savedDirectory + "/" + sceneName, savedData); // Write the file with the data
+    }
+
+    public static void LoadScene()
+    {
+
     }
 }
