@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InGameSaving : MonoBehaviour
 {
@@ -13,6 +14,21 @@ public class InGameSaving : MonoBehaviour
             SavingManager.Initialize();
     }
 
+    private void Start()
+    {
+        if (SavingManager.isLoadingSave) // SavingManager is loading a save
+        {
+            SavingManager.LoadTransform(SavingManager.loadedSaveName, transformsToSave); // Load the transform based on save name and object in scene
+
+            // OU FAIRE
+
+            // SavingManager.LoadTransform(SceneManager.GetActiveScene().name, transformsToSave); // Load the transform based on scene name and object in scene
+        }
+
+        SavingManager.isLoadingSave = false;
+        SavingManager.loadedSaveName = "";
+    }
+
     public void SaveTransform()
     {
         SavingManager.CreateSaveDirectory("MySave");
@@ -21,6 +37,6 @@ public class InGameSaving : MonoBehaviour
 
     public void LoadSaving()
     {
-        SavingManager.LoadTransform("MySave", transformsToSave);
+        //SavingManager.LoadTransform("MySave", transformsToSave);
     }
 }

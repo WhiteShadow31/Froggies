@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class SavingManager
 {
@@ -10,6 +11,9 @@ public static class SavingManager
     private static string[] _savedGames = null;
 
     public static bool initialized = false;
+
+    public static string loadedSaveName = "";
+    public static bool isLoadingSave = false;
 
     /// <summary>
     /// Initialize the SavingManager and directories
@@ -45,11 +49,19 @@ public static class SavingManager
         // Create the directory
         Directory.CreateDirectory(savedDirectory);
     }
+    public static void SaveSceneName(string savedGameName, string sceneName)
+    {
+        string savedDirectory = _saveDirectoryPath + "/" + savedGameName;
+
+        string savedData = JsonUtility.ToJson(sceneName);
+
+        File.WriteAllText(savedDirectory + "/" + sceneName, savedData); // Write the file with the data
+    }
 
     /// <summary>
     /// Save the transform parameters of the objects inside the list
     /// </summary>
-    /// <param name="savedDirectory"> The directory where to create the files </param>
+    /// <param name="savedGameName"> The directory where to create the files </param>
     public static void SaveTransform(string savedGameName, List<Transform> savedTransforms)
     {
         string savedDirectory = _saveDirectoryPath + "/" + savedGameName;
@@ -68,7 +80,7 @@ public static class SavingManager
     /// <summary>
     /// Load the transform datas on the objects in the list
     /// </summary>
-    /// <param name="directorySavePath"> The directory where to load the files </param>
+    /// <param name="savedGameName"> The directory where to load the files </param>
     public static void LoadTransform(string savedGameName, List<Transform> savedTransforms)
     {
         string savedDirectory = _saveDirectoryPath + "/" + savedGameName;
@@ -92,17 +104,12 @@ public static class SavingManager
         }
     }
 
-    public static void SaveSceneName(string savedGameName, string sceneName)
+
+    public static void LoadSave(string sceneName)
     {
-        string savedDirectory = _saveDirectoryPath + "/" + savedGameName;
+        loadedSaveName = sceneName;
+        isLoadingSave = true;
 
-        string savedData = JsonUtility.ToJson(sceneName);
-
-        File.WriteAllText(savedDirectory + "/" + sceneName, savedData); // Write the file with the data
-    }
-
-    public static void LoadScene()
-    {
-
+        SceneManager.LoadScene(sceneName);
     }
 }
