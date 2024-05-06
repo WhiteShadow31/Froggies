@@ -1211,7 +1211,7 @@ MonoBehaviour:
   playerColor: {r: 1, g: 0.5019608, b: 0.763672, a: 1}
   _moveForce: 1
   _moveMode: 1
-  _startMoveAfter: 0.2
+  _startMoveAfter: 1
   _disableMovementSlopeAngle: 45
   _disableMovementSlopeRaycastLayerMask:
     serializedVersion: 2
