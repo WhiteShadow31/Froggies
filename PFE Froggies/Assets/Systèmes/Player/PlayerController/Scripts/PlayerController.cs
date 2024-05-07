@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,13 +14,12 @@ public class PlayerController : MonoBehaviour
     public int playerNbr = 0;
     public Vector3 spawnPoint;
 
-    bool _tryToChangeButton = false;
-
-
-
+    UIManager _uiManager;
 
     private void Awake()
     {
+        _uiManager = FindObjectOfType<UIManager>();
+
         if (_cameraEntity == null)
         {
             _cameraEntity = Camera.main.GetComponent<CameraEntity>();
@@ -64,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     void OnStartTongueAim(InputValue ctx)
     {
-        if( _playerEntity != null && !MenuManager.Instance.IsInMenu)
+        if( _playerEntity != null)
         {
             _playerEntity.StartTongueAimInput = true;
         }
@@ -72,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     void OnEndTongueAim(InputValue ctx)
     {
-        if(_playerEntity != null && !MenuManager.Instance.IsInMenu)
+        if(_playerEntity != null)
         {
             _playerEntity.EndTongueAimInput = true;          
         }
@@ -80,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMount(InputValue ctx)
     {
-        if(_playerEntity != null && !MenuManager.Instance.IsInMenu)
+        if(_playerEntity != null)
         {
             _playerEntity.MountInput = true;
         }
@@ -88,9 +85,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMenuPause(InputValue ctx)
     {
-        
-
-
+        _uiManager.SetPauseMenu(!_uiManager.InPauseMenu);
     }
 
     public void SpawnPlayer()
