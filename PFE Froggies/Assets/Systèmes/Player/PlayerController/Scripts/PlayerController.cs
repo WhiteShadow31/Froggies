@@ -154,9 +154,12 @@ public class PlayerController : MonoBehaviour
             _playerEntity.gameObject.name = _prefabPlayerEntity.name + " " + playerNbr.ToString();
             if(_cameraEntity == null)
             {
-                _cameraEntity = Camera.main.GetComponent<CameraEntity>();
+                if(Camera.main.GetComponent<CameraEntity>() != null)
+                    _cameraEntity = Camera.main.GetComponent<CameraEntity>();
             }
-            _cameraEntity.AddPlayer(go);
+
+            if(_cameraEntity != null)
+                _cameraEntity.AddPlayer(go);
 
             _playerEntity.controller = this;
         }
