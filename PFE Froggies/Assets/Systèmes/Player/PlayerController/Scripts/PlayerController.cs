@@ -44,42 +44,14 @@ public class PlayerController : MonoBehaviour
             Vector2 dir = ctx.Get<Vector2>();
 
             // Is not in the menu
-            if (!MenuManager.Instance.IsInMenu)
-                _playerEntity.RotaInput = dir;
-            else
-            {
-                // Wasnt trying to change button and pushed joystick
-                if(!_tryToChangeButton && dir.magnitude > 0.5f)
-                {
-                    _tryToChangeButton = true;
-
-                    //Debug.Log("Try to change selected button");
-                    // MENU USE DIRECTION FOR SELECTION OF BUTTONS
-                    MenuManager.Instance.ChangeSelectedButton(dir);
-
-                }
-                // Has tried to change and almost stopped pushing joystick
-                else if (_tryToChangeButton && dir.magnitude < 0.3f)
-                {
-
-                    _tryToChangeButton = false;
-                }
-            }
+            _playerEntity.RotaInput = dir;
         }
     }
 
     void OnSmallJump(InputValue ctx)
     {
         if (_playerEntity != null)
-        {
-            if (!MenuManager.Instance.IsInMenu)
-                _playerEntity.SmallJumpInput = true;
-            else
-            {
-                // PRESS A BUTTON FROM MENU
-                MenuManager.Instance.PressSelectedButton();
-            }
-        }
+            _playerEntity.SmallJumpInput = true;
     }
 
     void OnLongJump(InputValue ctx)
@@ -116,7 +88,9 @@ public class PlayerController : MonoBehaviour
 
     void OnMenuPause(InputValue ctx)
     {
-        MenuManager.Instance.TryToOpenMenu();
+        
+
+
     }
 
     public void SpawnPlayer()
