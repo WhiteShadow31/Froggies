@@ -246,8 +246,19 @@
                 },
                 {
                     "name": "",
-                    "id": "6f6fb625-834a-4d50-82f5-9ee763b514b4",
+                    "id": "05f55a79-b229-4f41-ae58-bc97a56b0511",
                     "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuPause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c775c0b7-f77a-45a2-886c-f708a0373ddf",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -274,17 +285,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "LongJump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f6fb625-834a-4d50-82f5-9ee763b514b4",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MenuPause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
