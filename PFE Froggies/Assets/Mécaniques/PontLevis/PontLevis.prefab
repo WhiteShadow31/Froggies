@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 766864206847543094}
   - component: {fileID: 8166131215274037272}
   - component: {fileID: 3042570228503209542}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BaseTronc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612330391906761781}
   - component: {fileID: 7267761782087043945}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PontLevis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3437784863994040194}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PontLevis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 6688482642253700508}
   - component: {fileID: 1501363435285276124}
   - component: {fileID: 3526538374980498760}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

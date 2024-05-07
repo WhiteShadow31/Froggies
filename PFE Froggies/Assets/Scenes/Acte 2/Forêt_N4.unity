@@ -16948,6 +16948,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcae46119480f3349a07c5f7912eda0d, type: 3}
+--- !u!1 &1153799969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1153799970}
+  m_Layer: 0
+  m_Name: Spawn J1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1153799970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153799969}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -100.65, y: -5.64, z: -213.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1160179779
 GameObject:
   m_ObjectHideFlags: 0
@@ -17457,11 +17488,11 @@ PrefabInstance:
     - target: {fileID: 1348843027832207311, guid: c1d35629f95b8f34585e1d78cf4328ba, type: 3}
       propertyPath: spawnPoints.Array.data[0]
       value: 
-      objectReference: {fileID: 802716512}
+      objectReference: {fileID: 1563878857}
     - target: {fileID: 1348843027832207311, guid: c1d35629f95b8f34585e1d78cf4328ba, type: 3}
       propertyPath: spawnPoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1455346509}
+      objectReference: {fileID: 1153799970}
     - target: {fileID: 2777414321025984954, guid: c1d35629f95b8f34585e1d78cf4328ba, type: 3}
       propertyPath: m_Name
       value: PlayerManager
@@ -23060,6 +23091,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1563878856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1563878857}
+  m_Layer: 0
+  m_Name: Spawn J2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1563878857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563878856}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -98.9, y: -5.64, z: -213.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1586127455
 GameObject:
   m_ObjectHideFlags: 0
@@ -31042,3 +31104,5 @@ SceneRoots:
   - {fileID: 1189637154}
   - {fileID: 927232920}
   - {fileID: 817883673}
+  - {fileID: 1563878857}
+  - {fileID: 1153799970}

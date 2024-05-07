@@ -23,8 +23,10 @@ public class TriggerEventObject : MonoBehaviour
         {
             if (!_hasBeenTriggered)
                 triggerredEvent.Invoke();
+                _hasBeenTriggered = true;
         }
         else
             triggerredEvent.Invoke();
+            _hasBeenTriggered = true;
     }
 }
