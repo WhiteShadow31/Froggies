@@ -49,6 +49,11 @@ public static class SavingManager
         // Create the directory
         Directory.CreateDirectory(savedDirectory);
     }
+    /// <summary>
+    /// Create a file with the scene name to access it
+    /// </summary>
+    /// <param name="savedGameName"></param>
+    /// <param name="sceneName"></param>
     public static void SaveSceneName(string savedGameName, string sceneName)
     {
         string savedDirectory = _saveDirectoryPath + "/" + savedGameName;
@@ -56,6 +61,19 @@ public static class SavingManager
         string savedData = JsonUtility.ToJson(sceneName);
 
         File.WriteAllText(savedDirectory + "/" + sceneName, savedData); // Write the file with the data
+    }
+    /// <summary>
+    /// Load the scene from its name and set it as loading a scene
+    /// </summary>
+    /// <param name="sceneName"></param>
+    public static void LoadSave(string saveName)
+    {
+        //string path = savedDirectory + "/" + saveName;
+        //loadedSaveName = sceneName;
+        //isLoadingSave = true;
+
+        //
+        SceneManager.LoadScene(sceneName);
     }
 
     /// <summary>
@@ -104,12 +122,4 @@ public static class SavingManager
         }
     }
 
-
-    public static void LoadSave(string sceneName)
-    {
-        loadedSaveName = sceneName;
-        isLoadingSave = true;
-
-        SceneManager.LoadScene(sceneName);
-    }
 }

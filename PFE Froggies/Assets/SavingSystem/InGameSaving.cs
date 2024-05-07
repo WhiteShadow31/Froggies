@@ -29,14 +29,17 @@ public class InGameSaving : MonoBehaviour
         SavingManager.loadedSaveName = "";
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SaveTransform();
+        }
+    }
+
     public void SaveTransform()
     {
         SavingManager.CreateSaveDirectory("MySave");
         SavingManager.SaveTransform("MySave", transformsToSave);
-    }
-
-    public void LoadSaving()
-    {
-        //SavingManager.LoadTransform("MySave", transformsToSave);
     }
 }
