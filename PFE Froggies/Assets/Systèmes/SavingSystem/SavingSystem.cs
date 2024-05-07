@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SavingSystem : MonoBehaviour
+public static class SavingSystem
 {
-    public static SavingSystem Instance;
+    private static string _saveDirectoryPath = Application.persistentDataPath + "/Saves"; // Path for all directories saves
 
-    public List<Transform> savedTransforms = new List<Transform>();
+    private static string[] _savedGames = null;
 
-    private string _saveDirectoryPath;
+    public static bool initialized = false;
 
-    private string[] _savedGames = null;
-
-    private void Awake()
+    public static void Awake()
     {
-        _saveDirectoryPath = Application.persistentDataPath + "/Saves";
-
         // Is there a save directory
         if (!Directory.Exists(_saveDirectoryPath))
         {
@@ -29,17 +25,11 @@ public class SavingSystem : MonoBehaviour
         _savedGames = Directory.GetDirectories(_saveDirectoryPath, "*", SearchOption.TopDirectoryOnly);
     }
 
-    private void Start()
-    {
-        //CreateSavedGame("test");
-        //LoadSavedGame("test");
-    }
-
     /// <summary>
     /// Save the game
     /// </summary>
     /// <param name="savedGameName"> Name of the save </param>
-    public void CreateSavedGame(string savedGameName)
+    public static void CreateSavedGame(string savedGameName)
     {
         string playerDirectorySavePath = _saveDirectoryPath + "/" + savedGameName;
 
@@ -53,22 +43,22 @@ public class SavingSystem : MonoBehaviour
         // Create the directory
         Directory.CreateDirectory(playerDirectorySavePath);
 
-        SaveTransform(playerDirectorySavePath);
-        SavePlayers(playerDirectorySavePath);
+        //SaveTransform(playerDirectorySavePath);
+        //SavePlayers(playerDirectorySavePath);
     }
 
     /// <summary>
     /// Load the game
     /// </summary>
     /// <param name="savedGameName"> Name of the save </param>
-    public void LoadSavedGame(string savedGameName)
+    public static void LoadSavedGame(string savedGameName, InGameSaving saver)
     {
         string playerDirectorySavePath = _saveDirectoryPath + "/" + savedGameName;
 
         // Look if saved game already exist
         if (Directory.Exists(playerDirectorySavePath))
         {
-            LoadTransform(playerDirectorySavePath);
+            LoadTransform(playerDirectorySavePath, saver.transformsToSave);
             LoadPlayers(playerDirectorySavePath);
         }
     }
@@ -78,7 +68,7 @@ public class SavingSystem : MonoBehaviour
     /// Save the transform parameters of the objects inside the list
     /// </summary>
     /// <param name="directorySavePath"> The directory where to create the files </param>
-    protected void SaveTransform(string directorySavePath)
+    public static void SaveTransform(string directorySavePath, List<Transform> savedTransforms)
     {
         for(int i = 0; i < savedTransforms.Count; i++)
         {
@@ -95,12 +85,15 @@ public class SavingSystem : MonoBehaviour
     /// Load the transform datas on the objects in the list
     /// </summary>
     /// <param name="directorySavePath"> The directory where to load the files </param>
-    protected void LoadTransform(string directorySavePath)
+    public static void LoadTransform(string directorySavePath, List<Transform> savedTransforms)
     {
+        // Load each transform
         for (int i = 0; i < savedTransforms.Count; i++)
         {
+            // Not null
             if (savedTransforms[i] != null)
             {
+                // Get path with object name
                 string path = directorySavePath + "/" + savedTransforms[i].name;
                 if (File.Exists(path))
                 {
@@ -113,7 +106,7 @@ public class SavingSystem : MonoBehaviour
         }
     }
 
-    protected void SavePlayers(string directorySavePath)
+    public static void SavePlayers(string directorySavePath)
     {
         // Look for all controllers
         for(int i = 0; i < PlayerManager.Instance.Controllers.Count; i++)
@@ -129,7 +122,7 @@ public class SavingSystem : MonoBehaviour
         }
     }
 
-    protected void LoadPlayers(string directorySavePath)
+    public static void LoadPlayers(string directorySavePath)
     {
         // Load for 2 players
         for (int i = 0; i < 2; i++)
