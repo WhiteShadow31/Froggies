@@ -73,7 +73,7 @@ public static class SavingManager
         //isLoadingSave = true;
 
         //
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
     }
 
     /// <summary>
