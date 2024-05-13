@@ -26,7 +26,6 @@ public static class SavingManager
             // There is none so create it
             Directory.CreateDirectory(_saveDirectoryPath);
         }
-        //Debug.Log(_saveDirectoryPath);
 
         // Get all folders of saved games in the save directory
         _savedGames = Directory.GetDirectories(_saveDirectoryPath, "*", SearchOption.TopDirectoryOnly);
@@ -68,12 +67,33 @@ public static class SavingManager
     /// <param name="sceneName"></param>
     public static void LoadSave(string saveName)
     {
-        //string path = savedDirectory + "/" + saveName;
-        //loadedSaveName = sceneName;
-        //isLoadingSave = true;
+        // 
+        string path = _saveDirectoryPath + "/" + saveName;
 
-        //
-        SceneManager.LoadScene(sceneName);
+        // Look if saved game exist
+        if (Directory.Exists(path))
+        {
+            string sceneName = path + "/Scene";
+
+            loadedSaveName = saveName;
+            isLoadingSave = true;
+
+            SceneManager.LoadScene(sceneName);
+        }
+    }
+
+    public static void SaveSceneName(string saveName, Scene scene)
+    {
+        string path = _saveDirectoryPath + "/" + saveName;
+
+        // Look if saved game exist
+        if (Directory.Exists(path))
+        {
+            string sceneName = scene.name;
+            string savedData = JsonUtility.ToJson(sceneName);
+
+            File.WriteAllText(path + "/Scene", savedData);
+        }
     }
 
     /// <summary>
