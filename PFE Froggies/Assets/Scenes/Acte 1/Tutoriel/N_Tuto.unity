@@ -37560,7 +37560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649115975824620379, guid: 60976d2b347ca3147b609c914cce69ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 67.2
+      value: 69.2
       objectReference: {fileID: 0}
     - target: {fileID: 649115975824620379, guid: 60976d2b347ca3147b609c914cce69ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -37568,7 +37568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649115975824620379, guid: 60976d2b347ca3147b609c914cce69ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 60.9
+      value: 63.65
       objectReference: {fileID: 0}
     - target: {fileID: 649115975824620379, guid: 60976d2b347ca3147b609c914cce69ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -37621,6 +37621,14 @@ PrefabInstance:
     - target: {fileID: 4012688537969094145, guid: 60976d2b347ca3147b609c914cce69ff, type: 3}
       propertyPath: m_LocalPosition.z
       value: 13.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479364519963420823, guid: 60976d2b347ca3147b609c914cce69ff, type: 3}
+      propertyPath: m_Size.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479364519963420823, guid: 60976d2b347ca3147b609c914cce69ff, type: 3}
+      propertyPath: m_Size.z
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8632040677037257894, guid: 60976d2b347ca3147b609c914cce69ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52158,6 +52166,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3429340846200793096, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: _targetScene
+      value: "Assets/Scenes/Acte 1/Mare aux t\xEAtards.unity"
+      objectReference: {fileID: 0}
     - target: {fileID: 2241263916180592320, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
       propertyPath: m_Name
       value: TP Niveau2

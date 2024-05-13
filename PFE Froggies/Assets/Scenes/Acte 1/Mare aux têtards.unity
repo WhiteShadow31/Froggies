@@ -19239,6 +19239,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1d35629f95b8f34585e1d78cf4328ba, type: 3}
+--- !u!1001 &2038618904
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -3429340846200793096, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: _targetScene
+      value: Assets/Scenes/Acte 2/Chemin vers agiles/Chemin vers agiles.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241263916180592320, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_Name
+      value: TP Niveau2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.90767
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.500002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 67.69079
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
 --- !u!1001 &2101079986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19346,3 +19407,4 @@ SceneRoots:
   - {fileID: 247557635}
   - {fileID: 692989968}
   - {fileID: 492897701}
+  - {fileID: 2038618904}

@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UltimateAttributesPack;
 
 public class SC_Tp : MonoBehaviour {
+
+    [SerializeField, Scene] string _targetScene;
 
     float Nbplayer = 0;
 
@@ -13,18 +16,10 @@ public class SC_Tp : MonoBehaviour {
         {
             Nbplayer += 1;
         }
-
-        
-        if (Nbplayer >= 2 && SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCount-1) {
-
-            SceneManager.LoadScene(0);
-
+       
+        if (Nbplayer >= 2) {
+            SceneManager.LoadScene(_targetScene);
         } 
-        else 
-        {
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-        }
     }
 
     private void OnTriggerExit(Collider other)
