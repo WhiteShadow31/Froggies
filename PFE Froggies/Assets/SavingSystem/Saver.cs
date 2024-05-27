@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,7 @@ public class Saver : MonoBehaviour
     public static bool initialized = false;
 
     public static bool isLoading = false;
+    public static int saveIndex = -1;
 
     // ==================== INITIALIZE THE SAVING ====================
     /// <summary>
@@ -28,7 +30,7 @@ public class Saver : MonoBehaviour
             // Create the 3 saves directories
             for(int i = 0; i < 3 ; i++)
             {
-                CreateSaveDirectory("/Save " + (i+1));
+                CreateSaveDirectory(i);
             }
         }
         initialized = true;
@@ -41,7 +43,7 @@ public class Saver : MonoBehaviour
     /// <param name="savedGameName"> Name of the save </param>
     public static void CreateSaveDirectory(int index)
     {
-        string savedDirectory = _saveDirectoryPath + "/Save" + index;
+        string savedDirectory = _saveDirectoryPath + "/Save " + index;
 
         // Look if saved game already exist
         if (Directory.Exists(savedDirectory))
@@ -53,5 +55,26 @@ public class Saver : MonoBehaviour
         Directory.CreateDirectory(savedDirectory);
     }
 
-    
+    public static void SaveScene(int index, Scene scene)
+    {
+        string sceneName = scene.name;
+        string saveDirectory = _saveDirectoryPath + "/Save " + index;
+
+        File.WriteAllText(saveDirectory + "/Scene", sceneName);
+    }
+
+    public static void SaveActiveScene(int index)
+    {
+        SaveScene(index, SceneManager.GetActiveScene());
+    }
+
+    public static void LoadScene(int index)
+    {
+        string scenePath = _saveDirectoryPath + "/Save " + index + "/Scene";
+        string sceneName = JsonUtility.FromJson<string>(scenePath);
+
+        isLoading = true;
+        saveIndex = index;
+        SceneManager.LoadScene(sceneName);
+    }
 }

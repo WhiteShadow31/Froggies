@@ -12,14 +12,19 @@ public class InGameSaving : MonoBehaviour
         Instance = this;
 
         // Awake the saving system 
-        if(!SavingManager.initialized)
-            SavingManager.Initialize();
+        if(!Saver.initialized)
+            Saver.Initialize();
     }
 
     private void Start()
     {
-        Scene scene = SceneManager.GetSceneByBuildIndex(2);
-        Saver.SaveSceneName(0, scene);
-        Saver.LoadSave(0);
+        if(Saver.isLoading)
+        {
+
+
+            Saver.isLoading = false;
+        }
+
+        //Saver.SaveActiveScene(0);
     }
 }
