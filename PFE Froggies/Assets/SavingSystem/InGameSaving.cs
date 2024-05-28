@@ -20,11 +20,36 @@ public class InGameSaving : MonoBehaviour
     {
         if(Saver.isLoading)
         {
-
+            Debug.Log("LOADING");
 
             Saver.isLoading = false;
         }
+    }
 
-        //Saver.SaveActiveScene(0);
+    private void Update()
+    {
+        int indexActiveScene = SceneManager.GetActiveScene().buildIndex;
+        
+        if(Input.GetKeyDown(KeyCode.Space))
+            Saver.SaveActiveScene(0); // Save for the save 0
+
+        if(Input.GetKeyDown(KeyCode.Backspace))
+            Saver.LoadSave(0); // Load the save 0
+        
+        if (Input.GetKeyDown(KeyCode.E)) // Next scene
+        {
+            int nbrScene = SceneManager.sceneCountInBuildSettings;
+
+            if (indexActiveScene < nbrScene)
+                SceneManager.LoadScene(indexActiveScene + 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q)) // Previous scene
+        {
+            if (indexActiveScene > 0)
+                SceneManager.LoadScene(indexActiveScene-1);
+        }
+
+
     }
 }
