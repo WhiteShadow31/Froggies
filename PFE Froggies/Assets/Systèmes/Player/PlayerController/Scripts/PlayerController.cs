@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [Space]
     [SerializeField] protected GameObject _prefabPlayerEntity;
     protected PlayerEntity _playerEntity;
+    public PlayerEntity Player => _playerEntity;
     [Space]
     
     public int playerNbr = 0;
