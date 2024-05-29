@@ -1364,6 +1364,14 @@ MonoBehaviour:
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 216
+  _upArrowSounds:
+  - Clip: {fileID: 8300000, guid: ebbfc453033259d4895d2012630e4a34, type: 3}
+    Volume: 1
+  _leftArrowSounds:
+  - Clip: {fileID: 8300000, guid: 61823c4cdde4bc14f9794110fee05577, type: 3}
+    Volume: 1
+  _bottomArrowSounds: []
+  _rightArrowSounds: []
   _showDebug: 1
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
   _disableMovementSlopeRaycastColor: {r: 0, g: 0, b: 1, a: 1}

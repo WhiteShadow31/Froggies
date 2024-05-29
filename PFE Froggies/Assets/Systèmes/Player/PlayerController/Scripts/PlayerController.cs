@@ -88,6 +88,40 @@ public class PlayerController : MonoBehaviour
         _uiManager.SetPauseMenu(!_uiManager.InPauseMenu);
     }
 
+    // Arrows
+
+    void OnUpArrow(InputValue ctx)
+    {
+        if(_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.UpArrowSounds, transform);
+        }
+    }
+
+    void OnBottomArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.BottomArrowSounds, transform);
+        }
+    }
+
+    void OnLeftArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.LeftArrowSounds, transform);
+        }
+    }
+
+    void OnRightArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.RightArrowSounds, transform);
+        }
+    }
+
     public void SpawnPlayer()
     {
         if (_prefabPlayerEntity != null)
