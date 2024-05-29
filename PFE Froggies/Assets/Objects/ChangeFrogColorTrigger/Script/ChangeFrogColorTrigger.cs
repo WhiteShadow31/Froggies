@@ -10,43 +10,27 @@ public class ChangeFrogColorTrigger : MonoBehaviour
 
     [SerializeField] LayerMask _playerLayerMask;
     [Space]
-    [SerializeField] PrimaryColor _targetPrimaryColor;
+    [SerializeField] float _targetHue;
     [SerializeField] float _maxChangeColorTime;
-
-    Color _targetColor;
     [SerializeField] List<PlayerColorChange> _playerColorChanges = new List<PlayerColorChange>();
 
     private void Start()
     {
-        switch(_targetPrimaryColor)
-        {
-            case PrimaryColor.Red:
-                _targetColor = Color.red;
-                break;
-            case PrimaryColor.Yellow:
-                _targetColor = new Color(1,1,0,1);
-                break;
-            case PrimaryColor.Blue:
-                _targetColor = Color.blue;
-                break;
-        }
+        // Set target hue from 0 and 1
+        _targetHue = _targetHue / 359f;
     }
 
-    IEnumerator ChangeFrogColor(PlayerColorChange playerColorChange, Color startColor)
+    IEnumerator ChangeFrogColor(PlayerColorChange playerColorChange, float startHue)
     {
         Renderer[] renderersToChange = playerColorChange.PlayerEntity.model.GetComponentsInChildren<Renderer>();
-        
-        Vector3 startColorValues = new Vector3(startColor.r, startColor.g, startColor.b);
-        Vector3 targetColorValues = new Vector3(_targetColor.r, _targetColor.g, _targetColor.b);
 
         while (playerColorChange.ChangeColorTimer < playerColorChange.ChangeColorTime)
         {
+            float currentHue = LerpHue(startHue, _targetHue, playerColorChange.ChangeColorTimer / playerColorChange.ChangeColorTime);
 
             foreach(Renderer renderer in renderersToChange)
             {
-                Vector3 newColorValues = LerpHSV(RGB2HSV(startColorValues), RGB2HSV(targetColorValues), playerColorChange.ChangeColorTimer / playerColorChange.ChangeColorTime);
-                Vector3 newColor = HSV2RGB(newColorValues);
-                renderer.sharedMaterial.color = new Color(newColor.x, newColor.y, newColor.z);
+                renderer.sharedMaterial.color = Color.HSVToRGB(currentHue, 1f, 1f);
             }
             yield return new WaitForNextFrameUnit();
             playerColorChange.ChangeColorTimer += Time.deltaTime;
@@ -54,111 +38,28 @@ public class ChangeFrogColorTrigger : MonoBehaviour
         yield return null;
     }
 
-    Vector3 RGB2HSV(Vector3 color)
+    float LerpHue(float start, float end, float t)
     {
-        float[] colorValues = { color.x, color.y, color.z };
-        float cmax = Mathf.Max(colorValues);
-        float cmin = Mathf.Min(colorValues);
-        float delta = cmax - cmin;
-        
-        float hue = 0;
-        float saturation = 0;
+        float shortestRed = Mathf.Abs(0f - start) < Mathf.Abs(1f - start) ? 0f : 1f;
+        float longestRed = shortestRed == 0f ? 1f : 0f;
+        if (Mathf.Abs(shortestRed - start) + Mathf.Abs(end - longestRed) < Mathf.Abs(end - start))
+        {
+            float d = Mathf.Abs(shortestRed - start) + Mathf.Abs(end - longestRed);
+            float passedShortestRedPercent = Mathf.InverseLerp(0f, d, Mathf.Abs(shortestRed - start));
 
-        if (cmax == color.x)
-        {
-            hue = 60 * (((color.y - color.z) / delta) % 6);
-        }
-        else if (cmax == color.y)
-        {
-            hue = 60 * ((color.z - color.x) / delta + 2);
-        }
-        else if (cmax == color.y)
-        {
-            hue = 60 * ((color.x - color.y) / delta + 4);
-        }
-        if (cmax > 0)
-        {
-            saturation = delta / cmax;
+            if(t <= passedShortestRedPercent)
+            {
+                end = shortestRed;
+                t = t / passedShortestRedPercent;
+            }
+            else
+            {
+                start = shortestRed;
+            }           
         }
 
-        return new Vector3(hue, saturation, cmax);
-    }
-
-    Vector3 HSV2RGB(Vector3 color)
-    {
-        float hue = color.x;
-        float c = color.z * color.y;
-        float x = c * (1 - Mathf.Abs((hue / 60) % 2 - 1));
-        float m = color.z - c;
-
-        float r = 0;
-        float g = 0;
-        float b = 0;
-
-        if (hue < 60)
-        {
-            r = c;
-            g = x;
-        }
-        else if (hue < 120)
-        {
-            r = x;
-            g = c;
-        }
-        else if (hue < 180)
-        {
-            g = c;
-            b = x;
-        }
-        else if (hue < 240)
-        {
-            g = x;
-            b = c;
-        }
-        else if (hue < 300)
-        {
-            r = x;
-            b = c;
-        }
-        else
-        {
-            r = c;
-            b = x;
-        }
-
-        return new Vector3(r + m, g + m, b + m);
-    }
-
-    Vector3 LerpHSV(Vector3 a, Vector3 b, float x)
-    {
-        Vector3 ah = RGB2HSV(a);
-        Vector3 bh = RGB2HSV(b);
-        Vector3 color = new Vector3(
-            Mathf.LerpAngle(ah.x, bh.x, x),
-            Mathf.Lerp(ah.y, bh.y, x),
-            Mathf.Lerp(ah.z, bh.z, x)
-        );
-        return new Vector3(color.x, color.y, color.z);
-    }
-
-    float CalculateColorChangeTime(Color startColor)
-    {
-        float percent = 0f;
-
-        switch (_targetPrimaryColor)
-        {
-            case PrimaryColor.Red:
-                percent = Mathf.InverseLerp(0, 1, startColor.r);
-                break;
-            case PrimaryColor.Yellow:
-                percent = Mathf.InverseLerp(0, 1, Mathf.Min(startColor.r, startColor.g));               
-                break;
-            case PrimaryColor.Blue:
-                percent = Mathf.InverseLerp(0, 1, startColor.b);
-                break;
-        }
-
-        return Mathf.Lerp(0, _maxChangeColorTime, percent);
+        float hue = Mathf.Lerp(start, end, t);
+        return hue;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -167,13 +68,16 @@ public class ChangeFrogColorTrigger : MonoBehaviour
         {
             if(other.TryGetComponent<PlayerEntity>(out PlayerEntity frogEntity))
             {
-                Renderer[] frogRenderers = frogEntity.model.GetComponentsInChildren<Renderer>();               
+                // Get frog HSV color
+                Renderer[] frogRenderers = frogEntity.model.GetComponentsInChildren<Renderer>();
+                Color.RGBToHSV(frogRenderers[0].sharedMaterial.color, out float frogH, out float frogS, out float frogV);
 
+                // Set new player color change class
                 PlayerColorChange newPlayerColorChange = new PlayerColorChange();
                 newPlayerColorChange.PlayerEntity = frogEntity;
-                newPlayerColorChange.ChangeColorTime = 2f; //CalculateColorChangeTime(frogRenderers[0].sharedMaterial.color);
+                newPlayerColorChange.ChangeColorTime = 2f;
                 newPlayerColorChange.ChangeColorTimer = 0f;
-                newPlayerColorChange.Coroutine = StartCoroutine(ChangeFrogColor(newPlayerColorChange, frogRenderers[0].sharedMaterial.color));
+                newPlayerColorChange.Coroutine = StartCoroutine(ChangeFrogColor(newPlayerColorChange, frogH));
 
                 _playerColorChanges.Add(newPlayerColorChange);
             }
@@ -198,13 +102,6 @@ public class ChangeFrogColorTrigger : MonoBehaviour
                 }
             }               
         }
-    }
-
-    enum PrimaryColor
-    {
-        Red,
-        Yellow,
-        Blue
     }
 
     [Serializable]
