@@ -6,7 +6,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Saver : MonoBehaviour
+public static class Saver
 {
     private static string _saveDirectoryPath = Application.persistentDataPath + "/Saves"; // Path for all directories saves
     public static string SaveDirectoryPath { get { return _saveDirectoryPath; } }
@@ -78,16 +78,23 @@ public class Saver : MonoBehaviour
     public static void LoadSave(int index)
     {
         string scenePath = _saveDirectoryPath + "/Save " + index + "/Scene.json";
+        if(File.Exists(scenePath))
+        {
+            string jsonToRead = File.ReadAllText(scenePath);
+            SceneSaver sceneSaver = JsonUtility.FromJson<SceneSaver>(jsonToRead);
 
-        string jsonToRead = File.ReadAllText(scenePath);
-        SceneSaver sceneSaver = JsonUtility.FromJson<SceneSaver>(jsonToRead);
-
-        isLoading = true;
-        saveIndex = index;
-        SceneManager.LoadScene(sceneSaver.buildIndex);
+            isLoading = true;
+            saveIndex = index;
+            SceneManager.LoadScene(sceneSaver.buildIndex);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+            SaveScene(index, 1);
+        }
     }
 
-    public void SavePlayers(int index, List<PlayerController> controllers)
+    public static void SavePlayers(int index, List<PlayerController> controllers)
     {
         for(int i = 0; i < 2; i++)
         {

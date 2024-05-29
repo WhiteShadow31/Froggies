@@ -54,12 +54,11 @@ public class ChangeFrogColorTrigger : MonoBehaviour
             }
             else
             {
-                start = shortestRed;
+                start = longestRed;
             }           
         }
 
-        float hue = Mathf.Lerp(start, end, t);
-        return hue;
+        return Mathf.Lerp(start, end, t);
     }
 
     private void OnTriggerEnter(Collider other)
