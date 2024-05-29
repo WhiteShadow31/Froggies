@@ -127,19 +127,53 @@ public class Saver : MonoBehaviour
         }
     }
 
-    public static void SaveTransforms(int index, List<Transform> transforms)
+    public static void SaveTransforms(int index, List<Transform> trans)
     {
-        string saveDirectory = _saveDirectoryPath + "/Save " + index;
+        string saveDirectory = _saveDirectoryPath + "/Save " + index + "/Transforms";
 
-        List<TransformSaver> transSavers = new List<TransformSaver>();
-
-        for(int i = 0; i < transforms.Count; i++)
+        if (Directory.Exists(saveDirectory))
         {
-            Transform trans = transforms[i];
-            TransformSaver saver = new TransformSaver(trans.name, trans.position, trans.rotation, trans.localScale);
-
-            transSavers.Add(saver);
+            Directory.Delete(saveDirectory, true);
         }
+
+        Directory.CreateDirectory(saveDirectory);
+        for(int i = 0; i < trans.Count; i++)
+        {
+            SaveTransform(index, trans[i], i);
+        }
+    }
+    public static void SaveTransform(int index, Transform trans, int transformIndex)
+    {
+        string saveDirectory = _saveDirectoryPath + "/Save " + index + "/Transforms";
+
+        TransformSaver saver = new TransformSaver(trans.name, trans.position, trans.rotation, trans.localScale);
+        string savedData = JsonUtility.ToJson(saver);
+
+        File.WriteAllText(saveDirectory + "/Transform " + transformIndex, savedData);
+    }
+    public static void LoadTransforms(int index, List<Transform> trans)
+    {
+        string saveDirectory = _saveDirectoryPath + "/Save " + index + "/Transforms";
+
+        if (File.Exists(saveDirectory))
+        {
+            for (int i = 0; i < trans.Count; i++)
+            {
+                if (File.Exists(saveDirectory + "/Transform " + i))
+                {
+                    string jsonToRead = File.ReadAllText(saveDirectory + "/Transform "+i);
+                    TransformSaver saver = JsonUtility.FromJson<TransformSaver>(jsonToRead);
+
+                    if(saver.name == trans[i].name)
+                    {
+                        trans[i].position = saver.position;
+                        trans[i].rotation = saver.rotation;
+                        trans[i].localScale = saver.scale;
+                    }
+                }
+            }
+        }
+
     }
 }
 
