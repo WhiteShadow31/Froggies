@@ -86,7 +86,8 @@ public class PlayerController : MonoBehaviour
 
     void OnMenuPause(InputValue ctx)
     {
-        _uiManager.SetPauseMenu(!_uiManager.InPauseMenu);
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+            _uiManager.SetPauseMenu(!_uiManager.InPauseMenu);
     }
 
     // Arrows
