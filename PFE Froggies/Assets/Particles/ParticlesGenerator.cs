@@ -9,6 +9,9 @@ public class ParticlesGenerator : MonoBehaviour
     public GameObject highTouchGroundParticles;
     public GameObject jumpGroundParticles;
 
+    [Header("Pollen Particles")]
+    public GameObject pollenParticles;
+
     static ParticlesGenerator _instance;
     public static ParticlesGenerator Instance => _instance;
 
@@ -42,6 +45,15 @@ public class ParticlesGenerator : MonoBehaviour
             GameObject particles = Instantiate(jumpGroundParticles);
             particles.transform.position = position;
             particles.transform.rotation = Quaternion.LookRotation(jumpDirection);
+        }
+    }
+
+    public void PlayPollenSuccess(Vector3 position)
+    {
+        if (pollenParticles != null)
+        {
+            GameObject particles = Instantiate(pollenParticles);
+            particles.transform.position = position;
         }
     }
 }
