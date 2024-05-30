@@ -211,6 +211,7 @@ public class PlayerEntity : MonoBehaviour
         {
             if ((col.transform != this.transform))
             {
+                Debug.Log(this.gameObject.name + " / " + col.gameObject.name);
                 grounded = true;
             }
         }
