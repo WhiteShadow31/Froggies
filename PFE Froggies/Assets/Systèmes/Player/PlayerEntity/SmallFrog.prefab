@@ -168,6 +168,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1891151014697136453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5784543633428775835}
+  m_Layer: 0
+  m_Name: Eyes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5784543633428775835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891151014697136453}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8467531302061472473}
+  - {fileID: 2748258831867350666}
+  m_Father: {fileID: 4811288948140708742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2710754639691053199
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,8 +600,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8976306841644741175}
-  - {fileID: 8467531302061472473}
-  - {fileID: 2748258831867350666}
   m_Father: {fileID: 4811288948140708742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4363319480734025184
@@ -1055,11 +1086,11 @@ Transform:
   m_GameObject: {fileID: 7247843043867517124}
   serializedVersion: 2
   m_LocalRotation: {x: 0.6087605, y: -0, z: -0, w: 0.79335415}
-  m_LocalPosition: {x: -0.25, y: 0.45677418, z: 0.7368499}
+  m_LocalPosition: {x: -0.25, y: 0.9567742, z: 0.54684985}
   m_LocalScale: {x: 0.44315, y: 0.44315, z: 0.44315}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4404454837975397373}
+  m_Father: {fileID: 5784543633428775835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &577409700003682964
 MeshFilter:
@@ -1146,6 +1177,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7707663042051885650}
+  - {fileID: 5784543633428775835}
   - {fileID: 4404454837975397373}
   - {fileID: 1159593551632478005}
   - {fileID: 5260575640272389438}
@@ -1201,7 +1233,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _setGroundRotationRaycastLenght: 1
-  _rotationSmoothSpeed: 1
+  _rotationSmoothSpeed: 1.5
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: {x: 1.4, y: 0.1, z: 1.5}
   _groundMask:
@@ -1211,7 +1243,7 @@ MonoBehaviour:
   playerColor: {r: 1, g: 0.5019608, b: 0.763672, a: 1}
   _moveForce: 1
   _moveMode: 1
-  _startMoveAfter: 0.2
+  _startMoveAfter: 0.5
   _disableMovementSlopeAngle: 45
   _disableMovementSlopeRaycastLayerMask:
     serializedVersion: 2
@@ -1224,8 +1256,8 @@ MonoBehaviour:
   _tongueLayerMask:
     serializedVersion: 2
     m_Bits: 201
-  _tongueInTime: 0.25
-  _tongueOutTime: 0.5
+  _tongueInTime: 0.15
+  _tongueOutTime: 0.3
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:
@@ -1316,7 +1348,7 @@ MonoBehaviour:
   _jumpForceFwd: 30
   _longJumpForceUp: 40
   _longJumpForceFwd: 35
-  _canJumpTime: 0.05
+  _canJumpTime: 0.08
   _jumpMode: 1
   _jumpCollisionDetectionTransform: {fileID: 3222051968224460766}
   _jumpCollisionDetectionEveryTickCount: 1
@@ -1324,7 +1356,7 @@ MonoBehaviour:
   _jumpCollisionDetectionLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  _tryToResetIsJumpingAfter: 0.1
+  _tryToResetIsJumpingAfter: 0.08
   _showTrajectoryLine: 0
   _jumpPredictionLine: {fileID: 3735360176625625681}
   _jumpPredictionLinePointCount: 200
@@ -1332,6 +1364,14 @@ MonoBehaviour:
   _jumpPredictionLayerMask:
     serializedVersion: 2
     m_Bits: 216
+  _upArrowSounds:
+  - Clip: {fileID: 8300000, guid: ebbfc453033259d4895d2012630e4a34, type: 3}
+    Volume: 1
+  _leftArrowSounds:
+  - Clip: {fileID: 8300000, guid: 61823c4cdde4bc14f9794110fee05577, type: 3}
+    Volume: 1
+  _bottomArrowSounds: []
+  _rightArrowSounds: []
   _showDebug: 1
   _groundCheckDebugColor: {r: 1, g: 0, b: 0, a: 0.5882353}
   _disableMovementSlopeRaycastColor: {r: 0, g: 0, b: 1, a: 1}
@@ -1769,11 +1809,11 @@ Transform:
   m_GameObject: {fileID: 9072658680848413001}
   serializedVersion: 2
   m_LocalRotation: {x: 0.6087605, y: -0, z: -0, w: 0.79335415}
-  m_LocalPosition: {x: 0.25, y: 0.45677418, z: 0.7368499}
+  m_LocalPosition: {x: 0.25, y: 0.9567742, z: 0.54684985}
   m_LocalScale: {x: 0.44315, y: 0.44315, z: 0.44315}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4404454837975397373}
+  m_Father: {fileID: 5784543633428775835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1042270700067488787
 MeshFilter:

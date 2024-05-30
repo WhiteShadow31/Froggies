@@ -5,41 +5,62 @@ using UnityEngine.SceneManagement;
 
 public class InGameSaving : MonoBehaviour
 {
-    public List<Transform> transformsToSave = new List<Transform>();
+    public static InGameSaving Instance;
 
     private void Awake()
     {
+        Instance = this;
+
         // Awake the saving system 
-        if(!SavingManager.initialized)
-            SavingManager.Initialize();
+        if(!Saver.initialized)
+            Saver.Initialize();
     }
 
     private void Start()
     {
-        if (SavingManager.isLoadingSave) // SavingManager is loading a save
+        if(Saver.isLoading)
         {
-            SavingManager.LoadTransform(SavingManager.loadedSaveName, transformsToSave); // Load the transform based on save name and object in scene
+            Debug.Log("LOADING");
 
-            // OU FAIRE
-
-            // SavingManager.LoadTransform(SceneManager.GetActiveScene().name, transformsToSave); // Load the transform based on scene name and object in scene
+            Saver.isLoading = false;
         }
-
-        SavingManager.isLoadingSave = false;
-        SavingManager.loadedSaveName = "";
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SaveTransform();
-        }
+        //int indexActiveScene = SceneManager.GetActiveScene().buildIndex;
+        
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //    Saver.SaveActiveScene(0); // Save for the save 0
+
+        //if(Input.GetKeyDown(KeyCode.Backspace))
+        //    Saver.LoadSave(0); // Load the save 0
+        
+        //if (Input.GetKeyDown(KeyCode.E)) // Next scene
+        //{
+        //    int nbrScene = SceneManager.sceneCountInBuildSettings;
+
+        //    if (indexActiveScene < nbrScene)
+        //        SceneManager.LoadScene(indexActiveScene + 1);
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.Q)) // Previous scene
+        //{
+        //    if (indexActiveScene > 0)
+        //        SceneManager.LoadScene(indexActiveScene-1);
+        //}
+
+
     }
 
-    public void SaveTransform()
+    public void LoadSave()
     {
-        SavingManager.CreateSaveDirectory("MySave");
-        SavingManager.SaveTransform("MySave", transformsToSave);
+        Saver.LoadSave(Saver.saveIndex);
     }
+
+    public void SetSaveIndex(int index)
+    {
+        Saver.saveIndex = index;
+    }
+
 }

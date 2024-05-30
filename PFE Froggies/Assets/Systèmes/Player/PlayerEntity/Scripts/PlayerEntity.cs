@@ -98,6 +98,16 @@ public class PlayerEntity : MonoBehaviour
     public bool IsJumping { get { return _isJumping; } }
     bool _wasGroundedLastFrame = false;
 
+    [Header("Directional Pad")]
+    [SerializeField] Sound[] _upArrowSounds;
+    public Sound[] UpArrowSounds => _upArrowSounds;
+    [SerializeField] Sound[] _leftArrowSounds;
+    public Sound[] LeftArrowSounds => _leftArrowSounds;
+    [SerializeField] Sound[] _bottomArrowSounds;
+    public Sound[] BottomArrowSounds => _bottomArrowSounds;
+    [SerializeField] Sound[] _rightArrowSounds;
+    public Sound[] RightArrowSounds => _rightArrowSounds;
+
     [Header("--- DEBUG ---")]
     [SerializeField] bool _showDebug = false;
     [ShowIf("_showDebug", true), SerializeField] Color _groundCheckDebugColor = Color.red;
@@ -339,8 +349,9 @@ public class PlayerEntity : MonoBehaviour
 
     void ManageIsJumping()
     {        
-        if(_tryResetIsJumping && _rigidbodyController.Velocity.magnitude < 0.1f && IsGrounded && IsJumping)
+        if(_tryResetIsJumping && IsGrounded && IsJumping)
         {
+            _rigidbodyController.StopVelocity();
             _isJumping = false;
             _tryResetIsJumping = false;
         }

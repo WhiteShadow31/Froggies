@@ -58,7 +58,7 @@ public static class SavingSystem
         // Look if saved game already exist
         if (Directory.Exists(playerDirectorySavePath))
         {
-            LoadTransform(playerDirectorySavePath, saver.transformsToSave);
+            //LoadTransform(playerDirectorySavePath, saver.transformsToSave);
             LoadPlayers(playerDirectorySavePath);
         }
     }

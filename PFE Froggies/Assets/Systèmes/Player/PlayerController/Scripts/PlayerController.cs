@@ -15,13 +15,12 @@ public class PlayerController : MonoBehaviour
     public int playerNbr = 0;
     public Vector3 spawnPoint;
 
-    bool _tryToChangeButton = false;
-
-
-
+    UIManager _uiManager;
 
     private void Awake()
     {
+        _uiManager = FindObjectOfType<UIManager>();
+
         if (_cameraEntity == null)
         {
             _cameraEntity = Camera.main.GetComponent<CameraEntity>();
@@ -63,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     void OnStartTongueAim(InputValue ctx)
     {
-        if( _playerEntity != null && !MenuManager.Instance.IsInMenu)
+        if( _playerEntity != null)
         {
             _playerEntity.StartTongueAimInput = true;
         }
@@ -71,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void OnEndTongueAim(InputValue ctx)
     {
-        if(_playerEntity != null && !MenuManager.Instance.IsInMenu)
+        if(_playerEntity != null)
         {
             _playerEntity.EndTongueAimInput = true;          
         }
@@ -79,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMount(InputValue ctx)
     {
-        if(_playerEntity != null && !MenuManager.Instance.IsInMenu)
+        if(_playerEntity != null)
         {
             _playerEntity.MountInput = true;
         }
@@ -87,9 +86,42 @@ public class PlayerController : MonoBehaviour
 
     void OnMenuPause(InputValue ctx)
     {
-        
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+            _uiManager.SetPauseMenu(!_uiManager.InPauseMenu);
+    }
 
+    // Arrows
 
+    void OnUpArrow(InputValue ctx)
+    {
+        if(_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.UpArrowSounds, transform);
+        }
+    }
+
+    void OnBottomArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.BottomArrowSounds, transform);
+        }
+    }
+
+    void OnLeftArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.LeftArrowSounds, transform);
+        }
+    }
+
+    void OnRightArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.RightArrowSounds, transform);
+        }
     }
 
     public void SpawnPlayer()
