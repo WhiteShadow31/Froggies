@@ -1233,7 +1233,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _setGroundRotationRaycastLenght: 1
-  _rotationSmoothSpeed: 1
+  _rotationSmoothSpeed: 1.5
   _groundCheck: {fileID: 7707663042051885650}
   _groundRadius: {x: 1.4, y: 0.1, z: 1.5}
   _groundMask:
@@ -1243,7 +1243,7 @@ MonoBehaviour:
   playerColor: {r: 1, g: 0.5019608, b: 0.763672, a: 1}
   _moveForce: 1
   _moveMode: 1
-  _startMoveAfter: 0.2
+  _startMoveAfter: 0.5
   _disableMovementSlopeAngle: 45
   _disableMovementSlopeRaycastLayerMask:
     serializedVersion: 2
@@ -1256,8 +1256,8 @@ MonoBehaviour:
   _tongueLayerMask:
     serializedVersion: 2
     m_Bits: 201
-  _tongueInTime: 0.25
-  _tongueOutTime: 0.5
+  _tongueInTime: 0.15
+  _tongueOutTime: 0.3
   _tongueOutCurve:
     serializedVersion: 2
     m_Curve:
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   _jumpForceFwd: 30
   _longJumpForceUp: 40
   _longJumpForceFwd: 35
-  _canJumpTime: 0.05
+  _canJumpTime: 0.08
   _jumpMode: 1
   _jumpCollisionDetectionTransform: {fileID: 3222051968224460766}
   _jumpCollisionDetectionEveryTickCount: 1
@@ -1356,7 +1356,7 @@ MonoBehaviour:
   _jumpCollisionDetectionLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  _tryToResetIsJumpingAfter: 0.1
+  _tryToResetIsJumpingAfter: 0.08
   _showTrajectoryLine: 0
   _jumpPredictionLine: {fileID: 3735360176625625681}
   _jumpPredictionLinePointCount: 200
