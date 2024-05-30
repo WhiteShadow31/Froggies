@@ -13,7 +13,6 @@ public class ParticlesEntity : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_particleSystem.isPlaying);
         if(_particleSystem != null && !_particleSystem.isPlaying)
         {
             Destroy(this.gameObject);

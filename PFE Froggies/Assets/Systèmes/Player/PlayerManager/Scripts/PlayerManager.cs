@@ -50,6 +50,9 @@ public class PlayerManager : MonoBehaviour
             // Set the color of the frog
             ctrl.SetPlayerColor(playerColors[playerIndex]);
 
+            if (Saver.saveIndex != -1)
+                Saver.LoadPlayer(Saver.saveIndex, ctrl, playerIndex);
+
             // Increase index player 
             playerIndex++;
         }

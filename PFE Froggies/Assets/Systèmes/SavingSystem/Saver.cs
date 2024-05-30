@@ -134,6 +134,24 @@ public static class Saver
         }
     }
 
+    public static void LoadPlayer(int index, PlayerController controller, int indexPlayer)
+    {
+        string scenePath = _saveDirectoryPath + "/Save " + index + "/Player " + indexPlayer + ".json"; // Path for player file
+
+        if (File.Exists(scenePath))
+        {
+            string jsonToRead = File.ReadAllText(scenePath);
+            PlayerSaver playerSaver = JsonUtility.FromJson<PlayerSaver>(jsonToRead);
+
+            // SET THE COLOR
+            controller.SetPlayerColor(playerSaver.playerEntity.playerColor);
+            Transform trans = controller.Player.transform;
+
+            trans.position = playerSaver.position;
+            trans.rotation = playerSaver.rotation;
+        }
+    }
+
     public static void SaveTransforms(int index, List<Transform> transforms)
     {
         string saveDirectory = _saveDirectoryPath + "/Save " + index;
