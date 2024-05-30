@@ -107,6 +107,7 @@ public class CameraEntity : MonoBehaviour
         PlaceCamBorder();
     }
 
+
     // ---------------------  Camera states ----------------------- //
 
     void ExplorationCamera()

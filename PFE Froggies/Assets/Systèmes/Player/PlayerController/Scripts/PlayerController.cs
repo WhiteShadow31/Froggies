@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -11,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [Space]
     [SerializeField] protected GameObject _prefabPlayerEntity;
     protected PlayerEntity _playerEntity;
+    public PlayerEntity Player => _playerEntity;
     [Space]
     
     public int playerNbr = 0;
