@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [Space]
     [SerializeField] protected GameObject _prefabPlayerEntity;
     protected PlayerEntity _playerEntity;
+    public PlayerEntity Player => _playerEntity;
     [Space]
     
     public int playerNbr = 0;
@@ -85,7 +86,42 @@ public class PlayerController : MonoBehaviour
 
     void OnMenuPause(InputValue ctx)
     {
-        _uiManager.SetPauseMenu(!_uiManager.InPauseMenu);
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+            _uiManager.SetPauseMenu(!_uiManager.InPauseMenu);
+    }
+
+    // Arrows
+
+    void OnUpArrow(InputValue ctx)
+    {
+        if(_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.UpArrowSounds, transform);
+        }
+    }
+
+    void OnBottomArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.BottomArrowSounds, transform);
+        }
+    }
+
+    void OnLeftArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.LeftArrowSounds, transform);
+        }
+    }
+
+    void OnRightArrow(InputValue ctx)
+    {
+        if (_playerEntity != null)
+        {
+            SoundManager.instance.CreateRandomSound(_playerEntity.RightArrowSounds, transform);
+        }
     }
 
     public void SpawnPlayer()

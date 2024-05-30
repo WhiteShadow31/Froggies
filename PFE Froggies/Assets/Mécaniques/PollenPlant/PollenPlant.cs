@@ -19,6 +19,7 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
 
     [Header("Spawn Insects Parameters")]
     public float spawnRadius = 1f;
+    public Vector3 offset;
     public int nbrInsectToSpawn = 3;
     [Space]
     public float insectSpawningTimeBetween = 0.8f;
@@ -141,7 +142,7 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
             pos.x = Mathf.Sin((offsetAngle * i) * Mathf.Deg2Rad) * spawnRadius;
             pos.z = Mathf.Cos((offsetAngle * i) * Mathf.Deg2Rad) * spawnRadius;
 
-            pos += this.transform.position;
+            pos += this.transform.position + offset;
             result.Add(pos);
         }
 
@@ -166,7 +167,7 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
             pos.x = Mathf.Sin((offsetAngle * i) * Mathf.Deg2Rad) * spawnRadius;
             pos.z = Mathf.Cos((offsetAngle * i) * Mathf.Deg2Rad) * spawnRadius;
 
-            pos += this.transform.position;
+            pos += this.transform.position + offset;
             result.Add(pos);
         }
 
