@@ -332,8 +332,9 @@ public class PlayerEntity : MonoBehaviour
 
     void ManageIsJumping()
     {        
-        if(_tryResetIsJumping && _rigidbodyController.Velocity.magnitude < 0.1f && IsGrounded && IsJumping)
+        if(_tryResetIsJumping && IsGrounded && IsJumping)
         {
+            _rigidbodyController.StopVelocity();
             _isJumping = false;
             _tryResetIsJumping = false;
         }
