@@ -94,26 +94,26 @@ public static class Saver
         }
     }
 
-    public static void SavePlayers(int index, List<PlayerController> controllers)
+    public static void SavePlayers(int index, List<PlayerEntity> controllers)
     {
         for(int i = 0; i < 2; i++)
         {
             SavePlayer(index, controllers[i], i);
         }
     }
-    public static void SavePlayer(int index, PlayerController player, int indexPlayer)
+    public static void SavePlayer(int index, PlayerEntity player, int indexPlayer)
     {
-        if(player.Player != null)
+        if(player != null)
         {
-            string saveDirectory = _saveDirectoryPath + "/Save " + index + "/Player " + indexPlayer + ".json";
+            string saveDirectory = _saveDirectoryPath + "/Save " + index;
 
-            PlayerSaver playerSaver = new PlayerSaver(player.Player);
+            PlayerSaver playerSaver = new PlayerSaver(player.playerColor, player.transform.position, player.transform.rotation);
             string savedData = JsonUtility.ToJson(playerSaver);
 
             File.WriteAllText(saveDirectory + "/Player "+ indexPlayer +".json", savedData);
         }
     }
-    public static void LoadPlayers(int index, List<PlayerController> players)
+    public static void LoadPlayers(int index, List<PlayerEntity> players)
     {
         for(int i = 0; i < 2; i++)
         {
@@ -125,8 +125,8 @@ public static class Saver
                 PlayerSaver playerSaver = JsonUtility.FromJson<PlayerSaver>(jsonToRead);
 
                 // SET THE COLOR
-                players[i].SetPlayerColor(playerSaver.playerEntity.playerColor);
-                Transform trans = players[i].Player.transform;
+                players[i].SetPlayerColor(playerSaver.color);
+                Transform trans = players[i].transform;
 
                 trans.position = playerSaver.position;
                 trans.rotation = playerSaver.rotation;
@@ -163,22 +163,15 @@ public class SceneSaver
 
 public class PlayerSaver
 {
-    public PlayerEntity playerEntity;
+    public Color color;
     public Vector3 position;
     public Quaternion rotation;
 
-    public PlayerSaver(PlayerEntity playerEntity, Vector3 position, Quaternion rotation)
+    public PlayerSaver(Color color, Vector3 position, Quaternion rotation)
     {
-        this.playerEntity = playerEntity;
+        this.color = color;
         this.position = position;
         this.rotation = rotation;
-    }
-
-    public PlayerSaver(PlayerEntity playerEntity)
-    {
-        this.playerEntity = playerEntity;
-        this.position = playerEntity.transform.position;
-        this.rotation = playerEntity.transform.rotation;
     }
 }
 

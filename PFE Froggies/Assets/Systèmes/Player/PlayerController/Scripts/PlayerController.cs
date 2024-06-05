@@ -169,6 +169,24 @@ public class PlayerController : MonoBehaviour
             _playerEntity.controller = this;
         }
     }
+
+    public void SpawnPlayer(Vector3 pos, PlayerEntity player)
+    {
+        _playerEntity = player;
+        player.transform.position = pos;
+
+        if (_cameraEntity == null)
+        {
+            if (Camera.main.GetComponent<CameraEntity>() != null)
+                _cameraEntity = Camera.main.GetComponent<CameraEntity>();
+        }
+
+        if (_cameraEntity != null)
+            _cameraEntity.AddPlayer(player.gameObject);
+
+        _playerEntity.controller = this;
+    }
+
     public void SetPlayerColor(Color col)
     {
         if(_playerEntity != null && _playerEntity.model != null)
