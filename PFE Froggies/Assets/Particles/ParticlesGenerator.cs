@@ -8,6 +8,7 @@ public class ParticlesGenerator : MonoBehaviour
     public GameObject touchGroundParticles;
     public GameObject highTouchGroundParticles;
     public GameObject jumpGroundParticles;
+    public GameObject salivateParticles;
 
     [Header("Pollen Particles")]
     public GameObject pollenParticles;
