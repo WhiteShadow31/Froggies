@@ -543,6 +543,34 @@ public class PlayerEntity : MonoBehaviour
     }
 
     // =====================================================================================
+    //                                   COLOR METHODS 
+    // =====================================================================================
+
+    public void SetPlayerColor(Color col)
+    {
+        if (model != null)
+        {
+            playerColor = col;
+            SetPlayerColorRecursive(col, model);
+        }
+    }
+
+    protected void SetPlayerColorRecursive(Color col, Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.TryGetComponent<MeshRenderer>(out MeshRenderer mrChild))
+            {
+                Material mat = mrChild.material;
+                mat.color = col;
+                mrChild.material = mat;
+            }
+
+            SetPlayerColorRecursive(col, child);
+        }
+    }
+
+    // =====================================================================================
     //                                   GIZMOS METHODS 
     // =====================================================================================
 
