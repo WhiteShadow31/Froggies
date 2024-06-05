@@ -68,7 +68,7 @@ public class InGameSaving : MonoBehaviour
     public void SavePlayers()
     {
         if(PlayerManager.Instance != null)
-            Saver.SavePlayers(Saver.saveIndex, PlayerManager.Instance.m_controllers);
+            Saver.SavePlayers(Saver.saveIndex, PlayerManager.Instance.playerEntities);
     }
 
     public void LoadPlayers()

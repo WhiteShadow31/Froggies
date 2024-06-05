@@ -94,20 +94,20 @@ public static class Saver
         }
     }
 
-    public static void SavePlayers(int index, List<PlayerController> controllers)
+    public static void SavePlayers(int index, List<PlayerEntity> controllers)
     {
         for(int i = 0; i < 2; i++)
         {
             SavePlayer(index, controllers[i], i);
         }
     }
-    public static void SavePlayer(int index, PlayerController player, int indexPlayer)
+    public static void SavePlayer(int index, PlayerEntity player, int indexPlayer)
     {
-        if(player.Player != null)
+        if(player != null)
         {
             string saveDirectory = _saveDirectoryPath + "/Save " + index;
 
-            PlayerSaver playerSaver = new PlayerSaver(player.Player.playerColor, player.Player.transform.position, player.Player.transform.rotation);
+            PlayerSaver playerSaver = new PlayerSaver(player.playerColor, player.transform.position, player.transform.rotation);
             string savedData = JsonUtility.ToJson(playerSaver);
 
             File.WriteAllText(saveDirectory + "/Player "+ indexPlayer +".json", savedData);
