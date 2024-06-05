@@ -28,9 +28,14 @@ public class ChangeFrogColorTrigger : MonoBehaviour
         {
             float currentHue = LerpHue(startHue, _targetHue, playerColorChange.ChangeColorTimer / playerColorChange.ChangeColorTime);
 
-            foreach(Renderer renderer in renderersToChange)
+            Color targetColor = Color.HSVToRGB(currentHue, 1f, 1f);
+            Material newMat = new Material(renderersToChange[0].sharedMaterial);
+            newMat.color = targetColor;
+
+            foreach (Renderer renderer in renderersToChange)
             {
-                renderer.sharedMaterial.color = Color.HSVToRGB(currentHue, 1f, 1f);
+                renderer.material = newMat;
+                playerColorChange.PlayerEntity.playerColor = targetColor;
             }
             yield return new WaitForNextFrameUnit();
             playerColorChange.ChangeColorTimer += Time.deltaTime;

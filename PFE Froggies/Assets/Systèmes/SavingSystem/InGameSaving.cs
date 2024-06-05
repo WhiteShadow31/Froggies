@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class InGameSaving : MonoBehaviour
 {
@@ -21,7 +23,7 @@ public class InGameSaving : MonoBehaviour
         if(Saver.isLoading)
         {
             Debug.Log("LOADING");
-
+            LoadPlayers();
             Saver.isLoading = false;
         }
     }
@@ -61,6 +63,20 @@ public class InGameSaving : MonoBehaviour
     public void SetSaveIndex(int index)
     {
         Saver.saveIndex = index;
+    }
+
+    public void SavePlayers()
+    {
+        if(PlayerManager.Instance != null)
+            Saver.SavePlayers(Saver.saveIndex, PlayerManager.Instance.m_controllers);
+    }
+
+    public void LoadPlayers()
+    {
+        if (PlayerManager.Instance != null)
+        {
+            Saver.LoadPlayers(Saver.saveIndex, PlayerManager.Instance.playerEntities);
+        }
     }
 
 }
