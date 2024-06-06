@@ -23,6 +23,7 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] Transform _groundCheck;
     [SerializeField] Vector3 _groundRadius;
     [SerializeField] LayerMask _groundMask;
+    bool _lastGrounded = true;
     public bool IsGrounded { get { return LookGrounded(); } }
 
     [Header("--- MODEL ---")]
@@ -172,6 +173,20 @@ public class PlayerEntity : MonoBehaviour
         Move();       
     }
 
+    private void LateUpdate()
+    {
+        bool grounded = LookGrounded();
+
+        if(grounded && !_lastGrounded) // Touch ground but was in air before
+        {
+            if(ParticlesGenerator.Instance != null)
+            {
+                ParticlesGenerator.Instance.PlayTouchGround(this.transform.position);
+            }
+        } 
+        _lastGrounded = grounded;
+    }
+
     // =====================================================================================
     //                                   INITIALISATION METHODS 
     // =====================================================================================
@@ -303,6 +318,8 @@ public class PlayerEntity : MonoBehaviour
             Invoke(nameof(CanJumpTimerFinished), _canJumpTime);
             Invoke(nameof(SetTryResetIsJumping), _tryToResetIsJumpingAfter);
         }
+
+        ParticlesGenerator.Instance.PlayJumpGround(this.transform.position, this.transform.forward);
     }
 
     void SetTryResetIsJumping()
