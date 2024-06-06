@@ -134,7 +134,7 @@ public static class Saver
                     string jsonScene = File.ReadAllText(sceneSavePath);
                     SceneSaver sceneSaver = JsonUtility.FromJson<SceneSaver>(jsonScene);
 
-                    if(sceneSaver.buildIndex == SceneManager.GetActiveScene().buildIndex)
+                    if(sceneSaver.buildIndex == SceneManager.GetActiveScene().buildIndex && SceneManager.GetActiveScene().buildIndex != 0)
                     {
                         trans.position = playerSaver.position;
                         trans.rotation = playerSaver.rotation;
