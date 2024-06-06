@@ -154,7 +154,7 @@ public static class Saver
             PlayerSaver playerSaver = JsonUtility.FromJson<PlayerSaver>(jsonToRead);
 
             // SET THE COLOR
-            controller.SetPlayerColor(playerSaver.playerEntity.playerColor);
+            controller.SetPlayerColor(playerSaver.color);
             Transform trans = controller.Player.transform;
 
             trans.position = playerSaver.position;
