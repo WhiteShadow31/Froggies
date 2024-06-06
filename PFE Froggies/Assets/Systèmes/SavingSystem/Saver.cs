@@ -128,8 +128,18 @@ public static class Saver
                 players[i].SetPlayerColor(playerSaver.color);
                 Transform trans = players[i].transform;
 
-                trans.position = playerSaver.position;
-                trans.rotation = playerSaver.rotation;
+                string sceneSavePath = $"{SaveDirectoryPath}/Save {index}/Scene";
+                if (File.Exists(sceneSavePath))
+                {
+                    string jsonScene = File.ReadAllText(sceneSavePath);
+                    SceneSaver sceneSaver = JsonUtility.FromJson<SceneSaver>(jsonScene);
+
+                    if(sceneSaver.buildIndex == SceneManager.GetActiveScene().buildIndex)
+                    {
+                        trans.position = playerSaver.position;
+                        trans.rotation = playerSaver.rotation;
+                    }
+                }
             }
         }
     }
