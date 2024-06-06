@@ -116,6 +116,37 @@ Transform:
   - {fileID: 5912209266524685937}
   m_Father: {fileID: 3511934246156654282}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4898894086261775209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4174586584073964236}
+  m_Layer: 0
+  m_Name: RespawnPointCP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4174586584073964236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898894086261775209}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.022340013, z: 0, w: 0.99975044}
+  m_LocalPosition: {x: 0, y: 0.15, z: -4}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3511934246156654282}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5944904826470297104
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,10 +175,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5056502916359783139}
+  - {fileID: 4174586584073964236}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6214842889845694103
@@ -162,17 +194,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ff4d1037f120f4abd080da3584c2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectionRadius: 5
+  _detectionRadius: 15
   _detectionMask:
     serializedVersion: 2
     m_Bits: 64
   _timeToHit: 1
   _plantHead: {fileID: 5912209266524685937}
-  _respawnPoint: {fileID: 0}
+  _respawnPoint: {fileID: 4174586584073964236}
   _stunMask:
     serializedVersion: 2
     m_Bits: 128
-  _stunTimeMAX: 1.2
+  _stunTimeMAX: 2
 --- !u!65 &1718857038060886889
 BoxCollider:
   m_ObjectHideFlags: 0
