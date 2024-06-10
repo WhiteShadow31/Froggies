@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5063382933226818393}
   - component: {fileID: 8684759154778422353}
   - component: {fileID: 2250461748364568564}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6508127345666243755}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: "N\xE9nuphare_VerteParcour"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1109,6 +1109,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: efd988efeadf7f642adffd4386964819, type: 3}
       propertyPath: m_Name
       value: Nenuphare_parcour
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: efd988efeadf7f642adffd4386964819, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
