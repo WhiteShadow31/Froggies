@@ -1375,6 +1375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_nenuphar (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2911,6 +2915,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nenuphare_parcour (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2fbe664538396d24da2ef5984b703271, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3791,6 +3799,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_nenuphar
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4411,6 +4423,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_Name
       value: Nenuphare (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8833,6 +8849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nenuphare (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10474,6 +10494,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2fbe664538396d24da2ef5984b703271, type: 3}
       propertyPath: m_Name
       value: Nenuphare_parcour (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2fbe664538396d24da2ef5984b703271, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14166,6 +14190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nenuphare (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14437,6 +14465,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 97ea6ca83fee13c479353f01b65b0ed4, type: 3}
       propertyPath: m_Name
       value: Nenuphar
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97ea6ca83fee13c479353f01b65b0ed4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15339,6 +15371,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_nenuphar (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15582,6 +15618,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_nenuphar (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15741,6 +15781,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2fbe664538396d24da2ef5984b703271, type: 3}
       propertyPath: m_Name
       value: Nenuphare_parcour (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2fbe664538396d24da2ef5984b703271, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22181,7 +22225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 532245583}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Asset artiste
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25145,7 +25189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &650191083
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26807,6 +26851,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
       propertyPath: m_Name
       value: Maison_nenuphar (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31044,7 +31092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 265.5
+      value: 264.97
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -31052,7 +31100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.63
+      value: -4.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31090,10 +31138,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nenuphare
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1651769550}
   m_SourcePrefab: {fileID: 100100000, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
 --- !u!4 &776951909 stripped
 Transform:
@@ -33323,6 +33378,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
       propertyPath: m_Name
       value: Maison_nenuphar (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42295,6 +42354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nenuphare (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43689,6 +43752,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_Name
       value: Nenuphare (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47634,6 +47701,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
       propertyPath: m_Name
       value: Maison_nenuphar (02)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51689,6 +51760,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nenuphar (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97ea6ca83fee13c479353f01b65b0ed4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52840,6 +52915,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
       propertyPath: m_Name
       value: Maison_nenuphar (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -55818,6 +55897,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nenuphare_parcour
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2fbe664538396d24da2ef5984b703271, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -56800,6 +56883,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_Name
       value: Nenuphare (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58464,6 +58551,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
       propertyPath: m_Name
       value: Maison_nenuphar (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61648,7 +61739,7 @@ Transform:
   m_GameObject: {fileID: 1612979281}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 45.03, y: 0, z: 2}
+  m_LocalPosition: {x: 9.5, y: 0, z: -49.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63391,6 +63482,33 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1651769549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+  m_PrefabInstance: {fileID: 776951908}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1651769550
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651769549}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1101153151964735003, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
 --- !u!43 &1662360111
 Mesh:
   m_ObjectHideFlags: 0
@@ -71349,6 +71467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nenuphare_parcour (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2fbe664538396d24da2ef5984b703271, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74344,6 +74466,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_nenuphar (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74421,6 +74547,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
       propertyPath: m_Name
       value: Maison_nenuphar (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 747b6890f986efb4d8d7eb173e4887be, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
