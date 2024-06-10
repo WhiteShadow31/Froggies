@@ -134,7 +134,7 @@ public static class Saver
                     string jsonScene = File.ReadAllText(sceneSavePath);
                     SceneSaver sceneSaver = JsonUtility.FromJson<SceneSaver>(jsonScene);
 
-                    if(sceneSaver.buildIndex == SceneManager.GetActiveScene().buildIndex && SceneManager.GetActiveScene().buildIndex != 0)
+                    if (sceneSaver.buildIndex == SceneManager.GetActiveScene().buildIndex && SceneManager.GetActiveScene().buildIndex != 0)
                     {
                         trans.position = playerSaver.position;
                         trans.rotation = playerSaver.rotation;
@@ -157,8 +157,18 @@ public static class Saver
             controller.SetPlayerColor(playerSaver.color);
             Transform trans = controller.Player.transform;
 
-            trans.position = playerSaver.position;
-            trans.rotation = playerSaver.rotation;
+            string sceneSavePath = $"{SaveDirectoryPath}/Save {index}/Scene";
+            if (File.Exists(sceneSavePath))
+            {
+                string jsonScene = File.ReadAllText(sceneSavePath);
+                SceneSaver sceneSaver = JsonUtility.FromJson<SceneSaver>(jsonScene);
+
+                if (sceneSaver.buildIndex == SceneManager.GetActiveScene().buildIndex && SceneManager.GetActiveScene().buildIndex != 0)
+                {
+                    trans.position = playerSaver.position;
+                    trans.rotation = playerSaver.rotation;
+                }
+            }
         }
     }
 

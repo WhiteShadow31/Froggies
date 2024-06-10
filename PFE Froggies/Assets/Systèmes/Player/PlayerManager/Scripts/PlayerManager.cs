@@ -14,8 +14,6 @@ public class PlayerManager : MonoBehaviour
     public int Index { get { return playerIndex; } }
     public List<PlayerEntity> playerEntities = new List<PlayerEntity>(2);
 
-    public List<Color> playerColors = new List<Color>();
-
     public Transform[] spawnPoints;
 
     public List<PlayerController> m_controllers = new List<PlayerController>();
@@ -26,6 +24,8 @@ public class PlayerManager : MonoBehaviour
         Instance = this;
 
         _inputManager = GetComponent<PlayerInputManager>();
+
+        Time.timeScale = 1f;
     }
 
     public void OnPlayerJoined(PlayerInput player)
