@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 
 public class PlayerEntity : MonoBehaviour
 {
+    AudioSource _audioSource;
+    public AudioSource AudioSource => _audioSource;
+
     [HideInInspector] public PlayerController controller;
     SimpleRigidbody _rigidbodyController;
     StateMachinePlayer _smPlayer;
@@ -98,16 +101,6 @@ public class PlayerEntity : MonoBehaviour
     bool _isJumping;
     public bool IsJumping { get { return _isJumping; } }
     bool _wasGroundedLastFrame = false;
-
-    [Header("Directional Pad")]
-    [SerializeField] Sound[] _upArrowSounds;
-    public Sound[] UpArrowSounds => _upArrowSounds;
-    [SerializeField] Sound[] _leftArrowSounds;
-    public Sound[] LeftArrowSounds => _leftArrowSounds;
-    [SerializeField] Sound[] _bottomArrowSounds;
-    public Sound[] BottomArrowSounds => _bottomArrowSounds;
-    [SerializeField] Sound[] _rightArrowSounds;
-    public Sound[] RightArrowSounds => _rightArrowSounds;
 
     [Header("--- DEBUG ---")]
     [SerializeField] bool _showDebug = false;
