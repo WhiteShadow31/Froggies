@@ -12,13 +12,11 @@ public class PlayerManager : MonoBehaviour
     protected List<PlayerInput> players = new List<PlayerInput>();
     int playerIndex = 0;
     public int Index { get { return playerIndex; } }
-
-
-    public List<Color> playerColors = new List<Color>();
+    public List<PlayerEntity> playerEntities = new List<PlayerEntity>(2);
 
     public Transform[] spawnPoints;
 
-    protected List<PlayerController> m_controllers = new List<PlayerController>();
+    public List<PlayerController> m_controllers = new List<PlayerController>();
     public List<PlayerController> Controllers { get { return m_controllers; } }
 
     private void Awake()
@@ -26,10 +24,13 @@ public class PlayerManager : MonoBehaviour
         Instance = this;
 
         _inputManager = GetComponent<PlayerInputManager>();
+
+        Time.timeScale = 1f;
     }
 
     public void OnPlayerJoined(PlayerInput player)
     {
+        Debug.Log("join");
         players.Add(player);
         //playerIndex++;
         if(playerIndex  < 2 && player.transform.TryGetComponent<PlayerController>(out PlayerController ctrl))
@@ -46,9 +47,9 @@ public class PlayerManager : MonoBehaviour
             // Save the spawn point
             ctrl.spawnPoint = spawnPoints[playerIndex].position;
             // Spawn the player frog
-            ctrl.SpawnPlayer(spawnPoints[playerIndex].position);
+            ctrl.SpawnPlayer(spawnPoints[playerIndex].position, playerEntities[playerIndex]);
             // Set the color of the frog
-            ctrl.SetPlayerColor(playerColors[playerIndex]);
+            //ctrl.SetPlayerColor(playerColors[playerIndex]);
 
             if (Saver.saveIndex != -1)
                 Saver.LoadPlayer(Saver.saveIndex, ctrl, playerIndex);

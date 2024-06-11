@@ -167,7 +167,7 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
             pos.x = Mathf.Sin((offsetAngle * i) * Mathf.Deg2Rad) * spawnRadius;
             pos.z = Mathf.Cos((offsetAngle * i) * Mathf.Deg2Rad) * spawnRadius;
 
-            pos += this.transform.position;
+            pos += this.transform.position + offset;
             result.Add(pos);
         }
 

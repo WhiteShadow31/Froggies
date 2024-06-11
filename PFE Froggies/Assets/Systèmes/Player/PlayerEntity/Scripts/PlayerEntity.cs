@@ -68,6 +68,7 @@ public class PlayerEntity : MonoBehaviour
     [SerializeField] LayerMask _playerLayer;
     Transform _otherPlayerMountTransform = null;
     public Transform GetMountTransform { get { return _otherPlayerMountTransform; } }
+    CapsuleCollider _capsuleCollider;
 
     [Header("--- JUMP ---")]
     [SerializeField] float _jumpForceUp = 1;
@@ -145,6 +146,8 @@ public class PlayerEntity : MonoBehaviour
 
         _smPlayer = new StateMachinePlayer(this);
         _smPlayer.Start();
+
+        _capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     protected void Update()
@@ -224,8 +227,9 @@ public class PlayerEntity : MonoBehaviour
 
         foreach (Collider col in cols)
         {
-            if ((col.transform != this.transform))
+            if (col.transform != this.transform && !col.isTrigger)
             {
+                //Debug.Log(this.gameObject.name + " / " + col.gameObject.name);
                 grounded = true;
             }
         }
@@ -278,12 +282,16 @@ public class PlayerEntity : MonoBehaviour
         if (Physics.Raycast(_disableMovementSlopeRaycastTransform.position, -Vector3.up, out RaycastHit hitInfo, _disableMovementSlopeRaycastLenght, _disableMovementSlopeRaycastLayerMask))
         {
             //Debug.Log(Mathf.Abs(Vector3.Angle(Vector3.up, hitInfo.normal)));
-            if (Mathf.Abs(Vector3.Angle(Vector3.up, hitInfo.normal)) >= _disableMovementSlopeAngle)
+            if (!_isOnFrog && Mathf.Abs(Vector3.Angle(Vector3.up, hitInfo.normal)) >= _disableMovementSlopeAngle)
                 _onHighSlope = true;
             else
                 _onHighSlope = false;
         }
     }
+
+    // =====================================================================================
+    //                                   JUMP METHODS 
+    // =====================================================================================
 
     public void Jump()
     {
@@ -324,20 +332,8 @@ public class PlayerEntity : MonoBehaviour
         _canJump = true;
     }
 
-    // =====================================================================================
-    //                                   JUMP METHODS 
-    // =====================================================================================
-
     public void ManageJump()
     {
-        //Check if player is in jump
-        //if (_isJumping && !_wasGroundedLastFrame && IsGrounded)
-        //{
-        //    _rigidbodyController.StopVelocity();
-        //    _isJumping = false;
-        //}
-        //_wasGroundedLastFrame = IsGrounded;
-
         if (_showTrajectoryLine)
         {
             _jumpPredictionLine.enabled = true;
@@ -522,10 +518,8 @@ public class PlayerEntity : MonoBehaviour
                     if (!otherPlayerEntity._isOnFrog)
                     {
                         _otherPlayerMountTransform = otherPlayerEntity.onFrogTransform;
-                        Debug.Log(this.name + "mount on "+_otherPlayerMountTransform.parent.name);
 
-                        // Set ignore collision between players to true
-                        Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), true);
+                        _capsuleCollider.isTrigger = true;
 
                         _isOnFrog = true;
                         MountInput = false;
@@ -542,13 +536,11 @@ public class PlayerEntity : MonoBehaviour
     {
         if (_isOnFrog)
         {
-            // Set ignore collision between players to false
-            Physics.IgnoreCollision(GetComponent<Collider>(), _otherPlayerMountTransform.parent.GetComponent<Collider>(), false);
-
             _otherPlayerMountTransform = null;
 
-            _canJump = true;
+            _capsuleCollider.isTrigger = false;
 
+            _canJump = true;
             MountInput = false;
         }
     }
@@ -565,6 +557,34 @@ public class PlayerEntity : MonoBehaviour
     {
         this.transform.position = pos;
         _rigidbodyController.StopVelocity();
+    }
+
+    // =====================================================================================
+    //                                   COLOR METHODS 
+    // =====================================================================================
+
+    public void SetPlayerColor(Color col)
+    {
+        if (model != null)
+        {
+            playerColor = col;
+            SetPlayerColorRecursive(col, model);
+        }
+    }
+
+    protected void SetPlayerColorRecursive(Color col, Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.TryGetComponent<MeshRenderer>(out MeshRenderer mrChild))
+            {
+                Material mat = mrChild.material;
+                mat.color = col;
+                mrChild.material = mat;
+            }
+
+            SetPlayerColorRecursive(col, child);
+        }
     }
 
     // =====================================================================================

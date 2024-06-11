@@ -58,11 +58,11 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Imported Packages\HueFolders\Editor\HueFoldersBrowser.cs" />
-    <Compile Include="Assets\Imported Packages\HueFolders\Editor\SettingsProvider.cs" />
+    <Compile Include="Assets\Packages Imported\HueFolders\Editor\HueFoldersBrowser.cs" />
+    <Compile Include="Assets\Packages Imported\HueFolders\Editor\SettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Imported Packages\HueFolders\Editor\HueFolders.Editor.asmdef" />
+    <None Include="Assets\Packages Imported\HueFolders\Editor\HueFolders.Editor.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -319,6 +319,9 @@
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>

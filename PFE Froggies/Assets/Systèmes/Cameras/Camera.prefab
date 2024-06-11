@@ -448,17 +448,19 @@ MonoBehaviour:
   players:
   - {fileID: 0}
   - {fileID: 0}
-  _camExplorationRotation: {x: 60, y: 0, z: 0}
-  _camMinForwardOffset: -10
-  _camMaxForwardOffset: -15
+  _camExplorationRotation: {x: 45, y: 0, z: 0}
+  _camMinForwardOffset: -16
+  _camMaxForwardOffset: -40
   _maxZoomYDist: 15
-  _maxDezoomYDist: 25
+  _maxDezoomYDist: 40
   _startDezoomDistance: 10
   _maxDezoomDistance: 27
   _camExplorationPosInterpTime: 0.5
   _camExplorationRotInterpSpeed: 20
   _camPuzzlePosInterpTime: 0.5
   _camPuzzleRotInterpSpeed: 20
+  _useBordersInExploration: 0
+  _useBordersInPuzzle: 0
   _horizontalPlaneObject: {fileID: 9068986827617582194}
   _horizontalPlaneLayerMask:
     serializedVersion: 2
@@ -470,13 +472,6 @@ MonoBehaviour:
   - {fileID: 6681406899708065896}
   _bordersWallsWidth: 2
   _bordersWallsHeight: 20
-  _bordersTriggers:
-  - {fileID: 5128761544942512271}
-  - {fileID: 6373438870789672135}
-  - {fileID: 74303794614003863}
-  - {fileID: 5661354382288679592}
-  _bordersTriggersWidth: 6
-  _bordersTriggersHeight: 20
   _drawDebugGizmos: 1
   _bordersWallsDebugColor: {r: 1, g: 0, b: 0, a: 0.39215687}
   _bordersTriggersDebugColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.19607843}
@@ -669,7 +664,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 250, y: 1, z: 250}
+  m_LocalScale: {x: 500, y: 1, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1412082366757707698}
