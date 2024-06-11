@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5999655459131572649}
   - component: {fileID: 26051924038109010}
   - component: {fileID: 8502562547425965193}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3885188145196306017}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: M_Rocher_Sale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4735381126779296735}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rescale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,6 +813,10 @@ PrefabInstance:
       value: Material 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1ff2c634dab53ca4486cbbaa84fb62ce, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1ff2c634dab53ca4486cbbaa84fb62ce, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -897,6 +901,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1ff2c634dab53ca4486cbbaa84fb62ce, type: 3}
       propertyPath: m_Name
       value: Material 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1ff2c634dab53ca4486cbbaa84fb62ce, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1ff2c634dab53ca4486cbbaa84fb62ce, type: 3}
       propertyPath: m_IsActive
