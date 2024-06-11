@@ -1267,7 +1267,7 @@ MonoBehaviour:
   _setGroundRotationRaycastLenght: 1
   _rotationSmoothSpeed: 1.5
   _groundCheck: {fileID: 7707663042051885650}
-  _groundRadius: {x: 1.4, y: 0.1, z: 1.5}
+  _groundRadius: {x: 0.5, y: 0.1, z: 0.5}
   _groundMask:
     serializedVersion: 2
     m_Bits: 200
