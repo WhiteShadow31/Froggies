@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 874718678913189229}
   - component: {fileID: 4290940421653793480}
   - component: {fileID: 2047040914326224386}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plante_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5035333471447100695}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plante_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 3651968731252062072}
   - component: {fileID: 98331687004926705}
   - component: {fileID: 4272126400364032885}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

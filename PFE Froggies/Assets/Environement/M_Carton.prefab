@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8613065651507927969}
   - component: {fileID: 4536643269663070583}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 2097706138689640051}
   - component: {fileID: 3076898676016126422}
   - component: {fileID: 961413254484028700}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: carton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6668816619220046616}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: M_Carton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
