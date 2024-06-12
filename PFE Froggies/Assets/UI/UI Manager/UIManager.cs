@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject _pauseMenuObject;
     [SerializeField] GameObject _pauseMenuFirstSelected;
     [Space]
+    [SerializeField] GameObject _optionsMenuObject;
+    [SerializeField] GameObject _optionsMenuFirstSelected;
+    [Space]
     [SerializeField, Scene] int _mainMenuSceneIndex;
 
     bool _inPauseMenu;
@@ -29,14 +32,23 @@ public class UIManager : MonoBehaviour
             SetFirstSelected(_pauseMenuFirstSelected);
     }
 
-    public void QuitToMainMenu()
+    public void Quit()
     {
-        SceneManager.LoadScene(_mainMenuSceneIndex);
+        if(SceneManager.GetActiveScene().buildIndex == _mainMenuSceneIndex)
+            Application.Quit();
+        else
+        {
+            // Save de tout
+
+
+            SceneManager.LoadScene(_mainMenuSceneIndex);
+        }
     }
 
-    public void QuitGame()
+    public void SetOptionsMenu(bool state)
     {
-        Application.Quit();
+        _optionsMenuObject.SetActive(state);
+        if (state)
+            SetFirstSelected(_optionsMenuFirstSelected);
     }
-
 }
