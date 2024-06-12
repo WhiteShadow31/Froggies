@@ -2545,6 +2545,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseMenuObject: {fileID: 0}
   _pauseMenuFirstSelected: {fileID: 0}
+  _optionsMenuObject: {fileID: 0}
+  _optionsMenuFirstSelected: {fileID: 0}
   _mainMenuSceneIndex: 0
 --- !u!4 &154516472
 Transform:
@@ -18299,6 +18301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseMenuObject: {fileID: 582027054}
   _pauseMenuFirstSelected: {fileID: 1998875073}
+  _optionsMenuObject: {fileID: 0}
+  _optionsMenuFirstSelected: {fileID: 0}
   _mainMenuSceneIndex: 0
 --- !u!4 &976922944
 Transform:
