@@ -16,7 +16,17 @@ public class Dialogue : UIRotateToCamera
     public Vector2 sizeImage = new Vector2(1,1);
 
 
+    [Header("Animation Parameters")]
+    [SerializeField] float _appearTime;
+    [SerializeField] AnimationCurve _appearCurve;
+    float _appearTimer = 0f;
+    [SerializeField] float _disappearTime;
+    [SerializeField] AnimationCurve _disappearCurve;
+    float _disappearTimer = 0f;
+
     protected GameObject canvasGO;
+    GameObject _bubbleGo;
+    Image _bubbleImage;
 
     protected override void Awake()
     {
@@ -35,10 +45,48 @@ public class Dialogue : UIRotateToCamera
 
     private void FixedUpdate()
     {
-        if(PlayerClose())
+        if (PlayerClose())
+        {
+            _disappearTimer = 0f;
+
+            _bubbleGo.transform.localScale = Vector2.zero;
+            SetImageAlpha(1f);
             canvasGO.SetActive(true);
-        else 
-            canvasGO.SetActive(false);
+
+            if(_appearTimer < _appearTime)
+            {
+                _appearTimer += Time.deltaTime;
+                _bubbleGo.transform.localScale = Vector2.Lerp(Vector2.zero, Vector2.one, _appearCurve.Evaluate(_appearTimer / _appearTime));
+            }
+            else
+            {
+                _bubbleGo.transform.localScale = Vector2.one;
+            }
+        }
+        else
+        {
+            _appearTimer = 0f;
+
+            Color newColor = _bubbleImage.color;
+
+            if (_disappearTimer < _disappearTime)
+            {        
+                _disappearTimer += Time.deltaTime;
+                SetImageAlpha(Mathf.Lerp(1f, 0f, _disappearCurve.Evaluate(_disappearTimer / _disappearTime)));
+            }
+            else
+            {
+                SetImageAlpha(0f);
+                canvasGO.SetActive(false);
+            }
+        }
+    }
+
+    void SetImageAlpha(float value)
+    {
+        Color color = _bubbleImage.color;
+        color.a = value;
+        _bubbleImage.color = color;
     }
 
     protected void CreateUI()
@@ -53,21 +101,21 @@ public class Dialogue : UIRotateToCamera
         RectTransform rectCanva = canvasGO.GetComponent<RectTransform>();
         rectCanva.localPosition = offsetCanva;
         rectCanva.sizeDelta = sizeCanva;
-
+        
         // IMAGE
-        GameObject goChild = new GameObject("DialogueImage");
-        goChild.transform.parent = canvasGO.transform;
+        _bubbleGo = new GameObject("DialogueImage");
+        _bubbleGo.transform.parent = canvasGO.transform;
 
-        Image img = goChild.AddComponent<Image>();
+        _bubbleImage = _bubbleGo.AddComponent<Image>();
 
-        RectTransform rectImg = goChild.GetComponent<RectTransform>();
+        RectTransform rectImg = _bubbleGo.GetComponent<RectTransform>();
         rectImg.localPosition = offsetImage;
         rectImg.sizeDelta = sizeImage;
 
         if (spriteToShow == null)
             Debug.LogWarning("There is no sprite to show.");
         else
-            img.sprite = spriteToShow;
+            _bubbleImage.sprite = spriteToShow;
     }
 
     protected bool PlayerClose()
