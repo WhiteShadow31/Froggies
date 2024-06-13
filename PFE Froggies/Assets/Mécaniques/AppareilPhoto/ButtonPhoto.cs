@@ -35,6 +35,9 @@ public class ButtonPhoto : MonoBehaviour, IInteractableEntity
     {
         if(!_hasBeenUsed)
         {
+            if(AudioGenerator.Instance != null)
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "ENGM_Appareil_O1");
+
             StartCoroutine(ShowPhoto());
             _hasBeenUsed = true;
         }

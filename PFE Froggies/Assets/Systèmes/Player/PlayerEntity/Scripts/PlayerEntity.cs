@@ -176,6 +176,9 @@ public class PlayerEntity : MonoBehaviour
             {
                 ParticlesGenerator.Instance.PlayTouchGround(this.transform.position);
             }
+
+            if(AudioGenerator.Instance != null)
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Atterissage_0" + UnityEngine.Random.Range(1,2));
         } 
         _lastGrounded = grounded;
     }
@@ -290,6 +293,21 @@ public class PlayerEntity : MonoBehaviour
     {
         _rigidbodyController.StopVelocity();
         
+        if(ParticlesGenerator.Instance != null)
+        {
+            if(LongJumpInput)
+                ParticlesGenerator.Instance.PlayJumpGround(this.transform.position, this.transform.forward);
+            else
+                ParticlesGenerator.Instance.PlayJumpGround(this.transform.position, this.transform.forward);
+        }
+        if(AudioGenerator.Instance != null)
+        {
+            if(LongJumpInput)
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_GrandSaut_0" + UnityEngine.Random.Range(1,2));
+            else
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_PetitSaut_0" + UnityEngine.Random.Range(1,2));
+        }
+
         Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (Vector3.up * _jumpForceUp);
         if (LongJumpInput)
             jumpForce = (transform.forward * _longJumpForceFwd) + (Vector3.up * _longJumpForceUp);
@@ -312,7 +330,6 @@ public class PlayerEntity : MonoBehaviour
             Invoke(nameof(SetTryResetIsJumping), _tryToResetIsJumpingAfter);
         }
 
-        ParticlesGenerator.Instance.PlayJumpGround(this.transform.position, this.transform.forward);
     }
 
     void SetTryResetIsJumping()
@@ -448,6 +465,9 @@ public class PlayerEntity : MonoBehaviour
 
     IEnumerator UseTongueCoroutine()
     {
+        if(AudioGenerator.Instance != null)
+            AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_0" + UnityEngine.Random.Range(1,2));
+
         _canUseTongue = false;
         _tongueLineRenderer.enabled = true;
         Vector3 hitPosition;
@@ -516,6 +536,11 @@ public class PlayerEntity : MonoBehaviour
 
                         _isOnFrog = true;
                         MountInput = false;
+
+                        if(AudioGenerator.Instance != null)
+                            AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Chevauchement");
+                                        
+
                         return true;
                     }
                 }

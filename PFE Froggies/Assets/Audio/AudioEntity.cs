@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class AudioEntity : MonoBehaviour
 {
+    public float volume = 1;
+    public float pitch = 1;
     GameObject _trackedObject;
     bool _isTracking = false;
 
@@ -16,29 +17,52 @@ public class AudioEntity : MonoBehaviour
 
     private void Awake()
     {
-        _source = GetComponent<AudioSource>();
+        _source = this.gameObject.AddComponent<AudioSource>();
     }
 
     private void Update()
     {
-        if (!_isLooping && _time > _length)
+        if(_isPlaying)
         {
-            Destroy(this.gameObject);
-        }
-        _time += Time.deltaTime;
+            if (!_isLooping && _time > _length)
+            {
+                if(AudioGenerator.Instance != null)
+                    AudioGenerator.Instance.RemoveAudioEntity(this);
 
-        if (_isTracking)
-            this.transform.position = _trackedObject.transform.position;
+                Destroy(this.gameObject);
+            }
+            _time += Time.deltaTime;
+
+            if (_isTracking)
+                this.transform.position = _trackedObject.transform.position;
+        }
     }
 
-    public void PlayClip(AudioClip clip, bool isLooping = false)
+    public void Play(AudioClip clip, bool isLooping = false)
     {
         _source.clip = clip;
-        _source.Play();
+        _length = clip.length;
         _isLooping = isLooping;
+        
+        _source.loop = _isLooping;
+        _source.Play();
+
+        _isPlaying = true;
     }
 
-    public void Track(GameObject go)
+    public void SetBaseVolume(float volume = 1f, float pitch = 1f)
+    {
+        this.volume = volume;
+        this.pitch = pitch;
+    }
+
+    public void Volume(float volume = 1f, float pitch = 1f)
+    {
+        _source.volume = volume;
+        _source.pitch = pitch;
+    }
+
+    public void Follow(GameObject go)
     {
         _trackedObject = go;
         _isTracking = true;

@@ -34,6 +34,8 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
 
     bool canBeActivated = true;
 
+    AudioEntity audioPlant;
+
     private void Awake()
     {
         GetComponent<Rigidbody>().isKinematic = true;
@@ -61,12 +63,17 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
                 _pollenEmitTimer = 0;
                 _pollenSucceed = 0;
                 _isEmitting = false;
+
+                if(audioPlant != null)
+                    Destroy(audioPlant.gameObject);
             }
 
             // SUCCEED
             if(_pollenSucceed > pollenSucceedMAX)
             {
                 gatePlant.TotalOpen();
+                if(audioPlant != null)
+                    Destroy(audioPlant.gameObject);
                 canBeActivated = false;
             }
 
@@ -124,9 +131,12 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
 
     public override void Push(Vector3 dir, float force, GameObject frog)
     {
-        if (!_isEmitting)
+        if (canBeActivated && !_isEmitting)
         {
             _isEmitting = true;
+
+            if(audioPlant == null && AudioGenerator.Instance != null)
+                audioPlant = AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Fleur_01", true);
         }
     }
 
