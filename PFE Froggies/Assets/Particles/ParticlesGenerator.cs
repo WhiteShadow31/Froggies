@@ -20,6 +20,7 @@ public class ParticlesGenerator : MonoBehaviour
     public GameObject touchGroundParticles;
     public GameObject highTouchGroundParticles;
     public GameObject jumpGroundParticles;
+    public GameObject highJumpGroundParticles;
     public GameObject salivateInsectParticles;
     public GameObject slideGround;
 
@@ -84,6 +85,17 @@ public class ParticlesGenerator : MonoBehaviour
         if (jumpGroundParticles != null)
         {
             GameObject particles = Instantiate(jumpGroundParticles);
+            particles.transform.position = position;
+            particles.transform.rotation = Quaternion.LookRotation(jumpDirection);
+
+            SetParticlesEntityColor(particles, tag);
+        }
+    }
+    public void PlayHighJumpGround(Vector3 position, Vector3 jumpDirection, string tag = "None")
+    {
+        if (jumpGroundParticles != null)
+        {
+            GameObject particles = Instantiate(highJumpGroundParticles);
             particles.transform.position = position;
             particles.transform.rotation = Quaternion.LookRotation(jumpDirection);
 

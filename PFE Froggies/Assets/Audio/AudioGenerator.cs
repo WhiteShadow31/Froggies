@@ -19,6 +19,11 @@ public class AudioGenerator : MonoBehaviour
     List<AudioEntity> _sfxs = new List<AudioEntity>();
     List<AudioEntity> _musics = new List<AudioEntity>();
 
+    [Header("Scene Ambiance")]
+    public string ambianceName = "AMB_Foret";
+
+    AudioEntity _saveAudio;
+
     private void Awake()
     {
         _instance = this;
@@ -26,7 +31,7 @@ public class AudioGenerator : MonoBehaviour
 
     private void Start()
     {
-        PlayClipAt(Vector3.zero, "AMB_Foret", true, 1, 1, Camera.main.gameObject);
+        PlayAmbient(ambianceName);
     }
 
     private void LateUpdate()
@@ -41,7 +46,6 @@ public class AudioGenerator : MonoBehaviour
         {
             if(_musics[j] != null)
             {
-                Debug.Log(GeneralVolume + " / "+MusicVolume + " / "+ _musics[j].volume);
                 _musics[j].Volume(GeneralVolume * MusicVolume * _musics[j].volume, _musics[j].pitch);
             }
         }
@@ -66,6 +70,7 @@ public class AudioGenerator : MonoBehaviour
         if(clip != null)
         {
             audio.Play(clip, isLooping);
+            audio.SetBaseVolume(volume, pitch);
             float value = 1;
             if(name.Length > 3)
             {
@@ -90,8 +95,7 @@ public class AudioGenerator : MonoBehaviour
                         break;
                 }
             }
-            audio.SetBaseVolume(volume, pitch);
-            //audio.Volume(GeneralVolume * value * volume, pitch);
+            audio.Volume(GeneralVolume * value * volume, pitch);
 
             if(tracked != null)
                 audio.Follow(tracked);
@@ -110,5 +114,31 @@ public class AudioGenerator : MonoBehaviour
     {
         _sfxs.Remove(audio);
         _musics.Remove(audio);
+    }
+
+    public void PlaySaveAt(Vector3 position)
+    {
+            if(_saveAudio != null)
+                Destroy(_saveAudio.gameObject);
+            
+            _saveAudio = PlayClipAt(position, "UI_Save");
+    }
+    public void StopSave()
+    {
+        if(_saveAudio != null)
+                Destroy(_saveAudio.gameObject);
+    }
+
+    public void PlayAmbient(string ambientName)
+    {
+        for(int i = 0; i < _musics.Count; i++)
+        {
+            if(_musics[i] != null)
+            {
+                Destroy(_musics[i].gameObject);
+            }
+        }
+
+        PlayClipAt(Vector3.zero, ambientName, true, 1, 1, Camera.main.gameObject);
     }
 }
