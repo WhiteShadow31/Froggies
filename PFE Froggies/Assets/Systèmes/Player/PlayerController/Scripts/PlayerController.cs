@@ -96,9 +96,42 @@ public class PlayerController : MonoBehaviour
     {
         if(_playerEntity != null)
         {
-            if (!_playerEntity.AudioSource.isPlaying)
+            if (AudioGenerator.Instance != null)
             {
-                _playerEntity.AudioSource.Play();
+                AudioGenerator.Instance.PlayClipAt(_playerEntity.transform.position, "GRE_CROI_01");
+            }
+        }
+    }
+
+    void OnBottomArrow(InputValue ctx)
+    {
+        if(_playerEntity != null)
+        {
+            if (AudioGenerator.Instance != null)
+            {
+                AudioGenerator.Instance.PlayClipAt(_playerEntity.transform.position, "GRE_CROI_02");
+            }
+        }
+    }
+
+    void OnRightArrow(InputValue ctx)
+    {
+        if(_playerEntity != null)
+        {
+            if (AudioGenerator.Instance != null)
+            {
+                AudioGenerator.Instance.PlayClipAt(_playerEntity.transform.position, "GRE_CROI_03");
+            }
+        }
+    }
+
+    void OnLeftArrow(InputValue ctx)
+    {
+        if(_playerEntity != null)
+        {
+            if (AudioGenerator.Instance != null)
+            {
+                AudioGenerator.Instance.PlayClipAt(_playerEntity.transform.position, "GRE_CROI_04");
             }
         }
     }

@@ -102,6 +102,10 @@ public class PlayerEntity : MonoBehaviour
     public bool IsJumping { get { return _isJumping; } }
     bool _wasGroundedLastFrame = false;
 
+    [Header("Timer jump")]
+    float timerAirborn = 0.3f;
+    float _actualAirborn = 0;
+
     [Header("--- DEBUG ---")]
     [SerializeField] bool _showDebug = false;
     [ShowIf("_showDebug", true), SerializeField] Color _groundCheckDebugColor = Color.red;
@@ -157,6 +161,7 @@ public class PlayerEntity : MonoBehaviour
         ManageMovementOnSlope();
         ManageJump();
         ManageIsJumping();
+
     }
     
     protected void FixedUpdate()
@@ -174,13 +179,25 @@ public class PlayerEntity : MonoBehaviour
         {
             if(ParticlesGenerator.Instance != null)
             {
-                ParticlesGenerator.Instance.PlayTouchGround(this.transform.position);
+                string colTag = LookGroundedTag();
+
+                if(_actualAirborn >= timerAirborn)
+                    ParticlesGenerator.Instance.PlayHighTouchGround(this.transform.position, colTag);
+                else
+                    ParticlesGenerator.Instance.PlayTouchGround(this.transform.position, colTag);
             }
 
             if(AudioGenerator.Instance != null)
-                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Atterissage_0" + UnityEngine.Random.Range(1,2));
+            {
+                if(_actualAirborn >= timerAirborn)
+                    AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Atterissage_01", false, 0.5f);
+                else
+                    AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Atterissage_02", false, 0.5f);
+            }
         } 
         _lastGrounded = grounded;
+        
+        Airborn();
     }
 
     // =====================================================================================
@@ -230,6 +247,20 @@ public class PlayerEntity : MonoBehaviour
             }
         }
         return grounded;
+    }
+    string LookGroundedTag()
+    {
+        Collider[] cols = Physics.OverlapBox(_groundCheck.position, _groundRadius, Quaternion.identity, _groundMask);
+
+        foreach (Collider col in cols)
+        {
+            if (col.transform != this.transform && !col.isTrigger)
+            {
+                string colTag = col.gameObject.tag;
+                return colTag;
+            }
+        }
+        return "None";
     }
 
     public void Move()
@@ -295,10 +326,11 @@ public class PlayerEntity : MonoBehaviour
         
         if(ParticlesGenerator.Instance != null)
         {
+            string colTag = LookGroundedTag();
             if(LongJumpInput)
-                ParticlesGenerator.Instance.PlayJumpGround(this.transform.position, this.transform.forward);
+                ParticlesGenerator.Instance.PlayHighJumpGround(this.transform.position, this.transform.forward, colTag);
             else
-                ParticlesGenerator.Instance.PlayJumpGround(this.transform.position, this.transform.forward);
+                ParticlesGenerator.Instance.PlayJumpGround(this.transform.position, this.transform.forward, colTag);
         }
         if(AudioGenerator.Instance != null)
         {
@@ -435,6 +467,18 @@ public class PlayerEntity : MonoBehaviour
         }
     }
 
+    void Airborn()
+    {
+        bool grounded = LookGrounded();
+        if(!grounded)
+        {
+            _actualAirborn += Time.deltaTime;
+        }
+        else
+        {
+            _actualAirborn = 0;
+        }
+    }
     // =====================================================================================
     //                                   TONGUE METHODS 
     // =====================================================================================
@@ -560,6 +604,9 @@ public class PlayerEntity : MonoBehaviour
 
             _canJump = true;
             MountInput = false;
+
+            if(AudioGenerator.Instance != null)
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Descente");
         }
     }
 

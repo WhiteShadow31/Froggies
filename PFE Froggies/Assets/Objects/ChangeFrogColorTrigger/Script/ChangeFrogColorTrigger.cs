@@ -84,6 +84,11 @@ public class ChangeFrogColorTrigger : MonoBehaviour
                 newPlayerColorChange.Coroutine = StartCoroutine(ChangeFrogColor(newPlayerColorChange, frogH));
 
                 _playerColorChanges.Add(newPlayerColorChange);
+
+                if(AudioGenerator.Instance != null)
+                {
+                    AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Pot");
+                }
             }
         }
     }

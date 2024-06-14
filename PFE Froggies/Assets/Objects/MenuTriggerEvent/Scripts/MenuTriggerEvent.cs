@@ -40,6 +40,9 @@ public class MenuTriggerEvent : MonoBehaviour
     bool _isTransitionIn;
     float _transitionTimer;
 
+    public enum TriggerType {Save, Play, Back}
+    public TriggerType type;
+
     [Title("Debug")]
     [SerializeField] bool _showDebug;
 
@@ -192,6 +195,22 @@ public class MenuTriggerEvent : MonoBehaviour
 
             _activationTimer = 0;
             _transitionTimer = 0f;
+
+            if(_playersInTriggerCount == 2 && AudioGenerator.Instance != null)
+            {
+                switch(type)
+                {
+                    case TriggerType.Save:
+                        AudioGenerator.Instance.PlaySaveAt(this.transform.position);
+                        break;
+                    case TriggerType.Play:
+                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Start");
+                        break;
+                    case TriggerType.Back:
+                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Back");
+                        break;
+                }
+            }
         }
     }
 
@@ -200,6 +219,14 @@ public class MenuTriggerEvent : MonoBehaviour
         if ((_playersLayerMask.value & (1 << other.transform.gameObject.layer)) > 0)
         {
             _playersInTriggerCount--;
+
+            if(_playersInTriggerCount < 2 && type == TriggerType.Save)
+            {
+                if(AudioGenerator.Instance != null)
+                {
+                    AudioGenerator.Instance.StopSave();
+                }
+            }
         }
     }
 }
