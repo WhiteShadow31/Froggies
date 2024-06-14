@@ -7,6 +7,7 @@ public class ParticlesEntity : MonoBehaviour
     GameObject _trackedObject;
     bool _isTracking = false;
     ParticleSystem _particleSystem;
+    public ParticleSystem Particles => _particleSystem;
 
     private void Awake()
     {
@@ -24,7 +25,7 @@ public class ParticlesEntity : MonoBehaviour
             this.transform.position = _trackedObject.transform.position;
     }
 
-    public void Track(GameObject go)
+    public void Follow(GameObject go)
     {
         _trackedObject = go;
         _isTracking = true;
