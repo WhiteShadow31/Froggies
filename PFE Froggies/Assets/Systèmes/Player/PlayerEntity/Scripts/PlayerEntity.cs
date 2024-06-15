@@ -179,7 +179,36 @@ public class PlayerEntity : MonoBehaviour
         {
             if(ParticlesGenerator.Instance != null)
             {
-                string colTag = LookGroundedTag();
+                Collider[] cols = Physics.OverlapBox(_groundCheck.position, _groundRadius, Quaternion.identity, _groundMask);
+
+                string colTag = "None";
+
+                foreach (Collider col in cols)
+                {
+                    if (col.transform != this.transform && !col.isTrigger)
+                    {
+                        if(col.gameObject.TryGetComponent<out PlayerEntity plEntity>())
+                        {
+                            PlayerManager manager = PlayerManager.Instance;
+                            int index = 0;
+
+                        if(manager.Controllers.Count > 2)
+                        {
+                            for(int i = 0; i < 2; i++)
+                            {
+                                if(manager.Controllers[i] != controller)
+                                    index = i;
+                            }
+                                colTag = "Player"+index;
+                        }
+                        else
+                            colTag = "Player0";                      
+                        }
+                    }
+                }
+
+                if(colTag != "Player0" && colTag != "Player1")
+                    colTag = LookGroundedTag();
 
                 if(_actualAirborn >= timerAirborn)
                     ParticlesGenerator.Instance.PlayHighTouchGround(this.transform.position, colTag);

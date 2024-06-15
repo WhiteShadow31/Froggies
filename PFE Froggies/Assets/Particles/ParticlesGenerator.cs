@@ -44,7 +44,7 @@ public class ParticlesGenerator : MonoBehaviour
     {
         ParticlesEntity pe = particles.GetComponent<ParticlesEntity>();
         ParticleSystem.MainModule main = pe.Particles.main;
-        main.startColor = new ParticleSystem.MinMaxGradient(ColorByTag(tag)[0], ColorByTag(tag)[1]);;
+        main.startColor = new ParticleSystem.MinMaxGradient(ColorByTag(tag)[0], ColorByTag(tag)[1]);
     }
 
     List<Color> ColorByTag(string useTag)
