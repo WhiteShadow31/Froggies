@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 3641870}
   m_Layer: 3
   m_Name: PolyShape
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -589,27 +589,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5.732081
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.215841
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5.132382
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 104.28758
+      value: 118.53758
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 6.75
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 164.05463
+      value: 167.55463
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -638,6 +638,18 @@ PrefabInstance:
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.732081
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.215841
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.132382
       objectReference: {fileID: 0}
     - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1752,7 +1764,7 @@ GameObject:
   - component: {fileID: 34038016}
   m_Layer: 3
   m_Name: Eau marre
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4074,15 +4086,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 7.8939185
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.606572
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.1256082
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4090,7 +4102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.34
+      value: 8.34
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4123,6 +4135,18 @@ PrefabInstance:
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.8939185
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.606572
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.1874883
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4941,6 +4965,10 @@ PrefabInstance:
     - target: {fileID: 3403028468832215507, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_Name
       value: "N\xE9nuphare_VerteParcour (4)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403028468832215507, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalScale.x
@@ -6385,6 +6413,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7625,6 +7657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pierre Grande (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3609843574055590485, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 8000532573437159992, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -8022,6 +8058,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8533,15 +8573,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 215.17
+      value: 214.42
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.06
+      value: 17.81
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.61
+      value: 48.36
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8662,6 +8702,10 @@ PrefabInstance:
     - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_Name
       value: Rocher_EtangVerte (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9181,7 +9225,7 @@ GameObject:
   - component: {fileID: 241632681}
   m_Layer: 0
   m_Name: Pierre / Autres
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11480,7 +11524,7 @@ GameObject:
   - component: {fileID: 315614396}
   m_Layer: 3
   m_Name: PolyShape (8)
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12071,7 +12115,7 @@ GameObject:
   - component: {fileID: 322701689}
   m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12479,6 +12523,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13044,6 +13092,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 97ea6ca83fee13c479353f01b65b0ed4, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97ea6ca83fee13c479353f01b65b0ed4, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13934,6 +13986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_Verte (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -14228,9 +14284,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pierre Grande (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3609843574055590485, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 8000532573437159992, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000532573437159992, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 8181034417943863936, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
       propertyPath: m_IsActive
@@ -14469,6 +14533,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pierre Grande (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3609843574055590485, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 8000532573437159992, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -14505,7 +14573,7 @@ GameObject:
   - component: {fileID: 377998037}
   m_Layer: 3
   m_Name: Pierre
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16082,6 +16150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pierre Grande
       objectReference: {fileID: 0}
+    - target: {fileID: 3609843574055590485, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8181034417943863936, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
@@ -17091,6 +17163,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocher_EtangVerte (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_LocalPosition.x
       value: -56.64
@@ -17483,6 +17559,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocher_EtangVerte (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.6
@@ -17722,7 +17802,7 @@ GameObject:
   - component: {fileID: 464519290}
   m_Layer: 3
   m_Name: Pierre
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18259,6 +18339,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_Verte (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.20000003
@@ -18415,7 +18499,7 @@ GameObject:
   - component: {fileID: 477038748}
   m_Layer: 3
   m_Name: Marre fond (1)
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19049,22 +19133,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!114 &484286827 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9128852520563962194, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-  m_PrefabInstance: {fileID: 528792825144434551}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2db7f94906642f4abc2f02de7fce38c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &484286828 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-  m_PrefabInstance: {fileID: 528792825144434551}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &484368684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4687200988747284451, guid: 598e5c395eb52794abe805ef4b1931ce, type: 3}
@@ -20605,7 +20673,7 @@ GameObject:
   - component: {fileID: 512644709}
   m_Layer: 3
   m_Name: Pierres colision
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24913,15 +24981,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 7.8939185
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.606572
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.1874883
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24929,7 +24997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.34
+      value: 8.34
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24962,6 +25030,18 @@ PrefabInstance:
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.8939185
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.606572
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.1874883
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26004,6 +26084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pierre Grande (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3609843574055590485, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8181034417943863936, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
@@ -26207,18 +26291,6 @@ PrefabInstance:
       value: Maison_Verte
       objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 237.46184
       objectReference: {fileID: 0}
@@ -26257,10 +26329,6 @@ PrefabInstance:
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27237,6 +27305,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "N\xE9nuphare_VerteParcour (2)"
       objectReference: {fileID: 0}
+    - target: {fileID: 3403028468832215507, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.3
@@ -27874,6 +27946,10 @@ PrefabInstance:
     - target: {fileID: 2995649455754714965, guid: f054f403c5586ca4da976aab36b38085, type: 3}
       propertyPath: m_Name
       value: Rocher_EtangVerte 1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: f054f403c5586ca4da976aab36b38085, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: f054f403c5586ca4da976aab36b38085, type: 3}
       propertyPath: m_LocalScale.x
@@ -29690,7 +29766,7 @@ GameObject:
   - component: {fileID: 680149264}
   m_Layer: 0
   m_Name: Sol partie 2
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31259,6 +31335,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 68a6b28f9afa7bf46877ce5876b948aa, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32550,6 +32630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocher_EtangVerte (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_LocalPosition.x
       value: 159.7
@@ -32771,6 +32855,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33490,7 +33578,7 @@ GameObject:
   - component: {fileID: 805152182}
   m_Layer: 3
   m_Name: Platforme
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34147,6 +34235,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4ce1c7c8c35efd4469d1d354167eb9dc, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34338,7 +34430,7 @@ GameObject:
   - component: {fileID: 828935699}
   m_Layer: 3
   m_Name: Pierre
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35036,27 +35128,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.493283
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.215841
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.2158413
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 97.00755
+      value: 109.50755
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 6.75
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 172.0846
+      value: 175.5846
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -35087,6 +35179,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.493283
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.215841
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.2158413
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6
       objectReference: {fileID: 0}
@@ -35115,6 +35219,10 @@ PrefabInstance:
     - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_Name
       value: Maison_Verte (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
@@ -35259,6 +35367,10 @@ PrefabInstance:
     - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_Name
       value: Maison_Verte (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
@@ -36190,7 +36302,7 @@ GameObject:
   - component: {fileID: 907128478}
   m_Layer: 3
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38399,6 +38511,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocher_EtangVerte (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_LocalPosition.x
       value: 191.24
@@ -39000,7 +39116,7 @@ GameObject:
   - component: {fileID: 944743896}
   m_Layer: 3
   m_Name: Platforme
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40765,15 +40881,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.4332943
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.606572
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 15.5534115
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40781,7 +40897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.34
+      value: 8.34
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -40814,6 +40930,22 @@ PrefabInstance:
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.4332943
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.606572
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 15.5534115
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -43640,6 +43772,10 @@ PrefabInstance:
     - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_Name
       value: Rocher_EtangVerte (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48219,6 +48355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "N\xE9nuphareSimple"
       objectReference: {fileID: 0}
+    - target: {fileID: 3609406143862531829, guid: 3b8c548efc5163547b61a24fb6d157dd, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48531,7 +48671,7 @@ GameObject:
   - component: {fileID: 1069389749}
   m_Layer: 3
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49337,6 +49477,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_Verte (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.19999999
@@ -49489,7 +49633,7 @@ GameObject:
   - component: {fileID: 1094700888}
   m_Layer: 3
   m_Name: PolyShape (5)
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50411,7 +50555,7 @@ GameObject:
   - component: {fileID: 1098625340}
   m_Layer: 3
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51662,6 +51806,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52059,7 +52207,7 @@ GameObject:
   - component: {fileID: 1151774011}
   m_Layer: 3
   m_Name: Sol
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52324,6 +52472,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52454,7 +52606,7 @@ GameObject:
   - component: {fileID: 1167303391}
   m_Layer: 3
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56339,6 +56491,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maison_Verte (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.33
@@ -56424,6 +56580,10 @@ PrefabInstance:
     - target: {fileID: 3403028468832215507, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_Name
       value: "N\xE9nuphare_VerteParcour (3)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403028468832215507, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 6508127345666243755, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56952,6 +57112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocher2_Agile (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8229107719256702663, guid: 9f345457a73894140841d67fe2e10e47, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -57031,6 +57195,204 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8744111143169805698, guid: 08df266e963615d44864c315b9480d44, type: 3}
   m_PrefabInstance: {fileID: 1271259088}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1271406370
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1476710287}
+    m_Modifications:
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.data[0].b
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.data[0].g
+      value: 0.7411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.data[0].r
+      value: 0.78823537
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.data[1].b
+      value: 0.43921572
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.data[1].g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: dirtColor.Array.data[1].r
+      value: 0.6392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.data[0].b
+      value: 0.5254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.data[0].g
+      value: 0.52156866
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.data[0].r
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.data[1].b
+      value: 0.30588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.data[1].g
+      value: 0.2901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: rockColor.Array.data[1].r
+      value: 0.28235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: woodColor.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: woodColor.Array.data[0].b
+      value: 0.31764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: woodColor.Array.data[0].g
+      value: 0.43137258
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: woodColor.Array.data[0].r
+      value: 0.5372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: woodColor.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: woodColor.Array.data[1].b
+      value: 0.13725491
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: woodColor.Array.data[1].g
+      value: 0.19607845
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: woodColor.Array.data[1].r
+      value: 0.26666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: waterColor.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: waterColor.Array.data[0].b
+      value: 0.6862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: waterColor.Array.data[0].g
+      value: 0.6117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: waterColor.Array.data[0].r
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: waterColor.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: waterColor.Array.data[1].b
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: waterColor.Array.data[1].g
+      value: 0.5411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 845834098965493088, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: waterColor.Array.data[1].r
+      value: 0.23137257
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249000592967212919, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+      propertyPath: m_Name
+      value: UI + Audio Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+--- !u!4 &1271406371 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+  m_PrefabInstance: {fileID: 1271406370}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1277319709
 PrefabInstance:
@@ -58237,46 +58599,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: "N\xE9nuphare_VerteParcour"
       objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.7752103
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.5000019
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99898225
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.045104947
-      objectReference: {fileID: 0}
-    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -5.17
-      objectReference: {fileID: 0}
     - target: {fileID: 6508127345666243755, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalPosition.x
       value: 289.5182
@@ -58608,6 +58930,10 @@ PrefabInstance:
     - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_Name
       value: Maison_Verte (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
@@ -59598,7 +59924,7 @@ GameObject:
   - component: {fileID: 1332222868}
   m_Layer: 3
   m_Name: Pierre
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60258,6 +60584,10 @@ PrefabInstance:
     - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_Name
       value: Rocher_EtangVerte (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: 55be10507d53ef24cad88b262950c331, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: 55be10507d53ef24cad88b262950c331, type: 3}
       propertyPath: m_LocalScale.x
@@ -61414,6 +61744,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97ea6ca83fee13c479353f01b65b0ed4, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -62087,7 +62421,7 @@ GameObject:
   - component: {fileID: 1424437612}
   m_Layer: 3
   m_Name: Pierre (1)
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62828,27 +63162,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.9446006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.9446
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.9446006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 110.35759
+      value: 119.10759
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 172.49463
+      value: 175.49463
       objectReference: {fileID: 0}
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62877,6 +63211,18 @@ PrefabInstance:
     - target: {fileID: 3159523653528165845, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9446006
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.9446
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.9446006
       objectReference: {fileID: 0}
     - target: {fileID: 9125909326401505216, guid: 17510f5bd70ec1346a4898845653155f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -63480,13 +63826,12 @@ Transform:
   - {fileID: 1741892005}
   - {fileID: 1600159401}
   - {fileID: 1623670476}
-  - {fileID: 1499646843}
   - {fileID: 1568201908}
   - {fileID: 1257711508}
-  - {fileID: 484286828}
   - {fileID: 133015997}
   - {fileID: 1754110324}
   - {fileID: 1504777301}
+  - {fileID: 1271406371}
   m_Father: {fileID: 1537033467}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1476722420
@@ -63560,6 +63905,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a0fb0943fc2b347bcf90ff9977a83b, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -63762,6 +64111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "N\xE9nuphare_VerteParcour (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 3403028468832215507, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
+      propertyPath: m_TagString
+      value: Grass
+      objectReference: {fileID: 0}
     - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.4
@@ -63788,7 +64141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99144495
+      value: 0.9904379
       objectReference: {fileID: 0}
     - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalRotation.x
@@ -63796,7 +64149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.13052596
+      value: -0.13039339
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.045059133
       objectReference: {fileID: 0}
     - target: {fileID: 4053338037868588669, guid: 6d3cb6f5d2591c74b9aa6458aa234497, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -63860,72 +64217,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4687200988747284451, guid: 598e5c395eb52794abe805ef4b1931ce, type: 3}
   m_PrefabInstance: {fileID: 577004290}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1499646842
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1476710287}
-    m_Modifications:
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3744050735567544977, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: salivateParticles
-      value: 
-      objectReference: {fileID: 7012513321140294997, guid: 2d2a3c7a5281e3246af1f408875e2d5d, type: 3}
-    - target: {fileID: 7852746609658970592, guid: 344728a34336642479363bee9bdbf246, type: 3}
-      propertyPath: m_Name
-      value: ParticlesGenerator
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 344728a34336642479363bee9bdbf246, type: 3}
---- !u!4 &1499646843 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 684236490721258927, guid: 344728a34336642479363bee9bdbf246, type: 3}
-  m_PrefabInstance: {fileID: 1499646842}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1504777299
 PrefabInstance:
@@ -65576,6 +65867,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocher_EtangVerte 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: f054f403c5586ca4da976aab36b38085, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: f054f403c5586ca4da976aab36b38085, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.1401
@@ -65859,7 +66154,7 @@ GameObject:
   - component: {fileID: 1551158062}
   m_Layer: 3
   m_Name: Pierre
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66471,11 +66766,6 @@ Mesh:
 --- !u!4 &1568201908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1412082366757707698, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
-  m_PrefabInstance: {fileID: 751797688}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &1568201911 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6139277569186381820, guid: 22b8a3439a3b19d49af3760acd21ad7f, type: 3}
   m_PrefabInstance: {fileID: 751797688}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1568201914
@@ -68238,7 +68528,7 @@ GameObject:
   - component: {fileID: 1612979283}
   m_Layer: 3
   m_Name: Pierre
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68942,7 +69232,7 @@ GameObject:
   - component: {fileID: 1635921744}
   m_Layer: 3
   m_Name: Marre
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71809,6 +72099,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pierre Grande (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3609843574055590485, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 8181034417943863936, guid: 8909e0326a1e6b741888aab25cc64d79, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -73414,17 +73708,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bce7f5e7d0083184aa81c2c9b3f50775, type: 3}
---- !u!114 &1700661073 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7182751947754433469, guid: bce7f5e7d0083184aa81c2c9b3f50775, type: 3}
-  m_PrefabInstance: {fileID: 1700661072}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae40599f21ab924babc0f44b33f48d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1702764949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75043,6 +75326,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -8252009036583131148, guid: a5f392e0fe2bc0c4ca87bdfe4f1b01c1, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a5f392e0fe2bc0c4ca87bdfe4f1b01c1, type: 3}
       propertyPath: m_Name
       value: Pierre_LP
@@ -75050,6 +75337,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a5f392e0fe2bc0c4ca87bdfe4f1b01c1, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a5f392e0fe2bc0c4ca87bdfe4f1b01c1, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7879497892124320113, guid: a5f392e0fe2bc0c4ca87bdfe4f1b01c1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -75626,7 +75917,7 @@ GameObject:
   - component: {fileID: 1753739932}
   m_Layer: 3
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78587,7 +78878,7 @@ GameObject:
   - component: {fileID: 1835930108}
   m_Layer: 3
   m_Name: Platforme 2
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79055,6 +79346,10 @@ PrefabInstance:
     - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_Name
       value: Maison_Verte (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
@@ -79632,6 +79927,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocher_EtangVerte 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2995649455754714965, guid: f054f403c5586ca4da976aab36b38085, type: 3}
+      propertyPath: m_TagString
+      value: Rock
+      objectReference: {fileID: 0}
     - target: {fileID: 7116583682847165423, guid: f054f403c5586ca4da976aab36b38085, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.00715
@@ -80204,6 +80503,10 @@ PrefabInstance:
     - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_Name
       value: Maison_Verte (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169842504723329499, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
+      propertyPath: m_TagString
+      value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 7926545694793335482, guid: 70cbbdf3aaf4284459134ef83f4970f8, type: 3}
       propertyPath: m_LocalScale.x
@@ -85141,7 +85444,7 @@ GameObject:
   - component: {fileID: 2074532563}
   m_Layer: 3
   m_Name: PolyShape (10)
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86690,123 +86993,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4503324287152525414, guid: f51a0e87d89d94541b1b75aeab410a93, type: 3}
   m_PrefabInstance: {fileID: 2144234559}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &528792825144434551
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1476710287}
-    m_Modifications:
-    - target: {fileID: 1921088862420035724, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_Name
-      value: UI Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348311458709932479, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518628835549121165, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8458390367776562974, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1568201911}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1700661073}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 484286827}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SavePlayers
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: QuitToMainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InGameSaving, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UIManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8544496564896820519, guid: 076d34538a36ec340a152b655da863f5, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 076d34538a36ec340a152b655da863f5, type: 3}
 --- !u!65 &5304575354569383256
 BoxCollider:
   m_ObjectHideFlags: 0
