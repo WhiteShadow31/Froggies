@@ -251,11 +251,27 @@ public class PlayerEntity : MonoBehaviour
     string LookGroundedTag()
     {
         Collider[] cols = Physics.OverlapBox(_groundCheck.position, _groundRadius, Quaternion.identity, _groundMask);
-
         foreach (Collider col in cols)
         {
             if (col.transform != this.transform && !col.isTrigger)
             {
+                if(col.gameObject.TryGetComponent<PlayerEntity>(out PlayerEntity player))
+                {
+                    PlayerManager manager = PlayerManager.Instance;
+                    int index = 0;
+
+                    if(manager.Controllers.Count > 2)
+                    {
+                        for(int i = 0; i < 2; i++)
+                        {
+                            if(manager.Controllers[i] != controller)
+                                index = i;
+                        }
+
+                        return "Player"+index;
+                    }
+                }
+
                 string colTag = col.gameObject.tag;
                 return colTag;
             }
@@ -326,7 +342,26 @@ public class PlayerEntity : MonoBehaviour
         
         if(ParticlesGenerator.Instance != null)
         {
-            string colTag = LookGroundedTag();
+            string colTag = "None";
+            if(!_isOnFrog)
+                colTag = LookGroundedTag();
+            else
+            {
+                PlayerManager manager = PlayerManager.Instance;
+                int index = 0;
+
+                if(manager.Controllers.Count > 2)
+                {
+                    for(int i = 0; i < 2; i++)
+                    {
+                        if(manager.Controllers[i] != controller)
+                            index = i;
+                    }
+                        colTag = "Player"+index;
+                }
+                else
+                    colTag = "Player0";
+            }
             if(LongJumpInput)
                 ParticlesGenerator.Instance.PlayHighJumpGround(this.transform.position, this.transform.forward, colTag);
             else
@@ -513,7 +548,7 @@ public class PlayerEntity : MonoBehaviour
     IEnumerator UseTongueCoroutine()
     {
         if(AudioGenerator.Instance != null)
-            AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_0" + UnityEngine.Random.Range(1,2));
+            AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_0" + UnityEngine.Random.Range(1,3), false, 0.5f);
 
         _canUseTongue = false;
         _tongueLineRenderer.enabled = true;

@@ -35,6 +35,11 @@ public class ParticlesGenerator : MonoBehaviour
         _instance = this;
     }
 
+    void Start()
+    {
+        //AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_Hit_Objet");
+    }
+
     void SetParticlesEntityColor(GameObject particles, string tag)
     {
         ParticlesEntity pe = particles.GetComponent<ParticlesEntity>();
@@ -54,6 +59,18 @@ public class ParticlesGenerator : MonoBehaviour
             return rockColor;
         else if(useTag == tag5)
             return woodColor;
+        else if (useTag == "Player0")
+        {
+            Color pCol = PlayerManager.Instance.Controllers[0].Player.playerColor;
+            Color darkPCol = Color.Lerp(pCol, Color.black, 0.15f);
+            return new List<Color>(2){pCol, darkPCol};
+        }
+        else if (useTag == "Player1")
+        {
+            Color pCol = PlayerManager.Instance.Controllers[1].Player.playerColor;
+            Color darkPCol = Color.Lerp(pCol, Color.black, 0.15f);
+            return new List<Color>(2){pCol, darkPCol};
+        }
         else
             return new List<Color>(2){Color.magenta, Color.red};
     }
