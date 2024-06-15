@@ -29,6 +29,9 @@ public class InteractableDuoEntity : InteractableEntity, IInteractableEntity
 
     public override void Push(Vector3 dir, float force, GameObject frog)
     {
+        if(AudioGenerator.Instance != null)
+            AudioGenerator.Instance.PlayClipAt(this.transform.position, clipToPlayOnHit);
+
         // Has already been hit
         if (_isTriedToBePushed && _frogFirstHit != frog)
             base.Push(dir, force, frog);

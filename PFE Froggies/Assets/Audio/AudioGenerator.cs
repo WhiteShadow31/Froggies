@@ -67,6 +67,7 @@ public class AudioGenerator : MonoBehaviour
         AudioEntity audio = go.AddComponent<AudioEntity>();
 
         AudioClip clip = GetClipByName("SFX_"+name);
+        Debug.Log(clip);
         if(clip != null)
         {
             audio.Play(clip, isLooping);

@@ -23,6 +23,9 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
     {
         if (_rb.isKinematic)
         {
+            if(AudioGenerator.Instance != null)
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, clipToPlayOnHit);
+
             Vector3 direction = (this.transform.position - frog.transform.position).normalized;
             // Take only 1 axis
             direction.y = 0;

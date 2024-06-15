@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c20f2c549af1bb4a8b604a0d3e42431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clipToPlayOnHit: GRE_Langue_Hit_Objet
   _event:
     m_PersistentCalls:
       m_Calls:

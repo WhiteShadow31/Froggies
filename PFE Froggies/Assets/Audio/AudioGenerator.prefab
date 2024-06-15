@@ -44,19 +44,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c6340fed86bd840b27175aed554247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generalAudio: {fileID: 0}
+  sfxAudio: {fileID: 0}
+  musicAudio: {fileID: 0}
   clips:
+  - {fileID: 8300000, guid: e3de32fe3a1b28e46a8fb9dde77cee1a, type: 3}
   - {fileID: 8300000, guid: a907505e61b2b9b4faa497690a111d51, type: 3}
   - {fileID: 8300000, guid: e118c3db0cf3b614daed2b6a4af0fe9d, type: 3}
+  - {fileID: 8300000, guid: 547a4872075e52947b970bbd9ea9b8d3, type: 3}
   - {fileID: 8300000, guid: ee2e5c15403737140a41464dc72abbbc, type: 3}
+  - {fileID: 8300000, guid: dc79b22ff0ebeb74f868b660a4012a11, type: 3}
+  - {fileID: 8300000, guid: 5446de47ba395d04ca363ec097e5a158, type: 3}
   - {fileID: 8300000, guid: 6d8fe8f991d80754390dd8aa7aef2dd6, type: 3}
   - {fileID: 8300000, guid: 22156c3db1d23a445b02d352d81fe936, type: 3}
   - {fileID: 8300000, guid: e289617e825fad04a816b222b50e59f4, type: 3}
+  - {fileID: 8300000, guid: 4c1a77eefcd6fb347974f5a6f2733226, type: 3}
+  - {fileID: 8300000, guid: a023ca3eb4daf804a95aa6e99929394b, type: 3}
+  - {fileID: 8300000, guid: efb5198745659de4996a9d9e02ebe718, type: 3}
+  - {fileID: 8300000, guid: ce38aabddb3c0ae41b3adcb5581c842d, type: 3}
+  - {fileID: 8300000, guid: f4387eadcc00aad4db2903afcef8a08f, type: 3}
+  - {fileID: 8300000, guid: 594d80d8cc60e3c41ae685bd6353b164, type: 3}
   - {fileID: 8300000, guid: f991e3308fe0d7c4e87ccefd911e3e91, type: 3}
   - {fileID: 8300000, guid: 835dfa3cb2c014443b2b75380e185b59, type: 3}
   - {fileID: 8300000, guid: f1f89cc16a482cc4e9c881ef0a831e02, type: 3}
   - {fileID: 8300000, guid: 910e473a466589448af4e73735662525, type: 3}
+  - {fileID: 8300000, guid: b03a1e5a1538a974ebeb3bdd7d1e57c7, type: 3}
   - {fileID: 8300000, guid: bf862830d9a76f94fbaf2e747113b068, type: 3}
   - {fileID: 8300000, guid: d03293c5d0e17c44cadb8a0d2d6858e9, type: 3}
-  - {fileID: 8300000, guid: 2a1289eca6c02c04f9a41c3f687d2165, type: 3}
-  - {fileID: 8300000, guid: d9de705bc1d702944a6dd95eb764aa27, type: 3}
-  - {fileID: 8300000, guid: 32d02a0252ed7264b9107db4a0f739e6, type: 3}
+  ambianceName: AMB_Foret
