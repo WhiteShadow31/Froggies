@@ -134,7 +134,11 @@ public class CarnivorousPlant : MonoBehaviour
         }
 
         if (_tryToHit)
+        {
+            if(AudioGenerator.Instance != null)
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "ENGM_Plante_Croc_01");
             _targetPos.GetComponent<PlayerEntity>().Respawn(_respawnPoint.position);
+        }
 
         _plantHead.position = _plantHeadStartPos;
         _targetPos = null;
@@ -148,6 +152,9 @@ public class CarnivorousPlant : MonoBehaviour
         {
             _stunTime = 0;
             _isStunned = true;
+
+            if(AudioGenerator.Instance != null)
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "ENGM_Plante_Stun_01");
         }
     }
 

@@ -41,6 +41,9 @@ public class Insect : MonoBehaviour, IInteractableEntity
     public virtual void Push(Vector3 dir, float force, GameObject frog)
     {
         //this.gameObject.SetActive(false);
+
+        if(AudioGenerator.Instance != null)
+            AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_Hit_Insecte");
         Destroy(this.gameObject);
     }
 }

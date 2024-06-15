@@ -4,6 +4,7 @@ using UnityEngine;
 public class InteractableEntity : MonoBehaviour, IInteractableEntity
 {
     protected Rigidbody _rb;
+    public string clipToPlayOnHit = "GRE_Langue_Hit_Objet";
 
     void Awake()
     {
@@ -13,6 +14,9 @@ public class InteractableEntity : MonoBehaviour, IInteractableEntity
     public virtual void Push(Vector3 dir, float force, GameObject frog)
     {
         _rb.AddForce(dir * force, ForceMode.VelocityChange);
+
+        if(AudioGenerator.Instance != null)
+            AudioGenerator.Instance.PlayClipAt(this.transform.position, clipToPlayOnHit);
     }
 }
 

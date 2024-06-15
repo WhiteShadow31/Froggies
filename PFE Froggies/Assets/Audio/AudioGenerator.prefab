@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c6340fed86bd840b27175aed554247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generalAudio: {fileID: 0}
+  sfxAudio: {fileID: 0}
+  musicAudio: {fileID: 0}
   clips:
   - {fileID: 8300000, guid: a907505e61b2b9b4faa497690a111d51, type: 3}
   - {fileID: 8300000, guid: e118c3db0cf3b614daed2b6a4af0fe9d, type: 3}
@@ -60,3 +63,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2a1289eca6c02c04f9a41c3f687d2165, type: 3}
   - {fileID: 8300000, guid: d9de705bc1d702944a6dd95eb764aa27, type: 3}
   - {fileID: 8300000, guid: 32d02a0252ed7264b9107db4a0f739e6, type: 3}
+  - {fileID: 8300000, guid: b03a1e5a1538a974ebeb3bdd7d1e57c7, type: 3}
+  - {fileID: 8300000, guid: dc79b22ff0ebeb74f868b660a4012a11, type: 3}
+  - {fileID: 8300000, guid: 5446de47ba395d04ca363ec097e5a158, type: 3}
+  - {fileID: 8300000, guid: 547a4872075e52947b970bbd9ea9b8d3, type: 3}
+  ambianceName: AMB_Foret
