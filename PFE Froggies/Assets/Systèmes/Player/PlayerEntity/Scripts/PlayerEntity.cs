@@ -187,7 +187,7 @@ public class PlayerEntity : MonoBehaviour
                 {
                     if (col.transform != this.transform && !col.isTrigger)
                     {
-                        if(col.gameObject.TryGetComponent<out PlayerEntity plEntity>())
+                        if(col.gameObject.TryGetComponent<PlayerEntity>(out PlayerEntity plEntity))
                         {
                             PlayerManager manager = PlayerManager.Instance;
                             int index = 0;
