@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0072e764e7cb2cb42b7abf38856e8bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteToShow: {fileID: 0}
-  radiusDetection: 3
+  spriteToShow: {fileID: 21300000, guid: 287400fae59fe444ab5341bd68a7c5c7, type: 3}
+  radiusDetection: 10
   offsetCanva: {x: 0, y: 0, z: 0}
-  sizeCanva: {x: 1, y: 1}
+  sizeCanva: {x: 30, y: 30}
   offsetImage: {x: 0, y: 0, z: 0}
-  sizeImage: {x: 1, y: 1}
+  sizeImage: {x: 10, y: 10}
   _appearTime: 0.5
   _appearCurve:
     serializedVersion: 2

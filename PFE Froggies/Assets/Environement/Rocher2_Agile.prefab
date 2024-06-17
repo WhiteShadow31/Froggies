@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6225653941938656795}
   m_Layer: 3
   m_Name: Rocher2_Agile
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +107,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 550380541ad35544f925a336b86c0acf, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 550380541ad35544f925a336b86c0acf, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
