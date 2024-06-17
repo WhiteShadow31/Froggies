@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.LightAnchor;
+using UnityEngine.UIElements;
 
 public class ParticlesGenerator : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class ParticlesGenerator : MonoBehaviour
     public GameObject highJumpGroundParticles;
     public GameObject salivateInsectParticles;
     public GameObject slideGround;
+    public GameObject deathPlayer;
 
     [Header("Pollen Particles")]
     public GameObject pollenParticles;
@@ -44,7 +47,7 @@ public class ParticlesGenerator : MonoBehaviour
     {
         ParticlesEntity pe = particles.GetComponent<ParticlesEntity>();
         ParticleSystem.MainModule main = pe.Particles.main;
-        main.startColor = new ParticleSystem.MinMaxGradient(ColorByTag(tag)[0], ColorByTag(tag)[1]);;
+        main.startColor = new ParticleSystem.MinMaxGradient(ColorByTag(tag)[0], ColorByTag(tag)[1]);
     }
 
     List<Color> ColorByTag(string useTag)
@@ -147,6 +150,15 @@ public class ParticlesGenerator : MonoBehaviour
             GameObject particles = Instantiate(salivateInsectParticles);
             ParticlesEntity pe = particles.GetComponent<ParticlesEntity>();
             pe.Follow(insect);
+        }
+    }
+
+    public void PlayDeathPlayer(Vector3 position)
+    {
+        if (deathPlayer != null)
+        {
+            GameObject particles = Instantiate(deathPlayer);
+            particles.transform.position = position;
         }
     }
 }
