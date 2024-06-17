@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +9,12 @@ public class EndSceneTransition : MonoBehaviour
 {
     public float timeToFade = 0.75f;
     public Image blackScreenTransition;
+    public bool unfadeAtStart = true;
+    [Space]
+    public List<Image> logo = new List<Image>();
+    public RectTransform circleToRotate;
+    public Vector3 axisToRotate = Vector3.forward;
+    public float rotaSpeed = 1;
 
 
     private void Start()
@@ -19,6 +26,10 @@ public class EndSceneTransition : MonoBehaviour
             blackScreenTransition.color = color;
         }
 
+        if(unfadeAtStart)
+        {
+            Unfade();
+        }
     }
 
     public void Fade(string targetScene)
@@ -40,6 +51,12 @@ public class EndSceneTransition : MonoBehaviour
         int start = 0;
         int end = 1;
 
+        if(circleToRotate != null)
+        {
+            circleToRotate.localEulerAngles = Vector3.zero;
+        }
+
+
         while (time < timeToFade)
         {
             float step = time / timeToFade;
@@ -47,11 +64,22 @@ public class EndSceneTransition : MonoBehaviour
             color.a = alpha;
             blackScreenTransition.color = color;
 
+            AlphaImages(alpha);
+
             yield return null;
             time += Time.deltaTime;
+
+            if (circleToRotate != null)
+            {
+                Vector3 rota = circleToRotate.localEulerAngles + axisToRotate * rotaSpeed;
+                circleToRotate.localEulerAngles = rota;
+            }
+            
         }
         color.a = end;
         blackScreenTransition.color = color;
+
+        AlphaImages(end);
 
         SceneManager.LoadScene(targetScene);
     }
@@ -63,6 +91,11 @@ public class EndSceneTransition : MonoBehaviour
         int start = 1;
         int end = 0;
 
+        if (circleToRotate != null)
+        {
+            circleToRotate.localEulerAngles = Vector3.zero;
+        }
+
         while (time < timeToFade)
         {
             float step = time / timeToFade;
@@ -70,10 +103,30 @@ public class EndSceneTransition : MonoBehaviour
             color.a = alpha;
             blackScreenTransition.color = color;
 
+            AlphaImages(alpha);
+
             yield return null;
             time += Time.deltaTime;
+
+            if (circleToRotate != null)
+            {
+                Vector3 rota = circleToRotate.localEulerAngles + axisToRotate * rotaSpeed;
+                circleToRotate.localEulerAngles = rota;
+            }
         }
         color.a = end;
         blackScreenTransition.color = color;
+
+        AlphaImages(end);
+    }
+
+    void AlphaImages(float alpha)
+    {
+        for(int i = 0; i < logo.Count; i++)
+        {
+            Color color = logo[i].color;
+            color.a = alpha;
+            logo[i].color = color;
+        }
     }
 }

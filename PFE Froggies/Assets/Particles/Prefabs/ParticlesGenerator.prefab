@@ -44,9 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24df7510861e45e4facf280ec7ce6659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tag1: Grass
+  grassColor: []
+  tag2: Dirt
+  dirtColor: []
+  tag3: Water
+  waterColor: []
+  tag4: Rock
+  rockColor: []
+  tag5: Wood
+  woodColor: []
   touchGroundParticles: {fileID: 7012513321140294997, guid: f0b6228030770c248b0412ed60880ce3, type: 3}
   highTouchGroundParticles: {fileID: 7012513321140294997, guid: 7df0915e529679e4a9a4d7ce154b0155, type: 3}
   jumpGroundParticles: {fileID: 7012513321140294997, guid: 3e78330c428e4e949a97d26aae56193f, type: 3}
+  highJumpGroundParticles: {fileID: 7012513321140294997, guid: b234fd4b85d54ca45a84d417145b02af, type: 3}
   salivateInsectParticles: {fileID: 7012513321140294997, guid: 2d2a3c7a5281e3246af1f408875e2d5d, type: 3}
   slideGround: {fileID: 7012513321140294997, guid: 1177b1f11d881f94c9395d8be819f68b, type: 3}
   pollenParticles: {fileID: 3410705843383005749, guid: 6725cd4c9a30293428572d9b5678951f, type: 3}

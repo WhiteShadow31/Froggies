@@ -687,6 +687,9 @@ public class PlayerEntity : MonoBehaviour
     // =====================================================================================
     public void Respawn(Vector3 pos)
     {
+        if (ParticlesGenerator.Instance != null)
+            ParticlesGenerator.Instance.PlayDeathPlayer(this.transform.position);
+
         this.transform.position = pos;
         _rigidbodyController.StopVelocity();
     }
