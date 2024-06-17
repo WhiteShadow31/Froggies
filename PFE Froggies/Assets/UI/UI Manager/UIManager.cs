@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UltimateAttributesPack;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
@@ -27,7 +28,6 @@ public class UIManager : MonoBehaviour
     {
         _inPauseMenu = state;
         _pauseMenuObject.SetActive(state);
-        Time.timeScale = state ? 0f : 1f;
         if(state)
             SetFirstSelected(_pauseMenuFirstSelected);
     }
@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
         else
         {
             // Save de tout
-
+            Saver.SaveActiveScene(Saver.saveIndex);
 
             SceneManager.LoadScene(_mainMenuSceneIndex);
         }
@@ -50,5 +50,10 @@ public class UIManager : MonoBehaviour
         _optionsMenuObject.SetActive(state);
         if (state)
             SetFirstSelected(_optionsMenuFirstSelected);
+    }
+
+    public void SetPause(bool state)
+    {
+        Time.timeScale = state ? 0f : 1f;
     }
 }
