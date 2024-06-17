@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3626746658203754739}
   - component: {fileID: 430957205489905494}
   - component: {fileID: 2458936819451829148}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Branche
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,9 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8085427734564772709}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: M_Branche
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,9 +128,9 @@ GameObject:
   - component: {fileID: 7811491091221775743}
   - component: {fileID: 6613578211863825114}
   - component: {fileID: 8947756486566149648}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Branche_feuilles
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

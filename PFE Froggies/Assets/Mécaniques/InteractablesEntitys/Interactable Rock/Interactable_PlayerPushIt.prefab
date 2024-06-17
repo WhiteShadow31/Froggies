@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3159523653528165845}
   m_Layer: 7
   m_Name: Interactable_PlayerPushIt
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 4386198357476864421}
   m_Layer: 7
   m_Name: Mesh
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,3 +178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efb089a5149a5549aa9f86bac22e470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clipToPlayOnHit: GRE_Langue_Hit_Objet
