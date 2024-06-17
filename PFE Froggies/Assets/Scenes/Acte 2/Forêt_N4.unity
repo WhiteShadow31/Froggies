@@ -12712,7 +12712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4024820508105620854, guid: 61e079ad297533d45a43683ba1b32e56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -71.75452
+      value: -64.754524
       objectReference: {fileID: 0}
     - target: {fileID: 4024820508105620854, guid: 61e079ad297533d45a43683ba1b32e56, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12720,7 +12720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4024820508105620854, guid: 61e079ad297533d45a43683ba1b32e56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -188.75282
+      value: -169.75282
       objectReference: {fileID: 0}
     - target: {fileID: 4024820508105620854, guid: 61e079ad297533d45a43683ba1b32e56, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31386,31 +31386,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.40000004
+      value: 0.29999998
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.40000004
+      value: 0.29999998
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.40000004
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
       value: -66.15
+=======
+      value: -62.8
+>>>>>>> parent of 8ab7d57e (Merge branch 'Dev' of https://github.com/WhiteShadow31/Froggies into Dev)
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.766388
+      value: 3.7800007
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< HEAD
       value: -165.68
+=======
+      value: -164.5
+>>>>>>> parent of 8ab7d57e (Merge branch 'Dev' of https://github.com/WhiteShadow31/Froggies into Dev)
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99820405
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -31422,7 +31430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0599063
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -31434,7 +31442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 6.869
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 427004436749389218, guid: 8ad2a1cb49323e74dbe4494bc575d44b, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -38431,7 +38439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4361195811962987152, guid: 7584b69be390e9e449bc73d5322a7dcb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -66.69551
+      value: -59.695515
       objectReference: {fileID: 0}
     - target: {fileID: 4361195811962987152, guid: 7584b69be390e9e449bc73d5322a7dcb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -38439,7 +38447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4361195811962987152, guid: 7584b69be390e9e449bc73d5322a7dcb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -185.3035
+      value: -166.3035
       objectReference: {fileID: 0}
     - target: {fileID: 4361195811962987152, guid: 7584b69be390e9e449bc73d5322a7dcb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -39864,7 +39872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5035333471447100695, guid: b940252ef195f034ebe56708e1e89eb1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -52.6
+      value: -55.6
       objectReference: {fileID: 0}
     - target: {fileID: 5035333471447100695, guid: b940252ef195f034ebe56708e1e89eb1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -39872,7 +39880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5035333471447100695, guid: b940252ef195f034ebe56708e1e89eb1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -173.35
+      value: -172.1
       objectReference: {fileID: 0}
     - target: {fileID: 5035333471447100695, guid: b940252ef195f034ebe56708e1e89eb1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42314,45 +42322,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2454961258173482801, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_Size.y
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3792826330591140174, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
       propertyPath: m_Name
       value: PontLevis
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173652834799444674, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.4155642
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173652834799444674, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173652834799444674, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.1361785
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173652834799444674, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9914449
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173652834799444674, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173652834799444674, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.1305258
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173652834799444674, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7173652834799444674, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 7267761782087043945, guid: 79d23cb7642fca1459ed49c12371afd2, type: 3}
       propertyPath: timeToRotate

@@ -8615,11 +8615,14 @@ Transform:
   - {fileID: 487517778}
   m_Father: {fileID: 1537033467}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &186150397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6541939153825067871, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
   m_PrefabInstance: {fileID: 1538860258}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of 8ab7d57e (Merge branch 'Dev' of https://github.com/WhiteShadow31/Froggies into Dev)
 --- !u!1001 &204399699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68668,10 +68671,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 4127659109826730885, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4373256538531148459, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -68728,10 +68727,13 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 6040427253877405359, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> parent of 8ab7d57e (Merge branch 'Dev' of https://github.com/WhiteShadow31/Froggies into Dev)
     - target: {fileID: 6055873020302831332, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -68810,7 +68812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6541939153825067871, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6611000686466635952, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
       propertyPath: m_Layer
