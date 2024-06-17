@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4998,6 +4998,11 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &70385937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6541939153825067871, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
+  m_PrefabInstance: {fileID: 1538860258}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &71649471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69325,7 +69330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040427253877405359, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6055873020302831332, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
       propertyPath: m_Layer
@@ -69371,6 +69376,14 @@ PrefabInstance:
       propertyPath: _timeBetweenMovement
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6206303960087200999, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
+      propertyPath: _destroyedObjectsWhenEated.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206303960087200999, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
+      propertyPath: _destroyedObjectsWhenEated.Array.data[0]
+      value: 
+      objectReference: {fileID: 70385937}
     - target: {fileID: 6206303960087200999, guid: f8b0a8bcbc0fcde45bade9a91697c0ec, type: 3}
       propertyPath: _movementCurve.m_Curve.Array.data[0].time
       value: 0
