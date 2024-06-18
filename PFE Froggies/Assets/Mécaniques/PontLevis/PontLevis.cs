@@ -7,6 +7,7 @@ public class PontLevis : MonoBehaviour
     public Transform transformToRotate;
     public float angleToRotate = 90f;
     public float timeToRotate = 1;
+    public Transform particlesPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,9 @@ public class PontLevis : MonoBehaviour
             yield return null;
         }
         transformToRotate.localRotation = Quaternion.Euler(new Vector3(angleToRotate, eulers.y, eulers.z));
+
+        if (ParticlesGenerator.Instance != null)
+            ParticlesGenerator.Instance.PlayPontLevisHitParticles(this.transform.position);
     }
 
     public void ActivatePont()

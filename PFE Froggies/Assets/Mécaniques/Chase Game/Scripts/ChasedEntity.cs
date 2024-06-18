@@ -240,6 +240,9 @@ public class ChasedEntity : MonoBehaviour, IInteractableEntity
             {
                 obj.SetActive(false);
             }
+
+            if (ParticlesGenerator.Instance != null)
+                ParticlesGenerator.Instance.PlayLibelluleDeath(this.transform.position);
         }
         // 1st time hit
         else
