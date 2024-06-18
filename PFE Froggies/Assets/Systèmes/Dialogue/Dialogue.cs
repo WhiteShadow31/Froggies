@@ -97,7 +97,7 @@ public class Dialogue : UIRotateToCamera
                     // POP SOUND
                     if (AudioGenerator.Instance != null)
                     {
-                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Dialogue_Pop");
+                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Dialogue_Depop");
                     }
                     _useSound = false;
 
