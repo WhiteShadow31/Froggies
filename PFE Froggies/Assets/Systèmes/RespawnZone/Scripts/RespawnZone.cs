@@ -36,8 +36,12 @@ public class RespawnZone : MonoBehaviour
                     // Look if index is outside list
                     m_successIndex = m_successIndex >= successRespawnPoints.Count ? 0 : m_successIndex;
 
+                    if(ParticlesGenerator.Instance != null)
+                        ParticlesGenerator.Instance.PlayDeathPlayer(frog.transform.position);
+                        
                     frog.transform.position = successRespawnPoints[m_successIndex].position;
                     m_successIndex++;
+
                 }
             }
             // hasnt been registered
@@ -49,8 +53,12 @@ public class RespawnZone : MonoBehaviour
                     // Look if index is outside list
                     m_unsuccessIndex = m_unsuccessIndex >= unsuccessRespawnPoints.Count ? 0 : m_unsuccessIndex;
 
+                    if(ParticlesGenerator.Instance != null)
+                        ParticlesGenerator.Instance.PlayDeathPlayer(frog.transform.position);
+
                     frog.transform.position = unsuccessRespawnPoints[m_unsuccessIndex].position;
                     m_unsuccessIndex++;
+
                 }
             }
         }
