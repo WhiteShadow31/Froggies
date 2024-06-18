@@ -33,6 +33,8 @@ public class PontLevis : MonoBehaviour
 
         if (ParticlesGenerator.Instance != null)
             ParticlesGenerator.Instance.PlayPontLevisHitParticles(this.transform.position);
+        if (AudioGenerator.Instance != null)
+            AudioGenerator.Instance.PlayClipAt(this.transform.position, "ENGM_Tronc_0"+Random.Range(1, 4));
     }
 
     public void ActivatePont()

@@ -45,6 +45,8 @@ public class ChasedEntity : MonoBehaviour, IInteractableEntity
     [Header("Debug gizmos")]
     [SerializeField] bool _drawDebug = true;
 
+    bool _playSound = true;
+
     private void Awake()
     {
         _cameraEntity = Camera.main.GetComponent<CameraEntity>();
@@ -60,6 +62,7 @@ public class ChasedEntity : MonoBehaviour, IInteractableEntity
     {
         if (_isStopped)
         {
+            _playSound = false;
             Stopped();
         }
         else if (_isMoving)
@@ -68,6 +71,7 @@ public class ChasedEntity : MonoBehaviour, IInteractableEntity
         }
         else if (_isStuck)
         {
+            _playSound = false;
             Stucked();
         }
     }
@@ -200,6 +204,12 @@ public class ChasedEntity : MonoBehaviour, IInteractableEntity
     {
         if(_movementTimer < _movementTime)
         {
+            if(!_playSound && AudioGenerator.Instance != null)
+            {
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "ENGM_Libellule_Avance_0" + Random.Range(1, 5));
+                _playSound = true;
+            }
+
             transform.position = Vector3.Lerp(transform.position, _currentTargetPoint.transform.position, _movementCurve.Evaluate(_movementTimer / _movementTime));
             _movementTimer += Time.deltaTime;
 
@@ -208,6 +218,8 @@ public class ChasedEntity : MonoBehaviour, IInteractableEntity
         }
         else
         {
+            _playSound = false;
+
             transform.position = _currentTargetPoint.transform.position;
             _isStopped = true;
             _isMoving = false;
