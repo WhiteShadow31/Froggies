@@ -17,6 +17,8 @@ public class ParticlesGenerator : MonoBehaviour
     public List<Color> rockColor = new List<Color>(2);
     public string tag5 = "Wood";
     public List<Color> woodColor = new List<Color>(2);
+    [Header("Default Color")]
+    public List<Color> defaultColor = new List<Color>(2){Color.gray, Color.gray};
 
     [Header("Player Particles")]
     public GameObject touchGroundParticles;
@@ -84,7 +86,7 @@ public class ParticlesGenerator : MonoBehaviour
             return new List<Color>(2){pCol, darkPCol};
         }
         else
-            return new List<Color>(2){Color.magenta, Color.red};
+            return defaultColor;
     }
 
     public void PlayTouchGround(Vector3 position, string tag = "None")
