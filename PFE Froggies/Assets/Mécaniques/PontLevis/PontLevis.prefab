@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 493000246715139893}
   m_Layer: 0
   m_Name: Pivot (1)
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5021282872892708693}
   m_Layer: 3
   m_Name: BaseTronc (1)
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 7267761782087043945}
   m_Layer: 3
   m_Name: PontLevis
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 5274923195724206817}
   m_Layer: 3
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,6 +305,10 @@ PrefabInstance:
     - target: {fileID: 4523192234875399959, guid: 1e9aad4d8e473b1499c7f781c3e123eb, type: 3}
       propertyPath: m_Name
       value: Tronc maison
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523192234875399959, guid: 1e9aad4d8e473b1499c7f781c3e123eb, type: 3}
+      propertyPath: m_TagString
+      value: Wood
       objectReference: {fileID: 0}
     - target: {fileID: 8085427734564772709, guid: 1e9aad4d8e473b1499c7f781c3e123eb, type: 3}
       propertyPath: m_LocalScale.x
@@ -419,6 +423,10 @@ PrefabInstance:
     - target: {fileID: 4370564339180253184, guid: b0b0a9f577ce2ae41a6bfabf385dfa25, type: 3}
       propertyPath: m_Name
       value: TriggerEventObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370564339180253184, guid: b0b0a9f577ce2ae41a6bfabf385dfa25, type: 3}
+      propertyPath: m_TagString
+      value: Wood
       objectReference: {fileID: 0}
     - target: {fileID: 4725814474321697595, guid: b0b0a9f577ce2ae41a6bfabf385dfa25, type: 3}
       propertyPath: triggerredEvent.m_PersistentCalls.m_Calls.Array.size

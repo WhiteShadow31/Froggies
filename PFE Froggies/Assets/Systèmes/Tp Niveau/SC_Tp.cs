@@ -7,6 +7,7 @@ using UltimateAttributesPack;
 public class SC_Tp : MonoBehaviour {
 
     [SerializeField, Scene] string _targetScene;
+    public EndSceneTransition endTransition;
 
     float Nbplayer = 0;
 
@@ -17,8 +18,14 @@ public class SC_Tp : MonoBehaviour {
             Nbplayer += 1;
         }
        
-        if (Nbplayer >= 2) {
-            SceneManager.LoadScene(_targetScene);
+        if (Nbplayer >= 2) 
+        {
+            if(endTransition != null)
+            {
+                endTransition.Fade(_targetScene);
+            }
+            else
+                SceneManager.LoadScene(_targetScene);
         } 
     }
 
