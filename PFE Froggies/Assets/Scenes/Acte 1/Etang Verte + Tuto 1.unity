@@ -7525,9 +7525,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1231663455697493856, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231663455697493856, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 55.22
+      objectReference: {fileID: 0}
     - target: {fileID: 1298763028059415598, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
       propertyPath: m_Name
       value: POLLEN ENIGMA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342739775905611851, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
+      propertyPath: _particle
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6735720595794294915, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7571,7 +7583,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4869260377967990559, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
-    m_RemovedGameObjects: []
+    - {fileID: 5342739775905611851, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 6014487819036679684, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
