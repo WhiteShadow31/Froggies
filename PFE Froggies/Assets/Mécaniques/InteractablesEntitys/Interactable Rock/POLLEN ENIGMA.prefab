@@ -32,6 +32,77 @@ Transform:
   - {fileID: 1231663455697493856}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &261951998791553945
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1231663455697493856}
+    m_Modifications:
+    - target: {fileID: 5824670795371433368, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433373, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_Name
+      value: Particle_Pollen_Fleur
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ff642f034f7631469d707c593989168, type: 3}
+--- !u!198 &6014487819036679681 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5824670795371433368, guid: 8ff642f034f7631469d707c593989168, type: 3}
+  m_PrefabInstance: {fileID: 261951998791553945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6014487819036679687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5824670795371433374, guid: 8ff642f034f7631469d707c593989168, type: 3}
+  m_PrefabInstance: {fileID: 261951998791553945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1270374435457321009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,6 +183,9 @@ PrefabInstance:
     - {fileID: 4416310031215032845, guid: 0dcbb106463e81a49ba1b086ea447226, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 51502990179571537, guid: 0dcbb106463e81a49ba1b086ea447226, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 6014487819036679687}
     - targetCorrespondingSourceObject: {fileID: 5425667560581218170, guid: 0dcbb106463e81a49ba1b086ea447226, type: 3}
       insertIndex: 0
       addedObject: {fileID: 7243683316852177972}
@@ -167,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1011545bb789ecb48b98ac6f62b055e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clipToPlayOnHit: GRE_Langue_Hit_Objet
   timeTriedToBePushed: 1
   pollenEmitTimerMAX: 50
   _pollenEmitTimer: 0
@@ -180,6 +255,7 @@ MonoBehaviour:
   insectSpawningTimeBetween: 0.8
   waitingTimeNextWave: 0.8
   insectPrefab: {fileID: 4869463750527140665, guid: 08df266e963615d44864c315b9480d44, type: 3}
+  _particle: {fileID: 6014487819036679681}
 --- !u!54 &1188380242151093284
 Rigidbody:
   m_ObjectHideFlags: 0

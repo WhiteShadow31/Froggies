@@ -23,12 +23,21 @@ public class ParticlesGenerator : MonoBehaviour
     public GameObject highTouchGroundParticles;
     public GameObject jumpGroundParticles;
     public GameObject highJumpGroundParticles;
-    public GameObject salivateInsectParticles;
     public GameObject slideGround;
     public GameObject deathPlayer;
 
-    [Header("Pollen Particles")]
-    public GameObject pollenParticles;
+    [Header("Insect Particles")]
+    public GameObject insectHitParticles;
+
+    [Header("Object Particles")]
+    public GameObject objectHitParticles;
+    public GameObject objectFallingParticles;
+
+    [Header("Libellule Particles")]
+    public GameObject libelluleDeathParticles;
+
+    [Header("Pont Levis Particles")]
+    public GameObject pontLevisParticles;
 
     static ParticlesGenerator _instance;
     public static ParticlesGenerator Instance => _instance;
@@ -134,30 +143,58 @@ public class ParticlesGenerator : MonoBehaviour
             SetParticlesEntityColor(particles, tag);
         }
     }
-    public void PlayPollenSuccess(Vector3 position)
-    {
-        if (pollenParticles != null)
-        {
-            GameObject particles = Instantiate(pollenParticles);
-            particles.transform.position = position;
-        }
-    }
-
-    public void PlaySalivateInsect(GameObject insect)
-    {
-        if(salivateInsectParticles != null)
-        {
-            GameObject particles = Instantiate(salivateInsectParticles);
-            ParticlesEntity pe = particles.GetComponent<ParticlesEntity>();
-            pe.Follow(insect);
-        }
-    }
 
     public void PlayDeathPlayer(Vector3 position)
     {
         if (deathPlayer != null)
         {
             GameObject particles = Instantiate(deathPlayer);
+            particles.transform.position = position;
+        }
+    }
+
+    public void PlayInsectHit(Vector3 position)
+    {
+        if(insectHitParticles != null)
+        {
+            GameObject particles = Instantiate(insectHitParticles);
+            particles.transform.position = position;
+        }
+    }
+
+    public void PlayObjectHit(Vector3 position)
+    {
+        if (objectHitParticles != null)
+        {
+            GameObject particles = Instantiate(objectHitParticles);
+            particles.transform.position = position;
+        }
+    }
+
+    public void PlayFallingBlock(Vector3 position)
+    {
+        if (objectFallingParticles != null)
+        {
+            GameObject particles = Instantiate(objectFallingParticles);
+            particles.transform.position = position;
+        }
+    }
+
+    public void PlayLibelluleDeath(Vector3 position)
+    {
+        if (libelluleDeathParticles != null)
+        {
+            GameObject particles = Instantiate(libelluleDeathParticles);
+            particles.transform.position = position;
+        }
+    }
+
+    public void PlayPontLevisHitParticles(Vector3 position)
+    {
+        
+        if (pontLevisParticles != null)
+        {
+            GameObject particles = Instantiate(pontLevisParticles);
             particles.transform.position = position;
         }
     }

@@ -35,6 +35,7 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
     bool canBeActivated = true;
 
     AudioEntity audioPlant;
+    public ParticleSystem _particle;
 
     private void Awake()
     {
@@ -66,6 +67,7 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
 
                 if(audioPlant != null)
                     Destroy(audioPlant.gameObject);
+                _particle.Stop();
             }
 
             // SUCCEED
@@ -75,6 +77,12 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
                 if(audioPlant != null)
                     Destroy(audioPlant.gameObject);
                 canBeActivated = false;
+                _particle.Stop();
+
+                pollenEmitTimer = pollenEmitTimerMAX;
+                _pollenEmitTimer = 0;
+                _pollenSucceed = 0;
+                _isEmitting = false;
             }
 
             // CAN IT SPAWNING ?
@@ -137,6 +145,8 @@ public class PollenPlant : InteractableDuoEntity, IInteractableEntity
 
             if(audioPlant == null && AudioGenerator.Instance != null)
                 audioPlant = AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Fleur_01", true);
+
+            _particle.Play();
         }
     }
 

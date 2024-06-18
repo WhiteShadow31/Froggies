@@ -18,6 +18,8 @@ public class Pillar : MonoBehaviour
     float _startingHeight = 0;
     bool moving = false;
 
+    public ParticleSystem movingParticles;
+
     private void Awake()
     {
         _startingHeight = this.transform.position.y;
@@ -63,10 +65,15 @@ public class Pillar : MonoBehaviour
                 pos.y = Mathf.Lerp(_startingHeight, _startingHeight + offsetHeight, _timerRising / timeToRise);
 
                 this.transform.position = pos;
+
+                if (movingParticles != null)
+                    movingParticles.Play();
             }
             else
             {
                 _timerRising = 0;
+                if (movingParticles != null)
+                    movingParticles.Stop();
             }
         }
     }
@@ -82,10 +89,15 @@ public class Pillar : MonoBehaviour
             pos.y = Mathf.Lerp(_startingHeight, _startingHeight + offsetHeight, _timerRising / timeToRise);
 
             this.transform.position = pos;
+
+            if (movingParticles != null)
+                movingParticles.Play();
         }
         else
         {
             _timerRising = timeToRise;
+            if (movingParticles != null)
+                movingParticles.Stop();
         }
     }
 

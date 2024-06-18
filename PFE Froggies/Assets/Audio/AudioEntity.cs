@@ -45,7 +45,7 @@ public class AudioEntity : MonoBehaviour
         _isLooping = isLooping;
         
         _source.loop = _isLooping;
-        _source.spatialBlend = 1;
+        //_source.spatialBlend = 1;
         _source.Play();
 
         _isPlaying = true;
