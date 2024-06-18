@@ -61,7 +61,13 @@ public class Dialogue : UIRotateToCamera
             else
             {
                 _bubbleGo.transform.localScale = Vector2.one;
+                // POP SOUND
+                if(AudioGenerator.Instance != null)
+                {
+                    AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Dialogue_Pop");
+                }
             }
+
         }
         else
         {
@@ -78,7 +84,13 @@ public class Dialogue : UIRotateToCamera
             {
                 SetImageAlpha(0f);
                 canvasGO.SetActive(false);
+                // POP SOUND
+                if (AudioGenerator.Instance != null)
+                {
+                    AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Dialogue_Depop");
+                }
             }
+
         }
     }
 
