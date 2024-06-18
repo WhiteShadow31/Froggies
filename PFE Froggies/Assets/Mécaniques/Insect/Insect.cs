@@ -44,6 +44,8 @@ public class Insect : MonoBehaviour, IInteractableEntity
 
         if(AudioGenerator.Instance != null)
             AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_Hit_Insecte");
+        if (ParticlesGenerator.Instance != null)
+            ParticlesGenerator.Instance.PlayInsectHit(this.transform.position);
         Destroy(this.gameObject);
     }
 }

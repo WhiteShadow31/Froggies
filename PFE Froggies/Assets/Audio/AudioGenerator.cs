@@ -140,6 +140,6 @@ public class AudioGenerator : MonoBehaviour
             }
         }
 
-        PlayClipAt(Vector3.zero, ambientName, true, 1, 1, Camera.main.gameObject);
+        PlayClipAt(Vector3.zero, ambientName, true, 0.5f, 1, Camera.main.gameObject);
     }
 }

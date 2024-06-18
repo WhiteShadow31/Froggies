@@ -769,57 +769,6 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
---- !u!1 &19605238
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 19605240}
-  - component: {fileID: 19605239}
-  m_Layer: 0
-  m_Name: "Cutscene t\xEAtards disparus"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!320 &19605239
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19605238}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -1617033479413987759, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References: []
---- !u!4 &19605240
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19605238}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.202065, y: 4.2487907, z: -22.257843}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &21280526
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37524,16 +37473,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 446294902180587071, guid: 6a2522b6db5732f43b6f7f8a43b474c0, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 446294902180587071, guid: 6a2522b6db5732f43b6f7f8a43b474c0, type: 3}
       propertyPath: m_SceneBindings.Array.data[5].key
       value: 
       objectReference: {fileID: 1243604577788641799, guid: d8306933ea9a14f4f9b3d1cda743171c, type: 2}
     - target: {fileID: 446294902180587071, guid: 6a2522b6db5732f43b6f7f8a43b474c0, type: 3}
+      propertyPath: m_SceneBindings.Array.data[6].key
+      value: 
+      objectReference: {fileID: 654477430883894737, guid: d8306933ea9a14f4f9b3d1cda743171c, type: 2}
+    - target: {fileID: 446294902180587071, guid: 6a2522b6db5732f43b6f7f8a43b474c0, type: 3}
       propertyPath: m_SceneBindings.Array.data[5].value
       value: 
       objectReference: {fileID: 1398890415}
+    - target: {fileID: 446294902180587071, guid: 6a2522b6db5732f43b6f7f8a43b474c0, type: 3}
+      propertyPath: m_SceneBindings.Array.data[6].value
+      value: 
+      objectReference: {fileID: 1518430598}
     - target: {fileID: 754588014605728082, guid: 6a2522b6db5732f43b6f7f8a43b474c0, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -40311,6 +40268,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2564901753687745353, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
   m_PrefabInstance: {fileID: 1384156498}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1384156500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5527245884999794759, guid: 41ba4ea4c8535c947b765864e5d51013, type: 3}
+  m_PrefabInstance: {fileID: 1384156498}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11009aafbdeec984dafb137fc091b3f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1386752565
 GameObject:
   m_ObjectHideFlags: 0
@@ -44165,6 +44133,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59209b462192f9d4d908a72b35186d05, type: 3}
+--- !u!1 &1518430598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1518430600}
+  - component: {fileID: 1518430599}
+  m_Layer: 0
+  m_Name: Tp_NextScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1518430599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518430598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4facf7d888a6bc04ca25af4be33ccf38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScene: Assets/Scenes/Acte 1/Etang Verte + Tuto 1.unity
+  endTransition: {fileID: 1384156500}
+--- !u!4 &1518430600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518430598}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -36.76069, y: 110.800186, z: -133.87575}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1535175189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 330255145532671244, guid: 59209b462192f9d4d908a72b35186d05, type: 3}
@@ -60667,4 +60681,4 @@ SceneRoots:
   - {fileID: 1612324580}
   - {fileID: 1035397897}
   - {fileID: 884226621}
-  - {fileID: 19605240}
+  - {fileID: 1518430600}

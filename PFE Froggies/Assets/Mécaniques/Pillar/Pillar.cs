@@ -11,12 +11,15 @@ public class Pillar : MonoBehaviour
     float _timerRising = 0f;
     public LayerMask detectMask;
     public bool lower = true;
-
+    
     
 
     public float offsetHeight = -1;
     float _startingHeight = 0;
     bool moving = false;
+
+    public ParticleSystem movingParticles;
+    AudioEntity _audio;
 
     private void Awake()
     {
@@ -63,10 +66,19 @@ public class Pillar : MonoBehaviour
                 pos.y = Mathf.Lerp(_startingHeight, _startingHeight + offsetHeight, _timerRising / timeToRise);
 
                 this.transform.position = pos;
+
+                if (movingParticles != null)
+                    movingParticles.Play();
+                if (_audio == null && AudioGenerator.Instance != null)
+                    _audio = AudioGenerator.Instance.PlayClipAt(this.transform.position, "ENGM_Pilier_0" + Random.Range(1, 4));
             }
             else
             {
                 _timerRising = 0;
+                if (movingParticles != null)
+                    movingParticles.Stop();
+                if (_audio != null)
+                    Destroy(_audio.gameObject);
             }
         }
     }
@@ -82,10 +94,20 @@ public class Pillar : MonoBehaviour
             pos.y = Mathf.Lerp(_startingHeight, _startingHeight + offsetHeight, _timerRising / timeToRise);
 
             this.transform.position = pos;
+
+            if (movingParticles != null)
+                movingParticles.Play();
+
+            if (_audio == null && AudioGenerator.Instance != null)
+                _audio = AudioGenerator.Instance.PlayClipAt(this.transform.position, "ENGM_Pilier_0" + Random.Range(1, 4));
         }
         else
         {
             _timerRising = timeToRise;
+            if (movingParticles != null)
+                movingParticles.Stop();
+            if (_audio != null)
+                Destroy(_audio.gameObject);
         }
     }
 

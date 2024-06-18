@@ -399,9 +399,9 @@ public class PlayerEntity : MonoBehaviour
         if(AudioGenerator.Instance != null)
         {
             if(LongJumpInput)
-                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_GrandSaut_0" + UnityEngine.Random.Range(1,2));
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_GrandSaut_0" + (controller.playerNbr +1)); //AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_GrandSaut_0" + UnityEngine.Random.Range(1,2));
             else
-                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_PetitSaut_0" + UnityEngine.Random.Range(1,2));
+                AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_PetitSaut_0" + (controller.playerNbr + 1));
         }
 
         Vector3 jumpForce = (transform.forward * _jumpForceFwd) + (Vector3.up * _jumpForceUp);
@@ -577,7 +577,7 @@ public class PlayerEntity : MonoBehaviour
     IEnumerator UseTongueCoroutine()
     {
         if(AudioGenerator.Instance != null)
-            AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_0" + UnityEngine.Random.Range(1,3), false, 0.5f);
+            AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_0" + (controller.playerNbr + 1), false, 0.5f);
 
         _canUseTongue = false;
         _tongueLineRenderer.enabled = true;
@@ -689,6 +689,8 @@ public class PlayerEntity : MonoBehaviour
     {
         if (ParticlesGenerator.Instance != null)
             ParticlesGenerator.Instance.PlayDeathPlayer(this.transform.position);
+        if (AudioGenerator.Instance != null)
+            AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Mort_0"+controller.playerNbr+1);
 
         this.transform.position = pos;
         _rigidbodyController.StopVelocity();

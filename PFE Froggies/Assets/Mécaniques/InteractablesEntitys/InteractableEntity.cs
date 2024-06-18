@@ -17,6 +17,8 @@ public class InteractableEntity : MonoBehaviour, IInteractableEntity
 
         if(AudioGenerator.Instance != null)
             AudioGenerator.Instance.PlayClipAt(this.transform.position, clipToPlayOnHit);
+        if (ParticlesGenerator.Instance != null)
+            ParticlesGenerator.Instance.PlayObjectHit(this.transform.position);
     }
 }
 

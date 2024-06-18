@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
@@ -12,6 +13,9 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
     public LayerMask excludeMask;
     [SerializeField] public float distanceToMove = 1;
     bool canBePushed = true;
+
+    [Header("Push Particles")]
+    public ParticleSystem pushParticles;
 
     private void Awake()
     {
@@ -88,6 +92,8 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
         // If it can be pushed
         canBePushed = false;
 
+        pushParticles.Play();
+
         // Calculate move with time
         while (timer < duration)
         {
@@ -97,6 +103,17 @@ public class InteractableRockEntity : InteractableDuoEntity, IInteractableEntity
         }
         this.transform.position = posToGo;
         canBePushed = true;
+
+        pushParticles.Stop();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!_rb.isKinematic)
+        {
+            if (ParticlesGenerator.Instance != null)
+                ParticlesGenerator.Instance.PlayFallingBlock(collision.GetContact(0).point);
+        }
     }
 
     private void OnDrawGizmos()

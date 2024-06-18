@@ -28,6 +28,8 @@ public class Dialogue : UIRotateToCamera
     GameObject _bubbleGo;
     Image _bubbleImage;
 
+    bool _useSound = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -61,7 +63,19 @@ public class Dialogue : UIRotateToCamera
             else
             {
                 _bubbleGo.transform.localScale = Vector2.one;
+
+                if (!_useSound)
+                {
+                    // POP SOUND
+                    if(AudioGenerator.Instance != null)
+                    {
+                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Dialogue_Pop");
+                    }
+                    _useSound = true;
+
+                }
             }
+
         }
         else
         {
@@ -78,7 +92,18 @@ public class Dialogue : UIRotateToCamera
             {
                 SetImageAlpha(0f);
                 canvasGO.SetActive(false);
+                if (_useSound)
+                {
+                    // POP SOUND
+                    if (AudioGenerator.Instance != null)
+                    {
+                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Dialogue_Depop");
+                    }
+                    _useSound = false;
+
+                }
             }
+
         }
     }
 
