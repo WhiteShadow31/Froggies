@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &323613602405289748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3277951080912343753}
+  m_Layer: 0
+  m_Name: "Cutscene marre t\xEAtards"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3277951080912343753
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323613602405289748}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -38.15, y: 4.2487907, z: -33.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2824252460453243283}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7048666003096794595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2824252460453243283}
+  - component: {fileID: 6614285574420305112}
+  m_Layer: 0
+  m_Name: "Cutscene t\xEAtards disparus"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2824252460453243283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048666003096794595}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3277951080912343753}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &6614285574420305112
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048666003096794595}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -3181367352683101134, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 813795363579996328, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8942079891427784217, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5578594302254783566, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 733757917627303646, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4287465046435688040, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 768389687681046993, guid: 8fa68b46e7be34646b1e2af877192a48, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
