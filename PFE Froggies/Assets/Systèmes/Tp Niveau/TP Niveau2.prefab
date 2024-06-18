@@ -262,6 +262,8 @@ MonoBehaviour:
   timeToFade: 1.5
   blackScreenTransition: {fileID: 5944345101270104003}
   unfadeAtStart: 1
+  timeLogo: 0.15
+  timeLogoAppear: 0.75
   logo:
   - {fileID: 236134375112706757}
   - {fileID: 7808182524114537046}
