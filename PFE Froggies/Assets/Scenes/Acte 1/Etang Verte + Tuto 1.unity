@@ -7573,6 +7573,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5195419079952547817, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5342739775905611851, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
       propertyPath: _particle
       value: 
@@ -7617,11 +7621,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6942008021332981459, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7050868294228742819, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
       propertyPath: offset.y
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7685271675822364776, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8619074618962378566, guid: fbb4da7332acf6b47a323ea6a4cc11b2, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
