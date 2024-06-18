@@ -15,6 +15,8 @@ public class ButtonPhoto : MonoBehaviour, IInteractableEntity
     public Camera photoCam;
     public RenderTexture rt;
 
+    public ParticleSystem photoSystem;
+
     Texture2D tex2D;
 
     private void Awake()
@@ -39,6 +41,7 @@ public class ButtonPhoto : MonoBehaviour, IInteractableEntity
                 AudioGenerator.Instance.PlayClipAt(this.transform.position, "ENGM_Appareil_O1");
 
             StartCoroutine(ShowPhoto());
+            photoSystem.Play();
             _hasBeenUsed = true;
         }
     }
