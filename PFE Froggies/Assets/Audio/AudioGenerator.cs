@@ -27,6 +27,24 @@ public class AudioGenerator : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+
+        Object[] ambiants = Resources.LoadAll("Audio/Clips/Ambiant", typeof(AudioClip));
+        Object[] enigmes = Resources.LoadAll("Audio/Clips/Enigmes", typeof(AudioClip));
+        Object[] frogs = Resources.LoadAll("Audio/Clips/Frog", typeof(AudioClip));
+        Object[] uis = Resources.LoadAll("Audio/Clips/UI", typeof(AudioClip));
+
+        LoadToClips(ambiants);
+        LoadToClips(enigmes);
+        LoadToClips(frogs);
+        LoadToClips(uis);
+    }
+
+    void LoadToClips(object[] objs)
+    {
+        for(int i = 0; i < objs.Length; i++)
+        {
+            clips.Add((AudioClip)objs[i]);
+        }
     }
 
     private void Start()
@@ -122,7 +140,7 @@ public class AudioGenerator : MonoBehaviour
             if(_saveAudio != null)
                 Destroy(_saveAudio.gameObject);
             
-            _saveAudio = PlayClipAt(position, "UI_Save");
+            _saveAudio = PlayClipAt(position, "UI_Save",false, 1f, 1f, Camera.main.gameObject);
     }
     public void StopSave()
     {

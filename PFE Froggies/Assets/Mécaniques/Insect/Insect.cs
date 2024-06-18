@@ -26,6 +26,8 @@ public class Insect : MonoBehaviour, IInteractableEntity
         Vector3 startPosition = this.transform.position;
         Vector3 targetPosition = plantTarget != null ? plantTarget.transform.position : this.transform.position;
 
+        this.transform.localRotation = Quaternion.LookRotation((targetPosition - startPosition).normalized);
+
         // Calculate move with time
         while (timer < duration)
         {

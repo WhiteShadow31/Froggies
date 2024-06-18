@@ -17,18 +17,18 @@ public class Dialogue : UIRotateToCamera
 
 
     [Header("Animation Parameters")]
-    [SerializeField] float _appearTime;
-    [SerializeField] AnimationCurve _appearCurve;
-    float _appearTimer = 0f;
-    [SerializeField] float _disappearTime;
-    [SerializeField] AnimationCurve _disappearCurve;
-    float _disappearTimer = 0f;
+    [SerializeField] protected float _appearTime;
+    [SerializeField] protected AnimationCurve _appearCurve;
+    protected float _appearTimer = 0f;
+    [SerializeField] protected float _disappearTime;
+    [SerializeField] protected AnimationCurve _disappearCurve;
+    protected float _disappearTimer = 0f;
 
     protected GameObject canvasGO;
-    GameObject _bubbleGo;
-    Image _bubbleImage;
+    protected GameObject _bubbleGo;
+    protected Image _bubbleImage;
 
-    bool _useSound = false;
+    protected bool _useSound = false;
 
     protected override void Awake()
     {
@@ -45,7 +45,7 @@ public class Dialogue : UIRotateToCamera
         RotateToCam(canvasGO.transform, m_cam);
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (PlayerClose())
         {
@@ -107,7 +107,7 @@ public class Dialogue : UIRotateToCamera
         }
     }
 
-    void SetImageAlpha(float value)
+    protected void SetImageAlpha(float value)
     {
         Color color = _bubbleImage.color;
         color.a = value;
@@ -156,7 +156,7 @@ public class Dialogue : UIRotateToCamera
         return false;
     }
 
-    private void OnDrawGizmosSelected()
+    protected void OnDrawGizmosSelected()
     {
         Color color = Color.white;
         color.a = 0.3f;

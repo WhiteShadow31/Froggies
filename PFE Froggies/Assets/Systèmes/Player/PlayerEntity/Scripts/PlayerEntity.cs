@@ -558,7 +558,7 @@ public class PlayerEntity : MonoBehaviour
             if(hit.transform.TryGetComponent<PlayerEntity>(out  PlayerEntity otherPlayer) && !_hasPushedOtherPlayer)
             {
                 if(AudioGenerator.Instance != null)
-                    AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_Hit_Grenouille");
+                    AudioGenerator.Instance.PlayClipAt(this.transform.position, "GRE_Langue_Hit_Objet");
                 
                 otherPlayer.PushPlayer(transform.forward, _tongueHitForce);
                 _hasPushedOtherPlayer = true;

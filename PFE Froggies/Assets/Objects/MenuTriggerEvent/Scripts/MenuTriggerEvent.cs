@@ -204,10 +204,10 @@ public class MenuTriggerEvent : MonoBehaviour
                         AudioGenerator.Instance.PlaySaveAt(this.transform.position);
                         break;
                     case TriggerType.Play:
-                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Start");
+                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Start", false, 1, 1, Camera.main.gameObject);
                         break;
                     case TriggerType.Back:
-                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Back");
+                        AudioGenerator.Instance.PlayClipAt(this.transform.position, "UI_Back", false, 1, 1, Camera.main.gameObject);
                         break;
                 }
             }
