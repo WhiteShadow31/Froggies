@@ -283,6 +283,10 @@ PrefabInstance:
       value: 0.91764706
       objectReference: {fileID: 0}
     - target: {fileID: 1493769265180645074, guid: 076d34538a36ec340a152b655da863f5, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 8473650034904434674}
+    - target: {fileID: 1493769265180645074, guid: 076d34538a36ec340a152b655da863f5, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
       value: 0.9137255
       objectReference: {fileID: 0}
@@ -950,6 +954,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_PressedColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9131822166782877838, guid: 076d34538a36ec340a152b655da863f5, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 2276608180729950638}
     - target: {fileID: 9131822166782877838, guid: 076d34538a36ec340a152b655da863f5, type: 3}
       propertyPath: m_Colors.m_DisabledColor.b
       value: 0.7176471
