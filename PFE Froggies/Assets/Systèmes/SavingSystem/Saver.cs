@@ -89,8 +89,8 @@ public static class Saver
         }
         else
         {
-            SceneManager.LoadScene(1);
-            SaveScene(index, 1);
+            SceneManager.LoadScene(2);
+            SaveScene(index, 2);
         }
     }
 
