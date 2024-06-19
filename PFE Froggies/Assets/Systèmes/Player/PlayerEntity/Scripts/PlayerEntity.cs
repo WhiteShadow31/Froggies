@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UltimateAttributesPack;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem.HID;
 
 public class PlayerEntity : MonoBehaviour
 {
@@ -702,6 +703,7 @@ public class PlayerEntity : MonoBehaviour
 
     public void SetPlayerColor(Color col)
     {
+        Debug.Log("Has model ? " + model != null);
         if (model != null)
         {
             playerColor = col;
@@ -711,21 +713,21 @@ public class PlayerEntity : MonoBehaviour
 
     protected void SetPlayerColorRecursive(Color col, Transform parent)
     {
+        if (parent.TryGetComponent<MeshRenderer>(out MeshRenderer mrChild))
+        {
+            Material mat = mrChild.material;
+            mat.color = col;
+            mrChild.material = mat;
+        }
+        else if (parent.TryGetComponent<SkinnedMeshRenderer>(out SkinnedMeshRenderer skChild))
+        {
+            Material mat = skChild.material;
+            mat.color = col;
+            skChild.material = mat;
+        }
+
         foreach (Transform child in parent)
         {
-            if (child.TryGetComponent<MeshRenderer>(out MeshRenderer mrChild))
-            {
-                Material mat = mrChild.material;
-                mat.color = col;
-                mrChild.material = mat;
-            }
-            else if (child.TryGetComponent<SkinnedMeshRenderer>(out SkinnedMeshRenderer skChild))
-            {
-                Material mat = skChild.material;
-                mat.color = col;
-                skChild.material = mat;
-            }
-
             SetPlayerColorRecursive(col, child);
         }
     }

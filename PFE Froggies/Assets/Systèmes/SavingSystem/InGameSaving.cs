@@ -20,9 +20,10 @@ public class InGameSaving : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Load players ?" + Saver.isLoading);
         if(Saver.isLoading)
         {
-            Debug.Log("Load players");
+            Debug.Log("Yes");
             LoadPlayers();
             //Saver.isLoading = false;
         }
