@@ -32,4 +32,9 @@ public class EcranTitre : MonoBehaviour
     {
         credits.SetActive(false);
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

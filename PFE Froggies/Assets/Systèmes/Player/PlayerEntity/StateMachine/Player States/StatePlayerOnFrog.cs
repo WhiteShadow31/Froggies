@@ -11,7 +11,7 @@ public class StatePlayerOnFrog : State
 
     public override void Start()
     {
-        Debug.Log(_smPlayer.entity.gameObject.name + " : " + "ONFROG");
+        //Debug.Log(_smPlayer.entity.gameObject.name + " : " + "ONFROG");
     }
     public override void Update(float time)
     {       

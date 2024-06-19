@@ -89,6 +89,9 @@ public static class Saver
         }
         else
         {
+            Debug.Log("TEST ICI TU COMPRENDS");
+            isLoading = true;
+            saveIndex = 2;
             SceneManager.LoadScene(2);
             SaveScene(index, 2);
         }
@@ -117,12 +120,14 @@ public static class Saver
     {
         for(int i = 0; i < 2; i++)
         {
-            string scenePath = _saveDirectoryPath + "/Save " + index + "/Player "+i + ".json"; // Path for player file
-
+            string scenePath = _saveDirectoryPath + "/Save " + Mathf.Clamp(index-1, 0, 2) + "/Player "+i + ".json"; // Path for player file
+            Debug.Log(scenePath);
             if (File.Exists(scenePath))
             {
                 string jsonToRead = File.ReadAllText(scenePath);
                 PlayerSaver playerSaver = JsonUtility.FromJson<PlayerSaver>(jsonToRead);
+                
+                Debug.Log("Load player " + i + " and add color "+ playerSaver.color);
 
                 // SET THE COLOR
                 players[i].SetPlayerColor(playerSaver.color);
@@ -147,7 +152,7 @@ public static class Saver
     public static void LoadPlayer(int index, PlayerController controller, int indexPlayer)
     {
         string scenePath = _saveDirectoryPath + "/Save " + index + "/Player " + indexPlayer + ".json"; // Path for player file
-
+        isLoading = true;
         if (File.Exists(scenePath))
         {
             string jsonToRead = File.ReadAllText(scenePath);
