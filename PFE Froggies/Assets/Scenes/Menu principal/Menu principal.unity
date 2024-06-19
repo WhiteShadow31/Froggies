@@ -282,7 +282,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2127842835}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SetOptionsMenu
+        m_MethodName: SetPauseMenu
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5036,10 +5036,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 389451097863959738, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4278265367
-      objectReference: {fileID: 0}
     - target: {fileID: 1507099555324633567, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5080,93 +5076,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1630341946491345047, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1630341946491345047, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1630341946491345047, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644871617643441759, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1644871617643441759, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2244945077966795133, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2345418698372909740, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2345418698372909740, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664445533456141896, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664445533456141896, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664445533456141896, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4578632617452452090, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4578632617452452090, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4691564164045057731, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6249000592967212919, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
       propertyPath: m_Name
       value: UI + Audio Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 6998356046450755619, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6998356046450755619, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6998356046450755619, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7150515906673686301, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8274532264585142703, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8492757053312234622, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2112634122984376921, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f7d6d8fc500ae479e9945baf43a4e9, type: 3}
