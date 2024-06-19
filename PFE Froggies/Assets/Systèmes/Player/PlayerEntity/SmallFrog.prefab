@@ -796,6 +796,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5642425240394933531}
   - {fileID: 8796673419577462310}
   - {fileID: 5784543633428775835}
   - {fileID: 4404454837975397373}
@@ -1049,7 +1050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4404454837975397373
 Transform:
   m_ObjectHideFlags: 0
@@ -1395,7 +1396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7186052228906142762
 Transform:
   m_ObjectHideFlags: 0
@@ -1430,7 +1431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4862630376113354759
 Transform:
   m_ObjectHideFlags: 0
@@ -1967,7 +1968,6 @@ Transform:
   - {fileID: 3491076819419388840}
   - {fileID: 3222051968224460766}
   - {fileID: 2012173336860944063}
-  - {fileID: 5642425240394933531}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8876496789576747956
@@ -2022,7 +2022,7 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 200
-  model: {fileID: 7162881459987032061}
+  model: {fileID: 1194311345126223808}
   playerColor: {r: 1, g: 0.5019608, b: 0.763672, a: 1}
   _moveForce: 1
   _moveMode: 1
@@ -2419,7 +2419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2415469131775143385
 Transform:
   m_ObjectHideFlags: 0
@@ -2834,7 +2834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5642425240394933531
 Transform:
   m_ObjectHideFlags: 0
@@ -2851,7 +2851,7 @@ Transform:
   - {fileID: 7186052228906142762}
   - {fileID: 1194311345126223808}
   - {fileID: 6842844952892922617}
-  m_Father: {fileID: 4811288948140708742}
+  m_Father: {fileID: 4856313745613277125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9072658680848413001
 GameObject:
@@ -2948,6 +2948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frog
       objectReference: {fileID: 0}
+    - target: {fileID: 434779627866067187, guid: 443c9985b6a6d2549aeb5f1ac1264fe5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2665860075520535049, guid: 443c9985b6a6d2549aeb5f1ac1264fe5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.24
@@ -3013,11 +3017,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 443c9985b6a6d2549aeb5f1ac1264fe5, type: 3}
---- !u!4 &7162881459987032061 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4435109947281703890, guid: 443c9985b6a6d2549aeb5f1ac1264fe5, type: 3}
-  m_PrefabInstance: {fileID: 6839567344147440687}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8796673419577462310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2665860075520535049, guid: 443c9985b6a6d2549aeb5f1ac1264fe5, type: 3}

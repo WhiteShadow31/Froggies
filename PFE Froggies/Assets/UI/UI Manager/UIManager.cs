@@ -28,7 +28,8 @@ public class UIManager : MonoBehaviour
     {
         _inPauseMenu = state;
         _pauseMenuObject.SetActive(state);
-        if(state)
+        Time.timeScale = state ? 0f : 1f;
+        if (state)
             SetFirstSelected(_pauseMenuFirstSelected);
     }
 
