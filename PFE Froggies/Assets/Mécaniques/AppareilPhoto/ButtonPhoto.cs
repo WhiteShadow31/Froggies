@@ -50,7 +50,7 @@ public class ButtonPhoto : MonoBehaviour, IInteractableEntity
     {
         float time = 0;
         Vector3 startPos = photo.transform.localPosition;
-        Vector3 endPos = photo.transform.localPosition + photo.transform.right * 3;
+        Vector3 endPos = photo.transform.localPosition + Vector3.right * 3;
         //endPos.z += 3;
 
         if (photo != null)
