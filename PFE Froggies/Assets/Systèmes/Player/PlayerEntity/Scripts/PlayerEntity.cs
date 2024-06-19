@@ -719,6 +719,12 @@ public class PlayerEntity : MonoBehaviour
                 mat.color = col;
                 mrChild.material = mat;
             }
+            else if (child.TryGetComponent<SkinnedMeshRenderer>(out SkinnedMeshRenderer skChild))
+            {
+                Material mat = skChild.material;
+                mat.color = col;
+                skChild.material = mat;
+            }
 
             SetPlayerColorRecursive(col, child);
         }

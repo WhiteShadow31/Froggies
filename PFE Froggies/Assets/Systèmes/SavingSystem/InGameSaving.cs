@@ -22,6 +22,7 @@ public class InGameSaving : MonoBehaviour
     {
         if(Saver.isLoading)
         {
+            Debug.Log("Load players");
             LoadPlayers();
             //Saver.isLoading = false;
         }
