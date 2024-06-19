@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5676516543726129288}
   - component: {fileID: 3258226862170568644}
   - component: {fileID: 807194489195696674}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PolyShape
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,9 +470,9 @@ GameObject:
   - component: {fileID: 6038831013421582209}
   - component: {fileID: 4575309538070223402}
   - component: {fileID: 588744382754134638}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
